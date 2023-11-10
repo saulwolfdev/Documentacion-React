@@ -1,3 +1,5 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
 # Async - Await
 
 En React, las promesas son una forma de manejar operaciones **asíncronas** de manera más limpia y legible. Puedes usarlas para realizar operaciones como hacer solicitudes HTTP, cargar recursos o ejecutar código asíncrono en general. 
@@ -8,41 +10,44 @@ El uso de **async** antes de una función indica que la función devuelve una pr
 
 Aquí un ejemplo de cómo usar async/await con una solicitud HTTP en un componente React:
 
-```js
-import React, { useState, useEffect } from 'react';
+<CodeBlock
+  codeString={`
+  import React, { useState, useEffect } from 'react';
 
-const MiComponente = () => {
-  const [datos, setDatos] = useState(null);
+  const MiComponente = ( ) => {
+    const [datos, setDatos] = useState(null);
 
-  useEffect(() => {
-    const obtenerDatos = async () => {
-      try {
-        const response = await fetch('https://api.example.com/data');
-        const data = await response.json();
-        setDatos(data);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+    useEffect(( ) => {
+      const obtenerDatos = async ( ) => {
+        try {
+          const response = await fetch('https://api.example.com/data');
+          const data = await response.json( );
+          setDatos(data);
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      };
 
-    obtenerDatos();
-  }, []);
+      obtenerDatos( );
+    }, [ ]);
 
-  return (
-    <div>
-      {datos ? (
-        <div>
-          {/* Renderizar los datos */}
-        </div>
-      ) : (
-        <div>Cargando...</div>
-      )}
-    </div>
-  );
-};
+    return (
+      <div>
+        {datos ? (
+          <div>
+            {/* Renderizar los datos */}
+          </div>
+        ) : (
+          <div>Cargando...</div>
+        )}
+      </div>
+    );
+  };
 
-export default MiComponente;
-```
+  export default MiComponente;
+  `} 
+  language='javascript'
+/>
 
 ## **CallBacks**
 
@@ -55,18 +60,21 @@ Esto a menudo resultaba en código anidado conocido como **"callback hell" o "in
 
 Ejemplo usando callbacks:
 
-```js
-function obtenerDatos(callback) {
-  setTimeout(function() {
-    const datos = 'Estos son los datos';
-    callback(datos);
-  }, 2000);
-}
+<CodeBlock
+  codeString={`
+  function obtenerDatos(callback) {
+    setTimeout(function( ) {
+      const datos = 'Estos son los datos';
+      callback(datos);
+    }, 2000);
+  }
 
-obtenerDatos(function(datos) {
-  console.log(datos);
-});
-```
+  obtenerDatos(function(datos) {
+    console.log(datos);
+  });
+  `} 
+  language='javascript'
+/>
 
 **2. Promesas:**
 
@@ -76,28 +84,31 @@ Las promesas tienen dos posibles estados: **fulfilled (cumplida)** o **rejected 
 
 Ejemplo usando promesas:
 
-```js
-function obtenerDatos() {
-  return new Promise((resolve, reject) => {
-    setTimeout(function() {
-      const exito = true; // Indica si la operación fue exitosa o no
+<CodeBlock
+  codeString={`
+  function obtenerDatos( ) {
+    return new Promise((resolve, reject) => {
+      setTimeout(function( ) {
+        const exito = true; // Indica si la operación fue exitosa o no
 
-      if (exito) {
-        resolve('La operación fue exitosa');
-      } else {
-        reject('La operación falló');
-      }
-    }, 2000);
-  });
-}
+        if (exito) {
+          resolve('La operación fue exitosa');
+        } else {
+          reject('La operación falló');
+        }
+      }, 2000);
+    });
+  }
 
-obtenerDatos()
-  .then((mensaje) => {
-    console.log(mensaje); // La operación fue exitosa
-  })
-  .catch((error) => {
-    console.error(error); // La operación falló
-  });
-```
+  obtenerDatos( )
+    .then((mensaje) => {
+      console.log(mensaje); // La operación fue exitosa
+    })
+    .catch((error) => {
+      console.error(error); // La operación falló
+    });
+  `} 
+  language='javascript'
+/>
 
 Si bien las promesas proporcionaron una mejora significativa en la gestión de código asíncrono, **async/await** simplificó aún más el proceso al permitir que el código se escribiera de una manera que se asemeja al código síncrono, haciendo que sea más fácil de leer y mantener.
