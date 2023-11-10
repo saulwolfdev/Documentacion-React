@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Button } from './stories/atoms/button/Button';
+import { Button } from './index';
 
 const CodeBlock = ({ codeString, language }) => {
     const [copied, setCopied] = useState(false);

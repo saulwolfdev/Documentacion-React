@@ -1,3 +1,5 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
 # Módulos
 
 En React, modularizar componentes se refiere a dividir la interfaz de usuario en piezas más pequeñas y reutilizables, que pueden ser desarrolladas, probadas y mantenidas de manera independiente. Esto facilita la construcción y gestión de aplicaciones más grandes al descomponer la lógica en componentes más manejables y fáciles de entender.
@@ -22,58 +24,67 @@ Supongamos que estamos construyendo una aplicación de lista de tareas. Vamos a 
 
 Este componente representará una sola tarea en la lista.
 
-```js
-import React from 'react';
+<CodeBlock
+  codeString={`
+  import React from 'react';
 
-function Tarea(props) {
-  return <li>{props.texto}</li>;
-}
+  function Tarea(props) {
+    return <li>{props.texto}</li>;
+  }
 
-export default tarea;
-```
+  export default tarea;  
+  `} 
+  language='javascript'
+/>
 
 ## **ListaTareas.js - Componente de Lista de Tareas**
 
 Este componente será responsable de mostrar una lista de tareas, utilizando el componente Tarea.
 
-```js
-import React from 'react';
-import Tarea from './Tarea';
+<CodeBlock
+  codeString={`
+  import React from 'react';
+  import Tarea from './Tarea';
 
-function ListaTareas(props) {
-  return (
-    <ul>
-      {props.tareas.map((tarea, index) => (
-        <Tarea key={index} texto={tarea} />
-      ))}
-    </ul>
-  );
-}
+  function ListaTareas(props) {
+    return (
+      <ul>
+        {props.tareas.map((tarea, index) => (
+          <Tarea key={index} texto={tarea} />
+        ))}
+      </ul>
+    );
+  }
 
-export default ListaTareas;
-```
+  export default ListaTareas;
+  `} 
+  language='javascript'
+/>
 
 ## **App.js - Componente Principal**
 
 En este archivo, utilizaremos los componentes listaTareas y Tarea que acabamos de crear.
 
-```js
-import React from 'react';
-import ListaTareas from './ListaTareas';
+<CodeBlock
+  codeString={`
+  import React from 'react';
+  import ListaTareas from './ListaTareas';
 
-function App() {
-  const tareas = ['Hacer la compra', 'Limpiar la casa', 'Estudiar React'];
+  function App() {
+    const tareas = ['Hacer la compra', 'Limpiar la casa', 'Estudiar React'];
 
-  return (
-    <div>
-      <h1>Lista de Tareas</h1>
-      <ListaTareas tareas={tareas} />
-    </div>
-  );
-}
+    return (
+      <div>
+        <h1>Lista de Tareas</h1>
+        <ListaTareas tareas={tareas} />
+      </div>
+    );
+  }
 
-export default App;
-```
+  export default App;
+  `} 
+  language='javascript'
+/>
 
 En este ejemplo, hemos modularizado nuestra aplicación en dos componentes: ***Tarea**** y ***ListaTareas***. 
 ***Tarea*** se encarga de renderizar una tarea individual, mientras que ***ListaTareas*** se encarga de mostrar una lista de tareas, utilizando múltiples componentes tarea.

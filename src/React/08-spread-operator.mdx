@@ -1,3 +1,5 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
 # Spread Operator y Rest
 
 El operador de propagación (spread operator) y el operador rest son características de JavaScript que se utilizan para manipular y trabajar con listas de elementos, como arrays o argumentos de funciones. En el contexto de React, estas herramientas pueden ser útiles para pasar propiedades a componentes, manejar estados y más.
@@ -8,40 +10,52 @@ El operador de propagación (...) permite descomponer un iterable (como un array
 
 **Copiar un Array:**
 
-```js
-const originalArray = [1, 2, 3];
-const newArray = [...originalArray]; // Crea una copia de originalArray
-```
+<CodeBlock
+  codeString={`
+  const originalArray = [1, 2, 3];
+  const newArray = [...originalArray]; // Crea una copia de originalArray
+  `} 
+  language='javascript'
+/>
 
 **Combinar Arrays:**
 
-```js
-const array1 = [1, 2, 3];
-const array2 = [4, 5, 6];
-const combinedArray = [...array1, ...array2]; // Combina los elementos de array1 y array2
-```
+<CodeBlock
+  codeString={`
+  const array1 = [1, 2, 3];
+  const array2 = [4, 5, 6];
+  const combinedArray = [...array1, ...array2]; // Combina los elementos de array1 y array2
+  `} 
+  language='javascript'
+/>
 
 **Añadir un Elemento a un Array:**
 
-```js
-const originalArray = [1, 2, 3];
-const newArray = [...originalArray, 4]; // Añade el elemento 4 a la copia de originalArray
-```
+<CodeBlock
+  codeString={`
+  const originalArray = [1, 2, 3];
+  const newArray = [...originalArray, 4]; // Añade el elemento 4 a la copia de originalArray
+  `} 
+  language='javascript'
+/>
 
 **Pasar Props en React:**
 
 En React, el operador de propagación es frecuentemente utilizado para pasar propiedades a componentes secundarios.
 
-```js
-const ComponenteHijo = ({ prop1, prop2 }) => {
-  // ...
-};
+<CodeBlock
+  codeString={`
+  const ComponenteHijo = ({ prop1, prop2 }) => {
+    // ...
+  };
 
-const ComponentePadre = () => {
-  const props = { prop1: 'valor1', prop2: 'valor2' };
-  return <ComponenteHijo {...props} />; // Pasa las propiedades prop1 y prop2 al componente hijo
-};
-```
+  const ComponentePadre = ( ) => {
+    const props = { prop1: 'valor1', prop2: 'valor2' };
+    return <ComponenteHijo {...props} />; // Pasa las propiedades prop1 y prop2 al componente hijo
+  };
+  `} 
+  language='javascript'
+/>
 
 ## **Operador Rest (...)**
 
@@ -49,13 +63,16 @@ El operador rest también utiliza la misma sintaxis (...) pero se utiliza en un 
 
 Capturar Argumentos en una Función
 
-```js
-function sum(...args) {
-  return args.reduce((total, current) => total + current, 0);
-}
+<CodeBlock
+  codeString={`
+  function sum(...args) {
+    return args.reduce((total, current) => total + current, 0);
+  }
 
-const resultado = sum(1, 2, 3, 4, 5); // resultado será 15
-```
+  const resultado = sum(1, 2, 3, 4, 5); // resultado será 15
+  `} 
+  language='javascript'
+/>
 
 En el ejemplo anterior, ...args captura todos los argumentos de la función sum y los combina en un array llamado args.
 
@@ -63,13 +80,16 @@ En el ejemplo anterior, ...args captura todos los argumentos de la función sum 
 
 En el contexto de React, el operador de propagación (...) es muy útil para pasar props a componentes hijos, como se mencionó anteriormente. El operador rest (...) puede ser utilizado en funciones de componentes para recoger múltiples props en un solo objeto.
 
-```js
-const MiComponente = ({ prop1, prop2, ...restoDeProps }) => {
-  // prop1 y prop2 están disponibles aquí
-  // restoDeProps contendrá todas las otras props pasadas al componente
-  // ...
-};
-```
+<CodeBlock
+  codeString={`
+  const MiComponente = ({ prop1, prop2, ...restoDeProps }) => {
+    // prop1 y prop2 están disponibles aquí
+    // restoDeProps contendrá todas las otras props pasadas al componente
+    // ...
+  };
+  `} 
+  language='javascript'
+/>
 
 Esto es especialmente útil cuando quieres extraer algunas props específicas pero mantener un objeto que contenga las demás para reutilizarlas o pasarlas a otro componente.
 
