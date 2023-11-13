@@ -1,8 +1,17 @@
 import { Meta } from "@storybook/blocks";
+import Reacts from "../assets/react.png";
+import Next from "../assets/next-js.svg";
+import Gatsby from "../assets/gatsby.png";
 
 <Meta title="Comparativa Frameworks" />
 
-# **React Puro:**
+<style jsx>{`
+  body {
+    font-family: monospace, sans-serif;
+  }
+`}</style>
+
+# **React Puro:** {<img src={Reacts} alt="Texto Alternativo" style={{ width: '46px', height: '39px', position: 'relative', top: '6px' }} />} 
 
 ## Pros:
 
@@ -20,7 +29,7 @@ import { Meta } from "@storybook/blocks";
 
 
 
-# **Next.js:**
+# **Next.js:** {<img src={Next} alt="Texto Alternativo" style={{ width: '46px', height: '39px', position: 'relative', top: '8px' }} />}
 
 ## Pros:
 
@@ -37,7 +46,7 @@ import { Meta } from "@storybook/blocks";
 2. Mayor Curva de Aprendizaje: para los nuevos desarrolladores puede tener una curva de aprendizaje mas pronunciada debido a sus caracteristicas adicionales como Server-side Rendering (SSR) y el Static Site Generation (SSG).
 
 
-# **Gatsby:**
+# **Gatsby:** {<img src={Gatsby} alt="Texto Alternativo" style={{ width: '44px', height: '39px', position: 'relative', top: '9px' }} />}
 
 ## Pros:
 
