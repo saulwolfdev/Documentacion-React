@@ -43,8 +43,8 @@ En una arrow function, this se hereda del contexto en el que se definió la func
   codeString={`
   let objet = {
     nombre: "John",
-    saludar: function() {
-        setTimeout(function() {
+    saludar: function( ) {
+        setTimeout(function( ) {
             console.log("Hola, soy " + this.nombre); // En este contexto, 'this' se refiere a 'objet'
         }, 1000);
     }
@@ -55,14 +55,14 @@ En una arrow function, this se hereda del contexto en el que se definió la func
   // Solución con arrow function
   let objetArrow = {
     nombre: "John",
-    saludar: function() {
-        setTimeout(() => {
+    saludar: function( ) {
+        setTimeout(( ) => {
             console.log("Hola, soy " + this.nombre); // 'this' se refiere a 'objetArrow'
         }, 1000);
     }
   };
 
-  objetArrow.saludar(); // Imprimirá "Hola, soy John" correctamente
+  objetArrow.saludar( ); // Imprimirá "Hola, soy John" correctamente
   `} 
   language='javascript'
 />
