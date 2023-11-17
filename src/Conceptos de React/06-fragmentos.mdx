@@ -1,0 +1,30 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Fragmentos
+
+En React los fragmentos son una característica que permite agrupar múltiples elementos hijos sin introducir un contenedor adicional en el DOM. 
+Esto resulta especialmente útil cuando deseas renderizar varios elementos de manera contigua sin la necesidad de crear un elemento contenedor adicional en el árbol DOM.
+
+Ejemplo:
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+
+    const MiComponente = () => {
+    return (
+        <>
+        <h1>Título Principal</h1>
+        <p>Párrafo 1</p>
+        <p>Párrafo 2</p>
+        </>
+    );
+    };
+
+    export default MiComponente;  
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo `<></>` envuelve múltiples elementos `<h1>` y dos `<p>` sin crear un nodo adicional en el DOM. 
+Esto mejora la estructura del código y evita la necesidad de un contenedor extra como por ejemplo si utilizariamos un contenedor div.
