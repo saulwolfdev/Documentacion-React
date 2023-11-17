@@ -1,0 +1,86 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Portales
+
+En React los portales son una característica que permite renderizar un componente hijo fuera de su contenedor principal y directamente en otro lugar del DOM. 
+Esto puede ser útil en situaciones donde necesitas renderizar un componente en un lugar diferente al componente padre, como en el caso de la creación de modales, 
+notificaciones, menús desplegables u otros elementos que deben aparecer fuera de la jerarquía principal de componentes.
+
+Ejemplo:
+
+Supongamos que tenemos un componente Modal en React que deseamos renderizar fuera del árbol de componentes principal.
+
+<CodeBlock
+  codeString={`
+    //ModalContent.js
+    import React from 'react';
+
+    const ModalContent = ( ) => (
+    <>
+        <h2>Contenido del Modal</h2>
+        <p>Este es un ejemplo de modal renderizado fuera del árbol de componentes principal.</p>
+    </>
+    );
+
+    export default ModalContent;  
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    //Portal.js
+    import React from "react";
+    import ReactDOM from "react-dom";
+
+    const Portal = ({ isOpen, onClose, children }) => {
+    if (!isOpen) return null;
+
+    return ReactDOM.createPortal(
+        <>
+        <button onClick={onClose}>Cerrar</button>
+        {children}
+        </>,
+        document.body
+    );
+    };
+
+    export default Portal;  
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    //Modal.js
+    import React, { useState } from "react";
+    import Portal from "./Portal";
+    import ModalContent from "./ModalContent";
+
+    const Modal = ( ) => {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = ( ) => {
+        setModalOpen(true);
+    };
+
+    const closeModal = ( ) => {
+        setModalOpen(false);
+    };
+
+    return (
+        <div>
+        <button onClick={openModal}>Abrir Modal</button>
+        <Portal isOpen={modalOpen} onClose={closeModal}>
+            <ModalContent />
+        </Portal>
+        </div>
+    );
+    };
+
+    export default Modal;
+  `} 
+  language='javascript'
+  sandboxUrl="https://codesandbox.io/s/portal-qnncxw?file=/src/Modal.js:0-524"
+  showButtons= {true}
+/>

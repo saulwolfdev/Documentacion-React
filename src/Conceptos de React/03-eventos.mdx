@@ -1,0 +1,82 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Manejo de Eventos
+
+En React, el manejo de eventos es fundamental para crear aplicaciones interactivas y dinámicas. Los eventos en React son similares a los eventos en JavaScript estándar, 
+pero hay algunas diferencias clave, especialmente en la forma en que se nombran y se manejan.
+
+Ejemplo: Manejo de clicks
+
+Vamos a crear un componente simple de botón en React que responda a un click del usuario.
+
+<CodeBlock
+  codeString={`
+    import React, { useState } from 'react';
+
+    const ButtonClick = ( ) => {
+    const [message, setMessage] = useState('¡Haz clic en el botón!');
+
+    const handleClick = ( ) => {
+        setMessage('¡Se hizo clic en el botón!');
+    };
+
+    return (
+        <div>
+        <button onClick={handleClick}>Haz clic</button>
+        <p>{message}</p>
+        </div>
+    );
+    };
+
+    export default ButtonClick;
+  `} 
+  language='javascript'
+  sandboxUrl="https://codesandbox.io/s/evento-click-qzswlr"
+  showButtons= {true}
+/>
+
+En este ejemplo, hemos creado un componente funcional ButtonClick que renderiza un botón y un párrafo. 
+Hemos definido una función handleClick que actualiza el estado del mensaje(message) cuando se hace click en el botón. La prop onClick del botón está configurada para llamar
+a esta función.
+
+Ejemplo con formulario:
+
+Otro caso común es manejar eventos cuando se trabaja con formularios.
+
+<CodeBlock
+  codeString={`
+    import React, { useState } from 'react';
+
+    const ControlledForm = () => {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    return (
+        <div>
+        <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            placeholder="Escribe algo"
+        />
+        <p>{inputValue}</p>
+        </div>
+    );
+    };
+
+    export default ControlledForm;  
+  `} 
+  language='javascript'
+  sandboxUrl="https://codesandbox.io/s/evento-formulario-y88pyz"
+  showButtons= {true}
+/>
+
+En este ejemplo, el componente "ControlledForm" contiene un campo de entrada (input). La función "handleChange" se ejecuta cada vez que el usuario escribe algo en el campo 
+de entrada, actualizando el estado "inputValue" con el nuevo valor del campo.
+
+Estos son solo ejemplos simples pero muestran cómo React utiliza eventos para manejar interacciones del usuario. 
+Podemos aplicar conceptos similares a otros eventos, como onMouseOver, onSubmit, etc., dependiendo de los requisitos de tu aplicación. 
+El enfoque declarativo de React hace que el manejo de eventos sea más fácil de entender y mantener.

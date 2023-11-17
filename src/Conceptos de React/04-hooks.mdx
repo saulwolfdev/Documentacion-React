@@ -1,0 +1,81 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Hooks
+
+ Los hooks son funciones especiales proporcionadas por React que permiten a los componentes funcionales tener estado y ciclo de vida. 
+ Algunos hooks comunes incluyen useState y useEffect.
+
+ # useState
+
+ useState es un hook que permite a los componentes funcionales tener estado. 
+ Proporciona una forma de declarar variables de estado en el cuerpo de un componente funcional.
+
+ Ejemplo:
+
+ <CodeBlock
+  codeString={`
+    import React, { useState } from 'react';
+
+    const Toggle = ( ) =>{
+    // Declarando una variable de estado llamada 'isOn' con un valor inicial de false
+    const [isOn, setIsOn] = useState(false);
+
+    return (
+        <div>
+        <p>El interruptor está {isOn ? 'encendido' : 'apagado'}</p>
+        // Cambia el estado del interruptor al hacer clic en el botón 
+        <button onClick={( ) => setIsOn(!isOn)}>
+            {isOn ? 'Apagar' : 'Encender'}
+        </button>
+        </div>
+    );
+    }
+
+    export default Toggle;
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo la variable de estado isOn se inicializa con false. 
+El botón cambia el estado de isOn entre true y false cuando se hace click lo que afecta el texto que indica si el interruptor está encendido o apagado.
+
+# useEffect
+
+useEffect es un hook que permite realizar efectos secundarios en componentes funcionales. 
+Puedes usarlo para gestionar el ciclo de vida del componente funcional, como realizar solicitudes de red, suscripciones a eventos, o limpiar recursos cuando 
+el componente se desmonta.
+
+ejemplo:
+
+<CodeBlock
+  codeString={`
+    import React, { useState, useEffect } from 'react';
+
+    const CounterWithEffect = ( )=> {
+    const [count, setCount] = useState(0);
+
+    // useEffect se ejecuta cada vez que 'count' cambia
+    useEffect(( ) => {
+    console.log(El valor de count es: {count})
+        // Puedes realizar acciones adicionales aquí basadas en el cambio de 'count'
+    }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
+
+    return (
+        <div>
+        <p>Count: {count}</p>
+        <button onClick={( ) => setCount(count + 1)}>
+            Incrementar
+        </button>
+        </div>
+    );
+    }
+
+    export default CounterWithEffect;
+  
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo cada vez que haces clic en el botón para incrementar el contador, se actualiza el estado count. 
+El efecto asociado a useEffect se ejecutará debido a la dependencia de count en el array de dependencias. 
+En este caso simplemente muestra el valor actual de count en la consola, pero se podria realizar acciones más complejas basadas en el cambio del estado.
