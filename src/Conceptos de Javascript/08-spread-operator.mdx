@@ -2,11 +2,13 @@ import { CodeBlock } from '../components-mdx/index.js';
 
 # Spread Operator y Rest
 
-El operador de propagación (spread operator) y el operador rest son características de JavaScript que se utilizan para manipular y trabajar con listas de elementos, como arrays o argumentos de funciones. En el contexto de React, estas herramientas pueden ser útiles para pasar propiedades a componentes, manejar estados y más.
+El operador de propagación (spread operator) y el operador rest son características de JavaScript que se utilizan para manipular y trabajar con listas de elementos, como arrays 
+o argumentos de funciones. En el contexto de React, estas herramientas pueden ser útiles para pasar propiedades a componentes, manejar estados y más.
 
-## **Spread Operator (...)**
+### Spread Operator (...)
 
-El operador de propagación (...) permite descomponer un iterable (como un array) en elementos individuales. Esto es especialmente útil cuando necesitas copiar o combinar elementos de una lista en otra.
+El operador de propagación (...) permite descomponer un iterable (como un array) en elementos individuales. Esto es especialmente útil cuando necesitas copiar o combinar elementos 
+de una lista en otra.
 
 **Copiar un Array:**
 
@@ -57,7 +59,7 @@ En React, el operador de propagación es frecuentemente utilizado para pasar pro
   language='javascript'
 />
 
-## **Operador Rest (...)**
+### Operador Rest (...)
 
 El operador rest también utiliza la misma sintaxis (...) pero se utiliza en un contexto diferente: para combinar argumentos de función en un array.
 
@@ -76,7 +78,7 @@ Capturar Argumentos en una Función
 
 En el ejemplo anterior, ...args captura todos los argumentos de la función sum y los combina en un array llamado args.
 
-## **React y Spread/Rest**
+### React y Spread/Rest
 
 En el contexto de React, el operador de propagación (...) es muy útil para pasar props a componentes hijos, como se mencionó anteriormente. El operador rest (...) puede ser utilizado en funciones de componentes para recoger múltiples props en un solo objeto.
 
@@ -93,4 +95,5 @@ En el contexto de React, el operador de propagación (...) es muy útil para pas
 
 Esto es especialmente útil cuando quieres extraer algunas props específicas pero mantener un objeto que contenga las demás para reutilizarlas o pasarlas a otro componente.
 
-Recordar que tanto el operador de propagación como el operador rest son características fundamentales de JavaScript y no están limitados a React. Pueden ser utilizados en cualquier contexto de JavaScript donde se trabajen con listas o argumentos de funciones.
+Recordar que tanto el operador de propagación como el operador rest son características fundamentales de JavaScript y no están limitados a React. Pueden ser utilizados en cualquier 
+contexto de JavaScript donde se trabajen con listas o argumentos de funciones.
