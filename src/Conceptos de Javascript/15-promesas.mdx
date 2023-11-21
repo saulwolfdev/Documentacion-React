@@ -1,0 +1,53 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Promesas (Promises)
+
+
+En JavaScript una promesa es un objeto que representa el resultado eventual (éxito o fallo) de una operación asíncrona. 
+Las promesas son utilizadas para manejar operaciones asíncronas de una manera más clara y evitar los problemas asociados con los callbacks anidados.
+
+Una promesa puede estar en uno de los tres estados:
+
+**Pending (Pendiente):** Estado inicial, la promesa está pendiente de resolverse o rechazarse.
+
+**Fulfilled (Cumplida):** La operación se completó con éxito, y la promesa tiene un valor resultante.
+
+**Rejected (Rechazada):** La operación falló, y la promesa tiene un motivo de rechazo.
+
+ <CodeBlock
+  codeString={`
+    // Creación de una promesa
+    const myPromise = new Promise((resolve, reject) => {
+    // Simulación de una operación asíncrona
+    setTimeout(() => {
+        const success = true; // Cambiar a false para simular un fallo
+
+        if (success) {
+        resolve('¡La operación fue exitosa!');
+        } else {
+        reject('¡La operación falló!');
+        }
+    }, 2000); // Simula una operación que tarda 2 segundos
+    });
+
+    // Uso de la promesa con then y catch
+    myPromise
+    .then((result) => {
+        console.log('Éxito:', result);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+  `} 
+  language='javascript'
+/>
+
+### En este ejemplo:
+
+Se crea una nueva promesa **myPromise** que simula una operación asíncrona usando setTimeout.
+
+Dentro de la promesa se resuelve **resolve** o rechaza **reject** la promesa según el resultado de la operación.
+
+Se utiliza el método **.then()** para manejar el caso en que la promesa se resuelve con éxito.
+
+Se utiliza el método **.catch()** para manejar el caso en que la promesa es rechazada.

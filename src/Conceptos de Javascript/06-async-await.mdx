@@ -2,54 +2,42 @@ import { CodeBlock } from '../components-mdx/index.js';
 
 # Async - Await
 
-En React, las promesas son una forma de manejar operaciones **asíncronas** de manera más limpia y legible. Puedes usarlas para realizar operaciones como hacer solicitudes HTTP, cargar recursos o ejecutar código asíncrono en general. 
+**Async/await** es una característica de JavaScript que simplifica la escritura y lectura del código **asíncrono**. 
+Te permite trabajar con promesas de una manera más estructurada y legible.
 
-Actualmente, **async/await** es una forma muy común y recomendada de trabajar con promesas en JavaScript y, por lo tanto, también en React. Te permite escribir código asíncrono de una manera más legible y similar a código síncrono.
+Cuando defines una función con la palabra clave **async** antes de ella, estás indicando que esa función retornará una promesa. 
+Luego, puedes utilizar la palabra clave **await** dentro de la función para esperar que una promesa se resuelva antes de continuar con la ejecución del código.
 
-El uso de **async** antes de una función indica que la función devuelve una promesa, y **await** se utiliza para esperar el resultado de una promesa. Esto hace que el código sea mucho más claro y fácil de entender.
+Este enfoque es particularmente útil al tratar con operaciones asíncronas, como solicitudes a servidores, lectura de archivos, o cualquier tarea que tome un tiempo y no 
+bloquee el hilo principal de ejecución.
 
-Aquí un ejemplo de cómo usar async/await con una solicitud HTTP en un componente React:
+**ejemplo de cómo se usa async/await para hacer una solicitud HTTP:**
 
 <CodeBlock
   codeString={`
-  import React, { useState, useEffect } from 'react';
+  const obtenerDatos = async ( ) => {
+  try {
+    const response = await fetch('https://api.example.com/data');
 
-  const MiComponente = ( ) => {
-    const [datos, setDatos] = useState(null);
+    if (!response.ok) {
+      throw new Error(Error: {response.status});
+    }
 
-    useEffect(( ) => {
-      const obtenerDatos = async ( ) => {
-        try {
-          const response = await fetch('https://api.example.com/data');
-          const data = await response.json( );
-          setDatos(data);
-        } catch (error) {
-          console.error('Error:', error);
-        }
-      };
+    const data = await response.json();
+    console.log('Datos:', data);
+    // Podes realizar acciones con los datos aquí
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
 
-      obtenerDatos( );
-    }, [ ]);
-
-    return (
-      <div>
-        {datos ? (
-          <div>
-            {/* Renderizar los datos */}
-          </div>
-        ) : (
-          <div>Cargando...</div>
-        )}
-      </div>
-    );
-  };
-
-  export default MiComponente;
+// Llamada a la función para obtener datos
+obtenerDatos();
   `} 
   language='javascript'
 />
 
-## **CallBacks**
+### CallBacks
 
 Antes de que se introdujera **async/await en ECMAScript 2017**, la forma común de manejar operaciones asíncronas en JavaScript era a través de **callbacks y promesas**.
 
@@ -111,4 +99,5 @@ Ejemplo usando promesas:
   language='javascript'
 />
 
-Si bien las promesas proporcionaron una mejora significativa en la gestión de código asíncrono, **async/await** simplificó aún más el proceso al permitir que el código se escribiera de una manera que se asemeja al código síncrono, haciendo que sea más fácil de leer y mantener.
+Si bien las promesas proporcionaron una mejora significativa en la gestión de código asíncrono, **async/await** simplificó aún más el proceso al permitir que el código se 
+escribiera de una manera que se asemeja al código síncrono, haciendo que sea más fácil de leer y mantener.

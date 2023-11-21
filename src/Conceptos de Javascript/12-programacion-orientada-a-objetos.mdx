@@ -1,0 +1,174 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Programación orientada a objetos (POO)
+
+La programación orientada a objetos (POO) es un paradigma de programación que se basa en el concepto de "objetos", que pueden contener datos en forma de campos, a menudo conocidos 
+como atributos, y código, en forma de procedimientos, a menudo conocidos como métodos. 
+En JavaScript, la POO se ha vuelto más prominente y fácil de usar con las versiones más recientes del lenguaje.
+
+### Cuándo usar la Programación Orientada a Objetos en JavaScript:
+
+- **Cuando trabajas con entidades complejas:**  La POO es útil cuando estás modelando entidades del mundo real que tienen propiedades y comportamientos.
+- **Reutilización de código:** La herencia y la creación de clases permiten la reutilización de código, ya que puedes extender y modificar clases existentes.
+- **Mantenimiento del código:** La POO facilita la organización del código, lo que puede hacer que sea más fácil de entender y mantener.
+- **Colaboración en equipos:** La POO proporciona una estructura que facilita la colaboración en equipos grandes, ya que cada clase puede representar una pieza del sistema.
+
+### Clases en JavaScript:
+
+En JavaScript moderno, puedes utilizar la palabra clave **class** para definir una clase. Una clase es una plantilla para crear objetos. Los objetos creados a partir de una clase se 
+denominan instancias de esa clase.
+
+<CodeBlock
+    codeString={`
+    class Persona {
+    constructor(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    saludar( ) {
+        console.log(\`Hola, mi nombre es \${this.nombre} y tengo \${this.edad} años.\`);
+    }
+    }
+
+    // Crear una instancia de la clase Persona
+    const persona1 = new Persona("Juan", 25);
+
+    // Llamar al método de la instancia
+    persona1.saludar( );
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **Persona** es una clase que tiene un constructor para inicializar propiedades y un método **persona1** . **saludar** es una instancia de la clase **Persona**.
+
+### Herencia:
+
+La herencia es un concepto importante en POO que permite que una clase herede propiedades y métodos de otra clase. En JavaScript, la herencia se logra utilizando la palabra 
+clave **extends**.
+
+<CodeBlock
+  codeString={`
+  class Estudiante extends Persona {
+    constructor(nombre, edad, grado) {
+        super(nombre, edad);
+        this.grado = grado;
+  }
+
+  estudiar( ) {
+        console.log(\`\${this.nombre} está estudiando en el \${this.grado} grado.\`);
+    }
+  }
+
+  // Crear una instancia de la clase Estudiante
+  const estudiante1 = new Estudiante("Ana", 18, 12);
+
+  // Llamar a métodos de la clase padre y de la clase hija
+  estudiante1.saludar( );
+  estudiante1.estudiar( );
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, la clase **Estudiante** hereda de la clase **Persona** mediante **extends**. La palabra clave **super** se utiliza para llamar al constructor de la clase padre.
+
+### Polimorfismo:
+
+El polimorfismo permite que diferentes clases implementen métodos con el mismo nombre, pero con comportamientos específicos para cada clase.
+
+<CodeBlock
+  codeString={`
+  class Animal {
+    sonido( ) {
+        console.log("Haciendo sonidos genéricos");
+    }
+  }
+
+  class Perro extends Animal {
+    sonido( ) {
+        console.log("Woof! Woof!");
+    }
+  }
+
+  class Gato extends Animal {
+    sonido( ) {
+        console.log("Meow!");
+    }
+  }
+
+  // Crear instancias de las clases
+  const perro = new Perro( );
+  const gato = new Gato( );
+
+  // Llamar a los métodos
+  perro.sonido( ); // Woof! Woof!
+  gato.sonido( );  // Meow!
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **Perro** y **Gato** heredan de la clase **Animal**, y cada uno implementa su propio método **sonido**.
+
+### Encapsulamiento:
+
+En el contexto de la programación orientada a objetos (POO) el encapsulamiento implica ocultar los detalles internos de una clase y exponer solo una interfaz pública que permita 
+interactuar con los objetos de esa clase. Esto se logra mediante el uso de acceso controlado a los miembros de la clase, como propiedades y métodos.
+
+<CodeBlock
+  codeString={`
+   class CuentaBancaria {
+    constructor(saldoInicial) {
+        // Propiedad privada
+        let saldo = saldoInicial;
+
+        // Método privado
+        function validarMontoRetiro(monto) {
+        if (monto > saldo) {
+            console.log("Fondos insuficientes");
+            return false;
+        }
+        return true;
+        }
+
+        // Interfaz pública
+        this.getSaldo = function( ) {
+        return saldo;
+        };
+
+        this.depositar = function(monto) {
+        saldo += monto;
+        console.log(\`Depósito exitoso. Nuevo saldo: \${saldo}\`);
+        };
+
+        this.retirar = function(monto) {
+        if (validarMontoRetiro(monto)) {
+            saldo -= monto;
+            console.log(\`Retiro exitoso. Nuevo saldo: \${saldo}\`);
+        }
+        };
+    }
+   }
+
+  // Crear una instancia de la clase
+  const cuenta = new CuentaBancaria(1000);
+
+  // Acceder a la interfaz pública
+  console.log(\`Saldo inicial: \${cuenta.getSaldo( )}\`);
+  cuenta.depositar(500);
+  cuenta.retirar(200);
+  `} 
+  language='javascript'
+/>
+
+**En este ejemplo:**
+
+- **saldo** es una propiedad privada de la clase **CuentaBancaria**. Está encapsulada dentro del constructor y no se puede acceder directamente desde fuera de la clase.
+- **validarMontoRetiro** es un método privado que valida si hay fondos suficientes para realizar un retiro. También está encapsulado y no es accesible desde fuera de la clase.
+- La interfaz pública incluye métodos como **getSaldo**, **depositar** y **retirar**. Estos métodos permiten interactuar con la instancia de la clase de manera controlada 
+ proporcionando acceso seguro a los detalles internos sin exponerlos directamente.
+
+ Este enfoque de encapsulamiento ayuda a prevenir el acceso no autorizado o modificaciones indebidas a los datos internos de la clase, mejorando así la seguridad y la integridad 
+ del código.
+
+ Recuerda que, aunque la POO puede ser útil en muchos casos, no es la única forma de programar en JavaScript. La programación funcional también es una parte integral del lenguaje y 
+ puede ser utilizada en combinación con la POO para escribir código más limpio y modular.

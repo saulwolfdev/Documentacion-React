@@ -8,45 +8,46 @@ Ejemplo básico de cómo se usan los Template Strings:
 
 <CodeBlock
   codeString={`
-  import React from 'react';
-
   const MiComponente = ( ) => {
-    const nombre = 'John Doe';
-    return (
-      <div>
-        <p>Hola, mi nombre es {nombre}.</p>
-      </div>
-    );
-  }
+  const nombre = 'John Doe';
 
-  export default MiComponente;
+  const div = document.createElement('div');
+  const p = document.createElement('p');
+  p.textContent = \`Hola, mi nombre es \${nombre}.\`;
+
+  div.appendChild(p);
+
+  return div;
+  };
+
+export default MiComponente;
+
   `} 
   language='javascript'
 />
 
-En el ejemplo anterior, la variable nombre está envuelta en llaves dentro del texto, lo que permite que se evalúe como una expresión JavaScript. Esto significa que puedes incluir variables o incluso expresiones más complejas dentro de un string de JSX.
+
+En el ejemplo la variable `nombre` está incorporada en el texto utilizando el formato `${nombre}`, que es una característica de las plantillas de cadena de JavaScript.
+Esto permite la evaluación de `nombre` como una expresión JavaScript dentro de la cadena de texto. En otras palabras, puedes incluir variables o expresiones más elaboradas dentro de una cadena de texto de JavaScript utilizando esta sintaxis especial.
 
 También puedes realizar operaciones más complejas dentro de los Template Strings:
 
 <CodeBlock
   codeString={`
-  import React from 'react';
-
   const MiComponente = ( ) => {
-    const num1 = 10;
-    const num2 = 20;
-    return (
-      <div>
-        <p>La suma de {num1} y {num2} es {num1 + num2}.</p>
-      </div>
-    );
-  }
+  const num1 = 10;
+  const num2 = 20;
+
+  const div = document.createElement('div');
+  const p = document.createElement('p');
+  p.textContent = \`La suma de \${num1} y \${num2} es \${num1 + num2}.\`;
+
+  div.appendChild(p);
+
+  return div;
+  };
 
   export default MiComponente;
   `} 
   language='javascript'
 />
-
-Estos son solo ejemplos básicos, pero los Template Strings en React te permiten hacer cosas más avanzadas, como realizar mapeos sobre arreglos y generar listas de elementos JSX de manera dinámica.
-
-Tenemos que tener en cuenta que los Template Strings son una característica de JavaScript (ES6) y no están específicamente ligados a React. Puedes usarlos en cualquier proyecto de JavaScript moderno.

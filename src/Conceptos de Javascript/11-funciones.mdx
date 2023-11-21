@@ -1,0 +1,131 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Funciones
+
+Usar funciones en javascript es una parte fundamental a la hora de escribir codigo en nuestros proyectos.
+Aqui algunas razones importantes.
+
+### Reutilización de código:
+
+Las funciones permiten definir un conjunto de instrucciones que pueden ser ejecutadas en diferentes partes de tu programa. 
+Esto promueve la reutilización de código, ya que puedes llamar a la función en lugar de repetir las mismas líneas de código en múltiples lugares.
+
+
+<CodeBlock
+  codeString={`
+    function saludar(nombre) {
+    console.log("Hola, " + nombre + "!");
+    }
+
+    saludar("Juan");
+    saludar("María");
+  `} 
+  language='javascript'
+/>
+
+### Abstracción:
+
+Las funciones permiten abstraer detalles de implementación. 
+Puedes encapsular una serie de operaciones en una función y luego llamar a esa función sin necesidad de conocer los detalles internos. 
+Esto facilita la comprensión del código y mejora la mantenibilidad.
+
+
+<CodeBlock
+  codeString={`
+    function calcularSuma(a, b) {
+    return a + b;
+    }
+
+    let resultado = calcularSuma(3, 5);
+  `} 
+  language='javascript'
+/>
+
+### Modularidad:
+
+Las funciones ayudan a dividir el código en bloques más pequeños y manejables, lo que facilita el desarrollo y la colaboración en equipo. 
+Cada función puede encargarse de una tarea específica, lo que hace que el código sea más modular y fácil de entender.
+Supongamos que estamos construyendo un sistema de gestión de empleados y queremos realizar diversas operaciones, como agregar un nuevo empleado, calcular el salario, y generar informes. 
+Podríamos organizar esto de la siguiente manera:
+
+<CodeBlock
+  codeString={`
+    // Función para agregar un nuevo empleado a la base de datos
+    function agregarEmpleado(nombre, salario) {
+    // Lógica para agregar el empleado a la base de datos
+    console.log("Empleado agregado:", nombre);
+    }
+
+    // Función para calcular el salario después de deducciones
+    function calcularSalarioConDeducciones(salarioBase, deducciones) {
+    // Lógica para calcular el salario después de deducciones
+    return salarioBase - deducciones;
+    }
+
+    // Función para generar un informe de salario para un empleado
+    function generarInformeSalario(nombre, salario) {
+    // Lógica para generar un informe de salario
+    console.log("Informe de salario para", nombre, ": $", salario);
+    }
+
+    // Uso de las funciones
+    agregarEmpleado("Juan Pérez", 50000);
+    agregarEmpleado("María García", 60000);
+
+    let salarioJuan = calcularSalarioConDeducciones(50000, 2000);
+    let salarioMaria = calcularSalarioConDeducciones(60000, 2500);
+
+    generarInformeSalario("Juan Pérez", salarioJuan);
+    generarInformeSalario("María García", salarioMaria);
+  `} 
+  language='javascript'
+/>
+
+La función **agregarEmpleado** se encarga de la lógica para agregar un nuevo empleado a la base de datos. 
+Si necesitamos modificar cómo se agrega un empleado, solo necesitamos hacer cambios en esta función.
+
+La función **calcularSalarioConDeducciones** encapsula la lógica para calcular el salario después de aplicar deducciones. 
+Esto ayuda a mantener separadas las responsabilidades y facilita la actualización de la lógica de cálculo.
+
+La función **generarInformeSalario** se encarga de generar informes de salario. Si en el futuro necesitamos cambiar el formato o los detalles del informe, 
+solo modificamos esta función.
+
+Cada función tiene una tarea específica y se puede entender de manera aislada. Esta modularidad hace que sea más fácil entender, mantener y actualizar 
+el código, especialmente cuando trabajamos en equipo, ya que diferentes miembros del equipo pueden encargarse de diferentes funciones sin interferir con el trabajo de los demás.
+
+### Claridad y legibilidad:
+
+El uso de funciones puede hacer que tu código sea más claro y fácil de leer. 
+Al dar nombres descriptivos a las funciones, puedes comunicar de manera efectiva qué hace cada parte de tu código.
+
+
+<CodeBlock
+  codeString={`
+  function calcularAreaRectangulo(base, altura) {
+  return base * altura;
+  }
+
+  let area = calcularAreaRectangulo(10, 5);
+  `} 
+  language='javascript'
+/>
+
+### Manejo de eventos y devolución de llamadas (callbacks):
+
+En JavaScript las funciones son objetos de primera clase, lo que significa que pueden ser pasadas como argumentos a otras funciones. 
+Esto es especialmente útil al trabajar con eventos o devoluciones de llamadas, donde una función se ejecuta en respuesta a un evento.
+
+
+<CodeBlock
+  codeString={`
+  function manejarClick( ) {
+  console.log("Se hizo clic en el botón");
+  }
+
+  document.getElementById("miBoton").addEventListener("click", manejarClick);
+  `} 
+  language='javascript'
+/>
+
+En resumen, el uso de funciones en JavaScript mejora la estructura, reutilización, mantenibilidad y legibilidad del código, lo que resulta en un desarrollo
+más eficiente y menos propenso a errores.
