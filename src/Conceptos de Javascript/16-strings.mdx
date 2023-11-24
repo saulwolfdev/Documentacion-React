@@ -1,0 +1,158 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Strings
+
+Un string o cadena de texto es una secuencia de caracteres que representa texto y puede asignarse a una variable. Esto permite a los programadores almacenar, 
+manipular y trabajar con datos de texto de manera eficiente. La asignación de un string a una variable facilita su referencia y manipulación a lo largo del código.
+
+<CodeBlock
+  codeString={`
+  let miString = "Hola, mundo!";
+  console.log(miString); // Imprime: Hola, mundo!
+  `} 
+  language='javascript'
+/>
+
+### Concatenar un string y Template String
+
+**Usando el operador +:**
+
+<CodeBlock
+  codeString={`
+  let string1 = "Hola, ";
+  let templateString = \`mundo!\`;
+
+  let resultado = string1 + templateString;
+
+  console.log(resultado); // Imprime: Hola, mundo!
+  `} 
+  language='javascript'
+/>
+
+**Usando un template string directamente:**
+
+<CodeBlock
+  codeString={`
+  let string1 = "Hola, ";
+  let templateString = \`mundo!\`;
+
+  let resultado = \`\${string1}\${templateString}\`;
+
+  console.log(resultado); // Imprime: Hola, mundo!
+  `} 
+  language='javascript'
+/>
+
+En ambos casos obtendrás el mismo resultado: "Hola, mundo!". La ventaja del template string es que te permite interpolar variables directamente dentro del string 
+utilizando `${}`. Esto puede hacer que el código sea más legible y más fácil de mantener, especialmente cuando trabajas con varias variables o expresiones dentro de un string.
+
+### String Methods:
+
+- **includes y length:**
+
+**includes(substring):** Determina si un string contiene la subcadena especificada y devuelve true o false según el resultado.
+
+<CodeBlock
+  codeString={`
+  let frase = "Hola, mundo!";
+  console.log(frase.includes("mundo")); // Imprime: true
+  console.log(frase.includes("adiós")); // Imprime: false
+  `} 
+  language='javascript'
+/>
+
+**length:** Devuelve la longitud (número de caracteres) de un string.
+
+<CodeBlock
+  codeString={`
+  let palabra = "JavaScript";
+  console.log(palabra.length); // Imprime: 10
+  `} 
+  language='javascript'
+/>
+
+- **replace, slice y substring:**
+
+**replace (oldValue, newValue):** Reemplaza la primera ocurrencia de la subcadena especificada con otra subcadena.
+
+<CodeBlock
+  codeString={`
+  let mensaje = "Hola, mundo!";
+  let nuevoMensaje = mensaje.replace("mundo", "amigo");
+  console.log(nuevoMensaje); // Imprime: Hola, amigo!
+  `} 
+  language='javascript'
+/>
+
+**slice(start, end):** Extrae una porción del string desde la posición **start** hasta la posición **end** (no incluyendo **end**).
+
+<CodeBlock
+  codeString={`
+  let texto = "JavaScript";
+  let subcadena = texto.slice(0, 4);
+  console.log(subcadena); // Imprime: Java
+  `} 
+  language='javascript'
+/>
+
+**substring(start, end):** Similar a **slice** pero **substring** no acepta índices negativos.
+
+<CodeBlock
+  codeString={`
+  let texto = "JavaScript";
+  let subcadena = texto.substring(0, 4);
+  console.log(subcadena); // Imprime: Java
+  `} 
+  language='javascript'
+/>
+
+- **repeat y split:**
+
+**repeat(count):** Devuelve una nueva cadena que repite la cadena original el número de veces especificado.
+
+<CodeBlock
+  codeString={`
+  let parte = "abc";
+  let repetido = parte.repeat(3);
+  console.log(repetido); // Imprime: abcabcabc
+  `} 
+  language='javascript'
+/>
+
+**split(separator):** Divide un string en un array de subcadenas basado en el separador especificado.
+
+<CodeBlock
+  codeString={`
+  let lista = "manzana,naranja,uva";
+  let frutas = lista.split(",");
+  console.log(frutas); // Imprime: ['manzana', 'naranja', 'uva']
+  `} 
+  language='javascript'
+/>
+
+- **toUpperCase y toLowerCase**
+
+**toUpperCase():** Devuelve una nueva cadena con todos los caracteres convertidos a mayúsculas.
+
+<CodeBlock
+  codeString={`
+  let minusculas = "hola";
+  let mayusculas = minusculas.toUpperCase();
+  console.log(mayusculas); // Imprime: HOLA
+  `} 
+  language='javascript'
+/>
+
+**toLowerCase():** Devuelve una nueva cadena con todos los caracteres convertidos a minúsculas.
+
+<CodeBlock
+  codeString={`
+  let mayusculas = "HOLA";
+  let minusculas = mayusculas.toLowerCase();
+  console.log(minusculas); // Imprime: hola
+  `} 
+  language='javascript'
+/>
+
+Estos métodos son solo algunos ejemplos de las operaciones que puedes realizar con strings en JavaScript. 
+La flexibilidad de los métodos de string facilita la manipulación y procesamiento de texto.

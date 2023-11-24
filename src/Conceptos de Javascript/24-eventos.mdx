@@ -1,0 +1,75 @@
+import { CodeBlock } from '../components-mdx/index.js';
+
+# Eventos
+
+En JavaScript un evento es cualquier cosa que sucede en el navegador. Puede ser una interacción del usuario como hacer clic en un botón, cargar una página o incluso el cambio
+en el tamaño de la ventana.
+
+- **Eventos con el Mouse:** Los eventos del mouse incluyen acciones como hacer click, mover el mouse, soltar el mouse, etc.
+
+<CodeBlock
+  codeString={`
+  // Ejemplo de clic con el mouse
+  document.getElementById('miBoton').addEventListener('click', function() {
+    alert('¡Haz hecho clic!');
+  });
+  `} 
+  language='javascript'
+/>
+
+- **Eventos sobre los Inputs:** Estos eventos están relacionados con la interacción del usuario con elementos de entrada como campos de texto.
+
+<CodeBlock
+  codeString={`
+  // Ejemplo de evento al escribir en un campo de texto
+  document.getElementById('miInput').addEventListener('input', function() {
+    console.log('Texto cambiado:', this.value);
+  });
+  `} 
+  language='javascript'
+/>
+
+- **Evento Submit a un formulario:** El evento submit se activa cuando un formulario se envía.
+
+<CodeBlock
+  codeString={`
+  // Ejemplo de evento de envío de formulario
+  document.getElementById('miFormulario').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+    alert('Formulario enviado');
+  });
+  `} 
+  language='javascript'
+/>
+
+- **Event Bubbling:** El Event Bubbling es el proceso por el cual un evento se propaga desde el elemento objetivo hacia arriba en la jerarquía del DOM.
+
+<CodeBlock
+  codeString={`
+  // Ejemplo de event bubbling
+  document.getElementById('padre').addEventListener('click', function() {
+    alert('Padre hizo clic');
+  });
+
+  document.getElementById('hijo').addEventListener('click', function() {
+    alert('Hijo hizo clic');
+  });
+  `} 
+  language='javascript'
+/>
+
+Cuando haces clic en el elemento con id 'hijo' el navegador primero activa el evento asociado a 'hijo' y luego propaga el evento hacia arriba en la jerarquía del DOM
+activando también el evento asociado a 'padre'. Esto es el Event Bubbling.
+
+- **Prevenir Event Bubbling con un método:** Se puede usar stopPropagation() para detener el Event Bubbling.
+
+<CodeBlock
+  codeString={`
+  // Ejemplo de prevención de event bubbling con stopPropagation
+  document.getElementById('hijo').addEventListener('click', function(event) {
+    event.stopPropagation(); // Evita que el evento se propague hacia arriba
+    alert('Hijo hizo clic');
+  });
+  `} 
+  language='javascript'
+/>
