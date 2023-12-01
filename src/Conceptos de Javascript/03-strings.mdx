@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Strings
 
@@ -156,3 +157,73 @@ utilizando `${}`. Esto puede hacer que el código sea más legible y más fácil
 
 Estos métodos son solo algunos ejemplos de las operaciones que puedes realizar con strings en JavaScript. 
 La flexibilidad de los métodos de string facilita la manipulación y procesamiento de texto.
+
+# Tips
+
+#### Uso de `==` en lugar de `===`
+
+Al comparar strings, es recomendable utilizar el operador de igualdad estricta (===) en lugar del operador de igualdad (==). 
+El operador de igualdad estricta compara tanto el valor como el tipo de dato.
+
+<CodeBlock
+  codeString={`
+  let str1 = '5';
+  let str2 = 5;
+
+  // Incorrecto (puede dar true, ya que realiza conversión de tipo):
+  if (str1 == str2) {
+    // código
+  }
+
+  // Correcto:
+  if (str1 === str2) {
+    // código
+  }
+  `} 
+  language='javascript'
+/>
+
+#### No Manejar la Sensibilidad de Mayúsculas y Minúsculas
+
+Al comparar strings tene en cuenta que JavaScript es sensible a mayúsculas y minúsculas. Asegúrate de que tus comparaciones tengan en cuenta ese detalle.
+
+<CodeBlock
+  codeString={`
+  let str1 = 'Hello';
+  let str2 = 'hello';
+
+  // Incorrecto:
+  if (str1 === str2) {
+    // código
+  }
+
+  // Correcto:
+  if (str1.toLowerCase() === str2.toLowerCase()) {
+    // código
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Concatenación Ineficiente en Bucles
+
+Evita la concatenación repetida de strings dentro de bucles ya que puede tener un impacto en el rendimiento. 
+En su lugar considera utilizar un array y luego unir los elementos al final
+
+<CodeBlock
+  codeString={`
+  // Incorrecto:
+  let result = '';
+  for (let i = 0; i < 10; i++) {
+    result += i;
+  }
+
+  // Correcto:
+  let resultArray = [];
+  for (let i = 0; i < 10; i++) {
+    resultArray.push(i);
+  }
+  let result = resultArray.join('');
+  `} 
+  language='javascript'
+/>

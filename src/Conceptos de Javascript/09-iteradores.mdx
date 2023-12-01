@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Iteradores
 
@@ -95,6 +96,86 @@ import { CodeBlock } from '../components-mdx/index.js';
   for (const key in obj) {
     console.log(key, obj[key]); // Imprime a 1, b 2, c 3
   }
+  `} 
+  language='javascript'
+/>
+
+# Tips
+
+#### Evitar modificar el array mientras se itera
+
+Modificar un array mientras se está iterando puede conducir a resultados inesperados o errores. 
+Si necesitas modificar el array considera hacer una copia antes de la iteración
+
+<CodeBlock
+  codeString={`
+  const array = [1, 2, 3];
+
+  // Incorrecto: Modificar el array mientras se itera
+  for (const value of array) {
+    array.push(value * 2); // Esto puede causar un bucle infinito
+  }
+
+  // Correcto: Hacer una copia antes de la iteración
+  const copyArray = [...array];
+  for (const value of copyArray) {
+    array.push(value * 2);
+  }
+  `} 
+  language='javascript'
+/>
+
+# Tips
+
+#### Manejo de Eventos
+
+Asegurarse de asignar funciones de manejo de eventos de manera correcta.
+
+<CodeBlock
+  codeString={`
+  // Error
+  document.getElementById('miBoton').addEventListener('click', miFuncion());
+
+  // Correcto
+  document.getElementById('miBoton').addEventListener('click', miFuncion);
+  `} 
+  language='javascript'
+/>
+
+#### Referencias a Elementos del DOM
+
+Garantizar que el DOM esté completamente cargado antes de interactuar con él.
+
+<CodeBlock
+  codeString={`
+  // Error
+  document.addEventListener('DOMContentLoaded', function () {
+    // Intentar acceder a elementos del DOM aquí
+  });
+
+  // Correcto
+  document.addEventListener('DOMContentLoaded', function () {
+    // Acceder a elementos del DOM aquí
+  });
+  `} 
+  language='javascript'
+/>
+
+#### this en Funciones de Manejo de Eventos
+
+Asegurarse de que el valor de **this** sea el esperado en funciones de manejo de eventos.
+
+<CodeBlock
+  codeString={`
+  // Error
+  document.getElementById('miBoton').addEventListener('click', function () {
+    // 'this' no se refiere al elemento del botón
+  });
+
+  // Correcto
+  document.getElementById('miBoton').addEventListener('click', () => {
+    // 'this' se refiere al elemento del botón
+  });
   `} 
   language='javascript'
 />

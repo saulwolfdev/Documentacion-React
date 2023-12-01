@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Promesas (Promises)
 
@@ -51,3 +52,66 @@ Dentro de la promesa se resuelve **resolve** o rechaza **reject** la promesa seg
 Se utiliza el método **.then()** para manejar el caso en que la promesa se resuelve con éxito.
 
 Se utiliza el método **.catch()** para manejar el caso en que la promesa es rechazada.
+
+# Tips
+
+#### Manejo de Errores
+
+Siempre maneja los errores en las cadenas de promesas. Usa **catch** al final de la cadena para capturar cualquier error que ocurra en cualquier parte de la cadena.
+
+<CodeBlock
+  codeString={`
+  miPromesa()
+    .then(resultado => console.log(resultado))
+    .catch(error => console.error(error));
+  `} 
+  language='javascript'
+/>
+
+#### Evitar Promesas sin Retorno
+
+Asegúrate de que tus funciones de promesa devuelvan un valor o resuelvan con algún resultado. Olvidar hacerlo puede llevar a problemas difíciles de depurar.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  const promesaSinRetorno = () => new Promise(resolve => resolve());
+
+  // Correcto
+  const promesaConRetorno = () => new Promise(resolve => resolve('¡Éxito!'));
+  `} 
+  language='javascript'
+/>
+
+#### Uso de Promise.all
+
+Tip: Utiliza **Promise.all** para manejar múltiples promesas concurrentes. Esto asegura que todas las promesas se completen antes de continuar.
+
+<CodeBlock
+  codeString={`
+  const promesas = [promesa1(), promesa2(), promesa3()];
+
+  Promise.all(promesas)
+    .then(resultados => console.log(resultados))
+    .catch(error => console.error(error));
+  `} 
+  language='javascript'
+/>
+
+#### Async/Await
+
+Usa **async/await** para escribir código asincrónico de manera más sincrónica y legible.
+
+<CodeBlock
+  codeString={`
+  async function miFuncionAsincrona() {
+    try {
+      const resultado = await miPromesa();
+      console.log(resultado);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  `} 
+  language='javascript'
+/>

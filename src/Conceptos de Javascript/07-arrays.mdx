@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Arrays
 
@@ -394,3 +395,42 @@ Sin embargo tienen algunas diferencias clave en términos de su uso y lo que dev
 
 En resumen **forEach** es útil cuando solo necesitas realizar una acción en cada elemento del array mientras que **.map** es más adecuado cuando deseas obtener un nuevo array 
 basado en la transformación de cada elemento del array original.
+
+# Tips
+
+#### Evitar el uso de for...in para arrays
+
+El bucle for...in puede iterar sobre propiedades no numéricas por lo que no es la mejor opción para recorrer arrays. Utiliza for...of o métodos de array en su lugar.
+
+<CodeBlock
+  codeString={`
+  const array = [1, 2, 3];
+
+  // No recomendado
+  for (const index in array) {
+    console.log(array[index]);
+  }
+
+  // Recomendado
+  for (const element of array) {
+    console.log(element);
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Verificar si un elemento existe en un array
+
+Antes de realizar operaciones en un array verifica si un elemento específico existe para evitar errores.
+
+<CodeBlock
+  codeString={`
+  const array = [1, 2, 3, 4, 5];
+  const element = 3;
+
+  if (array.includes(element)) {
+    console.log(\`El elemento \${element} está en el array.\`);
+  }
+  `} 
+  language='javascript'
+/>

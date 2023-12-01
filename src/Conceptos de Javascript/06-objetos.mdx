@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Objetos
 
@@ -163,6 +164,47 @@ Métodos que proporcionan información sobre las propiedades de un objeto.
   console.log(Object.keys(persona));   // ['nombre', 'edad', 'trabajo']
   console.log(Object.values(persona)); // ['Juan', 25, 'Programador']
   console.log(Object.entries(persona)); // [['nombre', 'Juan'], ['edad', 25], ['trabajo', 'Programador']]
+  `} 
+  language='javascript'
+/>
+
+# Tips
+
+#### Manejo adecuado de this
+
+Al utilizar funciones dentro de objetos o eventos, asegúrate de manejar correctamente el valor de this utilizando funciones de flecha `=>` o `bind`.
+
+<CodeBlock
+  codeString={`
+  const objeto = {
+      valor: 42,
+      obtenerValor: function() {
+          console.log(this.valor);
+      }
+  };
+
+  // Usar esto
+  objeto.obtenerValor.bind(objeto)();
+
+  // O esto
+  const obtenerValor = ( ) => {
+      console.log(this.valor);
+  };
+  `} 
+  language='javascript'
+/>
+
+#### Uso de Object.entries para iterar sobre propiedades
+
+Para iterar sobre las propiedades de un objeto, puedes utilizar **Object.entries**.
+
+<CodeBlock
+  codeString={`
+  const miObjeto = { a: 1, b: 2, c: 3 };
+
+  for (const [clave, valor] of Object.entries(miObjeto)) {
+      console.log(\`\${clave}: \${valor}\`);
+  }
   `} 
   language='javascript'
 />

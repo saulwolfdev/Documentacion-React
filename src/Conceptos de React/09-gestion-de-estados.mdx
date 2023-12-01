@@ -1,0 +1,218 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Alternativas para el Manejo de Estados: Redux y Context API
+
+### Redux
+
+Redux es una biblioteca de gestión de estado para aplicaciones JavaScript especialmente aquellas construidas con bibliotecas como React o Angular. 
+Fue desarrollada por Dan Abramov y Andrew Clark. La principal idea detrás de Redux es proporcionar un contenedor predecible del estado de la aplicación, lo que facilita la gestión 
+de los datos y el flujo de la aplicación de una manera coherente.
+
+En Redux el estado de toda la aplicación se almacena en un solo objeto llamado **store**. El estado de la aplicación solo puede cambiarse emitiendo una acción que es un objeto que
+describe el cambio. Estas acciones son manejadas por funciones llamadas **reducers** que especifican cómo el estado de la aplicación cambia en respuesta a una acción.
+
+La arquitectura de Redux sigue el patrón de diseño de Flux pero simplifica y organiza aún más el manejo del estado. Aunque Redux puede ser inicialmente más verboso que algunos 
+enfoques alternativos su estructura clara y su capacidad para gestionar estados complejos y flujos de datos hacen que sea una elección popular en aplicaciones de gran escala o 
+donde la gestión del estado es crítica.
+
+**Instalar las dependencias:**
+
+Primero asegurarnos de tener instaladas las dependencias, caso contrario instalarlas:
+
+<CodeBlock
+  codeString={`
+  npm install redux react-redux
+  `} 
+  language='javascript'
+/>
+
+**Configurar el Store:**
+
+Crear un archivo llamado store.js donde configuraremos el store de Redux.
+
+<CodeBlock
+  codeString={`
+  // store.js
+  import { createStore } from 'redux';
+
+  // Reducer: Define cómo el estado de la aplicación cambia en respuesta a las acciones
+  const counterReducer = (state = { count: 0 }, action) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return { count: state.count + 1 };
+      case 'DECREMENT':
+        return { count: state.count - 1 };
+      default:
+        return state;
+    }
+  };
+
+  // Crear el store con el reducer
+  const store = createStore(counterReducer);
+
+  export default store;
+  `} 
+  language='javascript'
+/>
+
+**Conectar React con Redux:**
+
+En el componente principal de tu aplicación (por ejemplo **App.js**) conecta tu componente con el store de Redux utilizando **react-redux**.
+
+<CodeBlock
+  codeString={`
+    // App.js
+    import React from 'react';
+    import { connect } from 'react-redux';
+    import store from './store';
+
+    const App = ({ count, increment, decrement }) => {
+    return (
+        <div>
+        <h1>Contador: {count}</h1>
+        <button onClick={increment}>Incrementar</button>
+        <button onClick={decrement}>Decrementar</button>
+        </div>
+    );
+    };
+
+    // Mapear el estado de Redux a las props del componente
+    const mapStateToProps = (state) => ({
+    count: state.count,
+    });
+
+    // Mapear las acciones a las props del componente
+    const mapDispatchToProps = (dispatch) => ({
+    increment: () => dispatch({ type: 'INCREMENT' }),
+    decrement: () => dispatch({ type: 'DECREMENT' }),
+    });
+
+    // Conectar el componente con el store de Redux
+    export default connect(mapStateToProps, mapDispatchToProps)(App);
+  `} 
+  language='javascript'
+/>
+
+**Integrar el Store en la Aplicación:**
+
+En el archivo principal de tu aplicación (por ejemplo **index.js**), envuelve tu aplicación con el **Provider** de **react-redux** y proporciona el store.
+
+<CodeBlock
+  codeString={`
+    // index.js
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import { Provider } from 'react-redux';
+    import store from './store';
+    import App from './App';
+
+    ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
+    );
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo hemos creado un store de Redux con un reducer simple para manejar un contador. El componente **App** se conecta al store utilizando la función **connect** de 
+**react-redux** mapeando el estado y las acciones a las props del componente.
+
+Cuando se hace clic en los botones **Incrementar** o **Decrementar** se despachan acciones al store y el componente se actualiza automáticamente para reflejar el nuevo estado. 
+
+###  Context API 
+
+La API de Context en React es útil para pasar datos a través del árbol de componentes sin tener que pasar props manualmente en cada nivel. 
+
+**Crear el contexto:**
+
+Primero crea un archivo que contenga el contexto y sus proveedores. En este ejemplo, llamaremos al archivo MyContext.js:
+
+<CodeBlock
+  codeString={`
+    // MyContext.js
+    import React, { createContext, useContext, useReducer } from 'react';
+
+    // Creamos el contexto
+    const MyContext = createContext();
+
+    // Creamos el proveedor del contexto
+    const MyProvider = ({ children }) => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+
+    // Puedes definir un reducer y un estado inicial según tus necesidades
+    function reducer(state, action) {
+        switch (action.type) {
+        case 'INCREMENT':
+            return { count: state.count + 1 };
+        case 'DECREMENT':
+            return { count: state.count - 1 };
+        default:
+            return state;
+        }
+    }
+
+    const initialState = { count: 0 };
+
+    // Devolvemos el proveedor con el estado y las funciones de despacho
+    return (
+        <MyContext.Provider value={{ state, dispatch }}>
+        {children}
+        </MyContext.Provider>
+    );
+    };
+
+    // Función para utilizar el contexto en componentes hijos
+    const useMyContext = () => {
+    const context = useContext(MyContext);
+    if (!context) {
+        throw new Error('useMyContext debe ser utilizado dentro de un MyProvider');
+    }
+    return context;
+    };
+
+    export { MyProvider, useMyContext };
+  `} 
+  language='javascript'
+/>
+
+**Usar el contexto en componentes:**
+
+Ahora, pudemos usar este contexto en los componentes que lo requieran:
+
+<CodeBlock
+  codeString={`
+    // App.js
+    import React from 'react';
+    import { MyProvider, useMyContext } from './MyContext';
+
+    const Counter = () => {
+    const { state, dispatch } = useMyContext();
+
+    return (
+        <div>
+        <h1>Contador: {state.count}</h1>
+        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrementar</button>
+        <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrementar</button>
+        </div>
+    );
+    };
+
+    const App = () => {
+    return (
+        <MyProvider>
+        <Counter />
+        </MyProvider>
+    );
+    };
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+- **MyProvider** es el componente proveedor de contexto que envuelve los componentes que necesitan acceder a ese contexto.
+- **useMyContext** es un hook personalizado que facilita el acceso al contexto y su estado desde componentes secundarios.
+- **Counter** es un componente que utiliza el estado y el despacho proporcionados por el contexto.

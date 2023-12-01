@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Funciones
 
@@ -458,3 +459,99 @@ la palabra clave **return** en estos casos.
 
 Estos son solo ejemplos básicos, pero ilustran cómo las Arrow Functions pueden hacer que el código sea más claro y conciso, especialmente cuando se utilizan con métodos que implican 
 iteración sobre arrays.
+
+# Tips
+
+#### Evitar el uso de variables globales
+
+ Declarar variables en el ámbito global sin necesidad.
+ Limita el ámbito de tus variables usando let o const dentro de funciones o bloques específicos.
+
+ <CodeBlock
+  codeString={`
+  // Incorrecto
+  let globalVariable = 5;
+
+  function miFuncion() {
+    // Accediendo a la variable global innecesariamente
+    console.log(globalVariable);
+  }
+
+  // Correcto
+  function miFuncion() {
+    const localVariable = 5;
+    console.log(localVariable);
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Manejo de funciones anónimas
+Crear funciones anónimas innecesarias.
+Usar en su lugar funciones con nombre para facilitar el seguimiento del código y mejorar la legibilidad.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  setTimeout(function() {
+    console.log('Hola, mundo!');
+  }, 1000);
+
+  // Correcto
+  function saludar() {
+    console.log('Hola, mundo!');
+  }
+
+  setTimeout(saludar, 1000);
+  `} 
+  language='javascript'
+/>
+
+#### Manejo de funciones de retorno
+
+Un error comun es no devolver valores explícitamente desde funciones.
+Si una función debe devolver un valor asegúrate de incluir una declaración de retorno.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  function suma(a, b) {
+    const resultado = a + b;
+  }
+
+  // Correcto
+  function suma(a, b) {
+    const resultado = a + b;
+    return resultado;
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Callbacks y funciones asíncronas
+
+Un error puede ser no manejar errores en funciones asíncronas.
+ Usa bloques try-catch para manejar errores en funciones asíncronas y callbacks.
+
+ <CodeBlock
+  codeString={`
+  // Incorrecto
+  async function fetchData() {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  }
+
+  // Correcto
+  async function fetchData() {
+    try {
+      const response = await fetch('https://api.example.com/data');
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error al obtener datos:', error);
+    }
+  }
+  `} 
+  language='javascript'
+/>

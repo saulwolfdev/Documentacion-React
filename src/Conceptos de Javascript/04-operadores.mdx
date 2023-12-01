@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Operadores
 
@@ -292,3 +293,59 @@ Se puede anidar operadores ternarios para expresiones condicionales más complej
 />
 
 En este ejemplo, el operador ternario se utiliza para determinar si un número es par, múltiplo de 3 o impar.
+
+# Tips
+
+#### Comparación estricta `===` y `!==`
+
+Utiliza siempre la comparación estricta (=== y !==) en lugar de la comparación débil (== y !=). 
+La comparación estricta compara tanto el valor como el tipo de datos, lo que puede prevenir sorpresas.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  if (variable == 5) {
+    // código
+  }
+
+  // Correcto
+  if (variable === 5) {
+    // código
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Operador Ternario
+
+Usa el operador ternario (condición ? expresión1 : expresión2) para expresiones concisas en lugar de declaraciones if-else largas.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  if (condicion) {
+    resultado = expresion1;
+  } else {
+    resultado = expresion2;
+  }
+
+  // Correcto
+  resultado = condicion ? expresion1 : expresion2;
+  `} 
+  language='javascript'
+/>
+
+#### Incremento y Decremento
+
+Hay que tener cuidado con las expresiones de incremento (++) y decremento (--) dentro de otras expresiones, ya que su comportamiento puede ser inesperado.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = x++; // y = 5, x = 6
+
+  let a = 5;
+  let b = ++a; // b = 6, a = 6
+  `} 
+  language='javascript'
+/>
