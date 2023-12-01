@@ -1,0 +1,165 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Booleans
+
+Los booleans es una parte importante en javascript se crean utilizando las palabras clave **true** y **false**
+
+<CodeBlock
+  codeString={`
+  let booleanoVerdadero = true;
+  let booleanoFalso = false;
+  `} 
+  language='javascript'
+/>
+
+**ejemplo:**
+
+<CodeBlock
+  codeString={`
+  // Declarar una variable booleana
+  let miBooleano = false;
+
+  // Definir una función que invierte el valor del booleano
+    function invertirBooleano() {
+      miBooleano = !miBooleano;
+  }
+
+  // Imprimir el valor inicial del booleano
+  console.log(miBooleano); // Output: false
+
+  // Llamar a la función para invertir el valor
+  invertirBooleano();
+
+  // Imprimir el nuevo valor del booleano
+  console.log(miBooleano); // Output: true
+
+  // Llamar a la función nuevamente para invertir el valor otra vez
+  invertirBooleano();
+
+  // Imprimir el valor después de la segunda inversión
+  console.log(miBooleano); // Output: false
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **invertirBooleano** es una función que utiliza el operador de negación lógica `!` para invertir el valor de **miBooleano**. 
+Después de llamar a esta función el valor de **miBooleano** cambiará de **false** a **true** y viceversa. 
+Puedes llamar a la función tantas veces como desees para invertir el booleano.
+
+### Buenas Prácticas a la Hora de Comparar Booleans en JavaScript:
+
+**Usa Operadores de Comparación Estricta:** JavaScript tiene operadores de igualdad débil `==` y estricta `===`. Es recomendable utilizar la igualdad estricta `===` para 
+evitar conversiones automáticas de tipo y asegurarse de que tanto el valor como el tipo sean iguales.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = '5';
+
+  console.log(x == y);  // true (comparación débil)
+  console.log(x === y); // false (comparación estricta)
+  `} 
+  language='javascript'
+/>
+
+**Evita Comparaciones Redundantes:** No es necesario comparar un booleano con **true** o **false**. Simplemente usa el booleano directamente en la condición.
+
+<CodeBlock
+  codeString={`
+  // Evitar esto:
+  if (booleano === true) {
+    // ...
+  }
+
+  // En su lugar, hacer simplemente:
+  if (booleano) {
+    // ...
+  }
+  `} 
+  language='javascript'
+/>
+
+# Tips
+
+#### Evitar dobles negaciones
+
+Evitar el uso de dobles negaciones para mejorar la legibilidad
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  if (!!condition) {
+      // ...
+  }
+
+  // Correcto
+  if (condition) {
+      // ...
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Utilizar operadores lógicos de manera eficiente
+
+ Utiliza `&&`y `||` de manera efectiva para reducir la complejidad.
+
+ <CodeBlock
+  codeString={`
+  // Incorrecto
+  if (isTrue == true && isFalse == false) {
+      // ...
+  }
+
+  // Correcto
+  if (isTrue && !isFalse) {
+      // ...
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Usar funciones de alto orden para predicados
+
+Encapsula la lógica booleana en funciones para mejorar la reutilización.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  if (isAdult(age) && hasLicense(driver)) {
+      // ...
+  }
+
+  // Correcto
+  if (isDriverEligible(age, driver)) {
+      // ...
+  }
+
+  function isDriverEligible(age, driver) {
+      return isAdult(age) && hasLicense(driver);
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Evitar el uso excesivo de variables booleanas globales
+
+ Agrupa booleanos relacionados en estructuras de datos para mejorar la organización.
+
+ <CodeBlock
+  codeString={`
+  // Incorrecto
+  let isAdmin = false;
+  let isEditor = false;
+  let isModerator = true;
+
+  // Correcto
+  const roles = {
+      admin: false,
+      editor: false,
+      moderator: true
+  };
+  `} 
+  language='javascript'
+/>

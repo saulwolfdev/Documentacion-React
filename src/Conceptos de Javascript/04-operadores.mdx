@@ -1,0 +1,351 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Operadores
+
+### Operadores Aritméticos:
+
+Operadores aritméticos son símbolos que realizan operaciones matemáticas básicas en programación y en matemáticas en general. 
+Estos operadores permiten realizar cálculos numéricos en una variedad de contextos. 
+
+- **Suma y Resta:**
+
+<CodeBlock
+  codeString={`
+  // Suma
+  let a = 5;
+  let b = 3;
+  let suma = a + b;
+  console.log('Suma:', suma);  // Resultado: 8
+
+  // Resta
+  let c = 7;
+  let d = 4;
+  let resta = c - d;
+  console.log('Resta:', resta);  // Resultado: 3
+  `} 
+  language='javascript'
+/>
+
+- **Multiplicación y División:**
+
+<CodeBlock
+  codeString={`
+  // Multiplicación
+  let e = 6;
+  let f = 2;
+  let multiplicacion = e * f;
+  console.log('Multiplicación:', multiplicacion);  // Resultado: 12
+
+  // División
+  let g = 8;
+  let h = 4;
+  let division = g / h;
+  console.log('División:', division);  // Resultado: 2
+  `} 
+  language='javascript'
+/>
+
+### Operadores de Comparación:
+
+**`==` (Igual a):** Compara el valor de dos expresiones, sin tener en cuenta su tipo.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = "5";
+
+  console.log(x == y);// true, ya que el valor es el mismo a pesar de que un operando sea una cadena y el otro un número
+  `} 
+  language='javascript'
+/>
+
+**`===` (Igual a):** Compara tanto el valor como el tipo de dos expresiones.
+
+<CodeBlock
+  codeString={`
+   let x = 5;
+  let y = "5";
+
+  console.log(x === y);// false, ya que el valor es el mismo, pero los tipos son diferentes (número y cadena)
+  `} 
+  language='javascript'
+/>
+
+**`!=` (No igual a):** Compara el valor de dos expresiones, sin tener en cuenta su tipo.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = "5";
+
+  console.log(x != y);// false, ya que el valor es el mismo a pesar de que un operando sea una cadena y el otro un número
+  `} 
+  language='javascript'
+/>
+
+**`!==` (No igual a):** Compara tanto el valor como el tipo de dos expresiones.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = "5";
+
+  console.log(x !== y);// true, ya que el valor es el mismo, pero los tipos son diferentes (número y cadena)
+  `} 
+  language='javascript'
+/>
+
+ **`>` (Mayor que) y `<` (Menor que):** Estos operadores se utilizan para comparar dos valores y determinar si uno es mayor que el otro `>`, menor que el otro `<`, o si son iguales. 
+Estos operadores devuelven un valor booleano: true si la condición es verdadera y false si es falsa.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = 10;
+
+  console.log(x > y);  // Devuelve false, ya que 5 no es mayor que 10
+  console.log(x < y);  // Devuelve true, ya que 5 es menor que 10
+  `} 
+  language='javascript'
+/>
+
+**`>=` (mayor o igual a) y `<=` (menor o igual a)**
+
+<CodeBlock
+  codeString={`
+  let x = 10;
+  let y = 5;
+  let z = 10;
+
+  //mayor o igual a
+  console.log(x >= y);//true, ya que 10 es mayor que 5
+  console.log(x >= z);//// true, ya que 10 es igual a 10
+
+  //menor o igual a
+  console.log(x <= y);//false, ya que 10 es menor que 5
+  console.log(x <= z);//// true, ya que 10 es igual a 10
+
+  `} 
+  language='javascript'
+/>
+
+**Comparación de null y undefined:** En JavaScript null y undefined son dos valores especiales que indican la ausencia de valor. 
+El operador de igualdad estricta `===` se puede usar para comparar null y undefined para verificar si son iguales en valor y tipo.
+
+<CodeBlock
+  codeString={`
+  let value1 = null;
+  let value2 = undefined;
+
+  console.log(value1 === value2);  // Devuelve true, ya que ambos representan la ausencia de valor
+  `} 
+  language='javascript'
+/>
+
+A tener en cuenta que en comparaciones no estrictas `==` null y undefined se consideran iguales entre sí, pero no son iguales a ningún otro valor. 
+Sin embargo se recomienda utilizar la igualdad estricta `===` para evitar comportamientos inesperados.
+
+### Operadores Lógicos
+
+
+Los operadores lógicos son herramientas fundamentales en programación que se utilizan para realizar operaciones de lógica booleana. 
+Estos operadores actúan sobre valores booleanos (verdadero o falso) y producen un resultado booleano
+
+**`&&` (AND lógico):**  Devuelve verdadero si ambas condiciones son verdaderas; de lo contrario, devuelve falso.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = 10;
+
+  if (x > 0 && y > 0) {
+    console.log("Ambas condiciones son verdaderas");
+    } else {
+    console.log("Al menos una de las condiciones es falsa");
+  }
+  `} 
+  language='javascript'
+/>
+
+La respuesta sería: "Ambas condiciones son verdaderas". Esto se debe a que ambas variables, `x` `y` son mayores que cero, cumpliendo así con ambas condiciones del operador 
+lógico && (AND lógico). Por lo tanto se ejecuta el bloque de código dentro del if y se imprime en la consola el mensaje "Ambas condiciones son verdaderas".
+
+**`||` (OR lógico):** Devuelve verdadero si al menos una de las condiciones es verdadera; devuelve falso solo si ambas condiciones son falsas.
+
+<CodeBlock
+  codeString={`
+  let edad = 25;
+  let permisoParental = false;
+
+  if (edad >= 18 || permisoParental) {
+      console.log("Puede ingresar al sitio, es mayor de edad  o tiene permiso parental");
+  } else {
+    console.log("No puede ingresar al sitio");
+  }
+  `} 
+  language='javascript'
+/>
+
+La respuesta sería: "Puede ingresar al sitio, es mayor de edad o tiene permiso parental". Esto se debe a que la condición edad `>=` 18 es verdadera, ya que la variable edad tiene 
+el valor de 25, que es mayor o igual a 18. Como la condición usando el operador `||` (OR lógico) solo requiere que una de las condiciones sea verdadera para que todo sea verdadero 
+se ejecuta el bloque de código dentro del if, y se imprime en la consola el mensaje "Puede ingresar al sitio, es mayor de edad o tiene permiso parental".
+
+**`!` (NOT lógico):** Devuelve verdadero si la condición es falsa y viceversa. Es un operador unario que invierte el valor de verdad de la condición.
+
+<CodeBlock
+  codeString={`
+  let llueve = true;
+
+  if (!llueve) {
+      console.log("No lleva paraguas porque no está lloviendo");
+  } else {
+    console.log("Lleva paraguas porque está lloviendo");
+  }
+  `} 
+  language='javascript'
+/>
+
+La respuesta sería: "Lleva paraguas porque está lloviendo". Esto se debe a que la condición !llueve se evalúa como falsa, ya que llueve es verdadero. El operador `!` (NOT lógico) 
+invierte el valor de verdad, por lo que !llueve es equivalente a "no está lloviendo". Sin embargo, como llueve es verdadero, el bloque de código dentro del else se ejecuta, y se 
+imprime en la consola el mensaje "Lleva paraguas porque está lloviendo".
+
+### Operadores de Incremento/Decremento:
+
+**Incremento:** El operador de incremento en JavaScript es ++. Puede usarse como prefijo `++variable` o sufijo `variable++`.
+
+<CodeBlock
+  codeString={`
+  let a = 5;
+
+  // Incremento como sufijo
+  a++;
+  // Ahora 'a' es igual a 6
+
+  // Incremento como prefijo
+  ++a;
+  // Ahora 'a' es igual a 7
+  `} 
+  language='javascript'
+/>
+
+**Decremento:** El operador de decremento en JavaScript es --. También puede usarse como prefijo `--variable` o sufijo `variable--`.
+
+<CodeBlock
+  codeString={`
+  let b = 8;
+
+  // Decremento como sufijo
+  b--;
+  // Ahora 'b' es igual a 7
+
+  // Decremento como prefijo
+  --b;
+  // Ahora 'b' es igual a 6
+  `} 
+  language='javascript'
+/>
+
+Es importante tener en cuenta la diferencia entre el uso como sufijo y prefijo. Cuando se usa como sufijo `variable++` o `variable--` el valor actual de la variable se utiliza en 
+la expresión antes de que la variable se incremente o decremente. Cuando se usa como prefijo `++variable` o `--variable` la variable se incrementa o decrementa antes de que se 
+evalúe en la expresión. Esto puede afectar el resultado en situaciones específicas.
+
+### Operador Ternario
+
+El operador ternario es una forma compacta de escribir una expresión condicional en JavaScript. También se conoce como operador condicional. 
+La sintaxis básica del operador ternario es la siguiente:
+
+<CodeBlock
+  codeString={`
+  condicion ? expresion_si_es_verdadero : expresion_si_es_falso;
+  `} 
+  language='javascript'
+/>
+
+Aquí la condicion es una expresión que se evalúa como verdadera o falsa. Si la condición es verdadera, se devuelve expresion_si_es_verdadero; de lo contrario se devuelve 
+expresion_si_es_falso.
+
+**ejemplo:**
+
+<CodeBlock
+  codeString={`
+  var edad = 18;
+  var mensaje = (edad >= 18) ? 'Eres mayor de edad' : 'Eres menor de edad';
+
+  console.log(mensaje);
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, la variable **mensaje** se asigna según la condición de si **edad** es mayor o igual a 18. Si es verdadero, se asigna el mensaje "Eres mayor de edad"; de lo 
+contrario, se asigna el mensaje "Eres menor de edad".
+
+Se puede anidar operadores ternarios para expresiones condicionales más complejas:
+
+<CodeBlock
+  codeString={`
+  var numero = 10;
+  var tipo = (numero % 2 === 0) ? 'Par' : (numero % 3 === 0) ? 'Múltiplo de 3' : 'Impar';
+
+  console.log(tipo);
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, el operador ternario se utiliza para determinar si un número es par, múltiplo de 3 o impar.
+
+# Tips
+
+#### Comparación estricta `===` y `!==`
+
+Utiliza siempre la comparación estricta (=== y !==) en lugar de la comparación débil (== y !=). 
+La comparación estricta compara tanto el valor como el tipo de datos, lo que puede prevenir sorpresas.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  if (variable == 5) {
+    // código
+  }
+
+  // Correcto
+  if (variable === 5) {
+    // código
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Operador Ternario
+
+Usa el operador ternario (condición ? expresión1 : expresión2) para expresiones concisas en lugar de declaraciones if-else largas.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  if (condicion) {
+    resultado = expresion1;
+  } else {
+    resultado = expresion2;
+  }
+
+  // Correcto
+  resultado = condicion ? expresion1 : expresion2;
+  `} 
+  language='javascript'
+/>
+
+#### Incremento y Decremento
+
+Hay que tener cuidado con las expresiones de incremento (++) y decremento (--) dentro de otras expresiones, ya que su comportamiento puede ser inesperado.
+
+<CodeBlock
+  codeString={`
+  let x = 5;
+  let y = x++; // y = 5, x = 6
+
+  let a = 5;
+  let b = ++a; // b = 6, a = 6
+  `} 
+  language='javascript'
+/>

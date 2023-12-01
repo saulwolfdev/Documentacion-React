@@ -1,0 +1,176 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Fetch API
+
+Fetch es una API de JavaScript que permite hacer peticiones HTTP para obtener recursos de forma asíncrona desde un servidor. 
+Esta API fue introducida en el estándar de JavaScript en el 2015 y ha ido ganando popularidad en los últimos años.
+
+La API Fetch se puede utilizar para hacer solicitudes de recursos tales como texto, imágenes, archivos JSON, entre otros, y devolverlos como objetos JavaScript que pueden ser 
+utilizados en la aplicación.
+
+Además es importante tener en cuenta que Fetch utiliza promesas, lo que significa que se puede encadenar varias operaciones, como decodificar una respuesta JSON y actualizar la 
+interfaz de usuario de la aplicación con los datos resultantes. 
+Además, Fetch proporciona soporte para cabeceras personalizadas, autenticación y manejo de errores de manera integrada.
+
+#### Características clave de la Fetch API:
+
+- **Basada en Promesas:** La Fetch API utiliza Promesas lo que simplifica el manejo de operaciones asíncronas. Esto facilita la escritura de código limpio y legible, especialmente 
+al tratar con múltiples solicitudes asíncronas.
+
+- **Objetos Request y Response:** La Fetch API introduce los objetos Request y Response, que representan la solicitud HTTP realizada y la respuesta recibida, respectivamente. 
+Estos objetos proporcionan métodos y propiedades para trabajar con los detalles de la solicitud y la respuesta.
+
+- **Encabezados:** La Fetch API permite trabajar fácilmente con encabezados. Puedes establecer, obtener y eliminar encabezados mediante el objeto Headers, lo que facilita la 
+personalización de las solicitudes.
+
+- **Soporte para CORS (Intercambio de Recursos de Orígenes Cruzados):** La Fetch API admite CORS lo que te permite realizar solicitudes a un dominio diferente al que sirve la 
+página web. Esto es esencial para construir aplicaciones web modernas que interactúan con diversas APIs.
+
+<CodeBlock
+  codeString={`
+  fetch('https://jsonplaceholder.typicode.com/todos')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('La solicitud no fue exitosa');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  `} 
+  language='javascript'
+/>
+
+#### Promesas
+
+Las promesas son un mecanismo en JavaScript para manejar operaciones asíncronas. Una promesa representa el resultado eventual (éxito o fracaso) de una operación asíncrona y 
+proporciona una forma más clara de trabajar con este tipo de tareas. Una promesa puede estar en uno de tres estados: pendiente, resuelta o rechazada.
+
+**Ejemplo que combina la Fetch API y promesas para realizar una solicitud HTTP y manejar la respuesta de manera asíncrona:**
+
+<CodeBlock
+  codeString={`
+  const apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+
+  fetch(apiUrl)
+    .then(response => {
+      // Verificar si la respuesta es exitosa (código de estado 200-299)
+      if (!response.ok) {
+        throw new Error(\`Error de red: \${response.status}\`);
+      }
+    
+      // Parsear la respuesta como JSON y retornar la promesa resultante
+      return response.json();
+    })
+    .then(data => {
+      // Manejar los datos obtenidos
+      console.log('Datos obtenidos:', data);
+    })
+    .catch(error => {
+      // Manejar errores en cualquier etapa de la cadena de promesas
+      console.error('Error:', error);
+    });
+  `} 
+  language='javascript'
+/>
+
+- El primer **.then()** maneja la respuesta de la solicitud fetch. Este bloque se ejecuta cuando la promesa devuelta por **fetch(apiUrl)** se resuelve, es decir, cuando la solicitud de 
+red se completa.
+- Si la respuesta de la solicitud no es exitosa (código de estado diferente a 200-299), se lanza un error con **throw new Error()** lo que provoca que la promesa se rechace.
+- El segundo **.then()** maneja la promesa devuelta por **response.json()**. Este bloque se ejecuta cuando la promesa de parseo del JSON se resuelve con éxito.
+- El **.catch()** maneja cualquier error que pueda ocurrir en cualquier etapa de la cadena de promesas ya sea durante la solicitud fetch, el parseo del JSON, o cualquier otro
+problema.
+
+#### Fetch API con Async/Await:
+
+El uso de **async/await** es una forma más moderna y legible de manejar operaciones asíncronas en JavaScript. 
+Al trabajar con la Fetch API puedes utilizar **async/await** para escribir código más sencillo y estructurado evitando el anidamiento excesivo de callbacks y haciendo que el 
+flujo de control sea más claro.
+
+**Ejemplo con Fetch API y Async/Await:**
+
+<CodeBlock
+  codeString={`
+  const apiUrl = 'https://jsonplaceholder.typicode.com/todos/1';
+
+  // Función asíncrona para realizar la solicitud usando fetch
+  async function fetchData() {
+    try {
+      // Realizar la solicitud y esperar a que la promesa se resuelva
+      const response = await fetch(apiUrl);
+
+      // Verificar si la respuesta es exitosa (código de estado 200-299)
+      if (!response.ok) {
+        throw new Error(\`Error de red: \${response.status}\`);
+      }
+
+      // Parsear la respuesta como JSON y obtener los datos
+      const data = await response.json();
+
+      // Manejar los datos obtenidos
+      console.log('Datos obtenidos:', data);
+    } catch (error) {
+      // Manejar errores en cualquier etapa de la operación asíncrona
+      console.error('Error:', error);
+    }
+  }
+
+  // Llamar a la función asíncrona
+  fetchData();
+  `} 
+  language='javascript'
+/>
+
+- La función **fetchData** está marcada como **async** lo que significa que devuelve una promesa y puede contener operaciones **await**.
+
+# Tips
+
+#### Problemas de CORS
+
+Se puede encontrar problemas con la Política de Same-Origin (CORS).
+Asegúrate de que el servidor permita las solicitudes desde el origen de tu aplicación. Puedes configurar el servidor para incluir los encabezados CORS necesarios.
+
+#### Verificación del Estado de la Respuesta
+
+un error comun es no verificar el estado de la respuesta HTTP.
+Asegúrate de verificar si la respuesta fue exitosa antes de procesar los datos.
+
+<CodeBlock
+  codeString={`
+  fetch('https://api.example.com/data')
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+  `} 
+  language='javascript'
+/>
+
+#### Manejo de Tiempos de Espera
+
+Un error es no manejar tiempos de espera adecuadamente.
+Podes usar el método timeout para establecer un tiempo de espera en la solicitud.
+
+<CodeBlock
+  codeString={`
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+  fetch('https://api.example.com/data', { signal: controller.signal })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error))
+      .finally(() => clearTimeout(timeoutId));
+  `} 
+  language='javascript'
+/>
+

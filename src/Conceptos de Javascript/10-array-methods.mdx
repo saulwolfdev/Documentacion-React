@@ -1,0 +1,113 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Array Methods
+
+Los **Array Methods** en JavaScript son métodos incorporados en el objeto Array que permiten realizar diversas operaciones en arreglos. 
+Estos métodos facilitan la manipulación, filtrado, búsqueda y transformación de datos almacenados en arreglos.
+
+- **.some:** Verifica si al menos un elemento del array cumple con la condición proporcionada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const hasEven = numbers.some(num => num % 2 === 0);
+
+  console.log(hasEven); // true, ya que al menos un número es par
+  `} 
+  language='javascript'
+/>
+
+- **.findIndex:** Encuentra el índice de la primera ocurrencia que cumple con la condición dada.
+
+<CodeBlock
+  codeString={`
+  const fruits = ['apple', 'banana', 'orange'];
+
+  const indexOfBanana = fruits.findIndex(fruit => fruit === 'banana');
+
+  console.log(indexOfBanana); // 1, ya que 'banana' está en la posición 1 del array
+  `} 
+  language='javascript'
+/>
+
+- **.reduce:** Aplica una función acumuladora a cada elemento del array reduciéndolos a un solo valor.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  console.log(sum); // 15, que es la suma de todos los elementos del array
+  `} 
+  language='javascript'
+/>
+
+- **.filter:** Crea un nuevo array con todos los elementos que cumplen con la condición dada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+  console.log(evenNumbers); // [2, 4], que son los números pares del array
+  `} 
+  language='javascript'
+/>
+
+- **.find:** Devuelve el primer elemento que cumple con la condición dada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const firstEvenNumber = numbers.find(num => num % 2 === 0);
+
+  console.log(firstEvenNumber); // 2, que es el primer número par del array
+  `} 
+  language='javascript'
+/>
+
+- **.every:** Verifica si todos los elementos del array cumplen con la condición proporcionada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [2, 4, 6, 8, 10];
+
+  const allEven = numbers.every(num => num % 2 === 0);
+
+  console.log(allEven); // true, ya que todos los números son pares
+  `} 
+  language='javascript'
+/>
+
+- **.concat:** Combina dos o más arrays creando un nuevo array.
+
+<CodeBlock
+  codeString={`
+  const arr1 = [1, 2, 3];
+  const arr2 = [4, 5, 6];
+
+  const combinedArray = arr1.concat(arr2);
+
+  console.log(combinedArray); // [1, 2, 3, 4, 5, 6]
+  `} 
+  language='javascript'
+/>
+
+- **Spread Operator:**  Expande los elementos de un array o objeto.
+
+<CodeBlock
+  codeString={`
+  const arr1 = [1, 2, 3];
+  const arr2 = [4, 5, 6];
+
+  const combinedArray = [...arr1, ...arr2];
+
+  console.log(combinedArray); // [1, 2, 3, 4, 5, 6]
+  `} 
+  language='javascript'
+/>

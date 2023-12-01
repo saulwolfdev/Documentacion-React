@@ -1,4 +1,5 @@
 import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
 
 # Variables en React y JavaScript Moderno (Let y Const)
 
@@ -21,8 +22,6 @@ Como se menciono anteriormente se pueden declarar variables con let para aquella
 <CodeBlock
   codeString={`let variable = valor;`} 
   language='javascript'
-  sandboxUrl="https://codesandbox.io/s/inspiring-bartik-pjrl9h"
-  showButtons= {true}
 />
 
 **Ejemplo:**
@@ -82,3 +81,53 @@ sí pueden ser modificados.
 let se utiliza para declarar variables con alcance de bloque que pueden ser reasignadas.
 const se utiliza para declarar constantes con alcance de bloque, cuyos valores no pueden ser reasignados después de la inicialización, aunque sus propiedades o elementos internos 
 pueden ser modificados.
+
+# Tips 
+
+#### Nombres descriptivos
+
+Usa nombres de variables descriptivos y significativos para mejorar la legibilidad del código.
+
+<CodeBlock
+  codeString={`
+  // No recomendado
+  let x = 5;
+
+  // Recomendado
+  let numeroIntentos = 5;
+  `} 
+  language='javascript'
+/>
+
+#### Entender el Ámbito (Scope)
+Entender el ámbito de las variables y evitar la creación de variables globales innecesarias.
+
+<CodeBlock
+  codeString={`
+  // Evitar el uso de var
+  var variableGlobal = "Global";
+
+  // Usar let o const en lugar de var
+  `} 
+  language='javascript'
+/>
+
+#### Evitar Magic Numbers
+
+Evita el uso de "números mágicos" (valores literales sin explicación) y utiliza constantes descriptivas.
+
+<CodeBlock
+  codeString={`
+  // No recomendado
+  if (estatus === 3) {
+    // lógica
+  }
+
+  // Recomendado
+  const ESTATUS_FINALIZADO = 3;
+  if (estatus === ESTATUS_FINALIZADO) {
+    // lógica
+  }
+  `} 
+  language='javascript'
+/>

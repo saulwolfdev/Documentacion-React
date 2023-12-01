@@ -1,0 +1,557 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Funciones
+
+En JavaScript hay dos formas principales de crear funciones mediante la declaración de función **function declaration** y mediante la expresión de función **function expression**.
+
+#### Declaración de Función (Function Declaration)
+
+La declaración de función sigue la siguiente sintaxis:
+
+<CodeBlock
+  codeString={`
+  function nombreFuncion(parametro1, parametro2, ...) {
+  // Código de la función
+    return resultado; // Opcional
+  }
+  `} 
+  language='javascript'
+/>
+
+**ejemplo:**
+
+<CodeBlock
+  codeString={`
+  function sumar(a, b) {
+    return a + b;
+  }
+
+  // Uso de la función
+  var resultadoSuma = sumar(3, 5);
+  console.log(resultadoSuma); // Resultado: 8
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo se declara una función llamada sumar que toma dos parámetros **a y b** y devuelve la suma de esos dos valores.
+
+#### Expresión de Función (Function Expression)
+
+La expresión de función asigna una función a una variable y sigue la siguiente sintaxis:
+
+<CodeBlock
+  codeString={`
+  var nombreFuncion = function(parametro1, parametro2, ...) {
+  // Código de la función
+    return resultado; // Opcional
+  };
+  `} 
+  language='javascript'
+/>
+
+**Ejemplo:**
+
+<CodeBlock
+  codeString={`
+  var multiplicar = function(x, y) {
+    return x * y;
+  };
+
+  // Uso de la función
+  var resultadoMultiplicacion = multiplicar(4, 6);
+  console.log(resultadoMultiplicacion); // Resultado: 24
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, se utiliza una expresión de función para asignar una función anónima a la variable **multiplicar**.
+
+Ambas formas la declaración de función y la expresión de función son válidas y tienen sus usos específicos en diferentes situaciones. 
+La principal diferencia radica en cómo son tratadas por el intérprete de JavaScript durante la fase de carga del código.
+
+### La Diferencia entre Function expression y Declaration
+
+La principal diferencia entre una Function Declaration y una Function Expression en JavaScript radica en cómo son declaradas y en su accesibilidad en el código. 
+
+**Function Declaration:**
+La Function Declaration se declara usando la palabra clave function seguida por el nombre de la función y la lista de parámetros. 
+Una característica importante de las Function Declarations es que son "elevadas" (hoisted) durante la fase de compilación del código. Esto significa que la función puede ser 
+llamada incluso antes de que se declare en el código.
+
+<CodeBlock
+  codeString={`
+  saludar("Juan"); // Esto funciona incluso antes de la declaración
+
+  function saludar(nombre) {
+    console.log("Hola, " + nombre + "!");
+  }
+  `} 
+  language='javascript'
+/>
+
+**Function Expression:**
+La Function Expression se crea asignando una función anónima a una variable. La diferencia clave aquí es que las Function Expressions no son elevadas de la misma manera que las 
+Function Declarations deben ser declaradas antes de ser utilizadas.
+
+<CodeBlock
+  codeString={`  
+  saludar("Juan");// Esto dará un error: Uncaught TypeError: saludar is not a function
+
+  var saludar = function(nombre) {
+    console.log("Hola, " + nombre + "!");
+  };
+  `} 
+  language='javascript'
+/>
+
+En resumen, la principal diferencia es que las Function Declarations son elevadas y pueden ser llamadas incluso antes de ser declaradas en el código, mientras que las Function 
+Expressions no son elevadas y deben ser declaradas antes de ser utilizadas.
+
+Ambas formas tienen sus casos de uso, y la elección entre una u otra a menudo depende del contexto y de cómo se planea estructurar el código.
+
+### La Diferencia entre Función y Método
+
+**Función en JavaScript:**
+
+Una función en JavaScript es un bloque de código reutilizable que realiza una tarea específica. Puede ser declarada mediante la palabra clave function y luego llamada cuando 
+sea necesario.
+
+<CodeBlock
+  codeString={`
+  function sumar(a, b) {
+    return a + b;
+  }
+
+  var resultado = sumar(3, 5);
+  console.log(resultado); // Resultado: 8
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo sumar es una función que toma dos parámetros y devuelve su suma.
+
+**Método en JavaScript:**
+
+Un método es una función que está asociada a un objeto en particular. En JavaScript, los objetos pueden tener propiedades y métodos. Los métodos son funciones que son parte de un 
+objeto y actúan sobre ese objeto.
+
+<CodeBlock
+  codeString={`
+  var persona = {
+    nombre: "Juan",
+    edad: 30,
+    saludar: function( ) {
+      console.log("Hola, soy " + this.nombre + " y tengo " + this.edad + " años.");
+    }
+  };
+
+  persona.saludar( ); // Salida: Hola, soy Juan y tengo 30 años.
+  `} 
+  language='javascript'
+/>
+
+### Parametros y Argumentos en Funciones
+
+En JavaScript es importante comprender la diferencia entre parámetros y argumentos en funciones.
+
+**Parámetros en Funciones:**
+Los parámetros son variables que se definen en la firma de la función y que actúan como marcadores de posición para los valores que la función espera recibir cuando es llamada. 
+Los parámetros se encuentran entre los paréntesis en la declaración de la función.
+
+<CodeBlock
+  codeString={`
+  function saludar(nombre) {
+    console.log("Hola, " + nombre + "!");
+  }
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **nombre** es un parámetro de la función **saludar**. Cuando llamamos a la función **saludar("Juan")**, el valor "Juan" se pasa como argumento al 
+parámetro **nombre**.
+
+**Argumentos en Funciones:**
+Los argumentos son los valores reales que se pasan a la función cuando esta es invocada. Estos valores son asignados a los parámetros correspondientes en la definición 
+de la función.
+
+<CodeBlock
+  codeString={`
+  function sumar(a, b) {
+    console.log(a + b);
+  }
+
+  sumar(3, 5); // Aquí, 3 y 5 son argumentos pasados a los parámetros a y b
+  `} 
+  language='javascript'
+/>
+
+En este caso **sumar** es una función que toma dos parámetros, **a** y **b**. Cuando llamamos a **sumar(3, 5)** los valores 3 y 5 son los argumentos que se asignan a 
+**a** y **b** respectivamente.
+
+**Ejemplo completo:**
+
+<CodeBlock
+  codeString={`
+  function calcularPrecio(producto, precioBase, descuento) {
+    var precioFinal = precioBase - descuento;
+    console.log("El precio final de " + producto + " es: $" + precioFinal);
+  }
+
+  calcularPrecio("Camiseta", 25, 5); // "El precio final de Camiseta es: $20"
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **producto**, **precioBase**, y **descuento** son parámetros de la función **calcularPrecio**. Cuando llamamos a la función con **calcularPrecio("Camiseta", 25, 5)**
+"Camiseta", 25, y 5 son argumentos que se asignan a los parámetros correspondientes.
+
+En resumen, los parámetros son las variables que esperan recibir valores, y los argumentos son los valores reales que se pasan a la función cuando esta es llamada.
+
+### Añadir Funciones en un Objeto
+Añadir funciones a un objeto en JavaScript implica asignar una función como una propiedad del objeto. Las funciones asociadas a objetos se conocen como "métodos".
+
+<CodeBlock
+  codeString={`
+  var persona = {
+    nombre: "Juan",
+    edad: 30,
+    saludar: function() {
+      console.log("Hola, soy " + this.nombre + " y tengo " + this.edad + " años.");
+    },
+    cumpleaños: function() {
+      this.edad++;
+      console.log("¡Feliz cumpleaños! Ahora tengo " + this.edad + " años.");
+    }
+  };
+
+  // Uso de los métodos del objeto
+  persona.saludar();     // Salida: Hola, soy Juan y tengo 30 años.
+  persona.cumpleaños();  // Salida: ¡Feliz cumpleaños! Ahora tengo 31 años.
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **saludar** y **cumpleaños** son funciones que se han añadido al objeto **persona**. **saludar** es un método que muestra un saludo con el nombre y la edad de la persona, 
+mientras que **cumpleaños** es un método que incrementa la edad de la persona y muestra un mensaje de cumpleaños.
+
+Tambien se puede añadir funciones al objeto después de su definición. 
+
+<CodeBlock
+  codeString={`
+  persona.despedirse = function() {
+    console.log("Adiós, hasta luego.");
+  };
+
+  // Llamar a la nueva función
+  persona.despedirse();  // Salida: Adiós, hasta luego.
+  `} 
+  language='javascript'
+/>
+
+En este caso se añadió la función **despedirse** al objeto **persona** después de su definición.
+
+Este enfoque de añadir funciones a objetos es fundamental en la programación orientada a objetos en JavaScript, y es una de las maneras de encapsular lógica y comportamientos 
+dentro de objetos.
+
+### Arrow Functions
+
+Las "arrow functions" (también conocidas como funciones flecha) son una característica de JavaScript que proporciona una forma más concisa y clara de escribir funciones.
+
+**Sintaxis**
+
+La sintaxis básica de una arrow function es la siguiente:
+
+<CodeBlock
+  codeString={`(parametro1, parametro2, ..., parametroN) => expresion`} 
+  language='javascript'
+/>
+
+Si la función tiene más de un parámetro, se debe poner entre paréntesis. Si no tiene parámetros, los paréntesis se mantienen pero están vacíos. 
+La expresión después de la flecha (=>) es lo que la función devuelve automáticamente.
+
+Por ejemplo, aquí hay una función tradicional y su equivalente en arrow function:
+
+<CodeBlock
+  codeString={`
+  // Función tradicional
+    function sumar(a, b) {
+        return a + b;
+    }
+
+  // Arrow function equivalente
+    let sumarArrow = (a, b) => a + b;
+  `} 
+  language='javascript'
+/>
+
+#### Retorno automático
+Cuando una arrow function tiene solo una expresión en su cuerpo (como en el ejemplo anterior), esa expresión se toma como el valor de retorno. No es necesario usar la palabra 
+clave return.
+
+#### Contexto léxico (this)
+Una diferencia importante entre las funciones tradicionales y las arrow functions es cómo manejan el valor de this.
+
+En una arrow function, this se hereda del contexto en el que se definió la función. Esto significa que no tiene su propio this. Por otro lado, en una función tradicional, 
+this puede cambiar dependiendo de cómo se llame la función.
+
+
+<CodeBlock
+  codeString={`
+  let objet = {
+    nombre: "John",
+    saludar: function( ) {
+        setTimeout(function( ) {
+            console.log("Hola, soy " + this.nombre); // En este contexto, 'this' se refiere a 'objet'
+        }, 1000);
+    }
+   };
+
+  objet.saludar(); // Imprimirá "Hola, soy undefined" porque 'this' no se refiere a 'objet'
+
+  // Solución con arrow function
+  let objetArrow = {
+    nombre: "John",
+    saludar: function( ) {
+        setTimeout(( ) => {
+            console.log("Hola, soy " + this.nombre); // 'this' se refiere a 'objetArrow'
+        }, 1000);
+    }
+  };
+
+  objetArrow.saludar( ); // Imprimirá "Hola, soy John" correctamente
+  `} 
+  language='javascript'
+/>
+
+### **No pueden ser usadas como constructores**
+
+Las arrow functions no pueden ser utilizadas como constructores para crear objetos. Intentar hacerlo causará un error.
+
+<CodeBlock
+  codeString={`
+  let Persona = (nombre) => {
+    this.nombre = nombre; // Esto arrojará un error
+  };
+
+  let john = new Persona("John"); // Error: Persona is not a constructor
+  `} 
+  language='javascript'
+/>
+
+- **Sin arguments**
+Las arrow functions no tienen su propio objeto arguments. Si necesitas acceder a los argumentos de la función, deberías usar una función tradicional.
+
+- **No pueden ser generadoras**
+Las arrow functions no pueden ser utilizadas como funciones generadoras (aquellas que pueden pausar su ejecución y luego reanudarla).
+
+#### Resumen
+Las arrow functions son una característica poderosa de JavaScript que proporciona una forma más concisa de escribir funciones. 
+Sin embargo, es importante entender las diferencias clave entre arrow functions y funciones tradicionales, especialmente en lo que respecta al manejo de this.
+
+### Ventajas de los Arrow Functions
+
+Las funciones flecha, o Arrow Functions, en JavaScript tienen varias ventajas que las hacen atractivas en ciertos contextos.
+
+- **Sintaxis Concisa:** Las Arrow Functions tienen una sintaxis más corta y concisa en comparación con las funciones tradicionales, lo que hace que el código sea más legible 
+y fácil de escribir.
+
+<CodeBlock
+  codeString={`
+  // Función tradicional
+  const sumaTradicional = function(a, b) {
+    return a + b;
+  };
+
+  // Arrow Function equivalente
+  const sumaArrow = (a, b) => a + b;
+  `} 
+  language='javascript'
+/>
+
+- **No tienen su propio this:** Las Arrow Functions no tienen su propio objeto this. En cambio toman prestado el this del contexto en el que fueron creadas. 
+Esto puede ser beneficioso en situaciones donde las funciones tradicionales podrían tener problemas con el manejo de this.
+
+<CodeBlock
+  codeString={`
+  function Persona( ) {
+    this.edad = 0;
+
+    // Función tradicional
+    setInterval(function( ) {
+      this.edad++;
+      console.log(this.edad); // Esto generará un error
+    }, 1000);
+
+    // Arrow Function
+    setInterval(( ) => {
+      this.edad++;
+      console.log(this.edad); // Esto funcionará correctamente
+    }, 1000);
+  }
+
+  const persona = new Persona( );
+  `} 
+  language='javascript'
+/>
+
+- **No tienen arguments:** Las Arrow Functions no tienen su propio objeto **arguments**. Si necesitas acceder a los argumentos de la función es preferible utilizar el operador de 
+propagación `...` en lugar de arguments.
+
+<CodeBlock
+  codeString={`
+  // Función tradicional
+  function suma() {
+    let total = 0;
+    for (let i = 0; i < arguments.length; i++) {
+      total += arguments[i];
+    }
+    return total;
+  }
+
+  // Arrow Function equivalente
+  const sumaArrow = (...valores) => valores.reduce((acc, val) => acc + val, 0);
+  `} 
+  language='javascript'
+/>
+
+Estas ventajas hacen que las Arrow Functions sean especialmente útiles en situaciones donde la concisión y la manipulación de this son consideraciones importantes. 
+Sin embargo, es esencial entender las diferencias de comportamiento entre las Arrow Functions y las funciones tradicionales para utilizarlas de manera efectiva en diferentes 
+contextos.
+
+### Arrow Functions en un forEach y un map
+
+Usar Arrow Functions con métodos como forEach y map es común y puede hacer que el código sea más conciso y legible. 
+
+- **Arrow Function con forEach:** La función forEach se utiliza para iterar sobre elementos de un array y ejecutar una función proporcionada una vez por cada elemento.
+
+<CodeBlock
+  codeString={`
+  const numeros = [1, 2, 3, 4];
+
+  numeros.forEach((numero, indice) => {
+    console.log(\`Elemento en el índice \${indice}: \${numero}\`);
+  });
+  // Salida esperada:
+  // Elemento en el índice 0: 1
+  // Elemento en el índice 1: 2
+  // Elemento en el índice 2: 3
+  // Elemento en el índice 3: 4
+  `} 
+  language='javascript'
+/>
+
+- **Arrow Function con map:** El método map crea un nuevo array con los resultados de llamar a una función proporcionada para cada elemento en el array.
+
+<CodeBlock
+  codeString={`
+  const numeros = [1, 2, 3, 4];
+
+  const cuadrados = numeros.map(numero => numero * numero);
+  console.log(cuadrados); // Salida esperada: [1, 4, 9, 16]
+  `} 
+  language='javascript'
+/>
+
+En ambos ejemplos se utilizan Arrow Functions para proporcionar la lógica que se ejecuta en cada iteración. Estas Arrow Functions son útiles cuando la lógica es corta y se puede 
+expresar de manera concisa en una línea. Recuerda que las Arrow Functions tienen un valor de retorno implícito cuando son de una sola línea, por lo que no es necesario usar 
+la palabra clave **return** en estos casos.
+
+Estos son solo ejemplos básicos, pero ilustran cómo las Arrow Functions pueden hacer que el código sea más claro y conciso, especialmente cuando se utilizan con métodos que implican 
+iteración sobre arrays.
+
+# Tips
+
+#### Evitar el uso de variables globales
+
+ Declarar variables en el ámbito global sin necesidad.
+ Limita el ámbito de tus variables usando let o const dentro de funciones o bloques específicos.
+
+ <CodeBlock
+  codeString={`
+  // Incorrecto
+  let globalVariable = 5;
+
+  function miFuncion() {
+    // Accediendo a la variable global innecesariamente
+    console.log(globalVariable);
+  }
+
+  // Correcto
+  function miFuncion() {
+    const localVariable = 5;
+    console.log(localVariable);
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Manejo de funciones anónimas
+Crear funciones anónimas innecesarias.
+Usar en su lugar funciones con nombre para facilitar el seguimiento del código y mejorar la legibilidad.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  setTimeout(function() {
+    console.log('Hola, mundo!');
+  }, 1000);
+
+  // Correcto
+  function saludar() {
+    console.log('Hola, mundo!');
+  }
+
+  setTimeout(saludar, 1000);
+  `} 
+  language='javascript'
+/>
+
+#### Manejo de funciones de retorno
+
+Un error comun es no devolver valores explícitamente desde funciones.
+Si una función debe devolver un valor asegúrate de incluir una declaración de retorno.
+
+<CodeBlock
+  codeString={`
+  // Incorrecto
+  function suma(a, b) {
+    const resultado = a + b;
+  }
+
+  // Correcto
+  function suma(a, b) {
+    const resultado = a + b;
+    return resultado;
+  }
+  `} 
+  language='javascript'
+/>
+
+#### Callbacks y funciones asíncronas
+
+Un error puede ser no manejar errores en funciones asíncronas.
+ Usa bloques try-catch para manejar errores en funciones asíncronas y callbacks.
+
+ <CodeBlock
+  codeString={`
+  // Incorrecto
+  async function fetchData() {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  }
+
+  // Correcto
+  async function fetchData() {
+    try {
+      const response = await fetch('https://api.example.com/data');
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error al obtener datos:', error);
+    }
+  }
+  `} 
+  language='javascript'
+/>

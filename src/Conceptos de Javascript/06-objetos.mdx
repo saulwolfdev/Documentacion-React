@@ -1,0 +1,210 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Objetos
+
+### Crear Objetos
+Los objetos en JavaScript son conjuntos de pares clave-valor, donde las claves son cadenas y los valores pueden ser de cualquier tipo de dato.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    ciudad: 'EjemploCity'
+  };
+  `} 
+  language='javascript'
+/>
+
+### Acceder a los Valores de un Objeto
+Puedes acceder a los valores de un objeto mediante la notación de puntos o corchetes.
+
+<CodeBlock
+  codeString={`
+  console.log(persona.nombre); // Juan
+  console.log(persona['edad']); // 25
+  `} 
+  language='javascript'
+/>
+
+### Agregar o Eliminar Propiedades de un Objeto
+Puedes añadir o quitar propiedades de un objeto en cualquier momento.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    ciudad: 'EjemploCity'
+  };
+
+  // Mostrar el objeto antes de las modificaciones
+  console.log('Antes de las modificaciones:', persona);
+
+  // Agregar la propiedad 'trabajo'
+  persona.trabajo = 'Programador';
+
+  // Mostrar el objeto después de agregar la propiedad 'trabajo'
+  console.log('Después de agregar "trabajo":', persona);
+
+  // Eliminar la propiedad 'ciudad'
+  delete persona.ciudad;
+
+  // Mostrar el objeto después de eliminar la propiedad 'ciudad'
+  console.log('Después de eliminar "ciudad":', persona);
+  `} 
+  language='javascript'
+/>
+
+### Destructuring de Objetos
+Permite desempacar valores de un objeto en variables individuales.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+  };
+
+  const { nombre, edad } = persona;
+  `} 
+  language='javascript'
+/>
+
+### Objetos Dentro de Objetos
+Los objetos pueden contener otros objetos como sus propiedades.
+
+<CodeBlock
+  codeString={`
+  let empresa = {
+    nombre: 'TechCorp',
+    ubicacion: {
+        ciudad: 'EjemploCity',
+        pais: 'EjemploCountry'
+    }
+  };
+  `} 
+  language='javascript'
+/>
+
+### Destructuring de Objetos Anidados
+Desestructurar objetos que están dentro de otros objetos.
+
+<CodeBlock
+  codeString={`
+  let empresa = {
+    nombre: 'TechCorp',
+    ubicacion: {
+        ciudad: 'EjemploCity',
+        pais: 'EjemploCountry'
+    }
+  };
+
+  const { ubicacion: { ciudad, pais } } = empresa;
+  `} 
+  language='javascript'
+/>
+
+### Copiar 2 Objetos
+Para crear una copia de un objeto, puedes usar el operador de propagación `...`
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    ciudad: 'EjemploCity'
+  };
+
+  let copiaPersona = { ...persona };
+  `} 
+  language='javascript'
+/>
+
+### Funciones en Objetos y Acceder a Sus Valores
+Puedes tener funciones como propiedades de un objeto y acceder a ellas mediante la notación de puntos.
+
+<CodeBlock
+  codeString={`
+  let coche = {
+    marca: 'Toyota',
+    arrancar: function( ) {
+        console.log('El coche está en marcha');
+    }
+  };
+
+  coche.arrancar( );
+  `} 
+  language='javascript'
+/>
+
+### Object Constructor
+Puedes usar el constructor Object para crear un nuevo objeto.
+
+<CodeBlock
+  codeString={`
+  let nuevoObjeto = new Object( );
+  nuevoObjeto.propiedad = 'Nuevo';
+  `} 
+  language='javascript'
+/>
+
+### Object .keys, .values y .entries
+Métodos que proporcionan información sobre las propiedades de un objeto.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    trabajo: 'Programador'
+  };
+
+  console.log(Object.keys(persona));   // ['nombre', 'edad', 'trabajo']
+  console.log(Object.values(persona)); // ['Juan', 25, 'Programador']
+  console.log(Object.entries(persona)); // [['nombre', 'Juan'], ['edad', 25], ['trabajo', 'Programador']]
+  `} 
+  language='javascript'
+/>
+
+# Tips
+
+#### Manejo adecuado de this
+
+Al utilizar funciones dentro de objetos o eventos, asegúrate de manejar correctamente el valor de this utilizando funciones de flecha `=>` o `bind`.
+
+<CodeBlock
+  codeString={`
+  const objeto = {
+      valor: 42,
+      obtenerValor: function() {
+          console.log(this.valor);
+      }
+  };
+
+  // Usar esto
+  objeto.obtenerValor.bind(objeto)();
+
+  // O esto
+  const obtenerValor = ( ) => {
+      console.log(this.valor);
+  };
+  `} 
+  language='javascript'
+/>
+
+#### Uso de Object.entries para iterar sobre propiedades
+
+Para iterar sobre las propiedades de un objeto, puedes utilizar **Object.entries**.
+
+<CodeBlock
+  codeString={`
+  const miObjeto = { a: 1, b: 2, c: 3 };
+
+  for (const [clave, valor] of Object.entries(miObjeto)) {
+      console.log(\`\${clave}: \${valor}\`);
+  }
+  `} 
+  language='javascript'
+/>
