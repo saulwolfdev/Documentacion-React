@@ -1,8 +1,25 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Crear Objetos' },
+    { id: 'seccion2', text: 'Acceder a los Valores' },
+    { id: 'seccion3', text: 'Agregar o Eliminar Propiedades' },
+    { id: 'seccion4', text: 'Destructuring de Objetos' },
+    { id: 'seccion5', text: 'Objetos Dentro de Objetos' },
+    { id: 'seccion6', text: 'Destructuring de Objetos Anidados' },
+    { id: 'seccion7', text: 'Copiar 2 Objetos' },
+    { id: 'seccion8', text: 'Funciones en Objetos' },
+    { id: 'seccion9', text: 'Object Constructor' },
+    { id: 'seccion10', text: 'Object .keys, .values y .entries' },
+    { id: 'seccion11', text: 'Tips' },
+  ]}
+/>
 
 # Objetos
 
+<a id="seccion1"></a>
 ### Crear Objetos
 Los objetos en JavaScript son conjuntos de pares clave-valor, donde las claves son cadenas y los valores pueden ser de cualquier tipo de dato.
 
@@ -17,6 +34,7 @@ Los objetos en JavaScript son conjuntos de pares clave-valor, donde las claves s
   language='javascript'
 />
 
+<a id="seccion2"></a>
 ### Acceder a los Valores de un Objeto
 Puedes acceder a los valores de un objeto mediante la notación de puntos o corchetes.
 
@@ -28,6 +46,7 @@ Puedes acceder a los valores de un objeto mediante la notación de puntos o corc
   language='javascript'
 />
 
+<a id="seccion3"></a>
 ### Agregar o Eliminar Propiedades de un Objeto
 Puedes añadir o quitar propiedades de un objeto en cualquier momento.
 
@@ -57,6 +76,7 @@ Puedes añadir o quitar propiedades de un objeto en cualquier momento.
   language='javascript'
 />
 
+<a id="seccion4"></a>
 ### Destructuring de Objetos
 Permite desempacar valores de un objeto en variables individuales.
 
@@ -72,6 +92,7 @@ Permite desempacar valores de un objeto en variables individuales.
   language='javascript'
 />
 
+<a id="seccion5"></a>
 ### Objetos Dentro de Objetos
 Los objetos pueden contener otros objetos como sus propiedades.
 
@@ -88,6 +109,7 @@ Los objetos pueden contener otros objetos como sus propiedades.
   language='javascript'
 />
 
+<a id="seccion6"></a>
 ### Destructuring de Objetos Anidados
 Desestructurar objetos que están dentro de otros objetos.
 
@@ -106,6 +128,7 @@ Desestructurar objetos que están dentro de otros objetos.
   language='javascript'
 />
 
+<a id="seccion7"></a>
 ### Copiar 2 Objetos
 Para crear una copia de un objeto, puedes usar el operador de propagación `...`
 
@@ -122,6 +145,7 @@ Para crear una copia de un objeto, puedes usar el operador de propagación `...`
   language='javascript'
 />
 
+<a id="seccion8"></a>
 ### Funciones en Objetos y Acceder a Sus Valores
 Puedes tener funciones como propiedades de un objeto y acceder a ellas mediante la notación de puntos.
 
@@ -139,6 +163,7 @@ Puedes tener funciones como propiedades de un objeto y acceder a ellas mediante 
   language='javascript'
 />
 
+<a id="seccion9"></a>
 ### Object Constructor
 Puedes usar el constructor Object para crear un nuevo objeto.
 
@@ -150,6 +175,7 @@ Puedes usar el constructor Object para crear un nuevo objeto.
   language='javascript'
 />
 
+<a id="seccion10"></a>
 ### Object .keys, .values y .entries
 Métodos que proporcionan información sobre las propiedades de un objeto.
 
@@ -168,6 +194,7 @@ Métodos que proporcionan información sobre las propiedades de un objeto.
   language='javascript'
 />
 
+<a id="seccion11"></a>
 # Tips
 
 #### Manejo adecuado de this

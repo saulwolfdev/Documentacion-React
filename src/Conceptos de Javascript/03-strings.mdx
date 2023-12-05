@@ -1,6 +1,15 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Strings' },
+    { id: 'seccion2', text: 'String Methods' },
+    { id: 'seccion3', text: 'Tips' },
+  ]}
+/>
+
+<a id="seccion1"></a>
 # Strings
 
 Un string o cadena de texto es una secuencia de caracteres que representa texto y puede asignarse a una variable. Esto permite a los programadores almacenar, 
@@ -47,6 +56,7 @@ manipular y trabajar con datos de texto de manera eficiente. La asignación de u
 En ambos casos obtendrás el mismo resultado: "Hola, mundo!". La ventaja del template string es que te permite interpolar variables directamente dentro del string 
 utilizando `${}`. Esto puede hacer que el código sea más legible y más fácil de mantener, especialmente cuando trabajas con varias variables o expresiones dentro de un string.
 
+<a id="seccion2"></a>
 ### String Methods:
 
 - **includes y length:**
@@ -158,6 +168,7 @@ utilizando `${}`. Esto puede hacer que el código sea más legible y más fácil
 Estos métodos son solo algunos ejemplos de las operaciones que puedes realizar con strings en JavaScript. 
 La flexibilidad de los métodos de string facilita la manipulación y procesamiento de texto.
 
+<a id="seccion3"></a>
 # Tips
 
 #### Uso de `==` en lugar de `===`

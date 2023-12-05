@@ -1,10 +1,26 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Declaración de Función' },
+    { id: 'seccion2', text: 'Expresión de Función' },
+    { id: 'seccion3', text: 'Dif Function expression y Declaration' },
+    { id: 'seccion4', text: 'Diferencia entre Función y Método' },
+    { id: 'seccion5', text: 'Parametros y Argumentos en Funciones' },
+    { id: 'seccion6', text: 'Añadir Funciones en un Objeto' },
+    { id: 'seccion7', text: 'Arrow Functions' },
+    { id: 'seccion8', text: 'Ventajas de los Arrow Functions' },
+    { id: 'seccion9', text: 'Arrow Functions en un forEach y un map' },
+    { id: 'seccion10', text: 'Tips' },
+  ]}
+/>
 
 # Funciones
 
 En JavaScript hay dos formas principales de crear funciones mediante la declaración de función **function declaration** y mediante la expresión de función **function expression**.
 
+<a id="seccion1"></a>
 #### Declaración de Función (Function Declaration)
 
 La declaración de función sigue la siguiente sintaxis:
@@ -36,6 +52,7 @@ La declaración de función sigue la siguiente sintaxis:
 
 En este ejemplo se declara una función llamada sumar que toma dos parámetros **a y b** y devuelve la suma de esos dos valores.
 
+<a id="seccion2"></a>
 #### Expresión de Función (Function Expression)
 
 La expresión de función asigna una función a una variable y sigue la siguiente sintaxis:
@@ -70,6 +87,7 @@ En este ejemplo, se utiliza una expresión de función para asignar una función
 Ambas formas la declaración de función y la expresión de función son válidas y tienen sus usos específicos en diferentes situaciones. 
 La principal diferencia radica en cómo son tratadas por el intérprete de JavaScript durante la fase de carga del código.
 
+<a id="seccion3"></a>
 ### La Diferencia entre Function expression y Declaration
 
 La principal diferencia entre una Function Declaration y una Function Expression en JavaScript radica en cómo son declaradas y en su accesibilidad en el código. 
@@ -110,6 +128,7 @@ Expressions no son elevadas y deben ser declaradas antes de ser utilizadas.
 
 Ambas formas tienen sus casos de uso, y la elección entre una u otra a menudo depende del contexto y de cómo se planea estructurar el código.
 
+<a id="seccion4"></a>
 ### La Diferencia entre Función y Método
 
 **Función en JavaScript:**
@@ -151,6 +170,7 @@ objeto y actúan sobre ese objeto.
   language='javascript'
 />
 
+<a id="seccion5"></a>
 ### Parametros y Argumentos en Funciones
 
 En JavaScript es importante comprender la diferencia entre parámetros y argumentos en funciones.
@@ -208,6 +228,7 @@ En este ejemplo, **producto**, **precioBase**, y **descuento** son parámetros d
 
 En resumen, los parámetros son las variables que esperan recibir valores, y los argumentos son los valores reales que se pasan a la función cuando esta es llamada.
 
+<a id="seccion6"></a>
 ### Añadir Funciones en un Objeto
 Añadir funciones a un objeto en JavaScript implica asignar una función como una propiedad del objeto. Las funciones asociadas a objetos se conocen como "métodos".
 
@@ -254,6 +275,7 @@ En este caso se añadió la función **despedirse** al objeto **persona** despu�
 Este enfoque de añadir funciones a objetos es fundamental en la programación orientada a objetos en JavaScript, y es una de las maneras de encapsular lógica y comportamientos 
 dentro de objetos.
 
+<a id="seccion7"></a>
 ### Arrow Functions
 
 Las "arrow functions" (también conocidas como funciones flecha) son una característica de JavaScript que proporciona una forma más concisa y clara de escribir funciones.
@@ -349,6 +371,7 @@ Las arrow functions no pueden ser utilizadas como funciones generadoras (aquella
 Las arrow functions son una característica poderosa de JavaScript que proporciona una forma más concisa de escribir funciones. 
 Sin embargo, es importante entender las diferencias clave entre arrow functions y funciones tradicionales, especialmente en lo que respecta al manejo de this.
 
+<a id="seccion8"></a>
 ### Ventajas de los Arrow Functions
 
 Las funciones flecha, o Arrow Functions, en JavaScript tienen varias ventajas que las hacen atractivas en ciertos contextos.
@@ -419,6 +442,7 @@ Estas ventajas hacen que las Arrow Functions sean especialmente útiles en situa
 Sin embargo, es esencial entender las diferencias de comportamiento entre las Arrow Functions y las funciones tradicionales para utilizarlas de manera efectiva en diferentes 
 contextos.
 
+<a id="seccion9"></a>
 ### Arrow Functions en un forEach y un map
 
 Usar Arrow Functions con métodos como forEach y map es común y puede hacer que el código sea más conciso y legible. 
@@ -460,6 +484,7 @@ la palabra clave **return** en estos casos.
 Estos son solo ejemplos básicos, pero ilustran cómo las Arrow Functions pueden hacer que el código sea más claro y conciso, especialmente cuando se utilizan con métodos que implican 
 iteración sobre arrays.
 
+<a id="seccion10"></a>
 # Tips
 
 #### Evitar el uso de variables globales

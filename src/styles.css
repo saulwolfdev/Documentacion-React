@@ -33,9 +33,9 @@ code.css-1kwwth4 {
 .sticky-nav {
     display: grid;
     position: fixed;
-    top: 14%;
-    right: 60px;
-    transform: translateY(-50%);
+    top: 8%;
+    right: 30px;
+    /* transform: translateY(-50%); */
     background-color: #f0f0f0;
     padding: 10px;
     border-radius: 5px;

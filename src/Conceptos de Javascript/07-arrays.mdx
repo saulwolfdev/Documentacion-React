@@ -1,6 +1,21 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Crear Arrays' },
+    { id: 'seccion2', text: 'Acceder a los valores' },
+    { id: 'seccion3', text: 'Recorrer un Array' },
+    { id: 'seccion4', text: 'Añadir nuevos elementos al final o Inicio' },
+    { id: 'seccion5', text: 'nuevo arreglo con el spread operator' },
+    { id: 'seccion6', text: 'Eliminar elementos con Splice' },
+    { id: 'seccion7', text: 'Destructuring de Arrays' },
+    { id: 'seccion8', text: '.map para iterar un array' },
+    { id: 'seccion9', text: 'Tips' },
+  ]}
+/>
+
+<a id="seccion1"></a>
 # Arrays
 
 ### Crear Arrays
@@ -31,6 +46,7 @@ en este ejemplo:
 - **frutas** es un array que contiene nombres de frutas.
 - **mixto** es un array que contiene elementos de diferentes tipos.
 
+<a id="seccion2"></a>
 ###  Acceder a los valores de un Array
 
 Puedes acceder a los valores de un array en JavaScript utilizando los índices. Los índices en un array comienzan desde 0 y van hasta la longitud del array menos 1
@@ -68,6 +84,7 @@ Podes usar la propiedad length del array para obtener su longitud:
   language='javascript'
 />
 
+<a id="seccion3"></a>
 ### Recorrer un Array
 
 
@@ -132,6 +149,7 @@ Cada uno de estos enfoques imprimirá los valores del array en la consola:
 Podes eligir el método que te parezca más conveniente para tu situación. **forEach** suele ser preferido cuando no necesitas realizar un seguimiento del índice, mientras que el 
 bucle **for clásico** o el **for...of** son útiles cuando necesitas trabajar con los índices de los elementos.
 
+<a id="seccion4"></a>
 ### Añadir nuevos elementos al final o Inicio de un array
 
 
@@ -175,6 +193,7 @@ Para agregar nuevos valores a un array en JavaScript, puedes utilizar varios mé
   language='javascript'
 />
 
+<a id="seccion5"></a>
 ### Crear un nuevo arreglo con el spread operator
 
 El operador de propagación **spread operator** en JavaScript se denota por tres puntos `...`. Se utiliza para copiar elementos de un iterable (como un array o un objeto iterable) 
@@ -213,6 +232,7 @@ Tambien se puede utilizar esta técnica para combinar arrays.
 El spread operator es muy útil para evitar la modificación directa de los arrays originales y para crear copias rápidas y simples de estos. 
 Además de trabajar con arrays, también puedes usar el spread operator con objetos literales para realizar operaciones similares.
 
+<a id="seccion6"></a>
 ### Eliminar elementos con Splice
 
 El método **splice()** en JavaScript se utiliza para modificar el contenido de un array eliminando o reemplazando elementos existentes y/o agregando nuevos elementos en su lugar. 
@@ -261,6 +281,7 @@ También se puede utilizar **splice()** para agregar elementos en lugar de elimi
 
 En este caso **splice(2, 0, 6, 7)** agrega los elementos 6 y 7 en el índice 2 sin eliminar ningún elemento, y el resultado es **[1, 2, 6, 7, 3, 4, 5]**.
 
+<a id="seccion7"></a>
 ### Destructuring de Arrays
 
 La asignación por destructuración (o "destructuring") en JavaScript es una forma de extraer valores de arrays o propiedades de objetos y asignarlos a variables de manera más 
@@ -338,6 +359,7 @@ clara y legible.
   language='javascript'
 />
 
+<a id="seccion8"></a>
 ### .map para iterar un array y sus diferencias con forEach
 
 Ambos **forEach** y **.map** son métodos de los arrays en JavaScript que permiten realizar operaciones en cada elemento del array. 
@@ -396,6 +418,7 @@ Sin embargo tienen algunas diferencias clave en términos de su uso y lo que dev
 En resumen **forEach** es útil cuando solo necesitas realizar una acción en cada elemento del array mientras que **.map** es más adecuado cuando deseas obtener un nuevo array 
 basado en la transformación de cada elemento del array original.
 
+<a id="seccion9"></a>
 # Tips
 
 #### Evitar el uso de for...in para arrays

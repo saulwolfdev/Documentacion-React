@@ -1,6 +1,14 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Booleans' },
+    { id: 'seccion2', text: 'Tips' },
+  ]}
+/>
+
+<a id="seccion1"></a>
 # Booleans
 
 Los booleans es una parte importante en javascript se crean utilizando las palabras clave **true** y **false**
@@ -47,7 +55,8 @@ En este ejemplo, **invertirBooleano** es una función que utiliza el operador de
 Después de llamar a esta función el valor de **miBooleano** cambiará de **false** a **true** y viceversa. 
 Puedes llamar a la función tantas veces como desees para invertir el booleano.
 
-### Buenas Prácticas a la Hora de Comparar Booleans en JavaScript:
+<a id="seccion2"></a>
+# Tips:
 
 **Usa Operadores de Comparación Estricta:** JavaScript tiene operadores de igualdad débil `==` y estricta `===`. Es recomendable utilizar la igualdad estricta `===` para 
 evitar conversiones automáticas de tipo y asegurarse de que tanto el valor como el tipo sean iguales.
@@ -79,8 +88,6 @@ evitar conversiones automáticas de tipo y asegurarse de que tanto el valor como
   `} 
   language='javascript'
 />
-
-# Tips
 
 #### Evitar dobles negaciones
 

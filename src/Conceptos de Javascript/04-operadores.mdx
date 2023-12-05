@@ -1,8 +1,20 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Operadores Aritméticos' },
+    { id: 'seccion2', text: 'Operadores de Comparación' },
+    { id: 'seccion3', text: 'Operadores Lógicos' },
+    { id: 'seccion4', text: 'Operadores de Incremento/Decremento' },
+    { id: 'seccion5', text: 'Operador Ternario' },
+    { id: 'seccion6', text: 'Tips' },
+  ]}
+/>
 
 # Operadores
 
+<a id="seccion1"></a>
 ### Operadores Aritméticos:
 
 Operadores aritméticos son símbolos que realizan operaciones matemáticas básicas en programación y en matemáticas en general. 
@@ -46,6 +58,7 @@ Estos operadores permiten realizar cálculos numéricos en una variedad de conte
   language='javascript'
 />
 
+<a id="seccion2"></a>
 ### Operadores de Comparación:
 
 **`==` (Igual a):** Compara el valor de dos expresiones, sin tener en cuenta su tipo.
@@ -146,6 +159,7 @@ El operador de igualdad estricta `===` se puede usar para comparar null y undefi
 A tener en cuenta que en comparaciones no estrictas `==` null y undefined se consideran iguales entre sí, pero no son iguales a ningún otro valor. 
 Sin embargo se recomienda utilizar la igualdad estricta `===` para evitar comportamientos inesperados.
 
+<a id="seccion3"></a>
 ### Operadores Lógicos
 
 
@@ -210,6 +224,7 @@ La respuesta sería: "Lleva paraguas porque está lloviendo". Esto se debe a que
 invierte el valor de verdad, por lo que !llueve es equivalente a "no está lloviendo". Sin embargo, como llueve es verdadero, el bloque de código dentro del else se ejecuta, y se 
 imprime en la consola el mensaje "Lleva paraguas porque está lloviendo".
 
+<a id="seccion4"></a>
 ### Operadores de Incremento/Decremento:
 
 **Incremento:** El operador de incremento en JavaScript es ++. Puede usarse como prefijo `++variable` o sufijo `variable++`.
@@ -250,6 +265,7 @@ Es importante tener en cuenta la diferencia entre el uso como sufijo y prefijo. 
 la expresión antes de que la variable se incremente o decremente. Cuando se usa como prefijo `++variable` o `--variable` la variable se incrementa o decrementa antes de que se 
 evalúe en la expresión. Esto puede afectar el resultado en situaciones específicas.
 
+<a id="seccion5"></a>
 ### Operador Ternario
 
 El operador ternario es una forma compacta de escribir una expresión condicional en JavaScript. También se conoce como operador condicional. 
@@ -294,6 +310,7 @@ Se puede anidar operadores ternarios para expresiones condicionales más complej
 
 En este ejemplo, el operador ternario se utiliza para determinar si un número es par, múltiplo de 3 o impar.
 
+<a id="seccion6"></a>
 # Tips
 
 #### Comparación estricta `===` y `!==`

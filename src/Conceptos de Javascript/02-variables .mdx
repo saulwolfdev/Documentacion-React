@@ -1,6 +1,16 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Variables en React' },
+    { id: 'seccion2', text: 'let' },
+    { id: 'seccion3', text: 'const' },
+    { id: 'seccion4', text: 'tips' },
+  ]}
+/>
+
+<a id="seccion1"></a>
 # Variables en React y JavaScript Moderno (Let y Const)
 
 Antes que nada cabe mencionar que las variables se declaraban anteriormente con **var** la razón por la que ya no se recomienda usar la palabra clave **var** en  
@@ -13,6 +23,7 @@ de legibilidad en el código.
 En JavaScript Moderno se recomienda el uso de **const** para declarar variables que no van a ser reasignadas, y **let** para aquellas que sí pueden cambiar de valor. 
 Esto ayuda a evitar errores sutiles y a escribir código más claro y predecible.
 
+<a id="seccion2"></a>
 ### **let:**
 let es una palabra clave introducida en ECMAScript 6 (también conocido como ES6 o ECMAScript 2015) que permite declarar variables con alcance de bloque. 
 Como se menciono anteriormente se pueden declarar variables con let para aquellas variables que pueden cambiar su valor.
@@ -43,6 +54,7 @@ Como se menciono anteriormente se pueden declarar variables con let para aquella
 En este ejemplo, la variable x declarada dentro del bloque if tiene un alcance limitado a ese bloque, mientras que la variable x declarada fuera del bloque if tiene un alcance 
 global al script.
 
+<a id="seccion3"></a>
 ### **const:**
 const es otra palabra clave introducida en ECMAScript 6. Al igual que let, permite declarar variables con alcance de bloque, pero a diferencia de let, las variables declaradas 
 con const no pueden ser reasignadas después de su inicialización. Sin embargo, esto no significa que el valor es inmutable, solo que la variable no puede apuntar a otro valor.
@@ -82,6 +94,7 @@ let se utiliza para declarar variables con alcance de bloque que pueden ser reas
 const se utiliza para declarar constantes con alcance de bloque, cuyos valores no pueden ser reasignados después de la inicialización, aunque sus propiedades o elementos internos 
 pueden ser modificados.
 
+<a id="seccion4"></a>
 # Tips 
 
 #### Nombres descriptivos
