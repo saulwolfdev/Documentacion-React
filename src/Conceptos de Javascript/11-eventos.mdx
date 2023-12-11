@@ -1,11 +1,22 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Evento con el Mouse' },
+    { id: 'seccion2', text: 'Evento sobre los Inputs' },
+    { id: 'seccion3', text: 'Evento Submit a un formulario' },
+    { id: 'seccion4', text: 'Event Bubbling' },
+    { id: 'seccion5', text: 'Prevenir Event Bubbling' },
+  ]}
+/>
 
 # Eventos
 
 En JavaScript un evento es cualquier cosa que sucede en el navegador. Puede ser una interacción del usuario como hacer clic en un botón, cargar una página o incluso el cambio
 en el tamaño de la ventana.
 
+<a id="seccion1"></a>
 - **Eventos con el Mouse:** Los eventos del mouse incluyen acciones como hacer click, mover el mouse, soltar el mouse, etc.
 
 <CodeBlock
@@ -18,6 +29,7 @@ en el tamaño de la ventana.
   language='javascript'
 />
 
+<a id="seccion2"></a>
 - **Eventos sobre los Inputs:** Estos eventos están relacionados con la interacción del usuario con elementos de entrada como campos de texto.
 
 <CodeBlock
@@ -30,6 +42,7 @@ en el tamaño de la ventana.
   language='javascript'
 />
 
+<a id="seccion3"></a>
 - **Evento Submit a un formulario:** El evento submit se activa cuando un formulario se envía.
 
 <CodeBlock
@@ -43,6 +56,7 @@ en el tamaño de la ventana.
   language='javascript'
 />
 
+<a id="seccion4"></a>
 - **Event Bubbling:** El Event Bubbling es el proceso por el cual un evento se propaga desde el elemento objetivo hacia arriba en la jerarquía del DOM.
 
 <CodeBlock
@@ -62,6 +76,7 @@ en el tamaño de la ventana.
 Cuando haces clic en el elemento con id 'hijo' el navegador primero activa el evento asociado a 'hijo' y luego propaga el evento hacia arriba en la jerarquía del DOM
 activando también el evento asociado a 'padre'. Esto es el Event Bubbling.
 
+<a id="seccion5"></a>
 - **Prevenir Event Bubbling con un método:** Se puede usar stopPropagation() para detener el Event Bubbling.
 
 <CodeBlock

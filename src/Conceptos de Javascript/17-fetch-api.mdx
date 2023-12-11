@@ -1,5 +1,14 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Características clave de la Fetch API' },
+    { id: 'seccion2', text: 'Promesas' },
+    { id: 'seccion3', text: 'Fetch API con Async/Await' },
+    { id: 'seccion4', text: 'Tips' },
+  ]}
+/>
 
 # Fetch API
 
@@ -13,7 +22,8 @@ Además es importante tener en cuenta que Fetch utiliza promesas, lo que signifi
 interfaz de usuario de la aplicación con los datos resultantes. 
 Además, Fetch proporciona soporte para cabeceras personalizadas, autenticación y manejo de errores de manera integrada.
 
-#### Características clave de la Fetch API:
+<a id="seccion1"></a>
+### Características clave de la Fetch API:
 
 - **Basada en Promesas:** La Fetch API utiliza Promesas lo que simplifica el manejo de operaciones asíncronas. Esto facilita la escritura de código limpio y legible, especialmente 
 al tratar con múltiples solicitudes asíncronas.
@@ -46,7 +56,8 @@ página web. Esto es esencial para construir aplicaciones web modernas que inter
   language='javascript'
 />
 
-#### Promesas
+<a id="seccion2"></a>
+### Promesas
 
 Las promesas son un mecanismo en JavaScript para manejar operaciones asíncronas. Una promesa representa el resultado eventual (éxito o fracaso) de una operación asíncrona y 
 proporciona una forma más clara de trabajar con este tipo de tareas. Una promesa puede estar en uno de tres estados: pendiente, resuelta o rechazada.
@@ -86,7 +97,8 @@ red se completa.
 - El **.catch()** maneja cualquier error que pueda ocurrir en cualquier etapa de la cadena de promesas ya sea durante la solicitud fetch, el parseo del JSON, o cualquier otro
 problema.
 
-#### Fetch API con Async/Await:
+<a id="seccion3"></a>
+### Fetch API con Async/Await:
 
 El uso de **async/await** es una forma más moderna y legible de manejar operaciones asíncronas en JavaScript. 
 Al trabajar con la Fetch API puedes utilizar **async/await** para escribir código más sencillo y estructurado evitando el anidamiento excesivo de callbacks y haciendo que el 
@@ -128,6 +140,7 @@ flujo de control sea más claro.
 
 - La función **fetchData** está marcada como **async** lo que significa que devuelve una promesa y puede contener operaciones **await**.
 
+<a id="seccion4"></a>
 # Tips
 
 #### Problemas de CORS

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "../styles.css"
 
 const StickyNav = ({ links }) => {
-  const scrollToSection = (event, sectionId) => {
+  const [clickedLink, setClickedLink] = useState(null);
+
+  const scrollToSection = (event, sectionId, index) => {
     event.preventDefault();
 
     const targetSection = document.getElementById(sectionId);
@@ -12,12 +14,20 @@ const StickyNav = ({ links }) => {
         behavior: 'smooth',
       });
     }
+
+    setClickedLink(index);
   };
 
   return (
     <div className="sticky-nav">  
       {links.map((link, index) => (
-        <a key={index} href={`#${link.id}`} onClick={(e) => scrollToSection(e, link.id)}>
+        <a
+          key={index}
+          href={`#${link.id}`}
+          onClick={(e) => scrollToSection(e, link.id, index)}
+          className={`sticky-nav-link ${index === clickedLink ? 'clicked' : ''}`}
+        >
+          {index === clickedLink ? <span className="indicator">&#8226;</span> : null}
           {link.text}
         </a>
       ))}

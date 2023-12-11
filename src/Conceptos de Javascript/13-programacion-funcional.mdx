@@ -1,5 +1,16 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Cuándo usar programación funcional' },
+    { id: 'seccion2', text: 'Funciones de Orden Superior' },
+    { id: 'seccion3', text: 'Funciones Puras' },
+    { id: 'seccion4', text: 'Inmutabilidad' },
+    { id: 'seccion5', text: 'Métodos de Array de Alto Orden' },
+    { id: 'seccion6', text: 'Conclusion' },
+  ]}
+/>
 
 # Programación Funcional:
 
@@ -7,6 +18,24 @@ La programación funcional es un paradigma de programación que trata el cálcul
 En JavaScript moderno, la programación funcional se ha vuelto más prominente gracias a la adopción de características como funciones de orden superior, funciones flecha, y 
 métodos de array de alto orden.
 
+<a id="seccion1"></a>
+### Cuándo usar programación funcional en JavaScript:
+
+**Operaciones Inmutables y Sin Efectos Secundarios:**
+Cuando necesitas realizar operaciones sin modificar los datos existentes y sin efectos secundarios.
+
+**Manejo De Datos:**
+- Para procesar y transformar datos de manera declarativa.
+- Cuando trabajas con grandes conjuntos de datos y quieres evitar efectos colaterales.
+
+**Manejo de Eventos y Callbacks:**
+En situaciones donde se utilizan funciones de orden superior para manejar eventos y callbacks, como en aplicaciones basadas en eventos.
+
+**Concurrente y Paralelo:**
+En situaciones donde la programación funcional facilita la escritura de código concurrente y paralelo, ya que las funciones puras son más fáciles de razonar en entornos 
+concurrentes.
+
+<a id="seccion2"></a>
 ### Funciones de Orden Superior (Higher-Order Functions):
 
 Estas son funciones que pueden tomar otras funciones como argumentos o devolverlas como resultado.
@@ -21,6 +50,7 @@ Estas son funciones que pueden tomar otras funciones como argumentos o devolverl
   language='javascript'
 />
 
+<a id="seccion3"></a>
 ### Funciones Puras: 
 
 Son funciones que producen el mismo resultado dado el mismo conjunto de entradas y no tienen efectos secundarios esto facilita el razonamiento y la comprensión del código.
@@ -40,6 +70,7 @@ Son funciones que producen el mismo resultado dado el mismo conjunto de entradas
   language='javascript'
 />
 
+<a id="seccion4"></a>
 ### Inmutabilidad:
 
 Los datos en la programación funcional son inmutables es decir no pueden ser modificados una vez creados. En lugar de modificar los datos existentes, se crean nuevos datos.
@@ -57,6 +88,7 @@ Los datos en la programación funcional son inmutables es decir no pueden ser mo
   language='javascript'
 />
 
+<a id="seccion5"></a>
 ### Métodos de Array de Alto Orden:
 
 Métodos como **map**, **filter**, y **reduce** son fundamentales en la programación funcional en JavaScript. Estos métodos operan en arrays y permiten realizar operaciones de 
@@ -78,21 +110,8 @@ manera más declarativa.
   language='javascript'
 />
 
-### Cuándo usar programación funcional en JavaScript:
-
-**Operaciones Inmutables y Sin Efectos Secundarios:**
-Cuando necesitas realizar operaciones sin modificar los datos existentes y sin efectos secundarios.
-
-**Manejo De Datos:**
-- Para procesar y transformar datos de manera declarativa.
-- Cuando trabajas con grandes conjuntos de datos y quieres evitar efectos colaterales.
-
-**Manejo de Eventos y Callbacks:**
-En situaciones donde se utilizan funciones de orden superior para manejar eventos y callbacks, como en aplicaciones basadas en eventos.
-
-**Concurrente y Paralelo:**
-En situaciones donde la programación funcional facilita la escritura de código concurrente y paralelo, ya que las funciones puras son más fáciles de razonar en entornos 
-concurrentes.
+<a id="seccion6"></a>
+### Conclusion:
 
 La programación funcional puede hacer que el código sea más fácil de entender, mantener y razonar, especialmente en aplicaciones grandes y complejas. 
 Sin embargo, la elección de utilizar programación funcional depende del contexto y de los requisitos específicos del proyecto.

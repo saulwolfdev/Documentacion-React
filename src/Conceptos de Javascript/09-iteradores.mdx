@@ -1,8 +1,22 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'For Loop' },
+    { id: 'seccion2', text: 'break y continue' },
+    { id: 'seccion3', text: 'While Loop' },
+    { id: 'seccion4', text: 'Do While Loop' },
+    { id: 'seccion5', text: 'forEach y map' },
+    { id: 'seccion6', text: 'for ...of' },
+    { id: 'seccion7', text: 'for ...in' },
+    { id: 'seccion8', text: 'Tips' },
+  ]}
+/>
 
 # Iteradores
 
+<a id="seccion1"></a>
 - **For Loop:** Un bucle for se utiliza para repetir un bloque de código un número específico de veces.
 
 <CodeBlock
@@ -14,6 +28,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion2"></a>
 - **break y continue en un for loop:** break se utiliza para salir de un bucle antes de que se complete y continue se utiliza para saltar la iteración actual y pasar a la siguiente.
 
 <CodeBlock
@@ -35,6 +50,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion3"></a>
 - **While Loop:** Un bucle while se utiliza para repetir un bloque de código mientras una condición sea verdadera.
 
 <CodeBlock
@@ -48,6 +64,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion4"></a>
 - **Do While Loop:** Similar al bucle while pero garantiza que el bloque de código se ejecute al menos una vez incluso si la condición es falsa.
 
 <CodeBlock
@@ -61,6 +78,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion5"></a>
 - **.forEach y .map:** forEach y map son métodos de iteración para arrays en JavaScript.
 
 <CodeBlock
@@ -76,6 +94,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion6"></a>
 - **for ...of:** El bucle for...of se utiliza para recorrer los elementos de un iterable (como un array o una cadena).
 
 <CodeBlock
@@ -88,6 +107,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion7"></a>
 - **for ...in:** El bucle for...in se utiliza para recorrer las propiedades de un objeto.
 
 <CodeBlock
@@ -100,6 +120,7 @@ import "../styles.css"
   language='javascript'
 />
 
+<a id="seccion8"></a>
 # Tips
 
 #### Evitar modificar el array mientras se itera

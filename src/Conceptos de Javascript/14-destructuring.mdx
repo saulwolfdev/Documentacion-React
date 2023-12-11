@@ -1,11 +1,21 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Destructuring de Props' },
+    { id: 'seccion2', text: 'Destructuring en Funciones' },
+    { id: 'seccion3', text: 'Destructuring en Arreglos' },
+    { id: 'seccion4', text: 'Destructuring en Objetos Anidados' },
+  ]}
+/>
 
 # Destructuring
 
 El ***"destructuring"*** hace referencia a una característica de JavaScript que permite ***descomponer*** objetos o arreglos para acceder a sus elementos de manera más conveniente. 
 Esto es especialmente útil cuando se trabaja con props o state en componentes.
 
+<a id="seccion1"></a>
 ### Destructuring de Props
 
 Cuando recibes props en un componente se puede aplicar destructuring para acceder a las propiedades individuales de manera más sencilla. 
@@ -27,6 +37,7 @@ Cuando recibes props en un componente se puede aplicar destructuring para accede
   language='javascript'
 />
 
+<a id="seccion2"></a>
 ### Destructuring en Funciones de Componentes
 
 En componentes funcionales, se puede aplicar destructuring directamente en los argumentos de la función:
@@ -45,6 +56,7 @@ En componentes funcionales, se puede aplicar destructuring directamente en los a
   language='javascript'
 />
 
+<a id="seccion3"></a>
 ### Destructuring en Arreglos
 
 También se puede aplicar destructuring a los arreglos. Por ejemplo, si una función te devuelve un arreglo, puedes descomponerlo de la siguiente manera:
@@ -58,6 +70,7 @@ También se puede aplicar destructuring a los arreglos. Por ejemplo, si una func
   language='javascript'
 />
 
+<a id="seccion4"></a>
 ### Destructuring en Objetos Anidados
 
 Cuando trabajas con objetos anidados también puedes aplicar destructuring para acceder a propiedades más profundas:

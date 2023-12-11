@@ -1,5 +1,16 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Cuándo usar POO' },
+    { id: 'seccion2', text: 'Clases en JavaScript' },
+    { id: 'seccion3', text: 'Herencia' },
+    { id: 'seccion4', text: 'Polimorfismo' },
+    { id: 'seccion5', text: 'Encapsulamiento' },
+    { id: 'seccion6', text: 'Conclusion' },
+  ]}
+/>
 
 # Programación orientada a objetos (POO)
 
@@ -7,6 +18,7 @@ La programación orientada a objetos (POO) es un paradigma de programación que 
 como atributos, y código, en forma de procedimientos, a menudo conocidos como métodos. 
 En JavaScript, la POO se ha vuelto más prominente y fácil de usar con las versiones más recientes del lenguaje.
 
+<a id="seccion1"></a>
 ### Cuándo usar la Programación Orientada a Objetos en JavaScript:
 
 - **Cuando trabajas con entidades complejas:**  La POO es útil cuando estás modelando entidades del mundo real que tienen propiedades y comportamientos.
@@ -14,6 +26,7 @@ En JavaScript, la POO se ha vuelto más prominente y fácil de usar con las vers
 - **Mantenimiento del código:** La POO facilita la organización del código, lo que puede hacer que sea más fácil de entender y mantener.
 - **Colaboración en equipos:** La POO proporciona una estructura que facilita la colaboración en equipos grandes, ya que cada clase puede representar una pieza del sistema.
 
+<a id="seccion2"></a>
 ### Clases en JavaScript:
 
 En JavaScript moderno, puedes utilizar la palabra clave **class** para definir una clase. Una clase es una plantilla para crear objetos. Los objetos creados a partir de una clase se 
@@ -43,6 +56,7 @@ denominan instancias de esa clase.
 
 En este ejemplo, **Persona** es una clase que tiene un constructor para inicializar propiedades y un método **persona1** . **saludar** es una instancia de la clase **Persona**.
 
+<a id="seccion3"></a>
 ### Herencia:
 
 La herencia es un concepto importante en POO que permite que una clase herede propiedades y métodos de otra clase. En JavaScript, la herencia se logra utilizando la palabra 
@@ -73,6 +87,7 @@ clave **extends**.
 
 En este ejemplo, la clase **Estudiante** hereda de la clase **Persona** mediante **extends**. La palabra clave **super** se utiliza para llamar al constructor de la clase padre.
 
+<a id="seccion4"></a>
 ### Polimorfismo:
 
 El polimorfismo permite que diferentes clases implementen métodos con el mismo nombre, pero con comportamientos específicos para cada clase.
@@ -110,6 +125,7 @@ El polimorfismo permite que diferentes clases implementen métodos con el mismo 
 
 En este ejemplo, **Perro** y **Gato** heredan de la clase **Animal**, y cada uno implementa su propio método **sonido**.
 
+<a id="seccion5"></a>
 ### Encapsulamiento:
 
 En el contexto de la programación orientada a objetos (POO) el encapsulamiento implica ocultar los detalles internos de una clase y exponer solo una interfaz pública que permita 
@@ -171,5 +187,8 @@ interactuar con los objetos de esa clase. Esto se logra mediante el uso de acces
  Este enfoque de encapsulamiento ayuda a prevenir el acceso no autorizado o modificaciones indebidas a los datos internos de la clase, mejorando así la seguridad y la integridad 
  del código.
 
- Recuerda que, aunque la POO puede ser útil en muchos casos, no es la única forma de programar en JavaScript. La programación funcional también es una parte integral del lenguaje y 
+<a id="seccion6"></a>
+### Conclusion:
+
+ Recuerda que aunque la POO puede ser útil en muchos casos, no es la única forma de programar en JavaScript. La programación funcional también es una parte integral del lenguaje y 
  puede ser utilizada en combinación con la POO para escribir código más limpio y modular.
