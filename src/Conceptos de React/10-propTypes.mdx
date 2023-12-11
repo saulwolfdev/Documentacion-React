@@ -1,0 +1,78 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# PropTypes
+
+En React PropTypes es una propiedad especial que se puede definir en los componentes para especificar el tipo de datos que se espera que reciban como propiedades. 
+Estas definiciones de tipos ayudan a detectar errores en tiempo de desarrollo y a mejorar la claridad de la comunicación entre componentes. 
+**PropTypes** es parte de la biblioteca **prop-types** que solía venir incluida con React aunque a partir de React v15.5, se ha movido a un paquete por separado.
+
+### Instalación
+
+Si aún no tenes instalado prop-types podes hacerlo usando npm o yarn
+
+<CodeBlock
+  codeString={`
+    //instalar con npm
+    npm install prop-types
+    
+    //instalar con yarn
+    yarn add prop-types
+  `} 
+  language='javascript'
+/>
+
+### Uso en un componente de React
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+    import PropTypes from 'prop-types'; //importamos PropTypes
+
+    // Función de componente
+    function MiComponente(props) {
+    return (
+        <div>
+        <h1>{props.titulo}</h1>
+        <p>{props.descripcion}</p>
+        </div>
+    );
+    }
+
+    // Definición de PropTypes
+    MiComponente.propTypes = {
+    titulo: PropTypes.string.isRequired, // Cadena de texto requerida
+    descripcion: PropTypes.string,        // Cadena de texto opcional
+    };
+
+    export default MiComponente;
+  `} 
+  language='javascript'
+/>
+
+**PropTypes** se utiliza para definir el tipo de datos esperado para cada propiedad que **MiComponente** espera recibir. Esto se hace mediante la asignación de un objeto a 
+**MiComponente.propTypes**.
+
+- **titulo:**  **PropTypes.string.isRequired:** Aquí se establece que la propiedad **titulo** debe ser una cadena de texto **(string)** y es requerida **(isRequired)**. 
+Esto significa que si no se proporciona la propiedad **titulo** o si no es de tipo cadena de texto se generará una advertencia en la consola durante el desarrollo.
+
+- **descripcion:** **PropTypes.string:** De manera similar, se espera que la propiedad **descripcion** sea una cadena de texto **(string)**. Sin embargo esta propiedad no es 
+requerida. Si no se proporciona no se generará una advertencia pero si se proporciona y no es de tipo cadena de texto se generará una advertencia en la consola durante el 
+desarrollo.
+
+Estas definiciones de **PropTypes** son útiles para ayudar a los desarrolladores a evitar errores comunes al utilizar el componente y para proporcionar una documentación clara 
+sobre cómo se deben usar las propiedades del componente.
+
+### Tipos comunes de PropTypes
+Aquí hay algunos ejemplos de tipos de datos que podemos utilizar con PropTypes:
+
+- **PropTypes.string:** Cadena de texto.
+- **PropTypes.number:** Número.
+- **PropTypes.bool:** Booleano.
+- **PropTypes.array:** Array.
+- **PropTypes.object:** Objeto.
+- **PropTypes.func:** Función.
+- **PropTypes.node:** Cualquier cosa que pueda ser representada por React (elemento, cadena, número, etc.).
+- **PropTypes.element:** React element.
+- **PropTypes.oneOf:** Uno de los valores permitidos.
+- **PropTypes.shape:** Objeto con una estructura específica.
