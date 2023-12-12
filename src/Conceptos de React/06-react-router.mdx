@@ -1,6 +1,17 @@
 import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'BrowserRouter' },
+    { id: 'seccion2', text: 'Route' },
+    { id: 'seccion3', text: 'Link' },
+    { id: 'seccion4', text: 'Switch' },
+    { id: 'seccion5', text: 'Redirect' },
+    { id: 'seccion6', text: 'Uso' },
+  ]}
+/>
+
 # React Router
 
 **React Router** es una biblioteca de enrutamiento para aplicaciones React que permite gestionar la navegación dentro de una aplicación de una sola página (SPA). 
@@ -9,6 +20,7 @@ la aplicación cambia.
 
 ## Componentes Básicos de React Router
 
+<a id="seccion1"></a>
 - **BrowserRouter:** Este componente envuelve la aplicación y utiliza el historial del navegador para mantener la sincronización entre la interfaz de usuario y la URL.
 
 <CodeBlock
@@ -24,6 +36,7 @@ la aplicación cambia.
   language='javascript'
 />
 
+<a id="seccion2"></a>
 - **Route:** Define una ruta específica y el componente que debe renderizarse cuando la URL coincide con esa ruta.
 
 <CodeBlock
@@ -41,6 +54,7 @@ la aplicación cambia.
   language='javascript'
 />
 
+<a id="seccion3"></a>
 - **Link:** Proporciona una forma de navegar entre rutas sin recargar la página.
 
 <CodeBlock
@@ -57,6 +71,7 @@ la aplicación cambia.
   language='javascript'
 />
 
+<a id="seccion4"></a>
 - **Switch:** Renderiza el primer **Route** que coincide con la ubicación actual util para evitar que se rendericen varias rutas a la vez.
 
 <CodeBlock
@@ -74,6 +89,7 @@ la aplicación cambia.
   language='javascript'
 />
 
+<a id="seccion5"></a>
 - **Redirect:** Redirige a los usuarios a otra ruta. Se utiliza comúnmente para redireccionar a una ruta predeterminada.
 
 <CodeBlock
@@ -90,7 +106,8 @@ la aplicación cambia.
   language='javascript'
 />
 
-### Ejemplo Completo
+<a id="seccion6"></a>
+### Uso
 
 <CodeBlock
   codeString={`

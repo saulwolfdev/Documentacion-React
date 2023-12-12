@@ -1,10 +1,23 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Iteración con map' },
+    { id: 'seccion2', text: 'Iteración con forEach' },
+  ]}
+/>
 
 # Iteraciones
 
 En React las iteraciones se refieren al proceso de repetir o recorrer elementos de una lista para renderizar componentes de manera dinámica. 
-Esto se logra mediante el uso de estructuras de control como el método **map()** que permiten recorrer arrays y generar contenido JSX en función de los elementos de la lista.
+Esto se logra mediante el uso de estructuras de control con metodos que permiten recorrer arrays y generar contenido JSX en función de los elementos de la lista.
+
+<a id="seccion1"></a>
+### Iteración con map
+
+[.map](/docs/conceptos-de-javascript-10-array-methods--docs) es una función de JavaScript que se utiliza comúnmente en React para iterar sobre elementos de un array y 
+devolver un nuevo array con cada elemento transformado según una función proporcionada.
 
 <CodeBlock
   codeString={`
@@ -49,3 +62,25 @@ Esto se logra mediante el uso de estructuras de control como el método **map()*
 
 En este ejemplo **ListaDeElementos** es un componente funcional que recibe la prop **elementos** y renderiza una lista utilizando el método **map()**. 
 Luego en el archivo **App.js** importas **ListaDeElemento** y lo usas en tu aplicación.
+
+<a id="seccion2"></a>
+### Iteración con forEach
+
+[.forEach](/docs/conceptos-de-javascript-09-iteradores--docs) es otra función de iteración en JavaScript que ejecuta una función proporcionada una vez por cada elemento 
+en un array.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  numbers.forEach((number) => {
+    console.log(number);
+  });
+
+  // Resultado: 1, 2, 3, 4, 5
+  `} 
+  language='javascript'
+/>
+
+n React aunque forEach se puede utilizar para realizar acciones sobre elementos no se usa directamente para renderizar listas como map. 
+map es preferido en React porque devuelve un nuevo array mientras que forEach simplemente itera sobre los elementos.

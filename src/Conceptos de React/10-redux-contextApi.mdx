@@ -1,7 +1,18 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
 
-# Alternativas para el Manejo de Estados: Redux y Context API
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Instalar dependencias' },
+    { id: 'seccion2', text: 'Configurar el Store' },
+    { id: 'seccion3', text: 'Conectar React con Redux' },
+    { id: 'seccion4', text: 'Integrar el Store' },
+    { id: 'seccion5', text: 'Context API' },
+    { id: 'seccion6', text: 'Usar el contexto en componentes' },
+  ]}
+/>
+
+# Gestion de Estados: Redux y Context API
 
 ### Redux
 
@@ -16,6 +27,7 @@ La arquitectura de Redux sigue el patrón de diseño de Flux pero simplifica y o
 enfoques alternativos su estructura clara y su capacidad para gestionar estados complejos y flujos de datos hacen que sea una elección popular en aplicaciones de gran escala o 
 donde la gestión del estado es crítica.
 
+<a id="seccion1"></a>
 **Instalar las dependencias:**
 
 Primero asegurarnos de tener instaladas las dependencias, caso contrario instalarlas:
@@ -27,6 +39,7 @@ Primero asegurarnos de tener instaladas las dependencias, caso contrario instala
   language='javascript'
 />
 
+<a id="seccion2"></a>
 **Configurar el Store:**
 
 Crear un archivo llamado store.js donde configuraremos el store de Redux.
@@ -56,6 +69,7 @@ Crear un archivo llamado store.js donde configuraremos el store de Redux.
   language='javascript'
 />
 
+<a id="seccion3"></a>
 **Conectar React con Redux:**
 
 En el componente principal de tu aplicación (por ejemplo **App.js**) conecta tu componente con el store de Redux utilizando **react-redux**.
@@ -94,6 +108,7 @@ En el componente principal de tu aplicación (por ejemplo **App.js**) conecta tu
   language='javascript'
 />
 
+<a id="seccion4"></a>
 **Integrar el Store en la Aplicación:**
 
 En el archivo principal de tu aplicación (por ejemplo **index.js**), envuelve tu aplicación con el **Provider** de **react-redux** y proporciona el store.
@@ -122,6 +137,7 @@ En este ejemplo hemos creado un store de Redux con un reducer simple para maneja
 
 Cuando se hace clic en los botones **Incrementar** o **Decrementar** se despachan acciones al store y el componente se actualiza automáticamente para reflejar el nuevo estado. 
 
+<a id="seccion5"></a>
 ###  Context API 
 
 La API de Context en React es útil para pasar datos a través del árbol de componentes sin tener que pasar props manualmente en cada nivel. 
@@ -178,6 +194,7 @@ Primero crea un archivo que contenga el contexto y sus proveedores. En este ejem
   language='javascript'
 />
 
+<a id="seccion6"></a>
 **Usar el contexto en componentes:**
 
 Ahora, pudemos usar este contexto en los componentes que lo requieran:

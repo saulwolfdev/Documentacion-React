@@ -1,41 +1,23 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Operador ternario' },
+    { id: 'seccion2', text: 'Operador lógico &&' },
+    { id: 'seccion3', text: 'Operador lógico ||' },
+    { id: 'seccion4', text: 'Declaraciones if' },
+    { id: 'seccion5', text: 'Uso de Switch' },
+  ]}
+/>
 
 # Condicionales
 
  Las condicionales se utilizan para renderizar diferentes partes de un componente o aplicar lógica basada en condiciones. 
  se puede usar declaraciones if, operadores ternarios y funciones para manejar condicionales en tus componentes de React.
 
- #### Declaraciones if
-
- Se puede usar declaraciones if dentro del método render de un componente de React para decidir qué renderizar en función de ciertas condiciones.
-
- <CodeBlock
-  codeString={`
-    import React from 'react';
-
-    const EjemploCondicional = (props) => {
-    let contenido;
-
-    if (props.condicion) {
-        contenido = <p>La condición es verdadera.</p>;
-    } else {
-        contenido = <p>La condición es falsa.</p>;
-    }
-
-    return (
-        <div>
-        {contenido}
-        </div>
-    );
-    };
-
-    export default EjemploCondicional
-  `} 
-  language='javascript'
-/>
-
-#### Operador ternario
+<a id="seccion1"></a>
+### Operador ternario
 
 Podes usar el operador ternario para escribir condicionales de manera más concisa.
 
@@ -56,6 +38,78 @@ Podes usar el operador ternario para escribir condicionales de manera más conci
     };
 
     export default EjemploCondicional
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion2"></a>
+### Operador lógico &&
+
+Este operador evalúa la expresión a la izquierda y si es verdadera devuelve la expresión a la derecha, de lo contrario devuelve null.
+
+<CodeBlock
+  codeString={`
+  const UserInfo = ({ user }) => (
+    <div>
+      {user && <p>Hello, {user.name}!</p>}
+    </div>
+  );
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion3"></a>
+### Operador lógico ||
+
+Este operador se utiliza para proporcionar un valor por defecto si la expresión a la izquierda es falsa.
+
+<CodeBlock
+  codeString={`
+  const DefaultMessage = ({ message }) => (
+    <p>{message || 'No message available'}</p>
+  );
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion4"></a>
+### Declaraciones if
+
+ Se puede usar declaraciones if dentro del método render de un componente de React para decidir qué renderizar en función de ciertas condiciones.
+
+ <CodeBlock
+  codeString={`
+  const NumberDisplay = ({ number }) => {
+    if (number > 0) {
+      return <p>Positive Number: {number}</p>;
+    } else if (number < 0) {
+      return <p>Negative Number: {number}</p>;
+    } else {
+      return <p>Zero</p>;
+    }
+  };
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion5"></a>
+### Uso de Switch
+
+Cuando se tiene múltiples condiciones podemos utilizar un bloque switch.
+
+<CodeBlock
+  codeString={`
+  const DayOfWeek = ({ day }) => {
+    switch (day) {
+      case 1:
+        return <p>Monday</p>;
+      case 2:
+        return <p>Tuesday</p>;
+      // ... otros casos
+      default:
+        return <p>Invalid day</p>;
+    }
+  };
   `} 
   language='javascript'
 />
