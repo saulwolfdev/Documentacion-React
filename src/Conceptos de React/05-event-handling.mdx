@@ -1,5 +1,15 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Manejo de click' },
+    { id: 'seccion2', text: 'Manejo de cambio de entrada' },
+    { id: 'seccion3', text: 'Manejo de eventos con argumentos' },
+    { id: 'seccion4', text: 'Manejo de eventos condicional' },
+  ]}
+/>
 
 # Event Handling
 
@@ -17,6 +27,7 @@ Una función que se ejecuta en respuesta a un evento específico. En React estos
 
 ### Ejemplo:
 
+<a id="seccion1"></a>
 **Manejo de click:**
 
 <CodeBlock
@@ -39,6 +50,7 @@ Una función que se ejecuta en respuesta a un evento específico. En React estos
 
 En este ejemplo la función handleClick se ejecutará cuando el botón sea clickeado.
 
+<a id="seccion2"></a>
 **Manejo de cambio de entrada:**
 
 <CodeBlock
@@ -75,6 +87,7 @@ En este ejemplo la función handleClick se ejecutará cuando el botón sea click
 En este ejemplo el componente **"ControlledForm"** contiene un campo de entrada **(input)**. La función **"handleChange"** se ejecuta cada vez que el usuario escribe algo en el 
 campo de entrada actualizando el estado **"inputValue"** con el nuevo valor del campo.
 
+<a id="seccion3"></a>
 **Manejo de eventos con argumentos:**
 
 En React pasar argumentos a manejadores de eventos es un proceso común que permite enviar información adicional al manipular un evento como hacer click en un botón o cambiar el 
@@ -104,6 +117,7 @@ valor de un campo de entrada
 
 Podemos usar una función de flecha dentro del onClick si necesitas pasar parámetros adicionales.
 
+<a id="seccion4"></a>
 **Manejo de eventos condicional:**
 
 <CodeBlock

@@ -1,0 +1,129 @@
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import "../styles.css"
+
+# React Router
+
+**React Router** es una biblioteca de enrutamiento para aplicaciones React que permite gestionar la navegación dentro de una aplicación de una sola página (SPA). 
+Proporciona una forma declarativa y eficiente de definir las rutas de la aplicación lo que significa que puedes especificar qué componentes deben renderizarse cuando la URL de 
+la aplicación cambia.
+
+## Componentes Básicos de React Router
+
+- **BrowserRouter:** Este componente envuelve la aplicación y utiliza el historial del navegador para mantener la sincronización entre la interfaz de usuario y la URL.
+
+<CodeBlock
+  codeString={`
+  import { BrowserRouter as Router } from 'react-router-dom';
+
+    const App = () => (
+    <Router>
+        {/* Rutas y componentes aquí */}
+    </Router>
+  );
+  `} 
+  language='javascript'
+/>
+
+- **Route:** Define una ruta específica y el componente que debe renderizarse cuando la URL coincide con esa ruta.
+
+<CodeBlock
+  codeString={`
+    import { Route } from 'react-router-dom';
+
+    const Home = () => <div>Home Component</div>;
+
+    const App = () => (
+        <div>
+            <Route path="/" component={Home} />
+        </div>
+    );
+  `} 
+  language='javascript'
+/>
+
+- **Link:** Proporciona una forma de navegar entre rutas sin recargar la página.
+
+<CodeBlock
+  codeString={`
+    import { Link } from 'react-router-dom';
+
+    const Navigation = () => (
+        <div>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+        </div>
+    );
+  `} 
+  language='javascript'
+/>
+
+- **Switch:** Renderiza el primer **Route** que coincide con la ubicación actual util para evitar que se rendericen varias rutas a la vez.
+
+<CodeBlock
+  codeString={`
+    import { Switch, Route } from 'react-router-dom';
+
+    const App = () => (
+        <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+        </Switch>
+    );
+  `} 
+  language='javascript'
+/>
+
+- **Redirect:** Redirige a los usuarios a otra ruta. Se utiliza comúnmente para redireccionar a una ruta predeterminada.
+
+<CodeBlock
+  codeString={`
+    import { Redirect } from 'react-router-dom';
+
+    const App = () => (
+        <Switch>
+            <Redirect from="/old-url" to="/new-url" />
+            {/* Otras rutas */}
+        </Switch>
+    );
+  `} 
+  language='javascript'
+/>
+
+### Ejemplo Completo
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+    import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
+    const Home = () => <div>Home Component</div>;
+    const About = () => <div>About Component</div>;
+    const Contact = () => <div>Contact Component</div>;
+
+    const Navigation = () => (
+        <div>
+            <Link to="/">Home</Link>
+            <Link to="/about">About</Link>
+            <Link to="/contact">Contact</Link>
+        </div>
+    );
+
+    const App = () => (
+        <Router>
+            <Navigation />
+            <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+            </Switch>
+        </Router>
+    );
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo se utiliza BrowserRouter como enrutador principal y se definen tres rutas con sus respectivos componentes (Home, About, Contact). 
+También se incluye un componente de navegación que utiliza Link para navegar entre las distintas rutas.

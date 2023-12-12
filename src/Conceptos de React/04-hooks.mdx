@@ -22,7 +22,20 @@ import "../styles.css"
  useState es un hook que permite a los componentes funcionales tener estado. 
  Proporciona una forma de declarar variables de estado en el cuerpo de un componente funcional.
 
- Ejemplo:
+ #### Sintaxis:
+
+ <CodeBlock
+  codeString={`
+  const [state, setState] = useState(initialValue);
+  `} 
+  language='javascript'
+/>
+
+- **state** es la variable que almacena el valor actual del estado.
+- **setState** es la función utilizada para actualizar ese estado. 
+- **initialValue** es el valor inicial del estado, que puede ser un valor primitivo o una función que devuelve el valor inicial.
+
+ **Ejemplo:**
 
  <CodeBlock
   codeString={`
@@ -58,7 +71,24 @@ useEffect es un hook que permite realizar efectos secundarios en componentes fun
 Puedes usarlo para gestionar el ciclo de vida del componente funcional, como realizar solicitudes de red, suscripciones a eventos, o limpiar recursos cuando 
 el componente se desmonta.
 
-ejemplo:
+ #### Sintaxis:
+
+ <CodeBlock
+  codeString={`
+  useEffect(() => {
+    // Código del efecto
+  }, [dependencias]);
+  `} 
+  language='javascript'
+/>
+
+**useEffect** toma dos argumentos una función que contiene el código del efecto, y un array de dependencias.
+
+- La función del efecto se ejecutará después de cada renderizado del componente.
+- Las dependencias son un array opcional que especifica los valores que si cambian provocarán que la función del efecto se vuelva a ejecutar. 
+Si no se proporciona un array de dependencias el efecto se ejecutará después de cada renderizado.
+
+**ejemplo:**
 
 <CodeBlock
   codeString={`
