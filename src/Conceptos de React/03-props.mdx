@@ -1,0 +1,230 @@
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Props' },
+    { id: 'seccion2', text: 'DefaultProps' },
+    { id: 'seccion3', text: 'PropTypes' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+# Props
+
+Las "props" **(propiedades)** son una parte fundamental de la arquitectura de React.
+Se utilizan para pasar datos desde un componente principal **(padre)** a sus componentes secundarios **(hijos)** lo que facilita la comunicación entre ellos y la personalización 
+del comportamiento de los componentes secundarios.
+
+### Conceptos Básicos:
+
+**Props (Propiedades):** Son objetos que contienen datos que un componente puede recibir. Se utilizan para pasar información de un componente padre a un componente hijo.
+
+**Componente Padre:** Es el componente que contiene y renderiza otro componente.
+
+**Componente Hijo:** Es el componente que recibe y utiliza los props que le son pasados por su componente padre.
+
+### Ejemplo básico de uso de props:
+
+Supongamos que tenemos un componente principal llamado **"ParentComponent"** y un componente secundario llamado **"ChildComponent"**. Quieres pasar un mensaje del componente Padre 
+al componente Hijo utilizando props.
+
+### ParentComponent.js
+
+<CodeBlock
+  codeString={`
+    //Componente Padre
+    import React from 'react';
+    import { ChildComponent } from './ChildComponent';
+
+    export const ParentComponent = ( ) => {
+    const message = "Hola desde el componente padre";
+
+    // Pasamos la prop "mensaje" al componente Hijo
+    return <ChildComponent message={message} />;
+    };
+  `} 
+  language='javascript'
+/>
+
+### ChildComponent.js
+
+<CodeBlock
+  codeString={`
+    //Componente Hijo
+    import React from 'react';
+
+    export const ChildComponent = (props) => {
+    // Acceda al "mensaje" recibido del componente principal
+    return <p>{props.message}</p>;
+    };
+  `} 
+  language='javascript'
+/>
+
+### App.js
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+    import { ParentComponent } from './ParentComponent';
+
+    const App = () => {
+    return (
+        <div>
+        <h1>My App</h1>
+        <ParentComponent /> //recibiremos el mensaje que se paso por las props: "Hola desde el componente padre"
+        </div>
+    );
+    };
+
+    export default App;
+  `} 
+  language='javascript'
+  sandboxUrl="https://codesandbox.io/s/props-tdmrtr"
+  showButtons= {true}
+/>
+
+En este ejemplo, hemos creado dos archivos separados, **"ParentComponent"** y **"ChildComponent"**. Luego, en el archivo principal **"App.js"**, importamos **"ParentComponent"** y 
+lo utilizamos. Al hacer esto estamos pasando la prop message al **"ChildComponent"** que es parte de la lógica interna del **"ParentComponent"**.
+
+<a id="seccion2"></a>
+# DefaultProps
+
+En React **defaultProps** es una propiedad que se puede definir en un componente de clase para proporcionar valores predeterminados para las props que no se han especificado 
+explícitamente al renderizar el componente. Esto es útil cuando deseas asegurarte de que un componente tenga ciertos valores predeterminados si no se proporcionan propiedades 
+específicas.
+
+#### Ejemplo:
+
+Supongamos que tenemos un componente de clase llamado **MiComponente** que acepta una prop llamada **mensaje**. Se puede establecer un valor predeterminado para mensaje utilizando 
+**defaultProps** de la siguiente manera:
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+
+    const MiComponente = (props) => {
+    const { mensaje } = props;
+
+    return <div>{mensaje}</div>;
+    };
+
+    // Definición de defaultProps fuera del componente
+    MiComponente.defaultProps = {
+    mensaje: 'Hola, mundo!', // Valor predeterminado para la prop "mensaje"
+    };
+
+    export default MiComponente;
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo si creamos una instancia de **MiComponente** sin proporcionar una prop **mensaje** se utilizará el valor predeterminado **"Hola, mundo!"**.
+
+<CodeBlock
+  codeString={`
+    // Ejemplo de uso de MiComponente
+    import React from 'react';
+    import MiComponente from './MiComponente';
+
+    function App() {
+    return (
+        <div>
+        <MiComponente /> {/* Utiliza el valor predeterminado para "mensaje" */}
+        <MiComponente mensaje="¡Hola, desde App!" /> {/* Proporciona un valor específico para "mensaje" */}
+        </div>
+    );
+    }
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+ En el primer uso de **MiComponente** se utiliza el valor predeterminado porque no se proporciona la prop mensaje.
+ En el segundo uso de **MiComponente** se proporciona un valor específico para la prop mensaje lo que anula el valor predeterminado.
+
+ En resumen **defaultProps** es una forma de garantizar que tus componentes tengan valores predeterminados coherentes cuando las props específicas no se proporcionan explícitamente
+
+<a id="seccion3"></a>
+ # PropTypes
+
+En React PropTypes es una propiedad especial que se puede definir en los componentes para especificar el tipo de datos que se espera que reciban como propiedades. 
+Estas definiciones de tipos ayudan a detectar errores en tiempo de desarrollo y a mejorar la claridad de la comunicación entre componentes. 
+**PropTypes** es parte de la biblioteca **prop-types** que solía venir incluida con React aunque a partir de React v15.5, se ha movido a un paquete por separado.
+
+### Instalación
+
+Si aún no tenes instalado prop-types podes hacerlo usando npm o yarn
+
+<CodeBlock
+  codeString={`
+    //instalar con npm
+    npm install prop-types
+    
+    //instalar con yarn
+    yarn add prop-types
+  `} 
+  language='javascript'
+/>
+
+### Uso en un componente de React
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+    import PropTypes from 'prop-types'; //importamos PropTypes
+
+    // Función de componente
+    function MiComponente(props) {
+    return (
+        <div>
+        <h1>{props.titulo}</h1>
+        <p>{props.descripcion}</p>
+        </div>
+    );
+    }
+
+    // Definición de PropTypes
+    MiComponente.propTypes = {
+    titulo: PropTypes.string.isRequired, // Cadena de texto requerida
+    descripcion: PropTypes.string,        // Cadena de texto opcional
+    };
+
+    export default MiComponente;
+  `} 
+  language='javascript'
+/>
+
+**PropTypes** se utiliza para definir el tipo de datos esperado para cada propiedad que **MiComponente** espera recibir. Esto se hace mediante la asignación de un objeto a 
+**MiComponente.propTypes**.
+
+- **titulo:**  **PropTypes.string.isRequired:** Aquí se establece que la propiedad **titulo** debe ser una cadena de texto **(string)** y es requerida **(isRequired)**. 
+Esto significa que si no se proporciona la propiedad **titulo** o si no es de tipo cadena de texto se generará una advertencia en la consola durante el desarrollo.
+
+- **descripcion:** **PropTypes.string:** De manera similar, se espera que la propiedad **descripcion** sea una cadena de texto **(string)**. Sin embargo esta propiedad no es 
+requerida. Si no se proporciona no se generará una advertencia pero si se proporciona y no es de tipo cadena de texto se generará una advertencia en la consola durante el 
+desarrollo.
+
+Estas definiciones de **PropTypes** son útiles para ayudar a los desarrolladores a evitar errores comunes al utilizar el componente y para proporcionar una documentación clara 
+sobre cómo se deben usar las propiedades del componente.
+
+### Tipos comunes de PropTypes
+Aquí hay algunos ejemplos de tipos de datos que podemos utilizar con PropTypes:
+
+- **PropTypes.string:** Cadena de texto.
+- **PropTypes.number:** Número.
+- **PropTypes.bool:** Booleano.
+- **PropTypes.array:** Array.
+- **PropTypes.object:** Objeto.
+- **PropTypes.func:** Función.
+- **PropTypes.node:** Cualquier cosa que pueda ser representada por React (elemento, cadena, número, etc.).
+- **PropTypes.element:** React element.
+- **PropTypes.oneOf:** Uno de los valores permitidos.
+- **PropTypes.shape:** Objeto con una estructura específica.
+
+# Notas Adicionales:
+
+- Las **props** son de solo lectura. No deben ser modificados en el componente hijo. Si necesitas modificar datos, considera el uso de **"state"**.
+- Puedes pasar cualquier tipo de dato como **prop** incluyendo **funciones**, **objetos**, **arreglos**, etc.

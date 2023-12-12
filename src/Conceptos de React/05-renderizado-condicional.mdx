@@ -3,8 +3,8 @@ import "../styles.css"
 
 # Renderizado condicional
 
-En el contexto de React el término "renderizado" se refiere al proceso de representar la interfaz de usuario en función del estado actual de los componentes. 
-React utiliza un enfoque de "renderización declarativa", lo que significa que defines cómo debería lucir tu interfaz de usuario en función del estado y React 
+En el contexto de React el término **"renderizado"** se refiere al proceso de representar la interfaz de usuario en función del estado actual de los componentes. 
+React utiliza un enfoque de **"renderización declarativa"**, lo que significa que defines cómo debería lucir tu interfaz de usuario en función del estado y React 
 se encarga de actualizar el DOM para que coincida con esa representación.
 
 El renderizado condicional en React es una técnica fundamental para crear interfaces de usuario dinámicas y adaptables. 
@@ -41,9 +41,10 @@ Puedes realizar renderizado condicional en función del estado interno de un com
   showButtons= {true}
 />
 
-En este ejemplo, el componente ConditionalRenderingExample tiene un estado isLoggedIn que indica si el usuario está o no logueado. 
+En este ejemplo, el componente **ConditionalRenderingExample** tiene un estado **isLoggedIn** que controlamos con el **Hook** [useState](/docs/conceptos-de-react-04-hooks--docs) 
+que indica si el usuario está o no logueado. 
 Dependiendo de este estado, se renderiza un mensaje de bienvenida o un mensaje para iniciar sesión. 
-Al hacer clic en el botón, el estado cambia y el componente se vuelve a renderizar con la nueva información.
+Al hacer clic en el botón el estado cambia y el componente se vuelve a renderizar con la nueva información.
 
 # Renderizado condicional basado en props:
 
@@ -83,9 +84,9 @@ Al hacer clic en el botón, el estado cambia y el componente se vuelve a renderi
   showButtons= {true}
 />
 
-En este ejemplo se utiliza el componente "Greeting" para realizar un renderizado condicional basado en el estado "isLoggedIn". 
-Si el usuario está logueado (isLoggedIn es true), se muestra el componente "UserGreeting", que da la bienvenida al usuario. En caso contrario, se muestra el componente 
-"GuestGreeting", que indica al usuario que inicie sesión.
+En este ejemplo se utiliza el componente **"Greeting"** para realizar un renderizado condicional basado en el estado([useState](/docs/conceptos-de-react-04-hooks--docs)) **"isLoggedIn"** . 
+Si el usuario está logueado **(isLoggedIn es true)**, se muestra el componente **"UserGreeting"**, que da la bienvenida al usuario. En caso contrario, se muestra el componente 
+**"GuestGreeting"**, que indica al usuario que inicie sesión.
 
 Estos son solo ejemplos básicos pero el renderizado condicional en React puede volverse más complejo a medida que se introducen más condiciones y lógica. 
 Puedes combinar múltiples condiciones, utilizar operadores lógicos, y emplear funciones para calcular dinámicamente qué renderizar. 

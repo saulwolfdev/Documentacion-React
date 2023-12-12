@@ -1,12 +1,23 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
 import "../styles.css"
+
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'useState' },
+    { id: 'seccion2', text: 'useEffect' },
+    { id: 'seccion3', text: 'useContext' },
+    { id: 'seccion4', text: 'useMemo' },
+  ]}
+/>
 
 # Hooks
 
- Los hooks son funciones especiales proporcionadas por React que permiten a los componentes funcionales tener estado y ciclo de vida. 
- Algunos hooks comunes incluyen useState y useEffect.
+ Los **hooks** son funciones especiales proporcionadas por React que permiten a los componentes funcionales tener **estado y ciclo de vida**. 
+ Algunos hooks comunes incluyen **useState**, **useEffect**, **useContext**, **useMemo**.
 
- # useState
+<a id="seccion1"></a>
+ ### useState
 
  useState es un hook que permite a los componentes funcionales tener estado. 
  Proporciona una forma de declarar variables de estado en el cuerpo de un componente funcional.
@@ -40,7 +51,8 @@ import "../styles.css"
 En este ejemplo la variable de estado isOn se inicializa con false. 
 El botón cambia el estado de isOn entre true y false cuando se hace click lo que afecta el texto que indica si el interruptor está encendido o apagado.
 
-# useEffect
+<a id="seccion2"></a>
+### useEffect
 
 useEffect es un hook que permite realizar efectos secundarios en componentes funcionales. 
 Puedes usarlo para gestionar el ciclo de vida del componente funcional, como realizar solicitudes de red, suscripciones a eventos, o limpiar recursos cuando 
@@ -77,6 +89,182 @@ ejemplo:
   language='javascript'
 />
 
-En este ejemplo cada vez que haces clic en el botón para incrementar el contador, se actualiza el estado count. 
-El efecto asociado a useEffect se ejecutará debido a la dependencia de count en el array de dependencias. 
+En este ejemplo cada vez que haces click en el botón para incrementar el contador se actualiza el estado **count**. 
+El efecto asociado a **useEffect** se ejecutará debido a la dependencia de count en el array de dependencias. 
 En este caso simplemente muestra el valor actual de count en la consola, pero se podria realizar acciones más complejas basadas en el cambio del estado.
+
+<a id="seccion3"></a>
+### useContext
+
+**useContext** permite a los componentes de función suscribirse a un contexto específico y acceder al valor proporcionado por ese contexto. 
+Los contextos en React son una forma de pasar datos a través del árbol de componentes sin tener que pasar explícitamente las props en cada nivel. useContext simplifica la 
+suscripción a contextos y el acceso a sus valores.
+
+#### Ejemplo de useContext:
+Supongamos que tienes un contexto llamado UserContext que proporciona información sobre el usuario actual. Primero creamos el contexto:
+
+<CodeBlock
+  codeString={`
+  // UserContext.js
+  import React, { createContext } from 'react';
+
+  const UserContext = createContext();
+
+  export const UserProvider = ({ children }) => {
+    // Puedes proporcionar un valor por defecto si lo deseas
+    const user = { username: 'guest' };
+
+    return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  };
+
+  export default UserContext;
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo **UserContext** se crea con **createContext** y se proporciona un valor predeterminado para el usuario (en este caso, un usuario invitado). 
+Luego el componente **UserProvider** envuelve a sus hijos con el contexto proporcionando el valor del usuario.
+
+Ahora en otro componente podemos utilizar **useContext** para acceder al valor del contexto:
+
+<CodeBlock
+  codeString={`
+  // UserProfile.js
+  import React, { useContext } from 'react';
+  import UserContext from './UserContext';
+
+  const UserProfile = () => {
+    const user = useContext(UserContext);
+
+    return (
+      <div>
+        <h2>User Profile</h2>
+        <p>Username: {user.username}</p>
+      </div>
+    );
+  };
+
+  export default UserProfile;
+  `} 
+  language='javascript'
+/>
+
+En este componente **useContext(UserContext)** se utiliza para acceder al valor proporcionado por el contexto **UserContext**. 
+Ahora **UserProfile** puede mostrar la información del usuario sin necesidad de pasar las props desde componentes superiores.
+
+Finalmente para que todo funcione asegurarnos de envolver la aplicación o el componente que necesita el contexto con el UserProvider:
+
+<CodeBlock
+  codeString={`
+  // App.js
+  import React from 'react';
+  import UserProfile from './UserProfile';
+  import { UserProvider } from './UserContext';
+
+  function App() {
+    return (
+      <UserProvider>
+        <div>
+          <h1>My App</h1>
+          <UserProfile />
+        </div>
+      </UserProvider>
+    );
+  }
+
+  export default App;
+  `} 
+  language='javascript'
+/>
+
+De esta manera **UserProfile** puede acceder al contexto de usuario y mostrar la información del usuario actual. 
+Este es un ejemplo básico pero demuestra cómo **useContext** facilita la suscripción y acceso a contextos en React.
+
+<a id="seccion4"></a>
+### useMemo
+
+**useMemo** memoriza un valor calculado lo que significa que memoriza (almacena en memoria) el resultado de una función y lo devuelve si las dependencias no han cambiado desde 
+la última renderización. Esto puede ayudar a mejorar el rendimiento al evitar recálculos innecesarios.
+
+- **useMemo** toma una función que realiza un cálculo costoso y un array de dependencias.
+- La función se ejecutará solo cuando las dependencias hayan cambiado desde la última renderización.
+- Devuelve el valor memoizado que resulta de la ejecución de la función.
+
+### Sintaxis
+
+<CodeBlock
+  codeString={`
+  const memorizeValue = useMemo(( ) => computeExpensiveValue(a, b), [a, b]);
+  `} 
+  language='javascript'
+/>
+
+- **useMemo:** Este es el hook que estás utilizando para memoizar un valor calculado.
+
+- **( ) => computeExpensiveValue(a, b):** Este es el primer argumento de **useMemo**. Es una función que realiza algún cálculo costoso. En este ejemplo, **computeExpensiveValue** 
+es la función que realiza el cálculo y `a y b` son las dependencias de esta función.
+
+- **[a, b]:** Este es el segundo argumento de **useMemo** y es un array de dependencias. La memoización se actualizará solo cuando los valores en este array cambien entre renderizaciones.
+
+- **memorizeValue:** Esto es lo que devuelve useMemo. Es el valor resultante del cálculo memorizado.
+
+### Ejemplo de useMemo:
+Supongamos que tenemos un componente que realiza un cálculo costoso y queremos memorizar el resultado para evitar recálculos innecesarios.
+
+<CodeBlock
+  codeString={`
+  //SumComponent.js
+  import React, { useMemo } from "react";
+
+  const SumComponent = ({ a, b }) => {
+    // Función para realizar la suma
+    const addNumbers = (x, y) => {
+      console.log("Summing...");
+      return x + y;
+    };
+
+    // Memoriza el resultado de la suma
+    const sum = useMemo(() => addNumbers(a, b), [a, b]);
+
+    return (
+      <div>
+        <p>Sum: {sum}</p>
+      </div>
+    );
+  };
+
+  export default SumComponent;
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+  //App.js
+  import React, { useState } from "react";
+  import SumComponent from "./SumComponent ";
+
+  const App = () => {
+    const [numberA, setNumberA] = useState(0);
+    const [numberB, setNumberB] = useState(0);
+
+    const incrementA = () => setNumberA(numberA + 1);
+    const incrementB = () => setNumberB(numberB + 2);
+
+    return (
+      <div>
+        <SumComponent a={numberA} b={numberB} />
+        <button onClick={incrementA}>Increment A</button>
+        <button onClick={incrementB}>Increment B</button>
+      </div>
+    );
+  };
+
+  export default App;
+  `} 
+  language='javascript'
+  sandboxUrl="https://codesandbox.io/p/sandbox/usememo-w5nfmn"
+  showButtons= {true}
+/>
+
+Estos son solo algunos ejemplos de hooks en React. Hay otros hooks como **useReducer**, **useCallback**, entre otros que proporcionan funcionalidades adicionales para trabajar con componentes de función en React.

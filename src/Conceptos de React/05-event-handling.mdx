@@ -1,0 +1,135 @@
+import { CodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Event Handling
+
+**Event handling** en React se refiere al proceso de gestionar y responder a eventos que ocurren en la interfaz de usuario de una aplicación React. 
+Los eventos pueden ser desencadenados por diversas acciones del usuario como hacer clicK en un botón, escribir en un campo de entrada, mover el mouse, etc. 
+En React el manejo de eventos se realiza mediante funciones de manejo de eventos y JSX.
+
+## Definiciones clave
+
+- **Evento:**
+Un suceso específico que ocurre en la interfaz de usuario como un click, cambio de valor, o movimiento del mouse.
+
+- **Manejador de eventos:**
+Una función que se ejecuta en respuesta a un evento específico. En React estos manejadores de eventos se definen como funciones de JavaScript.
+
+### Ejemplo:
+
+**Manejo de click:**
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+
+    const handleClick = ( ) => {
+      console.log("Hiciste clic en el botón");
+    };
+
+  return (
+    <button onClick={handleClick}>Clic aquí</button>
+  );
+    };
+
+    export default ButtonClick;
+  `} 
+  language='javascript'  
+/>
+
+En este ejemplo la función handleClick se ejecutará cuando el botón sea clickeado.
+
+**Manejo de cambio de entrada:**
+
+<CodeBlock
+  codeString={`
+    import React, { useState } from 'react';
+
+    const ControlledForm = () => {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    return (
+        <div>
+        <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            placeholder="Escribe algo"
+        />
+        <p>{inputValue}</p>
+        </div>
+    );
+    };
+
+    export default ControlledForm;  
+  `} 
+  language='javascript'
+  sandboxUrl="https://codesandbox.io/s/evento-formulario-y88pyz"
+  showButtons= {true}
+/>
+
+En este ejemplo el componente **"ControlledForm"** contiene un campo de entrada **(input)**. La función **"handleChange"** se ejecuta cada vez que el usuario escribe algo en el 
+campo de entrada actualizando el estado **"inputValue"** con el nuevo valor del campo.
+
+**Manejo de eventos con argumentos:**
+
+En React pasar argumentos a manejadores de eventos es un proceso común que permite enviar información adicional al manipular un evento como hacer click en un botón o cambiar el 
+valor de un campo de entrada
+
+<CodeBlock
+  codeString={`
+  import React from 'react';
+
+  const MiComponente = ( ) => {
+    const handleButtonClick = (param) => {
+      console.log(\`Hiciste clic con el parámetro: \${param}\`);
+    };
+
+    return (
+      <button onClick={( ) => handleButtonClick("miArgumento")}>
+        Clic aquí
+      </button>
+    );
+  };
+
+  export default MiComponente;
+
+  `} 
+  language='javascript'
+/>
+
+Podemos usar una función de flecha dentro del onClick si necesitas pasar parámetros adicionales.
+
+**Manejo de eventos condicional:**
+
+<CodeBlock
+  codeString={`
+    import React, { useState } from 'react';
+
+    function ToggleComponent() {
+    const [isVisible, setIsVisible] = useState(true);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+    };
+        return (
+            <div>
+            {isVisible && <p>Este párrafo es visible</p>}
+            <button onClick={toggleVisibility}>
+                Toggle Visibility
+            </button>
+            </div>
+        );
+    }
+  `} 
+  language='javascript'
+/>
+
+Aquí el evento onClick cambia la visibilidad del párrafo dependiendo del estado si es true o false.
+
+Estos son solo ejemplos básicos pero muestran cómo React maneja eventos y cómo podemos definir funciones de manejo de eventos para responder a las acciones del usuario en 
+nuestra aplicación.
