@@ -10,8 +10,22 @@ import "../styles.css"
   ]}
 />
 
+<InteractiveCodeBlock codeString={`
+  const currentUser = {
+    name: 'John Doe',
 
-<CodeEditor />
+  };
+  
+  const UserInfo = ({ user }) => (
+    <div>
+      {user && <p>Hello, {user.name}!</p>}
+    </div>
+  );
+  
+render(<UserInfo user={currentUser} />)
+`} language="javascript" />
+
+
 <a id="seccion1"></a>
 # Variables en React y JavaScript Moderno (Let y Const)
 
