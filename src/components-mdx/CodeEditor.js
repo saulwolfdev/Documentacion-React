@@ -5,7 +5,7 @@ const CodeEditor = ({ codeString }) => {
     // const modifiedCode = `${initialCode}`;
   return (
     <LiveProvider code={codeString || ''} noInline>
-      <div style={{ display: 'flex', height: '50vh', padding: '16px 0 12px 0' }}>
+      <div style={{ display: 'flex', height: 'auto', padding: '16px 0 12px 0' }}>
         <div style={{ flex: 1, overflow: 'hidden' }}>
           <LiveEditor style={{ height: '100%', border: 'none', boxSizing: 'border-box', overflow: 'auto' }} />
           <LiveError />

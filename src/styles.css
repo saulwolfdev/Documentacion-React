@@ -65,3 +65,7 @@ code.css-1kwwth4 {
 .sticky-nav .sticky-nav-link.clicked .indicator {
     color: red;
 }
+
+pre.prism-code.language-tsx{
+    background-color: rgb(47, 47, 47)!important;
+}

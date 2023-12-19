@@ -1,11 +1,15 @@
 import React from 'react';
 import { CodeBlock, CodeEditor } from './index';
 
-const InteractiveCodeBlock = ({ codeString, language, sandboxUrl, showButtons }) => {
+const InteractiveCodeBlock = ({ codeString, language, sandboxUrl, showButtons, showCodeBlock=false , showCodeEditor }) => {
   return (
     <div>
-      <CodeBlock codeString={codeString} language={language} sandboxUrl={sandboxUrl} showButtons={showButtons} />
-      <CodeEditor codeString={codeString} />
+        {showCodeBlock ? (
+          <CodeBlock codeString={codeString} language={language} sandboxUrl={sandboxUrl} showButtons={showButtons} />
+        ) : null}
+        {showCodeEditor ? (
+          <CodeEditor codeString={codeString} />
+        ) : null}
     </div>
   );
 };
