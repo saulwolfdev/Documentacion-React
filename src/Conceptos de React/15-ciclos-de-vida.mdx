@@ -1,0 +1,60 @@
+import { StickyNav,InteractiveCodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Ciclos de vida
+
+En React la gestión de ciclos de vida en componentes de función se realiza principalmente a través del hook [useEffect](/docs/conceptos-de-react-04-hooks--docs) 
+y otros hooks relacionados. 
+Los componentes de función no tienen los mismos métodos de ciclo de vida que los componentes de clase, pero useEffect proporciona una forma de realizar efectos secundarios 
+en diferentes momentos del ciclo de vida.
+
+**Ejemplo:**
+
+Vamos a crear un ejemplo básico que utiliza [useEffect](/docs/conceptos-de-react-04-hooks--docs) para simular algunas operaciones de ciclo de vida. 
+Supongamos que queremos mostrar un mensaje cuando el componente se monta y se actualiza.
+
+<InteractiveCodeBlock codeString={`
+  const MiComponente=()=>{
+  const [contador, setContador] = React.useState(0);
+  const [mensaje, setMensaje] = React.useState('');
+
+  React.useEffect(() => {
+    setMensaje('El componente se ha montado o actualizado');
+
+    const fetchData = async () => {
+      // Supongamos que estamos haciendo una solicitud a una API y esperamos la respuesta
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setMensaje('Datos obtenidos de la API');
+      } catch (error) {
+        setMensaje('Error al obtener datos');
+        console.error('Error al obtener datos:', error);
+      }
+    };
+    // Llamamos a la función para simular la operación asincrónica
+    fetchData();
+
+    return () => {
+      setMensaje('El componente se va a desmontar o actualizar');
+    };
+  }, [contador]);
+
+  const incrementarContador = () => {
+    setContador(prevContador => prevContador + 1);
+  };
+
+  return (
+    <div>
+      <p>Contador: {contador}</p>
+      <button onClick={incrementarContador}>Incrementar Contador</button>
+      <p>{mensaje}</p>
+    </div>
+  );
+}
+
+render(<MiComponente />)  
+`} 
+language="javascript" 
+showCodeEditor
+noInline
+/>
