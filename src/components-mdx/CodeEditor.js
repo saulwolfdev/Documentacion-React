@@ -9,7 +9,7 @@ const CodeEditor = ({ codeString, noInline }) => {
           <LiveEditor style={{ height: '100%', border: 'none', boxSizing: 'border-box', overflow: 'auto' }} />
           <LiveError />
         </div>
-        <div style={{ flex: 1, overflow: 'hidden' }}>
+        <div style={{ flex: 1, overflow: 'hidden', textAlign: 'center' }}>
           <LivePreview style={{ width: '100%', height: '100%', border: 'none', boxSizing: 'border-box', marginLeft: '8px', fontFamily: 'monospace' }} />
         </div>
       </div>
