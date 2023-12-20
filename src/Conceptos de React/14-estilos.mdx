@@ -1,0 +1,138 @@
+import { CodeBlock, InteractiveCodeBlock } from '../components-mdx/index.js';
+
+# Estilos
+
+En React los estilos se aplican a los elementos de la interfaz de usuario para mejorar la apariencia y la experiencia del usuario. 
+
+- ### Estilos en línea
+
+React permite aplicar estilos en línea directamente a los elementos utilizando el atributo **style**.
+
+<InteractiveCodeBlock codeString={
+ `const InlineStyleComponent = () => {
+    const styles = {
+      color: 'blue',
+      fontSize: '18px',
+      backgroundColor: '#f0f0f0',
+      padding: '10px',
+    };
+
+    return (
+      <div style={styles}>
+        Este es un componente con estilos en línea.
+      </div>
+    );
+  };
+
+  render(<InlineStyleComponent />)`
+} 
+language="javascript" 
+showCodeEditor
+noInline
+/>
+
+- ### Usando CSS en archivos separados
+
+Podemos crear archivos CSS separados y luego importarlos en nuestros componentes de React.
+
+
+<InteractiveCodeBlock codeString={
+`// Estilos en 'styles.css'
+.container {
+  color: green;
+  font-size: 16px;
+}
+
+// Componente que utiliza los estilos
+import React from 'react';
+import './styles.css';
+
+const ExternalStyleComponent = () => {
+  return (
+    <div className="container">
+      Este es un componente con estilos externos.
+    </div>
+  );
+};
+
+export default ExternalStyleComponent;`  
+} 
+language="javascript" 
+showCodeBlock
+/>
+
+- ### Librerías de Estilos
+
+Librerías como Styled-components o Emotion permiten escribir estilos directamente en el código JavaScript.
+
+**Ejemplo con Styled-components**
+
+<InteractiveCodeBlock codeString={`
+  import React from 'react';
+  import styled from 'styled-components';
+
+  const StyledComponent = styled.div\`
+    color: purple;
+    font-size: 22px;
+  \`;
+
+  const StyledComponentsExample = () => {
+    return (
+      <StyledComponent>
+        Este es un componente con Styled-components.
+      </StyledComponent>
+    );
+  };
+
+  export default StyledComponentsExample;
+`} 
+language="javascript" 
+showCodeBlock
+/>
+
+<InteractiveCodeBlock codeString={`
+  import styled from 'styled-components';
+  const headerProps = { text: 'I\'m styled!' };
+
+  
+
+`} 
+language="javascript" 
+showCodeEditor
+noInline
+/>
+
+- ### Estilos condicionales
+
+Podemos aplicar estilos condicionales basados en el estado de un componente.
+
+ <InteractiveCodeBlock
+    codeString={`
+        const ConditionalStyleComponent = () => {
+        const [isActive, setIsActive] =  React.useState(false);
+
+        const handleClick = () => {
+          setIsActive(!isActive);
+        };
+
+        return (
+          <div
+            style={{
+              color: isActive ? 'blue' : 'black',
+              backgroundColor: isActive ? 'yellow' : 'transparent',
+              fontSize: '18px',
+              padding: '10px',
+            }}
+            onClick={handleClick}
+          >
+            Este es un componente con estilos condicionales.
+          </div>
+        );
+      };
+
+      render(<ConditionalStyleComponent />)
+    `}
+    language="javascript"
+    showCodeEditor
+    noInline
+  />

@@ -66,6 +66,10 @@ code.css-1kwwth4 {
     color: red;
 }
 
-pre.prism-code.language-tsx{
-    background-color: rgb(47, 47, 47)!important;
+/* pre{
+    background-color: rgb(1, 22, 39)!important;
 }
+
+.css-qa4clq :where(span:not(.sb-anchor, .sb-unstyled, .sb-unstyled span)) {
+    background-color: rgb(1, 22, 39)!important;
+} */
