@@ -69,3 +69,11 @@ code.css-1kwwth4 {
 pre.prism-code.language-tsx{
     background-color: rgb(47, 47, 47)!important;
 }
+
+.sp-c-bxeRRt.sp-c-gMfcns.sp-c-bxeRRt:has(svg + span) {
+    display: none;
+}
+
+.sp-c-euXojQ.sp-editor.sp-stack {
+    flex: 70 30 0px;
+}

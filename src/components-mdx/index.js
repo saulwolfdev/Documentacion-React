@@ -5,3 +5,4 @@ export { default as CodeSandboxLink } from './CodeSandboxLink';
 export { default as StickyNav } from './StickyNav';
 export { default as CodeEditor } from './CodeEditor';
 export { default as InteractiveCodeBlock } from './InteractiveCodeBlock.js';
+export { default as DynamicSandpack } from './DynamicSandpack.js';
