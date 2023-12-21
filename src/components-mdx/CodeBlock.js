@@ -1,6 +1,7 @@
 import React, {useState} from 'react'; 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+// import { sunBurst } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { zTouch } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Button, CodeSandboxLink } from './index';
 
@@ -19,7 +20,7 @@ const CodeBlock = ({ codeString, language, sandboxUrl, showButtons }) => {
 
   return (
     <div>
-      <SyntaxHighlighter language={language || "javascript"} style={materialDark}>
+      <SyntaxHighlighter language={language || "javascript"} style={zTouch} >
         {codeString}
       </SyntaxHighlighter>
       
