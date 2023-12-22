@@ -1,4 +1,11 @@
-import { StickyNav,InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import {
+  SandpackProvider,
+  SandpackLayout,
+  SandpackCodeEditor,
+  SandpackPreview,
+  SandpackFileExplorer,
+} from "@codesandbox/sandpack-react";
 import "../styles.css"
 
 # Formularios
@@ -289,3 +296,7 @@ strong {
   
   dynamicVisibleFiles={["/App.js", "/ComplexForm.js", "/ComplexForm.css"]}
 />
+
+### Prueba
+
+<SandPack />

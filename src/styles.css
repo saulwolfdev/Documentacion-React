@@ -75,7 +75,7 @@ pre.prism-code.language-tsx{
 }
 
 .sp-c-euXojQ.sp-editor.sp-stack {
-    flex: 70 30 0px!important;
+    flex: -1 30 0px!important;
 }
 
 .sp-c-euXojQ.sp-editor.sp-stack{
@@ -84,4 +84,8 @@ pre.prism-code.language-tsx{
 
 .sp-c-ikJbEZ > .sp-c-euXojQ{
     height: 30rem!important;
+}
+
+.sp-c-ikJbEZ > .sp-file-explorer {
+    min-width: 100px!important;
 }

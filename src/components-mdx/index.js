@@ -6,3 +6,4 @@ export { default as StickyNav } from './StickyNav';
 export { default as CodeEditor } from './CodeEditor';
 export { default as InteractiveCodeBlock } from './InteractiveCodeBlock.js';
 export { default as DynamicSandpack } from './DynamicSandpack.js';
+export { default as SandPack } from './SanPack.js';
