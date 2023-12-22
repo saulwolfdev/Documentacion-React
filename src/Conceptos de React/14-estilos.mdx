@@ -1,4 +1,4 @@
-import { CodeBlock, InteractiveCodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
 
 # Estilos
 
@@ -8,57 +8,71 @@ En React los estilos se aplican a los elementos de la interfaz de usuario para m
 
 React permite aplicar estilos en línea directamente a los elementos utilizando el atributo **style**.
 
-<InteractiveCodeBlock codeString={`  
-  const InlineStyleComponent = () => {
-    const styles = {
-      color: 'blue',
-      fontSize: '18px',
-      backgroundColor: '#f0f0f0',
-      padding: '10px',
-    };
-
-    return (
-      <div style={styles}>
-        Este es un componente con estilos en línea.
-      </div>
-    );
+<DynamicSandpack
+  dynamicFiles={{
+    "/InlineStyle.js": 
+`const InlineStyle = () => {
+  const styles = {
+    color: 'blue',
+    fontSize: '18px',
+    backgroundColor: '#f0f0f0',
+    padding: '2px',
   };
 
-  render(<InlineStyleComponent />)
-`} 
-language="javascript" 
-showCodeEditor
-noInline
+  return (
+    <div style={styles}>
+      Este es un componente con estilos en línea.
+    </div>
+  );
+};
+
+export default InlineStyle;
+    `,   
+    "/App.js": 
+`import React from "react";
+import InlineStyle from "./InlineStyle.js";
+
+ const App = () => {
+    return (
+      <div>
+        <InlineStyle />
+      </div>
+    ) 
+ }
+
+export default App;`,    
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/InlineStyle.js"]}
 />
 
 - ### Usando CSS en archivos separados
 
 Podemos crear archivos CSS separados y luego importarlos en nuestros componentes de React.
 
-
-<InteractiveCodeBlock codeString={`
-// Estilos en 'styles.css'
-.container {
+<DynamicSandpack
+  dynamicFiles={{
+    "styles.css": 
+`.container {
   color: green;
-  font-size: 16px;
-}
-
-// Componente que utiliza los estilos
-import React from 'react';
+  font-size: 18px;
+}`,       
+    "/App.js": 
+`import React from "react";
 import './styles.css';
 
-const ExternalStyleComponent = () => {
+const App = () => {
   return (
     <div className="container">
       Este es un componente con estilos externos.
     </div>
   );
-};
+}
 
-export default ExternalStyleComponent;  
-`} 
-language="javascript" 
-showCodeBlock
+export default App;`,    
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/styles.css"]}
 />
 
 - ### Librerías de Estilos
@@ -67,60 +81,78 @@ Librerías como Styled-components o Emotion permiten escribir estilos directamen
 
 **Ejemplo con Styled-components**
 
-<InteractiveCodeBlock codeString={`
-  import React from 'react';
-  import styled from 'styled-components';
+<DynamicSandpack
+  dynamicFiles={{    
+    "/App.js": 
+`import React from "react";
+import styled from 'styled-components';
 
-  const StyledComponent = styled.div\`
-    color: purple;
-    font-size: 22px;
-  \`;
+const StyledComponent = styled.div\`
+  color: purple;
+  font-size: 22px;
+\`;
 
-  const StyledComponentsExample = () => {
-    return (
-      <StyledComponent>
+const App = () => {
+  return (
+    <StyledComponent>
         Este es un componente con Styled-components.
-      </StyledComponent>
-    );
-  };
+    </StyledComponent>
+  );
+}
 
-  export default StyledComponentsExample;
-`} 
-language="javascript" 
-showCodeBlock
+export default App;`,    
+  }}
+  
+  dynamicVisibleFiles={["/App.js"]}
 />
 
 - ### Estilos condicionales
 
 Podemos aplicar estilos condicionales basados en el estado de un componente.
 
- <InteractiveCodeBlock
-    codeString={`
-        const ConditionalStyleComponent = () => {
-        const [isActive, setIsActive] =  React.useState(false);
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalStyle from "./ConditionalStyle.js";
 
-        const handleClick = () => {
-          setIsActive(!isActive);
-        };
+ const App = () => {
+   return (
+    <div>
+      <ConditionalStyle />
+    </div>
+  ) 
+ }
 
-        return (
-          <div
-            style={{
-              color: isActive ? 'blue' : 'black',
-              backgroundColor: isActive ? 'yellow' : 'transparent',
-              fontSize: '18px',
-              padding: '10px',
-            }}
-            onClick={handleClick}
-          >
-            Este es un componente con estilos condicionales.
-          </div>
-        );
-      };
+export default App;`, 
 
-      render(<ConditionalStyleComponent />)
-    `}
-    language="javascript"
-    showCodeEditor
-    noInline
-  />
+"/ConditionalStyle.js":
+`import React, { useState } from 'react';
+
+const ConditionalStyle = () => {
+ const [isActive, setIsActive] = useState(false);
+
+ const handleClick = () => {
+  setIsActive(!isActive);
+ };
+
+ return (
+    <div
+      style={{
+        color: isActive ? 'blue' : 'black',
+        backgroundColor: isActive ? 'yellow' : 'transparent',
+        fontSize: '18px',
+        padding: '10px',
+      }}
+    onClick={handleClick}
+    >
+      Este es un componente con estilos condicionales.
+    </div>
+  );
+};
+
+export default ConditionalStyle;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalStyle.js"]}
+/>

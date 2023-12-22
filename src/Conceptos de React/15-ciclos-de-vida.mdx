@@ -1,4 +1,4 @@
-import { StickyNav,InteractiveCodeBlock } from '../components-mdx/index.js';
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 # Ciclos de vida
@@ -13,48 +13,65 @@ en diferentes momentos del ciclo de vida.
 Vamos a crear un ejemplo básico que utiliza [useEffect](/docs/conceptos-de-react-04-hooks--docs) para simular algunas operaciones de ciclo de vida. 
 Supongamos que queremos mostrar un mensaje cuando el componente se monta y se actualiza.
 
-<InteractiveCodeBlock codeString={`
-  const MiComponente=()=>{
-  const [contador, setContador] = React.useState(0);
-  const [mensaje, setMensaje] = React.useState('');
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import MyComponent from "./MyComponent.js";
 
-  React.useEffect(() => {
-    setMensaje('El componente se ha montado o actualizado');
+const App = ( ) => {
+  return (
+    <div>
+      <MyComponent />
+    </div>
+  )
+}
 
-    const fetchData = async () => {
+export default App;`, 
+
+"/MyComponent.js":
+`import React, { useState, useEffect } from 'react';
+
+const MyComponent = ( ) => {
+  const [counter, setCounter] = useState(0);
+  const [message, setMessage] = useState('');
+
+  useEffect(( ) => {
+    setMessage('El componente se ha montado o actualizado');
+
+    const fetchData = async ( ) => {
       // Supongamos que estamos haciendo una solicitud a una API y esperamos la respuesta
       try {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        setMensaje('Datos obtenidos de la API');
+        setMessage('Datos obtenidos de la API');
       } catch (error) {
-        setMensaje('Error al obtener datos');
+        setMessage('Error al obtener datos');
         console.error('Error al obtener datos:', error);
       }
     };
     // Llamamos a la función para simular la operación asincrónica
-    fetchData();
+    fetchData( );
 
-    return () => {
-      setMensaje('El componente se va a desmontar o actualizar');
+    return ( ) => {
+      setMessage('El componente se va a desmontar o actualizar');
     };
-  }, [contador]);
+  }, [counter]);
 
-  const incrementarContador = () => {
-    setContador(prevContador => prevContador + 1);
+  const incrementCounter = ( ) => {
+    setCounter(prevCounter => prevCounter + 1);
   };
 
   return (
     <div>
-      <p>Contador: {contador}</p>
-      <button onClick={incrementarContador}>Incrementar Contador</button>
-      <p>{mensaje}</p>
+      <p>Contador: {counter}</p>
+      <button onClick={incrementCounter}>Incrementar Contador</button>
+      <p>{message}</p>
     </div>
   );
 }
 
-render(<MiComponente />)  
-`} 
-language="javascript" 
-showCodeEditor
-noInline
+export default MyComponent;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/MyComponent.js"]}
 />

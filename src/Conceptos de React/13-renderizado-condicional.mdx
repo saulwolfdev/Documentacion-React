@@ -1,4 +1,4 @@
-import { CodeBlock } from '../components-mdx/index.js';
+import { CodeBlock, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 # Renderizado condicional
@@ -12,76 +12,106 @@ Puedes realizar renderizado condicional en función del estado interno de un com
 
 # Renderizado condicional basado en el estado:
 
-<CodeBlock
-  codeString={`
-    import React, { useState } from 'react';
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalRendering from "./ConditionalRendering.js";
 
-    const ConditionalRendering = ( ) => {
-    const [isLoggedIn, setLoggedIn] = useState(false);
+const App = ( ) => {
+  return (
+    <div>
+      <ConditionalRendering />
+    </div>
+  )
+}
 
-    return (
-        <div>
-        {isLoggedIn ? (
-            <p>Bienvenido, usuario logueado</p>
+export default App;`, 
+
+"/ConditionalRendering.js":
+`import React, { useState } from 'react';
+
+const ConditionalRendering = ( ) => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        <p>Bienvenido, usuario logueado</p>
         ) : (
-            <p>Inicia sesión para acceder</p>
-        )}
+        <p>Inicia sesión para acceder</p>
+      )}
 
-        <button onClick={( ) => setLoggedIn(!isLoggedIn)}>
-            {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
-        </button>
-        </div>
-    );
-    };
+      <button onClick={( )=> setLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
+      </button>
+    </div>
+  );
+};
 
-    export default ConditionalRendering;  
-  `} 
-  language='javascript'
-  sandboxUrl="https://codesandbox.io/s/renderizado-condicional-basado-en-el-estado-5pzy6p"
-  showButtons= {true}
+export default ConditionalRendering;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalRendering.js"]}
 />
 
-En este ejemplo, el componente **ConditionalRenderingExample** tiene un estado **isLoggedIn** que controlamos con el **Hook** [useState](/docs/conceptos-de-react-04-hooks--docs) 
+En este ejemplo, el componente **ConditionalRendering** tiene un estado **isLoggedIn** que controlamos con el **Hook** [useState](/docs/conceptos-de-react-04-hooks--docs) 
 que indica si el usuario está o no logueado. 
 Dependiendo de este estado, se renderiza un mensaje de bienvenida o un mensaje para iniciar sesión. 
 Al hacer clic en el botón el estado cambia y el componente se vuelve a renderizar con la nueva información.
 
 # Renderizado condicional basado en props:
 
-<CodeBlock
-  codeString={`
-    import React, { useState } from 'react';
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalRenderingProps from "./ConditionalRenderingProps.js";
 
-    const UserGreeting = ({ isLoggedIn }) => {
-    return <p>Bienvenido de nuevo{isLoggedIn ? ', usuario' : ' '}</p>;
-    };
+const App = ( ) => {
+  return (
+    <div>
+      <ConditionalRenderingProps />
+    </div>
+  )
+}
 
-    const GuestGreeting = ( ) => {
-    return <p>Por favor, inicia sesión</p>;
-    };
+export default App;`, 
 
-    const Greeting = ({ isLoggedIn }) => {
-    return isLoggedIn ? <UserGreeting isLoggedIn={isLoggedIn} /> : <GuestGreeting />;
-    };
+"/ConditionalRenderingProps.js":
+`import React, { useState } from 'react';
 
-    const ConditionalRenderingProps = ( ) => {
-    const [isLoggedIn, setLoggedIn] = useState(false);
+const UserGreeting = ({ isLoggedIn }) => {
+  return <p>Bienvenido de nuevo{isLoggedIn ? ', usuario' : ' '}</p>;
+};
 
-    return (
-        <div>
-        <Greeting isLoggedIn={isLoggedIn} />
-        <button onClick={( ) => setLoggedIn(!isLoggedIn)}>
-            {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
-        </button>
-        </div>
-    );
-    };
+const GuestGreeting = ( ) => {
+  return <p>Por favor, inicia sesión</p>;
+};
 
-    export default ConditionalRenderingProps;
-  `} 
-  language='javascript'
-  sandboxUrl="https://codesandbox.io/s/renderizado-condicional-basado-en-props-lf7mvm"
-  showButtons= {true}
+const Greeting = ({ isLoggedIn }) => {
+  return isLoggedIn ?
+    <UserGreeting isLoggedIn={isLoggedIn} /> :
+    <GuestGreeting />;
+};
+
+const ConditionalRenderingProps = ( ) => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  return (
+    <div>
+      <Greeting isLoggedIn={isLoggedIn} />
+      <button onClick={( )=> setLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
+      </button>
+    </div>
+  );
+};
+
+export default ConditionalRenderingProps;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalRenderingProps.js"]}
 />
 
 En este ejemplo se utiliza el componente **"Greeting"** para realizar un renderizado condicional basado en el estado([useState](/docs/conceptos-de-react-04-hooks--docs)) **"isLoggedIn"** . 

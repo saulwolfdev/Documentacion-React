@@ -1,4 +1,4 @@
-import { StickyNav,InteractiveCodeBlock } from '../components-mdx/index.js';
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 # Formularios
@@ -16,121 +16,276 @@ Sin embargo en un formulario controlado el estado de React es la fuente única d
 ### Ejemplos:
 -  Formulario Simple con un Campo de Entrada:
 
-<InteractiveCodeBlock codeString={`
-    const SimpleForm = () => {
-        const [inputValue, setInputValue] = React.useState('');
-        const [submitted, setSubmitted] = React.useState(false);
-        const [submittedValue, setSubmittedValue] = React.useState('');
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import SimpleForm from "./SimpleForm.js";
 
-        const handleInputChange = (e) => {
-            setInputValue(e.target.value);
-        };
+ const App = ( ) => {
+   return (
+    <div>
+      <SimpleForm />
+    </div>
+  ) 
+ }
 
-        const handleSubmit = (e) => {
-            e.preventDefault();
-            // Aquí puedes realizar acciones con el valor del formulario
-            setSubmitted(true);
-            setSubmittedValue(inputValue);
-        };
+export default App;`, 
 
-        return (
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Nombre:
-                     <br />
-                    <input type="text" value={inputValue} onChange={handleInputChange} />
-                </label>
-                  <br />
-                  <br />
-                <button type="submit">Enviar</button>
-                {submitted && <p>Valor enviado: {submittedValue}</p>}
-            </form>
-        );
-    };
+"/SimpleForm.js":
+`import React, { useState } from 'react';
+import './SimpleForm.css';
 
-  render(<SimpleForm  />)
-`} 
-language="javascript" 
-showCodeEditor
-noInline
+const SimpleForm = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedValue, setSubmittedValue] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setSubmittedValue(inputValue);
+  };
+
+  return (
+    <form className="simple-form" onSubmit={handleSubmit}>
+      <label htmlFor="nameInput">
+        Nombre:
+        <input
+          id="nameInput"
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+      </label>
+      <button type="submit">Enviar</button>
+      {submitted && <p>Valor enviado: {submittedValue}</p>}
+    </form>
+  );
+};
+
+export default SimpleForm;`,
+
+"SimpleForm.css":
+`.simple-form {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  margin-top: 15px;
+  color: #333;
+}`
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/SimpleForm.js", , "/SimpleForm.css"]}
 />
 
 - Formulario con Varios Campos y Manejo Dinámico:
 
-<InteractiveCodeBlock codeString={`
-  const ComplexForm = () => {
-    const [formData, setFormData] = React.useState({
-        name: '',
-        email: '',
-        password: '',
-    });
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ComplexForm from "./ComplexForm.js";
 
-    const [formSubmissions, setFormSubmissions] = React.useState([]);
+ const App = ( ) => {
+   return (
+    <div>
+      <ComplexForm />
+    </div>
+  ) 
+ }
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+export default App;`, 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Agregar datos del formulario a la lista de envíos
-        setFormSubmissions([...formSubmissions, formData]);
-        // Limpiar el formulario
-        setFormData({ name: '', email: '', password: '' });
-    };
+"/ComplexForm.js":
+`import React, { useState } from 'react';
+import './ComplexForm.css';
 
-    return (
-        <form onSubmit={handleSubmit}>
-        <label>
-            Nombre:
-             <br />
-            <input 
-                type="text" 
-                name="name" 
-                value={formData.name} 
-                onChange={handleInputChange} 
-            />
+const ComplexForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const [formSubmissions, setFormSubmissions] = useState([]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmissions([...formSubmissions, formData]);
+    setFormData({ name: '', email: '', password: '' });
+  };
+
+  return (
+    <div className="complex-form-container">
+      <form onSubmit={handleSubmit} className="complex-form">
+        <label htmlFor="nameInput">
+          Nombre:
+          <input
+            id="nameInput"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
         </label>
-        <br />
-        <label>
-            Correo Electrónico:
-             <br />
-            <input 
-                type="email" 
-                name="email" 
-                value={formData.email} 
-                onChange={handleInputChange} 
-            />
+        <label htmlFor="emailInput">
+          Correo Electrónico:
+          <input
+            id="emailInput"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
         </label>
-        <label>
-            <br />
-            Contraseña:
-             <br />
-            <input 
-                type="password" 
-                name="password" 
-                value={formData.password} 
-                onChange={handleInputChange} 
-            />
+        <label htmlFor="passwordInput">
+          Contraseña:
+          <input
+            id="passwordInput"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
         </label>
-         <br />
         <button type="submit">Enviar</button>
+      </form>
+      <div className="submission-history">
         <h2>Historial de Envíos</h2>
-      <ul>
-        {formSubmissions.map((submission, index) => (
-          <li key={index}>
-            <strong>Envío {index + 1}:</strong> {JSON.stringify(submission)}
-          </li>
-        ))}
-      </ul>
-        </form>
-    );
+        <ul>
+          {formSubmissions.map((submission, index) => (
+            <li key={index}>
+              <strong>Envío {index + 1}:</strong>
+              <ul>
+                {Object.entries(submission).map(([key, value]) => (
+                  <li key={key}>
+                    <strong>{key}:</strong> {value}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 };
 
-render(<ComplexForm />)
-`} 
-language="javascript" 
-showCodeEditor
-noInline
+export default ComplexForm;`,
+
+"ComplexForm.css":
+`.complex-form-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
+  flex-direction: column;
+}
+
+.complex-form {
+  max-width: 300px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.submission-history {
+  max-width: 400px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: bold;
+}`
+}}
+  
+  dynamicVisibleFiles={["/App.js", "/ComplexForm.js", "/ComplexForm.css"]}
 />
