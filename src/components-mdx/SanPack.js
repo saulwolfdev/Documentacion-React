@@ -8,7 +8,7 @@ import {
 } from "@codesandbox/sandpack-react";
 import { amethyst } from "@codesandbox/sandpack-themes";
 
-const SandPack = ({ files }) => {
+const SandPack = ({ files, autoHiddenFiles = true }) => {
   return (
     <div style={{ width: '900px' }}> 
       <SandpackProvider
@@ -22,9 +22,12 @@ const SandPack = ({ files }) => {
           },
         }}
         files={files}
+        options={{
+          visibleFiles: Object.keys(files),
+        }} 
       >
         <SandpackLayout>
-          <SandpackFileExplorer autoHiddenFiles/>
+          <SandpackFileExplorer autoHiddenFiles={autoHiddenFiles} />
           <SandpackCodeEditor closableTabs showTabs />
           <SandpackPreview />
         </SandpackLayout>
