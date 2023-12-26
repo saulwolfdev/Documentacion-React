@@ -1,4 +1,4 @@
-import { CodeBlock, InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
+import { CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
 
 # Estilos
 
@@ -8,9 +8,9 @@ En React los estilos se aplican a los elementos de la interfaz de usuario para m
 
 React permite aplicar estilos en línea directamente a los elementos utilizando el atributo **style**.
 
-<DynamicSandpack
-  dynamicFiles={{
-    "/InlineStyle.js": 
+<SandPack 
+files={{    
+"/InlineStyle.js": 
 `const InlineStyle = () => {
   const styles = {
     color: 'blue',
@@ -40,19 +40,17 @@ import InlineStyle from "./InlineStyle.js";
     ) 
  }
 
-export default App;`,    
-  }}
-  
-  dynamicVisibleFiles={["/App.js", "/InlineStyle.js"]}
+export default App;`, 
+}}
 />
 
 - ### Usando CSS en archivos separados
 
 Podemos crear archivos CSS separados y luego importarlos en nuestros componentes de React.
 
-<DynamicSandpack
-  dynamicFiles={{
-    "styles.css": 
+<SandPack 
+files={{    
+"styles.css": 
 `.container {
   color: green;
   font-size: 18px;
@@ -69,10 +67,8 @@ const App = () => {
   );
 }
 
-export default App;`,    
-  }}
-  
-  dynamicVisibleFiles={["/App.js", "/styles.css"]}
+export default App;`,
+}}
 />
 
 - ### Librerías de Estilos
@@ -81,9 +77,9 @@ Librerías como Styled-components o Emotion permiten escribir estilos directamen
 
 **Ejemplo con Styled-components**
 
-<DynamicSandpack
-  dynamicFiles={{    
-    "/App.js": 
+<SandPack 
+files={{    
+"/App.js": 
 `import React from "react";
 import styled from 'styled-components';
 
@@ -100,18 +96,15 @@ const App = () => {
   );
 }
 
-export default App;`,    
-  }}
-  
-  dynamicVisibleFiles={["/App.js"]}
+export default App;`,   
+}}
 />
-
 - ### Estilos condicionales
 
 Podemos aplicar estilos condicionales basados en el estado de un componente.
 
-<DynamicSandpack
-dynamicFiles={{    
+<SandPack 
+files={{    
 "/App.js": 
 `import React from "react";
 import ConditionalStyle from "./ConditionalStyle.js";
@@ -152,7 +145,5 @@ const ConditionalStyle = () => {
 };
 
 export default ConditionalStyle;`,
-  }}
-  
-  dynamicVisibleFiles={["/App.js", "/ConditionalStyle.js"]}
+}}
 />
