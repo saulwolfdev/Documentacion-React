@@ -1,4 +1,4 @@
-import { StickyNav,InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
 import "../styles.css"
 
 # Ciclos de vida
@@ -13,8 +13,8 @@ en diferentes momentos del ciclo de vida.
 Vamos a crear un ejemplo básico que utiliza [useEffect](/docs/conceptos-de-react-04-hooks--docs) para simular algunas operaciones de ciclo de vida. 
 Supongamos que queremos mostrar un mensaje cuando el componente se monta y se actualiza.
 
-<DynamicSandpack
-dynamicFiles={{    
+<SandPack 
+files={{    
 "/App.js": 
 `import React from "react";
 import MyComponent from "./MyComponent.js";
@@ -71,7 +71,5 @@ const MyComponent = ( ) => {
 }
 
 export default MyComponent;`,
-  }}
-  
-  dynamicVisibleFiles={["/App.js", "/MyComponent.js"]}
+}}
 />

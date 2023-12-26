@@ -10,7 +10,7 @@ import { amethyst } from "@codesandbox/sandpack-themes";
 
 const SandPack = ({ files }) => {
   return (
-    <div style={{ width: '900px' }}> 
+    <div style={{ width: '1000px' }}> 
       <SandpackProvider
         theme={amethyst} 
         template="react"

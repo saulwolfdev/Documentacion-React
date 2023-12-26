@@ -1,11 +1,4 @@
-import { StickyNav,InteractiveCodeBlock, DynamicSandpack } from '../components-mdx/index.js';
-import {
-  SandpackProvider,
-  SandpackLayout,
-  SandpackCodeEditor,
-  SandpackPreview,
-  SandpackFileExplorer,
-} from "@codesandbox/sandpack-react";
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
 import "../styles.css"
 
 # Formularios
@@ -23,8 +16,8 @@ Sin embargo en un formulario controlado el estado de React es la fuente única d
 ### Ejemplos:
 -  Formulario Simple con un Campo de Entrada:
 
-<DynamicSandpack
-dynamicFiles={{    
+<SandPack 
+files={{    
 "/App.js": 
 `import React from "react";
 import SimpleForm from "./SimpleForm.js";
@@ -120,15 +113,13 @@ p {
   margin-top: 15px;
   color: #333;
 }`
-  }}
-  
-  dynamicVisibleFiles={["/App.js", "/SimpleForm.js", , "/SimpleForm.css"]}
+}}
 />
 
 - Formulario con Varios Campos y Manejo Dinámico:
 
-<DynamicSandpack
-dynamicFiles={{    
+<SandPack 
+files={{    
 "/App.js": 
 `import React from "react";
 import ComplexForm from "./ComplexForm.js";
@@ -293,6 +284,4 @@ strong {
   font-weight: bold;
 }`
 }}
-  
-  dynamicVisibleFiles={["/App.js", "/ComplexForm.js", "/ComplexForm.css"]}
 />
