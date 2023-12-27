@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 <StickyNav
@@ -42,6 +42,43 @@ Podes usar el operador ternario para escribir condicionales de manera más conci
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalExample from "./ConditionalExample.js";
+
+const App = ( ) => {
+  return (
+    <div>
+      <ConditionalExample />
+    </div>
+  )
+}
+
+export default App;`, 
+
+"/ConditionalExample.js":
+`import React from 'react';
+
+    const ConditionalExample = (props) => {
+    return (
+        <div>
+        {props.condicion ? (
+            <p>La condición es verdadera.</p>
+        ) : (
+            <p>La condición es falsa.</p>
+        )}
+        </div>
+    );
+    };
+
+    export default ConditionalExample`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalExample.js"]}
+/>
+
 <a id="seccion2"></a>
 ### Operador lógico &&
 
@@ -58,6 +95,38 @@ Este operador evalúa la expresión a la izquierda y si es verdadera devuelve la
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import UserInfo from "./UserInfo.js";
+
+const App = () => {
+  const user = { name: 'John' };
+
+  return (
+    <div>
+      <h1>Welcome to My App</h1>
+      <UserInfo user={user} />
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/UserInfo.js":
+`const UserInfo = ({ user }) => (
+    <div>
+      {user && <p>Hello, {user.name}!</p>}
+    </div>
+  );
+
+    export default UserInfo`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/UserInfo.js"]}
+/>
+
 <a id="seccion3"></a>
 ### Operador lógico ||
 
@@ -70,6 +139,34 @@ Este operador se utiliza para proporcionar un valor por defecto si la expresión
   );
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import DefaultMessage from "./DefaultMessage.js";
+
+const App = () => {
+  return (
+    <div>
+      <DefaultMessage message="Este es un mensaje desde App" />
+      <DefaultMessage message="" />
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/DefaultMessage.js":
+`const DefaultMessage = ({ message }) => (
+    <p>{message || 'No hay mensaje'}</p>
+  );
+
+    export default DefaultMessage`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/DefaultMessage.js"]}
 />
 
 <a id="seccion4"></a>
@@ -92,6 +189,41 @@ Este operador se utiliza para proporcionar un valor por defecto si la expresión
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import NumberDisplay from "./NumberDisplay.js";
+
+const App = () => {
+  return (
+    <div>
+      <NumberDisplay  />
+      <NumberDisplay  number={1} />
+      <NumberDisplay  number={-1} />
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/NumberDisplay.js":
+` const NumberDisplay = ({ number }) => {
+    if (number > 0) {
+      return <p>Positive Number: {number}</p>;
+    } else if (number < 0) {
+      return <p>Negative Number: {number}</p>;
+    } else {
+      return <p>Zero</p>;
+    }
+  };
+  
+  export default NumberDisplay`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/NumberDisplay.js"]}
+/>
+
 <a id="seccion5"></a>
 ### Uso de Switch
 
@@ -112,4 +244,41 @@ Cuando se tiene múltiples condiciones podemos utilizar un bloque switch.
   };
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import DayOfWeek from "./DayOfWeek.js";
+
+const App = () => {
+  return (
+    <div>
+      <DayOfWeek  />
+      <DayOfWeek  day={1}/>
+      <DayOfWeek  day={2}/>      
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/DayOfWeek.js":
+`const DayOfWeek = ({ day }) => {
+    switch (day) {
+      case 1:
+        return <p>Monday</p>;
+      case 2:
+        return <p>Tuesday</p>;
+      // ... otros casos
+      default:
+        return <p>Invalid day</p>;
+    }
+  };
+  
+  export default DayOfWeek`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/DayOfWeek.js"]}
 />

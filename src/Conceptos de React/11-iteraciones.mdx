@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 <StickyNav
@@ -19,10 +19,27 @@ Esto se logra mediante el uso de estructuras de control con metodos que permiten
 [.map](/docs/conceptos-de-javascript-10-array-methods--docs) es una función de JavaScript que se utiliza comúnmente en React para iterar sobre elementos de un array y 
 devolver un nuevo array con cada elemento transformado según una función proporcionada.
 
-<CodeBlock
-  codeString={`
-    //ListaDeElementos.js
-    import React from 'react';
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListaDeElementos from "./ListaDeElementos.js";
+
+const App = () => {
+  // Supongamos que tenemos un array de elementos
+  const elementos = ["Elemento 1", "Elemento 2", "Elemento 3"];
+
+  return (
+    <div>
+      <ListaDeElementos elementos={elementos} />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ListaDeElementos.js":
+`import React from 'react';
 
     const ListaDeElementos = ({ elementos }) => {
     return (
@@ -34,30 +51,10 @@ devolver un nuevo array con cada elemento transformado según una función propo
     );
     };
 
-    export default ListaDeElementos;
-  `} 
-  language='javascript'
-/>
-
-<CodeBlock
-  codeString={`
-    //App.js
-    import React from 'react';
-    import ListaDeElementos from './ListaDeElementos';
-
-    // Uso
-    const elementos = ['Elemento 1', 'Elemento 2', 'Elemento 3'];
-
-    const App = () => (
-    <div>
-        <h1>Mi Aplicación</h1>
-        <ListaDeElementos elementos={elementos} />
-    </div>
-    );
-
-    export default App;
-  `} 
-  language='javascript'
+    export default ListaDeElementos;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListaDeElementos.js"]}
 />
 
 En este ejemplo **ListaDeElementos** es un componente funcional que recibe la prop **elementos** y renderiza una lista utilizando el método **map()**. 
@@ -82,5 +79,5 @@ en un array.
   language='javascript'
 />
 
-n React aunque forEach se puede utilizar para realizar acciones sobre elementos no se usa directamente para renderizar listas como map. 
+En React aunque forEach se puede utilizar para realizar acciones sobre elementos no se usa directamente para renderizar listas como map. 
 map es preferido en React porque devuelve un nuevo array mientras que forEach simplemente itera sobre los elementos.

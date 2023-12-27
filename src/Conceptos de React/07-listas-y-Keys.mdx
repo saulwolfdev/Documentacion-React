@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 <StickyNav
@@ -25,21 +25,21 @@ Supongamos que tenemos un array de nombres y deseamos renderizarlos en una lista
   codeString={`
     import React from 'react';
 
-    const ListaNombres = ({ nombres }) => (
+    const ListName = ({ names }) => (
         <ul>
-            {nombres.map((nombre, index) => (
-                <li key={index}>{nombre}</li>
+            {names.map((name, index) => (
+                <li key={index}>{name}</li>
             ))}
         </ul>
     );
 
     const App = ( ) => {
-    const nombres = ["Juan", "María", "Pedro"];
+    const names = ["Juan", "María", "Pedro"];
     
         return (
             <div>
                 <h1>Lista de Nombres:</h1>
-                <ListaNombres nombres={nombres} />
+                <ListName names={names} />
             </div>
         );
     };
@@ -47,6 +47,40 @@ Supongamos que tenemos un array de nombres y deseamos renderizarlos en una lista
     export default App;
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListName from "./ListName.js";
+
+const App = () => {
+   const names = ["Juan", "María", "Pedro"];
+    
+        return (
+            <div>
+                <h1>Lista de Nombres:</h1>
+                <ListName names={names} />
+            </div>
+        );
+    };
+
+export default App;`, 
+
+"/ListName.js":
+`const ListName = ({ names }) => (
+        <ul>
+            {names.map((name, index) => (
+                <li key={index}>{name}</li>
+            ))}
+        </ul>
+    );
+  
+  export default ListName`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListName.js"]}
 />
 
 <a id="seccion2"></a>
@@ -89,6 +123,45 @@ Sin embargo en situaciones ideales deberiamos usar una propiedad única de los d
   export default App;
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListNames from "./ListNames.js";
+
+const App = () => {
+    const names = [
+        { id: 1, nombre: "Juan" },
+        { id: 2, nombre: "María" },
+        { id: 3, nombre: "Pedro" },
+    ];
+    
+    return (
+        <div>
+            <h1>Lista de Nombres:</h1>
+            <ListNames names={names} />
+        </div>
+    );
+};
+
+export default App;
+`, 
+
+"/ListNames.js":
+`const ListNames = ({ names }) => (
+    <ul>
+        {names.map((name) => (
+        <li key={name.id}>{name.nombre}</li>
+        ))}
+    </ul>
+  );
+  
+  export default ListNames`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListNames.js"]}
 />
 
 En este ejemplo la propiedad id se utiliza como **key** ya que es única para cada elemento en la lista.

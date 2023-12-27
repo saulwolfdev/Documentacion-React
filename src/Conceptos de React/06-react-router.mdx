@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, SandPack } from '../components-mdx/index.js';
 import "../styles.css"
 
 <StickyNav
@@ -72,18 +72,18 @@ la aplicación cambia.
 />
 
 <a id="seccion4"></a>
-- **Switch:** Renderiza el primer **Route** que coincide con la ubicación actual util para evitar que se rendericen varias rutas a la vez.
+- **Routes:** Renderiza el primer **Route** que coincide con la ubicación actual util para evitar que se rendericen varias rutas a la vez.
 
 <CodeBlock
   codeString={`
-    import { Switch, Route } from 'react-router-dom';
+    import { Routes, Route } from 'react-router-dom';
 
     const App = () => (
-        <Switch>
+        <Routes>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
-        </Switch>
+        </Routes>
     );
   `} 
   language='javascript'
@@ -97,10 +97,10 @@ la aplicación cambia.
     import { Redirect } from 'react-router-dom';
 
     const App = () => (
-        <Switch>
+        <Routes>
             <Redirect from="/old-url" to="/new-url" />
             {/* Otras rutas */}
-        </Switch>
+        </Routes>
     );
   `} 
   language='javascript'
@@ -129,17 +129,57 @@ la aplicación cambia.
     const App = () => (
         <Router>
             <Navigation />
-            <Switch>
+            <Routes>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
-            </Switch>
+            </Routes>
         </Router>
     );
 
     export default App;
   `} 
   language='javascript'
+/>
+
+### Ejemplo Completo
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+const Home = () => <div>Home Component</div>;
+const About = () => <div>About Component</div>;
+const Contact = () => <div>Contact Component</div>;
+
+const Navigation = () => (
+  <div>
+    <Link to="/">Home/ </Link>
+    <Link to="/about">About/ </Link>
+    <Link to="/contact">Contact</Link>
+  </div>
+);
+
+const App = () => {
+  return (
+    <>
+      <Router>
+        <Navigation />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="About" element={<About />}></Route>
+          <Route path="Contact" element={<Contact />}></Route>
+        </Routes>
+      </Router>
+    </>
+  );
+};
+
+export default App;
+`, 
+}}
 />
 
 En este ejemplo se utiliza BrowserRouter como enrutador principal y se definen tres rutas con sus respectivos componentes (Home, About, Contact). 

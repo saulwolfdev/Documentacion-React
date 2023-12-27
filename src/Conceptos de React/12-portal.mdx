@@ -1,4 +1,4 @@
-import { CodeBlock, DynamicSandpack } from "../components-mdx/index.js";
+import { CodeBlock, DynamicSandpack, SandPack } from "../components-mdx/index.js";
 import "../styles.css";
 
 # Portales
@@ -11,8 +11,8 @@ notificaciones, menús desplegables u otros elementos que deben aparecer fuera d
 
 Supongamos que tenemos un componente Modal en React que deseamos renderizar fuera del árbol de componentes principal.
 
-<DynamicSandpack
-dynamicFiles={{    
+<SandPack 
+files={{    
 "/App.js": 
 `import React from "react";
 import Modal from "./Modal.js";
@@ -100,8 +100,4 @@ const Portal = ({ isOpen, onClose, children }) => {
 
 export default Portal;`
 }}
-  
-dynamicVisibleFiles={["/App.js", "/Modal.js", "/ModalContent.js", "/Portal.js"]}
-/
-
->
+/>

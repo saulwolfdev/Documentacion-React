@@ -10,7 +10,7 @@ import { amethyst } from "@codesandbox/sandpack-themes";
 
 const SandPack = ({ files, autoHiddenFiles = true }) => {
   return (
-    <div style={{ width: '1000px' }}> 
+    <div style={{ width: '1000px', padding: '16px 0px 16px 0px' }}> 
       <SandpackProvider
         theme={amethyst} 
         template="react"
@@ -19,6 +19,9 @@ const SandPack = ({ files, autoHiddenFiles = true }) => {
             "css": "latest",
             "styled-components": "latest",
             "react-dom": "latest",
+            "redux" : "latest",
+            "react-redux" : "latest",
+            "react-router-dom" : "latest"
           },
         }}
         files={files}

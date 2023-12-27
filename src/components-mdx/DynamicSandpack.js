@@ -9,6 +9,7 @@ const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFile
   const sandpackDependencies = { ...defaultDependencies, ...dynamicDependencies };
 
   return (
+    <div style={{ width: '1000px', padding: '16px 0px 16px 0px' }}>
     <Sandpack
       template="react"
       theme={amethyst}
@@ -22,6 +23,7 @@ const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFile
         showLineNumbers: true,        
       }}
     />
+    </div>
   );
 };
 
