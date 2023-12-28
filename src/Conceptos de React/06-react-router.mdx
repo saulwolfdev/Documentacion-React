@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav, SandPack } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 <StickyNav
@@ -144,8 +144,8 @@ la aplicación cambia.
 
 ### Ejemplo Completo
 
-<SandPack 
-files={{    
+<DynamicSandpack
+dynamicFiles={{    
 "/App.js": 
 `import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
@@ -177,9 +177,12 @@ const App = () => {
   );
 };
 
-export default App;
-`, 
-}}
+export default App;`,
+
+  }}
+  
+  dynamicVisibleFiles={["/App.js"]}
+  showNavigator
 />
 
 En este ejemplo se utiliza BrowserRouter como enrutador principal y se definen tres rutas con sus respectivos componentes (Home, About, Contact). 

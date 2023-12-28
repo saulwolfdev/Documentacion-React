@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 
@@ -31,21 +31,56 @@ Una función que se ejecuta en respuesta a un evento específico. En React estos
 **Manejo de click:**
 
 <CodeBlock
-  codeString={`
-    import React from 'react';
+  codeString={
+`import React from 'react';
 
-    const handleClick = ( ) => {
-      console.log("Hiciste clic en el botón");
-    };
+const ButtonClick = () => {
+  const handleClick = () => {
+    alert("Hiciste clic en el botón");
+  };
 
   return (
     <button onClick={handleClick}>Clic aquí</button>
   );
-    };
+};
 
-    export default ButtonClick;
-  `} 
-  language='javascript'  
+export default ButtonClick;`}   
+language='javascript'  
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ButtonClick from "./ButtonClick.js";
+
+const App = () => {
+  return (
+    <div>
+      <ButtonClick />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ButtonClick.js":
+`import React from 'react';
+
+const ButtonClick = () => {
+  const handleClick = () => {
+    alert("Hiciste clic en el botón");
+  };
+
+  return (
+    <button onClick={handleClick}>Clic aquí</button>
+  );
+};
+
+export default ButtonClick;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ButtonClick.js"]}
 />
 
 En este ejemplo la función handleClick se ejecutará cuando el botón sea clickeado.
@@ -79,9 +114,52 @@ En este ejemplo la función handleClick se ejecutará cuando el botón sea click
 
     export default ControlledForm;  
   `} 
-  language='javascript'
-  sandboxUrl="https://codesandbox.io/s/evento-formulario-y88pyz"
-  showButtons= {true}
+  language='javascript'  
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ControlledForm from "./ControlledForm.js";
+
+const App = () => {
+  return (
+    <div>
+      <ControlledForm />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ControlledForm.js":
+`import React, { useState } from 'react';
+
+    const ControlledForm = () => {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleChange = (event) => {
+        setInputValue(event.target.value);
+    };
+
+    return (
+        <div>
+        <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            placeholder="Escribe algo"
+        />
+        <p>{inputValue}</p>
+        </div>
+    );
+    };
+
+    export default ControlledForm;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ControlledForm.js"]}
 />
 
 En este ejemplo el componente **"ControlledForm"** contiene un campo de entrada **(input)**. La función **"handleChange"** se ejecuta cada vez que el usuario escribe algo en el 
@@ -115,6 +193,43 @@ valor de un campo de entrada
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import MyComponent from "./MyComponent.js";
+
+const App = () => {
+  return (
+    <div>
+      <MyComponent />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/MyComponent.js":
+`import React from 'react';
+
+  const MyComponent = ( ) => {
+    const handleButtonClick = (param) => {
+      alert(\`Hiciste clic con el parámetro: \${param}\`);
+    };
+
+    return (
+      <button onClick={( ) => handleButtonClick("miArgumento")}>
+        Clic aquí
+      </button>
+    );
+  };
+
+  export default MyComponent;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/MyComponent.js"]}
+/>
+
 Podemos usar una función de flecha dentro del onClick si necesitas pasar parámetros adicionales.
 
 <a id="seccion4"></a>
@@ -132,15 +247,57 @@ Podemos usar una función de flecha dentro del onClick si necesitas pasar parám
     };
         return (
             <div>
-            {isVisible && <p>Este párrafo es visible</p>}
-            <button onClick={toggleVisibility}>
-                Toggle Visibility
-            </button>
+              {!isVisible && <p>Este párrafo es visible</p>}
+              <button onClick={toggleVisibility}>           
+                {isVisible ? 'Ver' : 'Ocultar'}
+              </button>
             </div>
         );
     }
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ToggleComponent from "./ToggleComponent.js";
+
+const App = () => {
+  return (
+    <div>
+      <ToggleComponent />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ToggleComponent.js":
+`import React, { useState } from 'react';
+
+function ToggleComponent() {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
+  return (
+    <div>
+      {!isVisible && <p>Este párrafo es visible</p>}
+      <button onClick={toggleVisibility}>           
+        {isVisible ? 'Ver' : 'Ocultar'}
+      </button>
+    </div>
+  );
+}
+
+export default ToggleComponent;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ToggleComponent.js"]}
 />
 
 Aquí el evento onClick cambia la visibilidad del párrafo dependiendo del estado si es true o false.

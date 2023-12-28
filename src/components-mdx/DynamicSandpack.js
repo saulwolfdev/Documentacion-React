@@ -2,8 +2,16 @@ import React from 'react';
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { amethyst } from "@codesandbox/sandpack-themes";
 
-const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFiles }) => {
-  const defaultDependencies = {"css": "latest", "styled-components" : "latest", "react-dom" : "latest" };
+const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFiles, showNavigator }) => {
+  const defaultDependencies = {
+    "css": "latest", 
+    "styled-components" : "latest", 
+    "react-dom" : "latest",
+    "redux" : "latest",
+    "react-redux" : "latest",
+    "react-router-dom" : "latest", 
+    "prop-types" : "latest",
+  };
 
   const sandpackFiles = {  ...dynamicFiles };
   const sandpackDependencies = { ...defaultDependencies, ...dynamicDependencies };
@@ -19,7 +27,7 @@ const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFile
       files={sandpackFiles}
       options={{
         visibleFiles: dynamicVisibleFiles,
-        // showNavigator: true,
+        showNavigator: showNavigator,
         showLineNumbers: true,        
       }}
     />

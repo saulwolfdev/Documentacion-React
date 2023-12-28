@@ -130,8 +130,6 @@ En el archivo principal de tu aplicación (por ejemplo **index.js**), envuelve t
     );
   `} 
   language='javascript'
-  sandboxUrl="https://codesandbox.io/p/sandbox/redux-4q22kj?file=%2Fsrc%2Fstore.js%3A13%2C3"
-  showButtons= {true}
 />
 
 ### Ejemplo Completo
@@ -162,8 +160,8 @@ const App = ({ count, increment, decrement }) => {
   return (
     <div>
       <h1>Contador: {count}</h1>
-      <button onClick={increment}>Incrementar</button>
       <button onClick={decrement}>Decrementar</button>
+      <button onClick={increment}>Incrementar</button>      
     </div>
   );
 };
@@ -363,8 +361,8 @@ export { MyProvider, useMyContext };`,
     return (
         <div>
         <h1>Contador: {state.count}</h1>
-        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrementar</button>
         <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrementar</button>
+        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrementar</button>        
         </div>
     );
     };

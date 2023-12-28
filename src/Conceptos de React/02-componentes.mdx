@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 <StickyNav
@@ -37,6 +37,35 @@ renderizar la interfaz de usuario.
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Saludo from './Saludo';
+
+function App() {
+  return (
+    <div>
+      <Saludo nombre="Usuario" />
+    </div>
+  );
+}
+
+export default App;`, 
+
+"/Saludo.js":
+`import React from 'react';
+
+function Saludo(props) {
+  return <p>Hola, {props.nombre}!</p>;
+}
+
+export default Saludo;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+/>
+
 ### Con variable:
 
 **Ventajas:** Puede ser útil para componentes más grandes o cuando se necesita reutilizar el componente en varios lugares.
@@ -50,6 +79,35 @@ renderizar la interfaz de usuario.
   };
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Saludo from './Saludo';
+
+const App=()=> {
+  return (
+    <div>
+      <Saludo nombre="Usuario" />
+    </div>
+  );
+}
+
+export default App;`, 
+
+"/Saludo.js":
+`import React from 'react';
+
+const Saludo = (props)=> {
+    return <p>Hola, {props.nombre}!</p>;
+};
+
+export default Saludo;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
 />
 
 ## Componentes de Clase:
@@ -71,6 +129,39 @@ renderizar la interfaz de usuario.
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Saludo from './Saludo';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Saludo nombre="Usuario" />
+      </div>
+    );
+  }
+}
+
+export default App;`, 
+
+"/Saludo.js":
+`import React from 'react';
+
+class Saludo extends React.Component {
+  render() {
+    return <p>Hola, {this.props.nombre}!</p>;
+  }
+}
+
+export default Saludo;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+/>
+
 ### Con variable:
 
 **Ventajas:** Puede facilitar la reutilización y la referencia cuando se trabaja con componentes de clase más grandes o complejos.
@@ -88,6 +179,39 @@ renderizar la interfaz de usuario.
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Saludo from './Saludo';
+
+const App = class extends React.Component {
+  render() {
+    return (
+      <div>
+        <Saludo nombre="Usuario" />
+      </div>
+    );
+  }
+}
+
+export default App;`, 
+
+"/Saludo.js":
+`import React from 'react';
+
+  const Saludo = class extends React.Component {
+    render() {
+        return <p>Hola, {this.props.nombre}!</p>;
+    }
+  };
+
+export default Saludo;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+/>
+
 <a id="seccion2"></a>
 ### JSX (JavaScript XML)
 
@@ -96,9 +220,79 @@ JSX facilita la creación de elementos de React de manera más concisa y legible
 
 <CodeBlock
   codeString={`
-  const element = <h1>Hola, mundo!</h1>;
+  const element = 
+  <>
+    <header>
+      <h1>Bienvenido a mi aplicación</h1>
+      <p>Esto es un encabezado con un párrafo.</p>
+    </header>
+    <section>
+      <h2>Contenido Principal</h2>
+      <p>Este es el contenido principal de la aplicación.</p>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+    </section>
+    <footer>
+      <p>&copy; 2023 Mi Aplicación</p>
+    </footer>
+  </>;
   `} 
   language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import JsxComponent from './JsxComponent';
+
+const App = ()=> {
+    return (
+      <JsxComponent />
+    );
+
+}
+
+export default App;`, 
+
+"/JsxComponent.js":
+`import React from 'react';
+
+const element = 
+  <>
+    <header>
+      <h1>Bienvenido a mi aplicación</h1>
+      <p>Esto es un encabezado con un párrafo.</p>
+    </header>
+    <section>
+      <h2>Contenido Principal</h2>
+      <p>Este es el contenido principal de la aplicación.</p>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+    </section>
+    <footer>
+      <p>&copy; 2023 Mi Aplicación</p>
+    </footer>
+  </>;
+
+const JsxComponent = () => {
+  return (
+    <div>
+      { element }
+    </div>
+  );
+};
+
+export default JsxComponent;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/JsxComponent.js"]}
 />
 
 <a id="seccion3"></a>
@@ -109,7 +303,12 @@ La idea es que el componente principal pasa datos a los componentes secundarios 
 
 <CodeBlock
   codeString={`
-  import React, { useState } from 'react';
+import React, { useState } from 'react';
+
+// Componente Hijo
+const MiComponente = (props) => {
+  return <p>Hola, {props.nombre}!</p>;
+};
 
 // Componente Padre
 const App = () => {
@@ -118,14 +317,32 @@ const App = () => {
   return <MiComponente nombre={usuario} />;
 };
 
+export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React, { useState } from 'react';
+
 // Componente Hijo
 const MiComponente = (props) => {
   return <p>Hola, {props.nombre}!</p>;
 };
 
-export default App;
-  `} 
-  language='javascript'
+// Componente Padre
+const App = () => {
+  const [usuario, setUsuario] = useState('Usuario');
+
+  return <MiComponente nombre={usuario} />;
+};
+
+export default App;`, 
+}}
+  
+  dynamicVisibleFiles={["/App.js"]}
 />
 
 Esto ayuda a mantener la aplicación predecible y facilita la depuración ya que siempre sabes de dónde provienen los datos.

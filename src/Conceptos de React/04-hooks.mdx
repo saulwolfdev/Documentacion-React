@@ -1,4 +1,4 @@
-import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
 
@@ -61,6 +61,45 @@ import "../styles.css"
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import Toggle from "./Toggle.js";
+
+const App = () => {
+  return (
+    <div>
+      <Toggle />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Toggle.js":
+`import React, { useState } from 'react';
+
+const Toggle = ( ) =>{
+// Declarando una variable de estado llamada 'isOn' con un valor inicial de false
+const [isOn, setIsOn] = useState(false);
+
+return (
+<div>
+  <p>El interruptor está {isOn ? 'encendido' : 'apagado'}</p>
+  <button onClick={( )=> setIsOn(!isOn)}>
+    {isOn ? 'Apagar' : 'Encender'}
+  </button>
+</div>
+);
+}
+
+export default Toggle;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Toggle.js"]}
+/>
+
 En este ejemplo la variable de estado isOn se inicializa con false. 
 El botón cambia el estado de isOn entre true y false cuando se hace click lo que afecta el texto que indica si el interruptor está encendido o apagado.
 
@@ -94,34 +133,76 @@ Si no se proporciona un array de dependencias el efecto se ejecutará después d
   codeString={`
     import React, { useState, useEffect } from 'react';
 
-    const CounterWithEffect = ( )=> {
-    const [count, setCount] = useState(0);
+    const CounterWithEffect = () => {
+      const [count, setCount] = useState(0);
 
-    // useEffect se ejecuta cada vez que 'count' cambia
-    useEffect(( ) => {
-    console.log(El valor de count es: {count})
+      // useEffect se ejecuta cada vez que 'count' cambia
+      useEffect(() => {
         // Puedes realizar acciones adicionales aquí basadas en el cambio de 'count'
-    }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
+      }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
 
-    return (
+      return (
         <div>
-        <p>Count: {count}</p>
-        <button onClick={( ) => setCount(count + 1)}>
+          <p>Count: {count}</p>
+          <button onClick={() => setCount(count + 1)}>
             Incrementar
-        </button>
+          </button>
         </div>
-    );
+      );
     }
 
-    export default CounterWithEffect;
+export default CounterWithEffect;;
   
   `} 
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import CounterWithEffect from "./CounterWithEffect.js";
+
+const App = () => {
+  return (
+    <div>
+      <CounterWithEffect />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/CounterWithEffect.js":
+`import React, { useState, useEffect } from 'react';
+
+const CounterWithEffect = () => {
+  const [count, setCount] = useState(0);
+
+  // useEffect se ejecuta cada vez que 'count' cambia
+  useEffect(() => {
+    // Puedes realizar acciones adicionales aquí basadas en el cambio de 'count'
+  }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Incrementar
+      </button>
+    </div>
+  );
+}
+
+export default CounterWithEffect;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/CounterWithEffect.js"]}
+/>
+
 En este ejemplo cada vez que haces click en el botón para incrementar el contador se actualiza el estado **count**. 
-El efecto asociado a **useEffect** se ejecutará debido a la dependencia de count en el array de dependencias. 
-En este caso simplemente muestra el valor actual de count en la consola, pero se podria realizar acciones más complejas basadas en el cambio del estado.
+El efecto asociado a **useEffect** se ejecutará debido a la dependencia de **count** en el array de dependencias. 
+En este caso simplemente muestra el **valor actual de count**, pero se podria realizar acciones más complejas basadas en el cambio del estado.
 
 <a id="seccion3"></a>
 ### useContext
@@ -207,6 +288,61 @@ Finalmente para que todo funcione asegurarnos de envolver la aplicación o el co
   language='javascript'
 />
 
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+  import UserProfile from './UserProfile';
+  import { UserProvider } from './UserContext';
+
+  function App() {
+    return (
+      <UserProvider>
+        <div>
+          <h1>My App</h1>
+          <UserProfile />
+        </div>
+      </UserProvider>
+    );
+  }
+
+  export default App;`,
+
+"/UserProfile.js":
+`import React, { useContext } from 'react';
+  import UserContext from './UserContext';
+
+  const UserProfile = () => {
+    const user = useContext(UserContext);
+
+    return (
+      <div>
+        <h2>User Profile</h2>
+        <p>Username: {user.username}</p>
+      </div>
+    );
+  };
+
+  export default UserProfile;`,
+
+  "/UserContext.js":
+`import React, { createContext } from 'react';
+
+  const UserContext = createContext();
+
+  export const UserProvider = ({ children }) => {
+    // Puedes proporcionar un valor por defecto si lo deseas
+    const user = { username: 'guest' };
+
+    return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  };
+
+  export default UserContext`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/UserProfile.js", "/UserContext.js"]}
+/>
+
 De esta manera **UserProfile** puede acceder al contexto de usuario y mostrar la información del usuario actual. 
 Este es un ejemplo básico pero demuestra cómo **useContext** facilita la suscripción y acceso a contextos en React.
 
@@ -239,31 +375,30 @@ es la función que realiza el cálculo y `a y b` son las dependencias de esta fu
 - **memorizeValue:** Esto es lo que devuelve useMemo. Es el valor resultante del cálculo memorizado.
 
 ### Ejemplo de useMemo:
-Supongamos que tenemos un componente que realiza un cálculo costoso y queremos memorizar el resultado para evitar recálculos innecesarios.
+Supongamos que tenemos un componente que realiza un cálculo y queremos memorizar el resultado para evitar recálculos innecesarios.
 
 <CodeBlock
   codeString={`
   //SumComponent.js
   import React, { useMemo } from "react";
 
-  const SumComponent = ({ a, b }) => {
-    // Función para realizar la suma
-    const addNumbers = (x, y) => {
-      console.log("Summing...");
-      return x + y;
-    };
-
-    // Memoriza el resultado de la suma
-    const sum = useMemo(() => addNumbers(a, b), [a, b]);
-
-    return (
-      <div>
-        <p>Sum: {sum}</p>
-      </div>
-    );
+const SumComponent = ({ a, b }) => {
+  // Función para realizar la suma
+  const addNumbers = (x, y) => {
+    return x + y;
   };
 
-  export default SumComponent;
+  // Memoriza el resultado de la suma
+  const sum = useMemo(() => addNumbers(a, b), [a, b]);
+
+  return (
+    <div>
+      <p>Suma: {sum}</p>
+    </div>
+  );
+};
+
+export default SumComponent;
   `} 
   language='javascript'
 />
@@ -272,7 +407,7 @@ Supongamos que tenemos un componente que realiza un cálculo costoso y queremos 
   codeString={`
   //App.js
   import React, { useState } from "react";
-  import SumComponent from "./SumComponent ";
+import SumComponent from "./SumComponent";
 
   const App = () => {
     const [numberA, setNumberA] = useState(0);
@@ -284,8 +419,8 @@ Supongamos que tenemos un componente que realiza un cálculo costoso y queremos 
     return (
       <div>
         <SumComponent a={numberA} b={numberB} />
-        <button onClick={incrementA}>Increment A</button>
-        <button onClick={incrementB}>Increment B</button>
+        <button onClick={incrementA}>Suma +1</button>
+        <button onClick={incrementB}>Suma +2</button>
       </div>
     );
   };
@@ -293,8 +428,55 @@ Supongamos que tenemos un componente que realiza un cálculo costoso y queremos 
   export default App;
   `} 
   language='javascript'
-  sandboxUrl="https://codesandbox.io/p/sandbox/usememo-w5nfmn"
-  showButtons= {true}
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+` import React, { useState } from "react";
+import SumComponent from "./SumComponent";
+
+  const App = () => {
+    const [numberA, setNumberA] = useState(0);
+    const [numberB, setNumberB] = useState(0);
+
+    const incrementA = () => setNumberA(numberA + 1);
+    const incrementB = () => setNumberB(numberB + 2);
+
+    return (
+      <div>
+        <SumComponent a={numberA} b={numberB} />
+        <button onClick={incrementA}>Suma +1</button>
+        <button onClick={incrementB}>Suma +2</button>
+      </div>
+    );
+  };
+
+  export default App;`,
+
+"/SumComponent.js":
+`import React, { useMemo } from "react";
+
+const SumComponent = ({ a, b }) => {
+  // Función para realizar la suma
+  const addNumbers = (x, y) => {
+    return x + y;
+  };
+
+  // Memoriza el resultado de la suma
+  const sum = useMemo(() => addNumbers(a, b), [a, b]);
+
+  return (
+    <div>
+      <p>Suma: {sum}</p>
+    </div>
+  );
+};
+
+export default SumComponent;`,  
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/SumComponent.js"]}
 />
 
 Estos son solo algunos ejemplos de hooks en React. Hay otros hooks como **useReducer**, **useCallback**, entre otros que proporcionan funcionalidades adicionales para trabajar con componentes de función en React.
