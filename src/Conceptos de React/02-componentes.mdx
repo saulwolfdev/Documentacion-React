@@ -4,8 +4,8 @@ import "../styles.css"
 <StickyNav
   links={[
     { id: 'seccion1', text: 'Componentes' },
-    { id: 'seccion2', text: 'JSX (JavaScript XML)' },
-    { id: 'seccion3', text: 'Unidireccionalidad de Datos' },
+    { id: 'seccion2', text: 'Componentes Funcionales' },
+    { id: 'seccion3', text: 'Componentes de Clase' },
   ]}
 />
 
@@ -20,6 +20,7 @@ Cada componente puede contener su propio estado y lógica, y puede ser compuesto
 En React un componente puede ser una función o una clase de JavaScript que devuelve elementos de React (usualmente, representados mediante JSX) que describen cómo se debe 
 renderizar la interfaz de usuario.
 
+<a id="seccion2"></a>
 ## Componentes Funcionales:
 
 ### Sin variable:
@@ -110,6 +111,7 @@ export default Saludo;`,
   dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
 />
 
+<a id="seccion3"></a>
 ## Componentes de Clase:
 
 ### Sin variable:
@@ -211,138 +213,3 @@ export default Saludo;`,
   
   dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
 />
-
-<a id="seccion2"></a>
-### JSX (JavaScript XML)
-
-JSX es una extensión de la sintaxis de JavaScript que se parece al XML o HTML pero se utiliza con React para describir cómo debería verse la interfaz de usuario. 
-JSX facilita la creación de elementos de React de manera más concisa y legible.
-
-<CodeBlock
-  codeString={`
-  const element = 
-  <>
-    <header>
-      <h1>Bienvenido a mi aplicación</h1>
-      <p>Esto es un encabezado con un párrafo.</p>
-    </header>
-    <section>
-      <h2>Contenido Principal</h2>
-      <p>Este es el contenido principal de la aplicación.</p>
-      <ul>
-        <li>Elemento 1</li>
-        <li>Elemento 2</li>
-        <li>Elemento 3</li>
-      </ul>
-    </section>
-    <footer>
-      <p>&copy; 2023 Mi Aplicación</p>
-    </footer>
-  </>;
-  `} 
-  language='javascript'
-/>
-
-<DynamicSandpack
-dynamicFiles={{    
-"/App.js": 
-`import React from 'react';
-import JsxComponent from './JsxComponent';
-
-const App = ()=> {
-    return (
-      <JsxComponent />
-    );
-
-}
-
-export default App;`, 
-
-"/JsxComponent.js":
-`import React from 'react';
-
-const element = 
-  <>
-    <header>
-      <h1>Bienvenido a mi aplicación</h1>
-      <p>Esto es un encabezado con un párrafo.</p>
-    </header>
-    <section>
-      <h2>Contenido Principal</h2>
-      <p>Este es el contenido principal de la aplicación.</p>
-      <ul>
-        <li>Elemento 1</li>
-        <li>Elemento 2</li>
-        <li>Elemento 3</li>
-      </ul>
-    </section>
-    <footer>
-      <p>&copy; 2023 Mi Aplicación</p>
-    </footer>
-  </>;
-
-const JsxComponent = () => {
-  return (
-    <div>
-      { element }
-    </div>
-  );
-};
-
-export default JsxComponent;`,
-  }}
-  
-  dynamicVisibleFiles={["/App.js", "/JsxComponent.js"]}
-/>
-
-<a id="seccion3"></a>
-###  Unidireccionalidad de Datos
-
-En React los datos fluyen en una dirección específica de arriba hacia abajo a través de los componentes. Esto se conoce como unidireccionalidad de datos o "flujo unidireccional". 
-La idea es que el componente principal pasa datos a los componentes secundarios a través de las props.
-
-<CodeBlock
-  codeString={`
-import React, { useState } from 'react';
-
-// Componente Hijo
-const MiComponente = (props) => {
-  return <p>Hola, {props.nombre}!</p>;
-};
-
-// Componente Padre
-const App = () => {
-  const [usuario, setUsuario] = useState('Usuario');
-
-  return <MiComponente nombre={usuario} />;
-};
-
-export default App;
-  `} 
-  language='javascript'
-/>
-
-<DynamicSandpack
-dynamicFiles={{    
-"/App.js": 
-`import React, { useState } from 'react';
-
-// Componente Hijo
-const MiComponente = (props) => {
-  return <p>Hola, {props.nombre}!</p>;
-};
-
-// Componente Padre
-const App = () => {
-  const [usuario, setUsuario] = useState('Usuario');
-
-  return <MiComponente nombre={usuario} />;
-};
-
-export default App;`, 
-}}
-  
-  dynamicVisibleFiles={["/App.js"]}
-/>
-
-Esto ayuda a mantener la aplicación predecible y facilita la depuración ya que siempre sabes de dónde provienen los datos.

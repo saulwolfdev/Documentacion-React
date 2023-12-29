@@ -1,6 +1,18 @@
 import { StickyNav,CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Virtual DOM' },
+    { id: 'seccion2', text: 'Creación Virtual DOM' },
+    { id: 'seccion3', text: 'Actualización Virtual DOM' },
+    { id: 'seccion4', text: 'Comparación de Cambios' },
+    { id: 'seccion5', text: 'Detección de Cambios' },
+    { id: 'seccion6', text: 'Aplicación en el DOM Real' },
+  ]}
+/>
+
+<a id="seccion1"></a>
 # Virtual DOM
 
 El **Virtual DOM (Document Objet Model Virtual)** es un concepto clave en React, una biblioteca de JavaScript utilizada para construir interfaces de usuario interactivas 
@@ -12,7 +24,8 @@ en los datos o estado de la aplicación **React** realiza los cambios primero en
 Después de la comparación **React** determina cuáles son los cambios reales y los aplica de manera eficiente en el **DOM real** minimizando la cantidad de manipulación directa 
 del **DOM** y mejorando el rendimiento.
 
-###  Creación del Virtual DOM:
+<a id="seccion2"></a>
+- ###  Creación del Virtual DOM:
 
 Cuando se crea un componente en **React**, se construye un árbol de elementos denominado **Virtual DOM**. Este árbol refleja la estructura de la interfaz de usuario basada 
 en los datos o el estado actuales. React utiliza este **Virtual DOM** para realizar comparaciones y determinar qué partes del DOM real deben actualizarse.
@@ -29,3 +42,97 @@ export default MiComponente;`
   } 
   language='javascript'
 />
+
+<a id="seccion3"></a>
+- ### Actualización del Virtual DOM:
+
+Cuando los datos o el estado de la aplicación cambian **React** no actualiza directamente el **DOM real**. En cambio actualiza el **Virtual DOM** con la nueva representación 
+de la interfaz de usuario basada en los cambios.
+
+<CodeBlock
+  codeString={
+`const actualizarValor = () => {
+    setValor('Nuevo valor');
+  };`
+  } 
+  language='javascript'
+/>
+
+<a id="seccion4"></a>
+- ### Comparación y Determinación de Cambios:
+
+Después de actualizar el **Virtual DOM** React realiza una comparación con el estado anterior del **Virtual DOM**. Esta comparación es eficiente porque se realiza en la 
+memoria y no en el **DOM real**.
+
+<a id="seccion5"></a>
+- ### Detección de Cambios Reales:
+
+React identifica las diferencias entre la representación anterior y la nueva en el **Virtual DOM** y determina qué nodos del **DOM real** necesitan actualizarse.
+
+
+<a id="seccion6"></a>
+- ### Aplicación Eficiente en el DOM Real:
+
+Finalmente React aplica solo los cambios necesarios en el **DOM real** minimizando la manipulación directa del **DOM** y mejorando el rendimiento de la aplicación.
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListaElementos from "./ListaElementos.js";
+
+const App = () => {
+  return (
+    <div>
+      <ListaElementos  />     
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/ListaElementos.js":
+`import React, { useState } from 'react';
+
+const ListaElementos = () => {
+  const [elementos, setElementos] = useState(['Elemento 1', 'Elemento 2', 'Elemento 3']);
+
+  const agregarElemento = () => {
+    const nuevoElemento = \`Elemento \${elementos.length + 1}\`;
+    setElementos([...elementos, nuevoElemento]);
+  };
+
+  return (
+    <div>
+      <button onClick={agregarElemento}>Agregar Elemento</button>
+      <ul>
+        {elementos.map((elemento, index) => (
+          <li key={index}>{elemento}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ListaElementos;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListaElementos.js"]}
+/>
+
+**En este ejmplo:**
+
+- Al hacer clic en el botón **"Agregar Elemento"** se llama a la función **agregarElemento** que actualiza el estado de **elementos** mediante **setElementos**. 
+Esto activará la renderización del componente.
+
+- React en lugar de manipular directamente el **DOM real** trabaja con el **Virtual DOM** para determinar las diferencias.
+
+- React compara el **Virtual DOM** actual con el nuevo **Virtual DOM** generado después de la actualización del estado.
+
+- Identifica las diferencias y determina que solo se ha agregado un nuevo elemento a la lista.
+
+- React actualiza eficientemente el **DOM real** para reflejar solo el cambio necesario en lugar de reconstruir la lista completa.
+
+Este proceso es especialmente beneficioso cuando se manejan grandes conjuntos de datos o se realizan actualizaciones frecuentes en la interfaz de usuario ya que minimiza 
+la manipulación del **DOM** y optimiza el rendimiento de la aplicación. En este caso el **Virtual DOM** ayuda a **React** a realizar actualizaciones más eficientes en la 
+interfaz de usuario al reducir la cantidad de manipulación directa del **DOM**.
