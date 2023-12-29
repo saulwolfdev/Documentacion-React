@@ -1,0 +1,31 @@
+import { StickyNav,CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Virtual DOM
+
+El **Virtual DOM (Document Objet Model Virtual)** es un concepto clave en React, una biblioteca de JavaScript utilizada para construir interfaces de usuario interactivas 
+y eficientes. El **Virtual DOM** es una **representación virtual** de la estructura de la interfaz de usuario que React mantiene en memoria. 
+A diferencia del DOM real, que es la representación de la estructura de la página web en el navegador, el Virtual DOM existe solo en la memoria del programa.
+
+La idea detrás del **Virtual DOM** es optimizar la manipulación y actualización del **DOM real**. En lugar de actualizar directamente el **DOM** cada vez que hay un cambio 
+en los datos o estado de la aplicación **React** realiza los cambios primero en el **Virtual DOM** y luego compara este último con el **DOM real**. 
+Después de la comparación **React** determina cuáles son los cambios reales y los aplica de manera eficiente en el **DOM real** minimizando la cantidad de manipulación directa 
+del **DOM** y mejorando el rendimiento.
+
+###  Creación del Virtual DOM:
+
+Cuando se crea un componente en **React**, se construye un árbol de elementos denominado **Virtual DOM**. Este árbol refleja la estructura de la interfaz de usuario basada 
+en los datos o el estado actuales. React utiliza este **Virtual DOM** para realizar comparaciones y determinar qué partes del DOM real deben actualizarse.
+
+<CodeBlock
+  codeString={
+`import React from 'react';
+
+const MiComponente = (props) => {
+  return <div>{props.valor}</div>;
+};
+
+export default MiComponente;`
+  } 
+  language='javascript'
+/>
