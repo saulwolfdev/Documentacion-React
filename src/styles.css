@@ -45,3 +45,46 @@ code.css-1kwwth4 {
 .sticky-nav:hover {
     background-color: #ddd;
 }
+<<<<<<< Updated upstream
+=======
+
+.sticky-nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+
+.sticky-nav .indicator {
+    margin-right: 4px;
+}
+
+.sticky-nav .sticky-nav-link.clicked,
+.sticky-nav .sticky-nav-link.clicked .indicator {
+    color: red;
+}
+
+pre.prism-code.language-tsx{
+    background-color: rgb(1, 22, 39)!important;
+}
+
+.sp-c-bxeRRt.sp-c-gMfcns.sp-c-bxeRRt:has(svg + span) {
+    display: none;
+}
+
+.sp-c-euXojQ.sp-editor.sp-stack {
+    flex: -1 30 0px!important;
+}
+
+.sp-c-euXojQ.sp-editor.sp-stack{
+    height: 30rem!important;
+}
+
+.sp-c-ikJbEZ > .sp-c-euXojQ{
+    height: 30rem!important;
+}
+
+.sp-c-ikJbEZ > .sp-file-explorer {
+    min-width: 164px!important;
+}
+>>>>>>> Stashed changes

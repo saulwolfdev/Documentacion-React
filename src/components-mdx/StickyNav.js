@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles.css"
+import "../styles.css";
 
 const StickyNav = ({ links }) => {
   const scrollToSection = (event, sectionId) => {
@@ -17,6 +17,14 @@ const StickyNav = ({ links }) => {
   return (
     <div className="sticky-nav">  
       {links.map((link, index) => (
+        <a
+          key={index}
+          href={`#${link.id}`}
+          onClick={(e) => scrollToSection(e, link.id, index)}
+          className={`sticky-nav-link ${index === clickedLink ? 'clicked' : ''}`}
+          title={link.text}
+        >
+          {index === clickedLink ? <span className="indicator">&#8226;</span> : null}
         <a key={index} href={`#${link.id}`} onClick={(e) => scrollToSection(e, link.id)}>
           {link.text}
         </a>
