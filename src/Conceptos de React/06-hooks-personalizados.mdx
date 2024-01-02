@@ -1,0 +1,126 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Hooks Personalizados' },
+    { id: 'seccion2', text: 'con useState' },
+    { id: 'seccion3', text: '' },
+    { id: 'seccion4', text: '' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+# Hooks Personalizados
+
+Se refiere a la capacidad de crear y utilizar tus propios hooks personalizados para encapsular lógica reutilizable en tus componentes de React. 
+Un hook personalizado es esencialmente una función JavaScript que utiliza los [hooks](/docs/conceptos-de-react-05-hooks--docs) existentes de React y puede ser compartida 
+entre componentes para encapsular y reutilizar lógica específica.
+
+<a id="seccion2"></a>
+### Ejemplo con useState
+
+Imaginemos un escenario donde varios componentes necesitan gestionar el estado de un contador. En lugar de duplicar la lógica del estado y los métodos en cada componente 
+podemos crear un hook personalizado para manejarlo de manera centralizada.
+
+ <CodeBlock
+  codeString={`
+import { useState } from "react";
+
+// Definimos el hook personalizado useCounter con un valor inicial predeterminado de 0.
+const useCounter = (initialValue = 0) => {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = ( ) => setCount(count + 1);
+  const decrement = ( ) => setCount(count - 1);
+
+  // Devolvemor un objeto que contiene el estado actual 'count', y las funciones 'increment' y 'decrement'.
+  // Esto permite al componente que use este hook acceder al estado y a las funciones de manera más limpia y legible.
+  return { count, increment, decrement };
+};
+
+export default useCounter;
+  `} 
+  language='javascript'
+/>
+
+ <CodeBlock
+  codeString={`
+// Importamos el hook personalizado en este caso useCounter 
+import useCounter from "./useCounter";
+
+const CounterComponent = () => {
+// Utilizamos el hook useCounter para obtener el estado del contador 'count' y las funciones 'increment' y 'decrement'.
+  const { count, increment, decrement } = useCounter();
+
+  // Renderizamos el componente con la información del contador y dos botones para incrementar y decrementar.
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={decrement}>Decrementar</button>
+      <button onClick={increment}>Incrementar</button>
+    </div>
+  );
+};
+
+export default CounterComponent;
+
+  `} 
+  language='javascript'
+/>
+
+### Ejemplo completo:
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import CounterComponent from "./CounterComponent";
+
+const App = () => {
+  return (
+    <div>
+      <CounterComponent />
+    </div>
+  );
+};
+
+export default App;
+`,
+
+"/CounterComponent.js":
+`import useCounter from "./useCounter";
+
+const CounterComponent = () => {
+  const { count, increment, decrement } = useCounter();
+
+  return (
+    <div>
+      <p>Contador: {count}</p>
+      <button onClick={decrement}>Decrementar</button>
+      <button onClick={increment}>Incrementar</button>
+    </div>
+  );
+};
+
+export default CounterComponent;
+`,
+
+"/useCounter.js":
+`import { useState } from "react";
+
+const useCounter = (initialValue = 0) => {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+
+  return { count, increment, decrement };
+};
+
+export default useCounter;`
+,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/CounterComponent.js", "/useCounter.js"]}
+/>
