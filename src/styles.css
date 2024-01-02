@@ -57,6 +57,13 @@ code.css-1kwwth4 {
     color: #029CFD;
 }
 
+.sticky-nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+
 .sticky-nav .indicator {
     margin-right: 4px;
 }

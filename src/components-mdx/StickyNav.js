@@ -26,6 +26,7 @@ const StickyNav = ({ links }) => {
           href={`#${link.id}`}
           onClick={(e) => scrollToSection(e, link.id, index)}
           className={`sticky-nav-link ${index === clickedLink ? 'clicked' : ''}`}
+          title={link.text}
         >
           {index === clickedLink ? <span className="indicator">&#8226;</span> : null}
           {link.text}
