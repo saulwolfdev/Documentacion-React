@@ -1,8 +1,9 @@
 import React from 'react';
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { amethyst } from "@codesandbox/sandpack-themes";
+import { toBeRequired } from '@testing-library/jest-dom/matchers';
 
-const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFiles, showNavigator }) => {
+const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFiles, showNavigator, showConsole }) => {
   const defaultDependencies = {
     "css": "latest", 
     "styled-components" : "latest", 
@@ -28,7 +29,9 @@ const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFile
       options={{
         visibleFiles: dynamicVisibleFiles,
         showNavigator: showNavigator,
-        showLineNumbers: true,        
+        showLineNumbers: true, 
+        showConsole: showConsole,
+        showConsoleButton: true       
       }}
     />
     </div>

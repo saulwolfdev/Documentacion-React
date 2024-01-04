@@ -5,8 +5,7 @@ import "../styles.css"
   links={[
     { id: 'seccion1', text: 'Hooks Personalizados' },
     { id: 'seccion2', text: 'con useState' },
-    { id: 'seccion3', text: '' },
-    { id: 'seccion4', text: '' },
+    { id: 'seccion3', text: 'con useEffect' },
   ]}
 />
 
@@ -16,6 +15,13 @@ import "../styles.css"
 Se refiere a la capacidad de crear y utilizar tus propios hooks personalizados para encapsular lógica reutilizable en tus componentes de React. 
 Un hook personalizado es esencialmente una función JavaScript que utiliza los [hooks](/docs/conceptos-de-react-05-hooks--docs) existentes de React y puede ser compartida 
 entre componentes para encapsular y reutilizar lógica específica.
+
+En React la convención es anteponer la palabra **"use"** al nombre de los hooks personalizados. Esta convención facilita la identificación y comprensión del propósito de 
+una función como un hook. Cuando un componente utiliza un hook personalizado React espera que siga la convención de nomenclatura y comienza con **"use"**.
+
+Esta práctica es esencial para mantener la consistencia y claridad en el código ya que permite a los desarrolladores reconocer rápidamente que están interactuando con un 
+hook de React y no con una función común. Al seguir esta convención se indica que la función puede hacer uso de los features proporcionados por los hooks de React como 
+**useState**, **useEffect**, **useContext**, etc.
 
 <a id="seccion2"></a>
 ### Ejemplo con useState
@@ -123,4 +129,190 @@ export default useCounter;`
   }}
   
   dynamicVisibleFiles={["/App.js", "/CounterComponent.js", "/useCounter.js"]}
+/>
+
+En este ejemplo **useCounter** es un hook personalizado que encapsula la lógica del contador. Puedes reutilizar este hook en cualquier componente que necesite gestionar un 
+contador sin tener que replicar el código relacionado con el estado y las funciones de manipulación.
+
+<a id="seccion3"></a>
+### Ejemplo con useEffect
+
+<CodeBlock
+  codeString={`
+import { useEffect, useState } from "react";
+
+const useSessionEffect = ( ) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(( ) => {
+    // Devuelve la función de limpieza para el cierre de sesión.
+    const handleLogout = ( ) => {
+      console.log("Usuario ha cerrado sesión.");
+      setIsLoggedIn(false);
+    };
+
+    // Simular un inicio de sesión al montar el componente.
+    console.log("Simulando inicio de sesión...");
+    setIsLoggedIn(false);
+
+    // Devuelve la función de limpieza para el cierre de sesión.
+    return ( ) => {
+      handleLogout();
+    };
+  }, []); // Array vacío para que este efecto solo se ejecute una vez al montar el componente.
+
+  return { isLoggedIn, setIsLoggedIn }; // Devuelve el estado y la función para actualizarlo.
+};
+
+export default useSessionEffect;
+  `} 
+  language='javascript'
+/>
+
+En este código **useSessionEffect** es un hook personalizado diseñado para gestionar la sesión de usuario en una aplicación React. 
+Proporciona una forma de encapsular la lógica relacionada con la sesión permitiendo su reutilización en diferentes componentes sin duplicar el código asociado con el estado 
+y las funciones de manipulación.
+
+La función **useSessionEffect** utiliza el hook [useState](/docs/conceptos-de-react-05-hooks--docs) de React para mantener el estado de si el usuario está o no autenticado 
+**(isLoggedIn)**. Además, hace uso del hook [useEffect](/docs/conceptos-de-react-05-hooks--docs) para realizar acciones específicas cuando el componente que utiliza este 
+hook se monta.
+
+La función **useEffect** devuelve otra función que actúa como una función de limpieza. En este caso esta función de limpieza se utiliza para realizar acciones relacionadas 
+con el cierre de sesión cuando el componente se desmonta.
+
+El hook **useSessionEffect** devuelve un objeto que contiene el estado actual de la sesión **(isLoggedIn)** y la función para actualizar ese estado **(setIsLoggedIn)**. 
+Este objeto puede ser utilizado por el componente que hace uso de este hook para acceder y manipular el estado de la sesión.
+
+<CodeBlock
+  codeString={`
+import React from "react";
+import useSessionEffect from "./useSessionEffect";
+
+const SessionComponent = () => {
+  const { isLoggedIn, setIsLoggedIn } = useSessionEffect();
+
+  const handleLogin = () => {
+    // Lógica de inicio de sesión personalizada, si es necesario.
+    console.log("Iniciando sesión...");
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    // Lógica de cierre de sesión personalizada, si es necesario.
+    console.log("Cerrando sesión...");
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        <div>
+          <p>Usuario autenticado</p>
+          <button onClick={handleLogout}>Cerrar Sesión</button>
+        </div>
+      ) : (
+        <div>
+          <p>Usuario no autenticado</p>
+          <button onClick={handleLogin}>Iniciar Sesión</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SessionComponent;
+`} 
+  language='javascript'
+/>
+
+El componente SessionComponent utiliza el hook personalizado **useSessionEffect** para gestionar la lógica de la sesión de usuario en la interfaz de usuario para obtener el 
+estado actual de la sesión **(isLoggedIn)** y la función para actualizar ese estado **(setIsLoggedIn)**.
+
+Tambien se define dos funciones **handleLogin** y **handleLogout** que se encargan de manejar el inicio y cierre de sesión respectivamente. 
+Estas funciones utilizan la función **setIsLoggedIn** del hook personalizado para actualizar el estado de la sesión
+
+Ademas se realiza un renderizado condicional basado en el estado de la sesión. Si el usuario está autenticado **(isLoggedIn es true)** muestra un mensaje indicando que el 
+usuario está autenticado y un botón para cerrar la sesión. 
+
+### Ejemplo completo:
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import SessionComponent from "./SessionComponent";
+
+const App = () => {
+  return (
+    <div>
+      <SessionComponent />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/SessionComponent.js":
+`import React from "react";
+import useSessionEffect from "./useSessionEffect";
+
+const SessionComponent = ( ) => {
+  const { isLoggedIn, setIsLoggedIn } = useSessionEffect();
+
+  const handleLogin = ( ) => {
+    console.log("Iniciando sesión...");
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = ( ) => {
+    console.log("Cerrando sesión...");
+    setIsLoggedIn(false);
+  };
+
+  return (
+    <div>
+      {isLoggedIn ? (
+        <div>
+          <p>Usuario autenticado</p>
+          <button onClick={handleLogout}>Cerrar Sesión</button>
+        </div>
+      ) : (
+        <div>
+          <p>Usuario no autenticado</p>
+          <button onClick={handleLogin}>Iniciar Sesión</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SessionComponent;`,
+
+"/useSessionEffect.js":
+`import { useEffect, useState } from "react";
+
+const useSessionEffect = ( ) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(( ) => {
+    const handleLogout = ( ) => {
+      console.log("Usuario ha cerrado sesión.");
+      setIsLoggedIn(false);
+    };
+
+    console.log("Simulando inicio de sesión...");
+    setIsLoggedIn(false);
+
+    return ( ) => {
+      handleLogout( );
+    };
+  }, []);
+
+  return { isLoggedIn, setIsLoggedIn };
+};
+
+export default useSessionEffect;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/SessionComponent.js", "/useSessionEffect.js"]}
 />
