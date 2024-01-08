@@ -178,6 +178,8 @@ Estos operadores actúan sobre valores booleanos (verdadero o falso) y producen 
     } else {
     console.log("Al menos una de las condiciones es falsa");
   }
+
+  //resp: "Ambas condiciones son verdaderas"
   `} 
   language='javascript'
 />
@@ -197,6 +199,8 @@ lógico && (AND lógico). Por lo tanto se ejecuta el bloque de código dentro de
   } else {
     console.log("No puede ingresar al sitio");
   }
+
+  //resp: "Puede ingresar al sitio, es mayor de edad  o tiene permiso parental"
   `} 
   language='javascript'
 />
@@ -216,6 +220,8 @@ se ejecuta el bloque de código dentro del if, y se imprime en la consola el men
   } else {
     console.log("Lleva paraguas porque está lloviendo");
   }
+
+  //resp: "Lleva paraguas porque está lloviendo"
   `} 
   language='javascript'
 />
@@ -278,8 +284,10 @@ La sintaxis básica del operador ternario es la siguiente:
   language='javascript'
 />
 
-Aquí la condicion es una expresión que se evalúa como verdadera o falsa. Si la condición es verdadera, se devuelve expresion_si_es_verdadero; de lo contrario se devuelve 
-expresion_si_es_falso.
+Aquí la **condicion** es una expresión que se evalúa como verdadera o falsa con el signo de interrogacion **?**. 
+Si la condición es **verdadera** se devuelve **expresion_si_es_verdadero**, de lo contrario se devuelve **expresion_si_es_falso**.
+
+
 
 **ejemplo:**
 
@@ -288,7 +296,7 @@ expresion_si_es_falso.
   var edad = 18;
   var mensaje = (edad >= 18) ? 'Eres mayor de edad' : 'Eres menor de edad';
 
-  console.log(mensaje);
+  console.log(mensaje); // Resultado: 'Eres mayor de edad'
   `} 
   language='javascript'
 />
@@ -303,12 +311,13 @@ Se puede anidar operadores ternarios para expresiones condicionales más complej
   var numero = 10;
   var tipo = (numero % 2 === 0) ? 'Par' : (numero % 3 === 0) ? 'Múltiplo de 3' : 'Impar';
 
-  console.log(tipo);
+  console.log(tipo); // Resultado: 'Par'
   `} 
   language='javascript'
 />
 
-En este ejemplo, el operador ternario se utiliza para determinar si un número es par, múltiplo de 3 o impar.
+En este ejemplo el operador ternario se utiliza para determinar si un número es par, múltiplo de 3 o impar.
+El **número** es 10 y es divisible por 2  por lo tanto se cumple la primera condición y se asigna el valor 'Par' a la variable **tipo**
 
 <a id="seccion6"></a>
 # Tips
@@ -320,15 +329,17 @@ La comparación estricta compara tanto el valor como el tipo de datos, lo que pu
 
 <CodeBlock
   codeString={`
-  // Incorrecto
-  if (variable == 5) {
-    // código
-  }
+// Evitar la coerción automática de tipos - Incorrecto
+if (variable == 5) {
+  // En este caso, la igualdad débil (coerción automática) podría conducir a resultados inesperados.
+  // Se recomienda usar igualdad estricta (===) para comparar valor y tipo de manera precisa.
+}
 
-  // Correcto
-  if (variable === 5) {
-    // código
-  }
+// Utilizar igualdad estricta - Correcto
+if (variable === 5) {
+  // Se utiliza el operador de igualdad estricta para comparar tanto el valor como el tipo de la variable.
+  // Esto evita la coerción automática de tipos y garantiza comparaciones más precisas.
+}
   `} 
   language='javascript'
 />
@@ -359,10 +370,17 @@ Hay que tener cuidado con las expresiones de incremento (++) y decremento (--) d
 <CodeBlock
   codeString={`
   let x = 5;
-  let y = x++; // y = 5, x = 6
+  let y = x++;
+
+  console.log(y); // Resultado: 5 (valor original de x)
+  console.log(x); // Resultado: 6 (x se incrementa en 1 después de la asignación)
+
 
   let a = 5;
-  let b = ++a; // b = 6, a = 6
+  let b = ++a;
+
+  console.log(b); // Resultado: 6 (a se incrementa en 1 antes de la asignación)
+  console.log(a); // Resultado: 6
   `} 
   language='javascript'
 />

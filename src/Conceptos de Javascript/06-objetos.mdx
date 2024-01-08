@@ -19,6 +19,9 @@ import "../styles.css"
 
 # Objetos
 
+En JavaScript cuando ves `{}` estás utilizando la notación de objeto literal esto representa un **objeto**. 
+La notación de objeto literal te permite crear y definir un objeto en el lugar donde lo necesitas.
+
 <a id="seccion1"></a>
 ### Crear Objetos
 Los objetos en JavaScript son conjuntos de pares clave-valor, donde las claves son cadenas y los valores pueden ser de cualquier tipo de dato.
@@ -59,19 +62,19 @@ Puedes añadir o quitar propiedades de un objeto en cualquier momento.
   };
 
   // Mostrar el objeto antes de las modificaciones
-  console.log('Antes de las modificaciones:', persona);
+  console.log('Antes de las modificaciones:', persona); // { nombre: 'Juan', edad: 25, ciudad: 'EjemploCity' }
 
   // Agregar la propiedad 'trabajo'
   persona.trabajo = 'Programador';
 
   // Mostrar el objeto después de agregar la propiedad 'trabajo'
-  console.log('Después de agregar "trabajo":', persona);
+  console.log('Después de agregar "trabajo":', persona); //{ nombre: 'Juan', edad: 25, ciudad: 'EjemploCity', trabajo: 'Programador' }
 
   // Eliminar la propiedad 'ciudad'
   delete persona.ciudad;
 
   // Mostrar el objeto después de eliminar la propiedad 'ciudad'
-  console.log('Después de eliminar "ciudad":', persona);
+  console.log('Después de eliminar "ciudad":', persona); //{ nombre: 'Juan', edad: 25, trabajo: 'Programador' }
   `} 
   language='javascript'
 />
@@ -158,7 +161,7 @@ Puedes tener funciones como propiedades de un objeto y acceder a ellas mediante 
     }
   };
 
-  coche.arrancar( );
+  coche.arrancar( ); //imprime 'El coche está en marcha'
   `} 
   language='javascript'
 />
@@ -171,6 +174,8 @@ Puedes usar el constructor Object para crear un nuevo objeto.
   codeString={`
   let nuevoObjeto = new Object( );
   nuevoObjeto.propiedad = 'Nuevo';
+
+  console.log(nuevoObjeto); // Resultado: { propiedad: 'Nuevo' }
   `} 
   language='javascript'
 />
@@ -203,6 +208,7 @@ Al utilizar funciones dentro de objetos o eventos, asegúrate de manejar correct
 
 <CodeBlock
   codeString={`
+  // Usar esto
   const objeto = {
       valor: 42,
       obtenerValor: function() {
@@ -210,16 +216,27 @@ Al utilizar funciones dentro de objetos o eventos, asegúrate de manejar correct
       }
   };
 
-  // Usar esto
-  objeto.obtenerValor.bind(objeto)();
+  
+  objeto.obtenerValor.bind(objeto)(); // Imprimirá: 42
 
   // O esto
-  const obtenerValor = ( ) => {
-      console.log(this.valor);
+  const objeto = {
+      valor: 42,
+      obtenerValor: function() {
+          const obtenerValorArrow = () => {
+              console.log(this.valor);
+          };
+          obtenerValorArrow();
+      }
   };
+
+  objeto.obtenerValor(); // Imprimirá: 42
   `} 
   language='javascript'
 />
+
+El uso de **bind(objeto)** en este caso garantiza que cuando se llama a **obtenerValor**, el valor de this dentro de la función será el objeto **objeto**. 
+La última línea **()** invoca la función resultante.
 
 #### Uso de Object.entries para iterar sobre propiedades
 
@@ -232,6 +249,11 @@ Para iterar sobre las propiedades de un objeto, puedes utilizar **Object.entries
   for (const [clave, valor] of Object.entries(miObjeto)) {
       console.log(\`\${clave}: \${valor}\`);
   }
+
+  //salida esperada:
+  //a: 1
+  //b: 2
+  //c: 3
   `} 
   language='javascript'
 />

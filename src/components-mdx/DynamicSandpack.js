@@ -1,7 +1,6 @@
 import React from 'react';
 import { Sandpack } from "@codesandbox/sandpack-react";
 import { amethyst } from "@codesandbox/sandpack-themes";
-import { toBeRequired } from '@testing-library/jest-dom/matchers';
 
 const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFiles, showNavigator, showConsole }) => {
   const defaultDependencies = {

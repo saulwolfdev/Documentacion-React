@@ -76,9 +76,11 @@ con const no pueden ser reasignadas después de su inicialización. Sin embargo,
   const array = [1, 2, 3];
   array.push(4); // Esto es válido, porque no estamos reasignando 'array' pero no lo ideal ya que estariamos mutando el array original
 
-  const newArray = [...array, 4]; //lo ideal seria utilizar el spread operator para evitar mutar el arreglo original.
+  const newArrayConcat = array.concat(4); // Si prefieres evitar la mutación podrías usar el método concat 
+  const newArraySpread = [...array, 4]; // Tambien se puede utilizar el spread operator para evitar mutar el arreglo original.
 
-  console.log(newArray); // Output: [1, 2, 3, 4] 
+  console.log(newArrayConcat); // Output: [1, 2, 3, 4]
+  console.log(newArraySpread); // Output: [1, 2, 3, 4]  
   `}
   language='javascript'
 />
@@ -90,9 +92,10 @@ sí pueden ser modificados.
 
 ### **Resumen:**
 
-let se utiliza para declarar variables con alcance de bloque que pueden ser reasignadas.
-const se utiliza para declarar constantes con alcance de bloque, cuyos valores no pueden ser reasignados después de la inicialización, aunque sus propiedades o elementos internos 
-pueden ser modificados.
+**let** se utiliza para declarar variables con alcance de bloque que pueden ser reasignadas.
+**const** se utiliza para declarar constantes con alcance de bloque cuyos valores no pueden ser reasignados después de la inicialización aunque sus propiedades o elementos 
+internos pueden ser modificados.
+
 
 <a id="seccion4"></a>
 # Tips 
@@ -121,6 +124,7 @@ Entender el ámbito de las variables y evitar la creación de variables globales
   var variableGlobal = "Global";
 
   // Usar let o const en lugar de var
+  let variableGlobal = "Global";
   `} 
   language='javascript'
 />

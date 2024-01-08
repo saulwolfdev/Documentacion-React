@@ -181,12 +181,12 @@ El operador de igualdad estricta compara tanto el valor como el tipo de dato.
   let str1 = '5';
   let str2 = 5;
 
-  // Incorrecto (puede dar true, ya que realiza conversión de tipo):
+  // Incorrecto (puede dar true ya que realiza conversión de tipo):
   if (str1 == str2) {
     // código
   }
 
-  // Correcto:
+  // Correcto(compara tanto el valor como el tipo de dato):
   if (str1 === str2) {
     // código
   }
@@ -224,7 +224,7 @@ En su lugar considera utilizar un array y luego unir los elementos al final
 <CodeBlock
   codeString={`
   // Incorrecto:
-  let result = '';
+  let result = ' ';
   for (let i = 0; i < 10; i++) {
     result += i;
   }
@@ -235,6 +235,7 @@ En su lugar considera utilizar un array y luego unir los elementos al final
     resultArray.push(i);
   }
   let result = resultArray.join('');
+  console.log(result); // Resultado: '0123456789'
   `} 
   language='javascript'
 />
