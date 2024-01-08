@@ -269,6 +269,12 @@ Si aún no tenes instalado prop-types podes hacerlo usando npm o yarn
     descripcion: PropTypes.string,        // Cadena de texto opcional
     };
 
+    //PropTypes por default
+    MiComponente.defaultProps = {
+      titulo: 'Titulo Default',
+      descripcion: 'Descripcion Default'  
+    };
+
     export default MiComponente;
   `} 
   language='javascript'
@@ -283,10 +289,11 @@ import MiComponente from "./MiComponente.js";
 const App = ( ) => {
   return (
     <div>
+      <MiComponente />
       <MiComponente 
         titulo="Título del componente"
         descripcion="Esta es la descripción del componente."
-      />
+      />      
     </div>
   )
 }
@@ -311,6 +318,12 @@ export default App;`,
     MiComponente.propTypes = {
     titulo: PropTypes.string.isRequired, // Cadena de texto requerida
     descripcion: PropTypes.string,        // Cadena de texto opcional
+    };
+
+    //PropTypes por default
+    MiComponente.defaultProps = {
+      titulo: 'Titulo Default',
+      descripcion: 'Descripcion Default'  
     };
 
     export default MiComponente;`,
