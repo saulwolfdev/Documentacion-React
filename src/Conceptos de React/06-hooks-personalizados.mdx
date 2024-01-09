@@ -4,8 +4,9 @@ import "../styles.css"
 <StickyNav
   links={[
     { id: 'seccion1', text: 'Hooks Personalizados' },
-    { id: 'seccion2', text: 'con useState' },
-    { id: 'seccion3', text: 'con useEffect' },
+    { id: 'seccion2', text: 'Como funcionan los Hooks' },
+    { id: 'seccion3', text: 'con useState' },
+    { id: 'seccion4', text: 'con useEffect' },
   ]}
 />
 
@@ -24,6 +25,40 @@ hook de React y no con una función común. Al seguir esta convención se indica
 **useState**, **useEffect**, **useContext**, etc.
 
 <a id="seccion2"></a>
+### Como funcionan los Hooks
+
+Antes de continuar seria bueno entender un poco cómo funciona un hook por detras, podemos crear nuestro propio estado utilizando clausuras y funciones. 
+A continuación mostraré una versión simplificada de cómo se podria implementar un estado similar a [useState](/docs/conceptos-de-react-05-hooks--docs):
+
+<CodeBlock
+  codeString={`
+function miUseState(initialValue) {
+  let state = initialValue;  // Estado actual
+  const setState = (newValue) => {  // Función para actualizar el estado
+    state = newValue; // Se actualiza el valor del estado
+  };
+
+  return [state, setState];
+}
+
+// Uso del hook personalizado
+const [count, setCount] = miUseState(0);
+
+console.log(count);  // Imprime el estado actual: 0
+setCount(1);         // Actualiza el estado
+console.log(count);  // Imprime el nuevo estado: 1
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo **miUseState** es un hook personalizado que devuelve un array con dos elementos: el estado actual **(state)** y la función para actualizar el estado 
+**(setState)**. Cuando se llama a **miUseState** con un valor inicial **(por ejemplo, 0)**, se devuelve un array **[0, función]**. 
+Puedes **desestructurar** este array en variables, como **count** y **setCount**, que luego se utilizan para acceder y actualizar el **estado**.
+
+Por supuesto, la implementación real de **useState** en React es más compleja y maneja diversos casos de uso como la gestión de múltiples estados y la suscripción a cambios 
+pero este ejemplo simple demuestra la idea fundamental de cómo un hook de estado podría implementarse utilizando clausuras y funciones. 
+
+<a id="seccion3"></a>
 ### Ejemplo con useState
 
 Imaginemos un escenario donde varios componentes necesitan gestionar el estado de un contador. En lugar de duplicar la lógica del estado y los métodos en cada componente 
@@ -134,7 +169,7 @@ export default useCounter;`
 En este ejemplo **useCounter** es un hook personalizado que encapsula la lógica del contador. Puedes reutilizar este hook en cualquier componente que necesite gestionar un 
 contador sin tener que replicar el código relacionado con el estado y las funciones de manipulación.
 
-<a id="seccion3"></a>
+<a id="seccion4"></a>
 ### Ejemplo con useEffect
 
 <CodeBlock
@@ -315,4 +350,5 @@ export default useSessionEffect;`,
   }}
   
   dynamicVisibleFiles={["/App.js", "/SessionComponent.js", "/useSessionEffect.js"]}
+  showConsole
 />

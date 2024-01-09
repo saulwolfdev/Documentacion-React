@@ -3,14 +3,36 @@ import "../styles.css"
 
 # Ciclos de vida
 
-En React la gestión de ciclos de vida en componentes de función se realiza principalmente a través del hook [useEffect](/docs/conceptos-de-react-04-hooks--docs) 
+En **React** la gestión de ciclos de vida en componentes de función se realiza principalmente a través del hook [useEffect](/docs/conceptos-de-react-04-hooks--docs) 
 y otros hooks relacionados. 
-Los componentes de función no tienen los mismos métodos de ciclo de vida que los componentes de clase, pero useEffect proporciona una forma de realizar efectos secundarios 
-en diferentes momentos del ciclo de vida.
+Los componentes de función no tienen los mismos métodos de ciclo de vida que los componentes de clase, pero **useEffect** proporciona una forma de realizar efectos 
+secundarios en diferentes momentos del ciclo de vida.
+
+### Fases del Ciclo de Vida:
+
+**Montaje (Mounting):**
+
+**- useEffect en el montaje:** Al utilizar useEffect con una función como argumento, podemos realizar operaciones cuando el componente se monta por primera vez. Esto es ideal 
+para inicializaciones, solicitudes de red y otros efectos relacionados con el montaje.
+
+**Actualización (Updating):**
+
+**- useEffect en la actualización:** Al proporcionar una dependencia en useEffect (por ejemplo, [counter]), podemos realizar operaciones cada vez que ciertos estados o props 
+cambian. Esto es útil para responder a cambios específicos y realizar acciones relacionadas con la actualización del componente.
+
+**Desmontaje (Unmounting):**
+
+**- useEffect con función de retorno:** La función de retorno de useEffect se ejecuta justo antes de que el componente se desmonte. Aquí podemos realizar tareas de limpieza 
+o liberación de recursos.
+
+**Manejo de Errores (Error Handling):**
+
+**- useEffect con try-catch para errores:** Podemos usar bloques try-catch dentro de useEffect para manejar errores durante operaciones asincrónicas, como solicitudes a una 
+API.
 
 **Ejemplo:**
 
-Vamos a crear un ejemplo básico que utiliza [useEffect](/docs/conceptos-de-react-04-hooks--docs) para simular algunas operaciones de ciclo de vida. 
+Aqui un ejemplo básico que utiliza [useEffect](/docs/conceptos-de-react-04-hooks--docs) para simular algunas operaciones de ciclo de vida. 
 Supongamos que queremos mostrar un mensaje cuando el componente se monta y se actualiza.
 
 <SandPack 

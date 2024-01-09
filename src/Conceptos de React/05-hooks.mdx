@@ -1,4 +1,5 @@
 import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import Context from "../assets/context.png";
 import "../styles.css"
 
 
@@ -100,13 +101,13 @@ export default Toggle;`,
   dynamicVisibleFiles={["/App.js", "/Toggle.js"]}
 />
 
-En este ejemplo la variable de estado isOn se inicializa con false. 
-El botón cambia el estado de isOn entre true y false cuando se hace click lo que afecta el texto que indica si el interruptor está encendido o apagado.
+En este ejemplo la variable de estado **isOn** se inicializa con false. 
+El botón cambia el estado de **isOn** entre true y false cuando se hace click lo que afecta el texto que indica si el interruptor está encendido o apagado.
 
 <a id="seccion2"></a>
 ### useEffect
 
-useEffect es un hook que permite realizar efectos secundarios en componentes funcionales. 
+**useEffect** es un hook que permite realizar efectos secundarios en componentes funcionales. 
 Puedes usarlo para gestionar el ciclo de vida del componente funcional, como realizar solicitudes de red, suscripciones a eventos, o limpiar recursos cuando 
 el componente se desmonta.
 
@@ -200,7 +201,7 @@ export default CounterWithEffect;`,
   dynamicVisibleFiles={["/App.js", "/CounterWithEffect.js"]}
 />
 
-En este ejemplo cada vez que haces click en el botón para incrementar el contador se actualiza el estado **count**. 
+En este ejemplo cada vez que hacemos click en el botón para incrementar el contador se actualiza el estado del **count**. 
 El efecto asociado a **useEffect** se ejecutará debido a la dependencia de **count** en el array de dependencias. 
 En este caso simplemente muestra el **valor actual de count**, pero se podria realizar acciones más complejas basadas en el cambio del estado.
 
@@ -210,6 +211,12 @@ En este caso simplemente muestra el **valor actual de count**, pero se podria re
 **useContext** permite a los componentes de función suscribirse a un contexto específico y acceder al valor proporcionado por ese contexto. 
 Los contextos en React son una forma de pasar datos a través del árbol de componentes sin tener que pasar explícitamente las props en cada nivel. useContext simplifica la 
 suscripción a contextos y el acceso a sus valores.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Context} alt="Texto Alternativo" style={{ width: '600px', height: '300px', position: 'relative', margin: '32px' }} />
+</div>
+}
 
 #### Ejemplo de useContext:
 Supongamos que tienes un contexto llamado UserContext que proporciona información sobre el usuario actual. Primero creamos el contexto:

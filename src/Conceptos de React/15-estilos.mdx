@@ -2,14 +2,28 @@ import { CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../c
 
 # Estilos
 
-En React los estilos se aplican a los elementos de la interfaz de usuario para mejorar la apariencia y la experiencia del usuario. 
+En **React** los estilos se aplican a los elementos de la interfaz de usuario para mejorar la apariencia y la experiencia del usuario. 
 
 - ### Estilos en línea
 
 React permite aplicar estilos en línea directamente a los elementos utilizando el atributo **style**.
 
 <SandPack 
-files={{    
+files={{   
+"/App.js": 
+`import React from "react";
+import InlineStyle from "./InlineStyle.js";
+
+ const App = () => {
+    return (
+      <div>
+        <InlineStyle />
+      </div>
+    ) 
+ }
+
+export default App;`,
+
 "/InlineStyle.js": 
 `const InlineStyle = () => {
   const styles = {
@@ -26,21 +40,7 @@ files={{
   );
 };
 
-export default InlineStyle;
-    `,   
-    "/App.js": 
-`import React from "react";
-import InlineStyle from "./InlineStyle.js";
-
- const App = () => {
-    return (
-      <div>
-        <InlineStyle />
-      </div>
-    ) 
- }
-
-export default App;`, 
+export default InlineStyle;`,       
 }}
 />
 
@@ -49,13 +49,8 @@ export default App;`,
 Podemos crear archivos CSS separados y luego importarlos en nuestros componentes de React.
 
 <SandPack 
-files={{    
-"styles.css": 
-`.container {
-  color: green;
-  font-size: 18px;
-}`,       
-    "/App.js": 
+files={{           
+"/App.js": 
 `import React from "react";
 import './styles.css';
 
@@ -68,6 +63,12 @@ const App = () => {
 }
 
 export default App;`,
+
+"styles.css": 
+`.container {
+  color: green;
+  font-size: 18px;
+}`,
 }}
 />
 

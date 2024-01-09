@@ -13,8 +13,8 @@ import "../styles.css"
 
 # Event Handling
 
-**Event handling** en React se refiere al proceso de gestionar y responder a eventos que ocurren en la interfaz de usuario de una aplicación React. 
-Los eventos pueden ser desencadenados por diversas acciones del usuario como hacer clicK en un botón, escribir en un campo de entrada, mover el mouse, etc. 
+En React se refiere al proceso de gestionar y responder a eventos que ocurren en la interfaz de usuario de una aplicación React. 
+Los eventos pueden ser desencadenados por diversas acciones del usuario como hacer click en un botón, escribir en un campo de entrada, mover el mouse, etc. 
 En React el manejo de eventos se realiza mediante funciones de manejo de eventos y JSX.
 
 ## Definiciones clave
@@ -36,7 +36,7 @@ Una función que se ejecuta en respuesta a un evento específico. En React estos
 
 const ButtonClick = () => {
   const handleClick = () => {
-    alert("Hiciste clic en el botón");
+    console.log("Hiciste clic en el botón");
   };
 
   return (
@@ -69,7 +69,7 @@ export default App;`,
 
 const ButtonClick = () => {
   const handleClick = () => {
-    alert("Hiciste clic en el botón");
+    console.log("Hiciste clic en el botón");
   };
 
   return (
@@ -81,12 +81,15 @@ export default ButtonClick;`,
   }}
   
   dynamicVisibleFiles={["/App.js", "/ButtonClick.js"]}
+  showConsole
 />
 
 En este ejemplo la función handleClick se ejecutará cuando el botón sea clickeado.
 
 <a id="seccion2"></a>
-**Manejo de cambio de entrada:**
+### Manejo de cambio de entrada:
+
+El manejo de cambio de entrada se refiere a cómo un componente reacciona y se actualiza cuando sus datos de entrada cambian.
 
 <CodeBlock
   codeString={`
@@ -166,7 +169,7 @@ En este ejemplo el componente **"ControlledForm"** contiene un campo de entrada 
 campo de entrada actualizando el estado **"inputValue"** con el nuevo valor del campo.
 
 <a id="seccion3"></a>
-**Manejo de eventos con argumentos:**
+### Manejo de eventos con argumentos
 
 En React pasar argumentos a manejadores de eventos es un proceso común que permite enviar información adicional al manipular un evento como hacer click en un botón o cambiar el 
 valor de un campo de entrada
@@ -214,7 +217,7 @@ export default App;`,
 
   const MyComponent = ( ) => {
     const handleButtonClick = (param) => {
-      alert(\`Hiciste clic con el parámetro: \${param}\`);
+      console.log(\`Hiciste clic con el parámetro: \${param}\`);
     };
 
     return (
@@ -228,12 +231,15 @@ export default App;`,
   }}
   
   dynamicVisibleFiles={["/App.js", "/MyComponent.js"]}
+  showConsole
 />
 
 Podemos usar una función de flecha dentro del onClick si necesitas pasar parámetros adicionales.
 
 <a id="seccion4"></a>
-**Manejo de eventos condicional:**
+### Manejo de eventos condicional
+
+En React los eventos se pueden manejar de manera condicional según el estado del componente, las props o cualquier otra lógica específica de la aplicación.
 
 <CodeBlock
   codeString={`
@@ -302,5 +308,5 @@ export default ToggleComponent;`,
 
 Aquí el evento onClick cambia la visibilidad del párrafo dependiendo del estado si es true o false.
 
-Estos son solo ejemplos básicos pero muestran cómo React maneja eventos y cómo podemos definir funciones de manejo de eventos para responder a las acciones del usuario en 
-nuestra aplicación.
+Estos son solo ejemplos básicos pero muestran cómo **React** maneja eventos y cómo podemos definir funciones de manejo de eventos para responder a las acciones del usuario 
+en nuestra aplicación.

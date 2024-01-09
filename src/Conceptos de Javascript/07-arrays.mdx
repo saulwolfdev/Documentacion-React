@@ -426,7 +426,7 @@ basado en la transformación de cada elemento del array original.
 
 #### Evitar el uso de for...in para arrays
 
-El bucle for...in puede iterar sobre propiedades no numéricas por lo que no es la mejor opción para recorrer arrays. Utiliza for...of o métodos de array en su lugar.
+El bucle **for...in** puede iterar sobre propiedades no numéricas por lo que no es la mejor opción para recorrer arrays. Utiliza **for...of** o métodos de array en su lugar.
 
 <CodeBlock
   codeString={`
@@ -445,6 +445,11 @@ El bucle for...in puede iterar sobre propiedades no numéricas por lo que no es 
   language='javascript'
 />
 
+Es importante destacar que el bucle **for...in** no se recomienda para iterar sobre arrays ya que puede incluir propiedades adicionales si el array ha sido extendido o 
+modificado.
+
+El enfoque con **for...of** es más seguro y está diseñado específicamente para iterar sobre elementos de un array sin incluir propiedades adicionales
+
 #### Verificar si un elemento existe en un array
 
 Antes de realizar operaciones en un array verifica si un elemento específico existe para evitar errores.
@@ -454,9 +459,12 @@ Antes de realizar operaciones en un array verifica si un elemento específico ex
   const array = [1, 2, 3, 4, 5];
   const element = 3;
 
+  //El método includes retorna true
   if (array.includes(element)) {
     console.log(\`El elemento \${element} está en el array.\`);
   }
+
+  //resp: El elemento 3 está en el array.
   `} 
   language='javascript'
 />

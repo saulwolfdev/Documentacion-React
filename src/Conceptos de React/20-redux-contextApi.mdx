@@ -16,16 +16,17 @@ import "../styles.css"
 
 ### Redux
 
-Redux es una biblioteca de gestión de estado para aplicaciones JavaScript especialmente aquellas construidas con bibliotecas como React o Angular. 
-Fue desarrollada por Dan Abramov y Andrew Clark. La principal idea detrás de Redux es proporcionar un contenedor predecible del estado de la aplicación, lo que facilita la gestión 
-de los datos y el flujo de la aplicación de una manera coherente.
+**Redux** es una **biblioteca de gestión de estado** para aplicaciones **JavaScript** especialmente aquellas construidas con bibliotecas como **React** o **Angular**. 
+La principal idea detrás de **Redux** es proporcionar un contenedor predecible del estado de la aplicación, lo que facilita la gestión de los datos y el flujo de la 
+aplicación de una manera coherente.
 
-En Redux el estado de toda la aplicación se almacena en un solo objeto llamado **store**. El estado de la aplicación solo puede cambiarse emitiendo una acción que es un objeto que
-describe el cambio. Estas acciones son manejadas por funciones llamadas **reducers** que especifican cómo el estado de la aplicación cambia en respuesta a una acción.
+En **Redux** el estado de toda la aplicación se almacena en un solo objeto llamado **store**. El estado de la aplicación solo puede cambiarse emitiendo una acción que es un 
+objeto que describe el cambio. Estas acciones son manejadas por funciones llamadas **reducers** que especifican cómo el estado de la aplicación cambia en respuesta a una 
+acción.
 
-La arquitectura de Redux sigue el patrón de diseño de Flux pero simplifica y organiza aún más el manejo del estado. Aunque Redux puede ser inicialmente más verboso que algunos 
-enfoques alternativos su estructura clara y su capacidad para gestionar estados complejos y flujos de datos hacen que sea una elección popular en aplicaciones de gran escala o 
-donde la gestión del estado es crítica.
+La arquitectura de **Redux** sigue el patrón de diseño de Flux pero simplifica y organiza aún más el manejo del estado. Aunque Redux puede ser inicialmente más verboso que 
+algunos enfoques alternativos su estructura clara y su capacidad para gestionar estados complejos y flujos de datos hacen que sea una elección popular en aplicaciones de 
+gran escala o donde la gestión del estado es crítica.
 
 <a id="seccion1"></a>
 **Instalar las dependencias:**
@@ -42,7 +43,7 @@ Primero asegurarnos de tener instaladas las dependencias, caso contrario instala
 <a id="seccion2"></a>
 **Configurar el Store:**
 
-Crear un archivo llamado store.js donde configuraremos el store de Redux.
+Crear un archivo llamado **store.js** donde configuraremos el store de Redux.
 
 <CodeBlock
   codeString={`
@@ -72,7 +73,7 @@ Crear un archivo llamado store.js donde configuraremos el store de Redux.
 <a id="seccion3"></a>
 **Conectar React con Redux:**
 
-En el componente principal de tu aplicación (por ejemplo **App.js**) conecta tu componente con el store de Redux utilizando **react-redux**.
+En el componente principal de tu aplicación (por ejemplo **App.js**) conecta tu componente con el **store de Redux** utilizando **react-redux**.
 
 <CodeBlock
   codeString={`
@@ -111,7 +112,7 @@ En el componente principal de tu aplicación (por ejemplo **App.js**) conecta tu
 <a id="seccion4"></a>
 **Integrar el Store en la Aplicación:**
 
-En el archivo principal de tu aplicación (por ejemplo **index.js**), envuelve tu aplicación con el **Provider** de **react-redux** y proporciona el store.
+En el archivo principal de tu aplicación (por ejemplo **index.js**), envuelve tu aplicación con el **Provider** de **react-redux** y proporciona el **store**.
 
 <CodeBlock
   codeString={`
@@ -206,8 +207,8 @@ export default store;
 
 
 
-En este ejemplo hemos creado un store de Redux con un reducer simple para manejar un contador. El componente **App** se conecta al store utilizando la función **connect** de 
-**react-redux** mapeando el estado y las acciones a las props del componente.
+En este ejemplo hemos creado un **store de Redux** con un reducer simple para manejar un contador. El componente **App** se conecta al store utilizando la función **connect** 
+de **react-redux** mapeando el estado y las acciones a las props del componente.
 
 Cuando se hace clic en los botones **Incrementar** o **Decrementar** se despachan acciones al store y el componente se actualiza automáticamente para reflejar el nuevo estado. 
 
@@ -218,7 +219,7 @@ La API de Context en React es útil para pasar datos a través del árbol de com
 
 **Crear el contexto:**
 
-Primero crea un archivo que contenga el contexto y sus proveedores. En este ejemplo, llamaremos al archivo MyContext.js:
+Primero crea un archivo que contenga el contexto y sus proveedores. En este ejemplo, llamaremos al archivo **MyContext.js**:
 
 <CodeBlock
   codeString={`
@@ -270,7 +271,7 @@ Primero crea un archivo que contenga el contexto y sus proveedores. En este ejem
 <a id="seccion6"></a>
 **Usar el contexto en componentes:**
 
-Ahora, pudemos usar este contexto en los componentes que lo requieran:
+Ahora podemos usar este contexto en los componentes que lo requieran:
 
 <CodeBlock
   codeString={`
