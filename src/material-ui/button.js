@@ -8,7 +8,7 @@ const ButtonComponent = ({variant, color, onClick, disable, label}) => {
       color={color}
       onClick={onClick}
       disable={disable}
-      sx={{margin:1}}
+      sx={{margin: 2}}
       >
        {label}
       </Button>
