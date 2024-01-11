@@ -8,6 +8,9 @@ const theme = createTheme({
       secondary: {
         main: "#f50057",
       },
+      colorCustom: {
+        main: "orange",
+      },
     },
   });
   

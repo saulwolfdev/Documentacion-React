@@ -25,24 +25,15 @@
 // export default App;
 
 import React from 'react'
-import { Button, ThemeProvider, createTheme } from '@mui/material';
+import { ThemeProvider } from '@mui/material';
 import theme  from './material-ui/theme';
-
-
+import ButtonComponent  from './material-ui/button';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        hola       
-      </div>
-      <Button 
-      variant='contained' 
-      color='success'
-      onClick={()=>{alert('click')}}
-      >
-        button
-      </Button>
+      <ButtonComponent label='button' variant="contained" color="colorCustom"  />
+
     </ThemeProvider>
   )
 }
