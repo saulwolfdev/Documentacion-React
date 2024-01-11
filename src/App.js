@@ -5,6 +5,7 @@ import ButtonComponent  from './material-ui/ButtonComponent';
 import CardComponent  from './material-ui/CardComponent';
 import SelectComponent from './material-ui/SelectComponent';
 import TabsComponent from './material-ui/TabsComponent';
+import ModalComponent from './material-ui/ModalComponent';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <CardComponent />
       <SelectComponent/>
       <TabsComponent />
+      <ModalComponent />
     </ThemeProvider>
   )
 }
