@@ -6,6 +6,7 @@ import CardComponent  from './material-ui/CardComponent';
 import SelectComponent from './material-ui/SelectComponent';
 import TabsComponent from './material-ui/TabsComponent';
 import ModalComponent from './material-ui/ModalComponent';
+import SimpleForm from './SimpleForm';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <SelectComponent/>
       <TabsComponent />
       <ModalComponent />
+      <SimpleForm />
     </ThemeProvider>
   )
 }
