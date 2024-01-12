@@ -8,6 +8,7 @@ import TabsComponent from './material-ui/TabsComponent';
 import ModalComponent from './material-ui/ModalComponent';
 import SimpleForm from './SimpleForm';
 import ComplexForm from './ComplexForm';
+import MyComponent from './MockData/MyComponent';
 
 const App = () => {
   return (
@@ -17,8 +18,9 @@ const App = () => {
       <SelectComponent/>
       <TabsComponent />
       <ModalComponent />
-      <SimpleForm /> */}
-      <ComplexForm />
+      <SimpleForm /> 
+      <ComplexForm />*/}
+      <MyComponent />
     </ThemeProvider>
   )
 }
