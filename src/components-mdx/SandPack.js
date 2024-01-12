@@ -24,7 +24,10 @@ const SandPack = ({ files, autoHiddenFiles }) => {
             "react-dom": "latest",
             "redux" : "latest",
             "react-redux" : "latest",
-            "react-router-dom" : "latest"
+            "react-router-dom" : "latest",
+            "@mui/material" : "latest",
+            "@emotion/styled" : "latest",
+            "@emotion/react" : "latest",
           },
         }}
         files={files}

@@ -25,6 +25,7 @@ import SimpleForm from "./SimpleForm.js";
  const App = ( ) => {
    return (
     <div>
+      <h1 style={{margin: '16px'}}>Formulario Simple</h1>
       <SimpleForm />
     </div>
   ) 
@@ -34,7 +35,11 @@ export default App;`,
 
 "/SimpleForm.js":
 `import React, { useState } from 'react';
-import './SimpleForm.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 const SimpleForm = () => {
   const [inputValue, setInputValue] = useState('');
@@ -52,67 +57,38 @@ const SimpleForm = () => {
   };
 
   return (
-    <form className="simple-form" onSubmit={handleSubmit}>
-      <label htmlFor="nameInput">
-        Nombre:
-        <input
+    <div style={{ margin: '16px' }}>
+      <form className="simple-form" onSubmit={handleSubmit}>
+        <TextField
           id="nameInput"
-          type="text"
+          label="Nombre"
+          variant="standard"
           value={inputValue}
           onChange={handleInputChange}
         />
-      </label>
-      <button type="submit">Enviar</button>
-      {submitted && <p>Valor enviado: {submittedValue}</p>}
-    </form>
+        <div>
+          <Button sx={{ marginTop: 2, left: '7rem' }} type="submit" variant="contained" color="primary">
+            Enviar
+          </Button>
+        </div>
+      </form>
+      {submitted && (
+        <Card sx={{ marginTop: 2, maxWidth: 275, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+          <CardContent>
+            <Typography gutterBottom variant="h6" component="div">
+              Valor enviado:
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {submittedValue}
+            </Typography>
+          </CardContent>
+        </Card>
+      )}
+    </div>
   );
 };
 
 export default SimpleForm;`,
-
-"SimpleForm.css":
-`.simple-form {
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  font-size: 16px;
-  margin-bottom: 10px;
-  display: block;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-p {
-  margin-top: 15px;
-  color: #333;
-}`
 }}
 />
 
@@ -127,6 +103,7 @@ import ComplexForm from "./ComplexForm.js";
  const App = ( ) => {
    return (
     <div>
+      <h1 style={{margin: '16px'}}>Formulario Complejo</h1>
       <ComplexForm />
     </div>
   ) 
@@ -136,7 +113,11 @@ export default App;`,
 
 "/ComplexForm.js":
 `import React, { useState } from 'react';
-import './ComplexForm.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 const ComplexForm = () => {
   const [formData, setFormData] = useState({
@@ -161,44 +142,51 @@ const ComplexForm = () => {
   return (
     <div className="complex-form-container">
       <form onSubmit={handleSubmit} className="complex-form">
-        <label htmlFor="nameInput">
-          Nombre:
-          <input
+        <div>
+            <TextField
             id="nameInput"
+            label="Nombre"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-          />
-        </label>
-        <label htmlFor="emailInput">
-          Correo Electrónico:
-          <input
+            sx={{margin: 2}}
+            />
+        </div>
+        <div>
+            <TextField
             id="emailInput"
+            label="Correo Electrónico"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-          />
-        </label>
-        <label htmlFor="passwordInput">
-          Contraseña:
-          <input
+            sx={{margin: 2}}
+            />
+        </div>
+        <div>
+            <TextField
             id="passwordInput"
+            label="Contraseña"
             type="password"
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-          />
-        </label>
-        <button type="submit">Enviar</button>
+            sx={{margin: 2}}
+            />
+        </div>
+        <Button type="submit" variant="contained" color="primary" sx={{margin: 2, left: 133}}>
+          Enviar
+        </Button>
       </form>
-      <div className="submission-history">
+      <div style={{margin: '16px'}}>
         <h2>Historial de Envíos</h2>
-        <ul>
-          {formSubmissions.map((submission, index) => (
-            <li key={index}>
-              <strong>Envío {index + 1}:</strong>
+        {formSubmissions.map((submission, index) => (
+          <Card key={index} sx={{ marginTop: 2, maxWidth: 380, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                Envío {index + 1}:
+              </Typography>
               <ul>
                 {Object.entries(submission).map(([key, value]) => (
                   <li key={key}>
@@ -206,82 +194,14 @@ const ComplexForm = () => {
                   </li>
                 ))}
               </ul>
-            </li>
-          ))}
-        </ul>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
 };
 
 export default ComplexForm;`,
-
-"ComplexForm.css":
-`.complex-form-container {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 20px;
-  flex-direction: column;
-}
-
-.complex-form {
-  max-width: 300px;
-  padding: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  font-size: 16px;
-  margin-bottom: 10px;
-  display: block;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-.submission-history {
-  max-width: 400px;
-}
-
-h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin-bottom: 10px;
-}
-
-strong {
-  font-weight: bold;
-}`
 }}
 />

@@ -11,6 +11,9 @@ const DynamicSandpack = ({ dynamicFiles, dynamicDependencies, dynamicVisibleFile
     "react-redux" : "latest",
     "react-router-dom" : "latest", 
     "prop-types" : "latest",
+    "@mui/material" : "latest",
+    "@emotion/styled" : "latest",
+    "@emotion/react" : "latest",
   };
 
   const sandpackFiles = {  ...dynamicFiles };
