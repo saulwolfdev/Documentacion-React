@@ -7,16 +7,18 @@ import SelectComponent from './material-ui/SelectComponent';
 import TabsComponent from './material-ui/TabsComponent';
 import ModalComponent from './material-ui/ModalComponent';
 import SimpleForm from './SimpleForm';
+import ComplexForm from './ComplexForm';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <ButtonComponent label='button' variant="contained" color="colorCustom" onClick={()=> console.log('click')} />
+      {/* <ButtonComponent label='button' variant="contained" color="colorCustom" onClick={()=> console.log('click')} />
       <CardComponent />
       <SelectComponent/>
       <TabsComponent />
       <ModalComponent />
-      <SimpleForm />
+      <SimpleForm /> */}
+      <ComplexForm />
     </ThemeProvider>
   )
 }
