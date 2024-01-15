@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import "../styles.css"
+import React, { useState, useEffect } from 'react';
+import "../styles.css";
 
 const StickyNav = ({ links }) => {
   const [clickedLink, setClickedLink] = useState(null);
+  const [showStickyNav, setShowStickyNav] = useState(window.innerWidth >= 1660);
 
   const scrollToSection = (event, sectionId, index) => {
     event.preventDefault();
@@ -18,8 +19,23 @@ const StickyNav = ({ links }) => {
     setClickedLink(index);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      // Adjust the showStickyNav state based on the screen width
+      setShowStickyNav(window.innerWidth >= 1660);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <div className="sticky-nav">  
+    <div className={`sticky-nav ${showStickyNav ? 'visible' : 'hidden'}`}>
       {links.map((link, index) => (
         <a
           key={index}
