@@ -486,4 +486,100 @@ export default SumComponent;`,
   dynamicVisibleFiles={["/App.js", "/SumComponent.js"]}
 />
 
+### useRef
+
+**useRef** es un Hook de React que devuelve un objeto mutable llamado **ref**. El objeto **ref** tiene una propiedad current la cual puede ser utilizada para hacer 
+referencia a un elemento del DOM o a un valor mutable que persiste a través de las renderizaciones de un componente. A diferencia del estado **(useState)** la actualización 
+de una **ref** no provoca una **re-renderización** del componente.
+
+**Cuándo usar useRef**
+
+**- Acceso a elementos del DOM:** Podemos usar **useRef** para acceder directamente a elementos del DOM y realizar operaciones imperativas como enfocar un input, medir un 
+elemento o realizar animaciones directamente.
+
+<CodeBlock
+  codeString={`
+import React, { useRef, useEffect } from 'react';
+
+const DOMElementAccess = () => {
+  // Crear una ref para el input
+  const inputRef = useRef();
+
+  // Función para enfocar el input
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  // useEffect para enfocar el input cuando el componente se monta
+  useEffect(() => {
+    focusInput();
+  }, []);
+
+  return (
+    <div>
+      {/* Asignar la ref al input */}
+      <input type="text" ref={inputRef} />
+      {/* Botón que enfoca el input */}
+      <button onClick={focusInput}>Enfocar Input</button>
+    </div>
+  );
+};
+
+export default DOMElementAccess;
+
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+` import React, { useState } from "react";
+import DOMElementAccess from "./DOMElementAccess";
+
+  const App = () => {
+    return (
+      <div>
+        <DOMElementAccess />        
+      </div>
+    );
+  };
+
+  export default App;`,
+
+"/DOMElementAccess.js":
+`import React, { useRef, useEffect } from 'react';
+
+const DOMElementAccess = () => {
+  // Crear una ref para el input
+  const inputRef = useRef();
+
+  // Función para enfocar el input
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  // useEffect para enfocar el input cuando el componente se monta
+  useEffect(() => {
+    console.log("El componente se ha montado");
+    focusInput();
+  }, []);
+
+  return (
+    <div>
+      {/* Asignar la ref al input */}
+      <input type="text" ref={inputRef} />
+      {/* Botón que enfoca el input */}
+      <button onClick={focusInput}>Enfocar Input</button>
+    </div>
+  );
+};
+
+export default DOMElementAccess;`,  
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/DOMElementAccess.js"]}
+/>
+
+
 Estos son solo algunos ejemplos de hooks en React. Hay otros hooks como **useReducer**, **useCallback**, entre otros que proporcionan funcionalidades adicionales para trabajar con componentes de función en React.
