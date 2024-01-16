@@ -9,6 +9,7 @@ import "../styles.css"
     { id: 'seccion2', text: 'useEffect' },
     { id: 'seccion3', text: 'useContext' },
     { id: 'seccion4', text: 'useMemo' },
+    { id: 'seccion5', text: 'useRef' },
   ]}
 />
 
@@ -486,6 +487,7 @@ export default SumComponent;`,
   dynamicVisibleFiles={["/App.js", "/SumComponent.js"]}
 />
 
+<a id="seccion5"></a>
 ### useRef
 
 **useRef** es un Hook de React que devuelve un objeto mutable llamado **ref**. El objeto **ref** tiene una propiedad current la cual puede ser utilizada para hacer 
@@ -550,13 +552,13 @@ import DOMElementAccess from "./DOMElementAccess";
 "/DOMElementAccess.js":
 `import React, { useRef, useEffect } from 'react';
 
-const DOMElementAccess = () => {
+const DOMElementAccess = ( ) => {
   // Crear una ref para el input
-  const inputRef = useRef();
+  const inputRef = useRef( );
 
   // Función para enfocar el input
-  const focusInput = () => {
-    inputRef.current.focus();
+  const focusInput = ( ) => {
+    inputRef.current.focus( );
   };
 
   // useEffect para enfocar el input cuando el componente se monta
@@ -581,5 +583,113 @@ export default DOMElementAccess;`,
   dynamicVisibleFiles={["/App.js", "/DOMElementAccess.js"]}
 />
 
+**- Persistencia entre renderizaciones:** Las **refs** son útiles para almacenar valores que no causan re-renderizaciones cuando cambian. Esto puede ser útil para ciertos 
+casos de optimización o para almacenar valores que necesitan persistir entre renderizaciones sin afectar el flujo de renderización.
+
+<CodeBlock
+  codeString={`
+import React, { useState, useRef } from 'react';
+
+const PersistenciaEntreRenderizaciones = ( ) => {
+  // Estado para un contador que provoca re-renderizaciones
+  const [contadorNormal, setContadorNormal] = useState(0);
+
+  // Ref para un contador que no provoca re-renderizaciones
+  const contadorPersistente = useRef(0);
+
+  const incrementarContadorNormal = ( ) => {
+    // Incrementar el contador normal (provoca re-renderización)
+    setContadorNormal(contadorNormal + 1);
+  };
+
+  const incrementarContadorPersistente = ( ) => {
+    // Incrementar el contador persistente (no provoca re-renderización)
+    contadorPersistente.current += 1;
+  };
+
+  return (
+    <div>
+      <p>Contador Normal: {contadorNormal}</p>
+      <p>Contador Persistente: {contadorPersistente.current}</p>
+      <button onClick={incrementarContadorNormal}>Incrementar Contador Normal</button>
+      <button onClick={incrementarContadorPersistente}>Incrementar Contador Persistente</button>
+    </div>
+  );
+};
+
+export default PersistenciaEntreRenderizaciones;
+`} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+` import React, { useState } from "react";
+import PersistenciaEntreRenderizaciones from "./PersistenciaEntreRenderizaciones";
+
+  const App = ( ) => {
+    return (
+      <div>
+        <PersistenciaEntreRenderizaciones />        
+      </div>
+    );
+  };
+
+  export default App;`,
+
+"/PersistenciaEntreRenderizaciones.js":
+`import React, { useState, useRef } from 'react';
+
+const PersistenciaEntreRenderizaciones = ( ) => {
+  // Estado para un contador que provoca re-renderizaciones
+  const [contadorNormal, setContadorNormal] = useState(0);
+
+  // Ref para un contador que no provoca re-renderizaciones
+  const contadorPersistente = useRef(0);
+
+  const incrementarContadorNormal = ( ) => {
+    // Incrementar el contador normal (provoca re-renderización)
+    setContadorNormal(contadorNormal + 1);
+  };
+
+  const incrementarContadorPersistente = ( ) => {
+    // Incrementar el contador persistente (no provoca re-renderización)
+    contadorPersistente.current += 1;
+  };
+
+  return (
+    <div>
+      <p>Contador Normal: {contadorNormal}</p>
+      <p>Contador Persistente: {contadorPersistente.current}</p>
+      <button onClick={incrementarContadorNormal}>Incrementar Contador Normal</button>
+      <button onClick={incrementarContadorPersistente}>Incrementar Contador Persistente</button>
+    </div>
+  );
+};
+
+export default PersistenciaEntreRenderizaciones;`,  
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/PersistenciaEntreRenderizaciones.js"]}
+/>
+
+En este ejemplo al hacer clic en **Incrementar Contador Normal** el estado cambia y provoca una re-renderización del componente. 
+En cambio al hacer clic en **Incrementar Contador Persistente** el valor de la ref **contadorPersistente** se incrementa pero no provoca re-renderizaciones del componente. 
+Se veran los cambios en el **DOM** solo cuando el componente se vuelva a renderizar por otros motivos como cambios en el estado o las props, pero no por el cambio en 
+**contadorPersistente.current**.
+Esto resalta la diferencia en el comportamiento entre el **estado** y las **refs** en términos de re-renderización.
+
+**Cuándo no usar useRef en React:**
+
+**- Manejo de estado reactivamente:** Si necesitas que cambios en tus datos provoquen re-renderizaciones es mejor utilizar el estado **useState** en lugar de **useRef**. 
+El estado garantiza una actualización reactiva del componente.
+
+**- Alternativa a useState:** No uses **useRef** como un reemplazo directo de **useState** para manejar el estado de tu componente. 
+Las refs no activan re-renderizaciones y no son adecuadas para manejar cambios reactivos en la UI.
+
+En resumen utiliza **useRef** cuando necesites acceder a elementos del DOM directamente, almacenar datos mutables que no deben causar re-renderizaciones, o mantener datos 
+que persistan entre renderizaciones sin afectar la representación del componente. Evita usar **useRef** cuando estás manejando datos reactivos que deben afectar la UI y 
+provocar re-renderizaciones.
 
 Estos son solo algunos ejemplos de hooks en React. Hay otros hooks como **useReducer**, **useCallback**, entre otros que proporcionan funcionalidades adicionales para trabajar con componentes de función en React.
