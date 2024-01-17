@@ -1,13 +1,29 @@
 import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
 import "../styles.css"
 
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Higher-Order Components' },
+    { id: 'seccion2', text: 'Añadir propiedades adicionales' },
+    { id: 'seccion3', text: 'Compartir estado' },
+    { id: 'seccion4', text: 'Ventajas y Consideraciones' },
+  ]}
+/>
+
+<a id="seccion1"></a>
 #  Higher-Order Components
 
 Higher-Order Component **(HOC)** es una función que toma un componente y devuelve un nuevo componente con funcionalidades adicionales o propiedades. 
 Es una técnica que se utiliza para reutilizar la lógica de componentes y compartir funcionalidades entre diferentes partes de una aplicación. 
 Los **HOC** no son componentes de React en sí mismos, sino funciones que envuelven componentes para extender su comportamiento.
 
-### Ejemplo 1: Añadir propiedades adicionales
+<a id="seccion2"></a>
+### Añadir propiedades adicionales
+
+Cuando se habla de **añadir propiedades adicionales** se refiere a la capacidad de extender las propiedades y métodos de un componente React existente mediante el uso de un 
+**HOC**.
+
+Aquí hay un ejemplo simple para ilustrar cómo un **HOC** puede añadir propiedades adicionales a un componente:
 
 <CodeBlock
   codeString={`
@@ -133,7 +149,12 @@ export default withColor;`,
 
 **App.js** importa y utiliza **ComponenteA** y **ComponenteB** en la composición de la aplicación.
 
-### Ejemplo 2: Compartir estado
+<a id="seccion3"></a>
+### Compartir estado
+
+Cuando se habla de **compartir estado** a través de **HOC** se está refiriendo a la capacidad de pasar cierto estado a varios componentes envolviéndolos con el mismo **HOC**.
+
+**Ejemplo:**
 
 <CodeBlock
   codeString={`
@@ -270,6 +291,7 @@ muestra el contador y un botón para incrementarlo.
 **App.js** en este archivo utilizamos el **HOC** **withCounter** para envolver el componente **CounterComponent** creando así un nuevo componente llamado **CounterWithHOC** 
 luego renderizamos este componente dentro de la aplicación principal.
 
+<a id="seccion4"></a>
 ### Ventajas:
 
 **- Reutilización de Código:** Permite la reutilización de lógica y funcionalidades en diferentes partes de una aplicación.
