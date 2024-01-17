@@ -10,13 +10,15 @@ import "../styles.css"
     { id: 'seccion3', text: 'useContext' },
     { id: 'seccion4', text: 'useMemo' },
     { id: 'seccion5', text: 'useRef' },
+    { id: 'seccion6', text: 'useReducer' },
+    { id: 'seccion7', text: 'useCallback' },
   ]}
 />
 
 # Hooks
 
  Los **hooks** son funciones especiales proporcionadas por React que permiten a los componentes funcionales tener **estado y ciclo de vida**. 
- Algunos hooks comunes incluyen **useState**, **useEffect**, **useContext**, **useMemo**.
+ Algunos hooks comunes incluyen **useState**, **useEffect**, **useContext**, **useMemo**, **useReducer**, **useCallback**.
 
 <a id="seccion1"></a>
  ### useState
@@ -562,8 +564,8 @@ const DOMElementAccess = ( ) => {
   };
 
   // useEffect para enfocar el input cuando el componente se monta
-  useEffect(() => {
-    console.log("El componente se ha montado");
+  useEffect(() => {    
+  console.log("El componente se ha montado");
     focusInput();
   }, []);
 
@@ -692,4 +694,172 @@ En resumen utiliza **useRef** cuando necesites acceder a elementos del DOM direc
 que persistan entre renderizaciones sin afectar la representación del componente. Evita usar **useRef** cuando estás manejando datos reactivos que deben afectar la UI y 
 provocar re-renderizaciones.
 
-Estos son solo algunos ejemplos de hooks en React. Hay otros hooks como **useReducer**, **useCallback**, entre otros que proporcionan funcionalidades adicionales para trabajar con componentes de función en React.
+<a id="seccion6"></a>
+### useReducer
+
+useReducer es un hook que se utiliza para gestionar el estado de un componente de manera más avanzada, especialmente cuando el estado depende del **estado anterior** y la 
+lógica para actualizarlo es más compleja. A diferencia de **useState** que maneja un solo valor de estado, useReducer maneja el estado a través de una **función reductora**. 
+La función reductora recibe el **estado actual** y una **acción** y devuelve un **nuevo estado**.
+
+### Sintaxis
+
+La sintaxis básica de useReducer en React es la siguiente:
+
+<CodeBlock
+  codeString={`
+    const [state, dispatch] = useReducer(reducer, initialState);
+  `} 
+  language='javascript'
+/>
+
+**state (cualquier tipo):** Es el estado actual gestionado por useReducer. Puede ser de cualquier tipo y será el resultado de aplicar las acciones al estado inicial 
+utilizando el reductor.
+
+**dispatch (función):** Es una función que se utiliza para enviar acciones al reductor. Cada vez que se llama a dispatch con una acción la función reductora se ejecuta y 
+actualiza el estado en consecuencia.
+
+**reducer (función):** Esta función se encarga de especificar cómo se debe actualizar el estado en respuesta a diferentes acciones. Toma dos argumentos: el estado actual y 
+una acción, y devuelve el nuevo estado.
+
+**initialState (cualquier tipo):** Es el estado inicial que se utilizará antes de que se realice cualquier acción. Puede ser de cualquier tipo (objeto, número, cadena, etc.) 
+dependiendo de las necesidades de nuestra aplicación.
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Counter from './Counter';
+
+// App component
+const App = ( ) => {
+  return (
+    <div>
+      <h1>Counter App</h1>
+      <Counter />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Counter.js":
+`import React, { useReducer } from 'react';
+
+// Reducer function
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+// Counter component
+const Counter = ( ) => {
+  // Initial state
+  const initialState = { count: 0 };
+
+  // useReducer
+  const [state, dispatch] = useReducer(counterReducer, initialState);
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+    </div>
+  );
+};
+
+export default Counter;`,  
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Counter.js"]}
+/>
+
+Este ejemplo utiliza **useReducer** para gestionar el estado de un contador. Cuando se hace clic en los botones, se envían acciones al reductor, que actualiza el estado en 
+consecuencia.
+
+<a id="seccion7"></a>
+### useCallback
+
+useCallback es un hook que se utiliza para memorizar funciones lo que significa que ayuda a evitar la recreación de funciones en cada renderizado, optimizando así el 
+rendimiento de la aplicación. Se utiliza comúnmente para mejorar el rendimiento de componentes que dependen de funciones callback especialmente en situaciones donde estas 
+funciones se pasan como propiedades a componentes hijos.
+
+**Sintaxis**
+
+<CodeBlock
+  codeString={`
+    const memoizedCallback = useCallback(
+      ( ) => {
+        // función a memoizar
+      },
+      [dependencias]
+    );
+  `} 
+  language='javascript'
+/>
+
+- El primer argumento de useCallback es la función que quieres memorizar.
+
+- El segundo argumento es un array de dependencias. Si alguna de estas dependencias cambia entre renderizaciones la función se volverá a crear de lo contrario se devolverá 
+la versión memorizada.
+
+**Ejemplo:**
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import CounterComponent from './CounterComponent';
+
+const App = () => {
+  return (
+    <div>
+      <CounterComponent label="Count1" />
+      <CounterComponent label="Count2 con useCallback" />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ButtonComponent.js":
+`import React from 'react';
+
+const ButtonComponent = ({ onClick, label }) => {
+  console.log(\`Renderizando \${label}\`);
+  return <button onClick={onClick}>{label}</button>;
+};
+
+export default ButtonComponent;`,
+
+"/CounterComponent.js":
+`import React, { useState, useCallback } from 'react';
+import ButtonComponent from './ButtonComponent';
+
+const CounterComponent = ({ label }) => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  return (
+    <div>
+      <p>{label}: {count}</p>
+      <ButtonComponent onClick={handleClick} label={\`Incrementar \${label}\`} />
+    </div>
+  );
+};
+
+export default CounterComponent;`,  
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ButtonComponent.js", "/CounterComponent.js"]}
+/>
+
