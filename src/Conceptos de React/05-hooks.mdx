@@ -11,13 +11,14 @@ import "../styles.css"
     { id: 'seccion4', text: 'useMemo' },
     { id: 'seccion5', text: 'useRef' },
     { id: 'seccion6', text: 'useReducer' },
+    { id: 'seccion7', text: 'useCallback' },
   ]}
 />
 
 # Hooks
 
  Los **hooks** son funciones especiales proporcionadas por React que permiten a los componentes funcionales tener **estado y ciclo de vida**. 
- Algunos hooks comunes incluyen **useState**, **useEffect**, **useContext**, **useMemo**, *useReducer**.
+ Algunos hooks comunes incluyen **useState**, **useEffect**, **useContext**, **useMemo**, **useReducer**, **useCallback**.
 
 <a id="seccion1"></a>
  ### useState
@@ -782,4 +783,83 @@ export default Counter;`,
 Este ejemplo utiliza **useReducer** para gestionar el estado de un contador. Cuando se hace clic en los botones, se envían acciones al reductor, que actualiza el estado en 
 consecuencia.
 
-Estos son solo algunos ejemplos de hooks en React. Hay otros hooks como **useCallback** entre otros que proporcionan funcionalidades adicionales para trabajar con componentes de función en React.
+<a id="seccion7"></a>
+### useCallback
+
+useCallback es un hook que se utiliza para memorizar funciones lo que significa que ayuda a evitar la recreación de funciones en cada renderizado, optimizando así el 
+rendimiento de la aplicación. Se utiliza comúnmente para mejorar el rendimiento de componentes que dependen de funciones callback especialmente en situaciones donde estas 
+funciones se pasan como propiedades a componentes hijos.
+
+**Sintaxis**
+
+<CodeBlock
+  codeString={`
+    const memoizedCallback = useCallback(
+      ( ) => {
+        // función a memoizar
+      },
+      [dependencias]
+    );
+  `} 
+  language='javascript'
+/>
+
+- El primer argumento de useCallback es la función que quieres memorizar.
+
+- El segundo argumento es un array de dependencias. Si alguna de estas dependencias cambia entre renderizaciones la función se volverá a crear de lo contrario se devolverá 
+la versión memorizada.
+
+**Ejemplo:**
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import CounterComponent from './CounterComponent';
+
+const App = () => {
+  return (
+    <div>
+      <CounterComponent label="Count1" />
+      <CounterComponent label="Count2 con useCallback" />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ButtonComponent.js":
+`import React from 'react';
+
+const ButtonComponent = ({ onClick, label }) => {
+  console.log(\`Renderizando \${label}\`);
+  return <button onClick={onClick}>{label}</button>;
+};
+
+export default ButtonComponent;`,
+
+"/CounterComponent.js":
+`import React, { useState, useCallback } from 'react';
+import ButtonComponent from './ButtonComponent';
+
+const CounterComponent = ({ label }) => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  return (
+    <div>
+      <p>{label}: {count}</p>
+      <ButtonComponent onClick={handleClick} label={\`Incrementar \${label}\`} />
+    </div>
+  );
+};
+
+export default CounterComponent;`,  
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ButtonComponent.js", "/CounterComponent.js"]}
+/>
+
