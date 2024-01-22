@@ -18,9 +18,136 @@ Cada componente puede contener su propio estado y lógica, y puede ser compuesto
 
 {
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-  <img src={Reacts} alt="Texto Alternativo" style={{ width: '700px', height: '380px', position: 'relative', margin: '32px' }} />
+  <h2>React Components</h2>
 </div>
 }
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import "./Styles.css";
+
+const Header = () => <div className="header">Header</div>;
+const SidebarMenu = () => <div className="sidebar-menu">Menu</div>;
+const Form = () => <div className="form">Form</div>;
+const Text = () => <div className="text">Text</div>;
+const Image = () => <div className="image">Image</div>;
+const Card = () => <div className="card">Card</div>;
+const Footer = () => <div className="footer">Footer</div>;
+
+const App = () => {
+  return (
+    <div className="app">
+      <Header />
+      <div className="main-content">
+        <SidebarMenu />
+        <div className="content">
+          <Form />
+          <Text />
+        </div>
+        <div className="sidebar">
+          <Card />
+          <Image />
+          <Card />
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Styles.css":`
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.app {
+  font-family: sans-serif;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #ff6347;
+  padding: 20px;
+  color: white;
+  height: 27px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar-menu {
+  background-color: #ffa07a;  
+  padding: 20px;
+  color: white;
+  width: 55px
+}
+
+.content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  background-color: #87CEEB;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 143px
+}
+
+.text {
+  background-color: #778899;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 100px
+}
+
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  background-color: #9370db;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 60px
+}
+
+.card {
+  background-color: #3cb371;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 60px
+}
+
+.footer {
+  background-color: #b0c4de;
+  padding: 20px;
+  color: white;
+  height: 10px;
+}
+
+`
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Styles.css"]}
+/>
 
 ### Definición de Componente:
 
@@ -38,8 +165,8 @@ describen cómo se debe renderizar la interfaz de usuario.
 
 <CodeBlock
   codeString={`
-  function Saludo(props) {
-    return <p>Hola, {props.nombre}!</p>;
+  function Header() {
+    return <div className="header">Header</div>;
   }
   `} 
   language='javascript'
@@ -49,29 +176,38 @@ describen cómo se debe renderizar la interfaz de usuario.
 dynamicFiles={{    
 "/App.js": 
 `import React from 'react';
-import Saludo from './Saludo';
+import Header from './Header';
 
 function App() {
   return (
     <div>
-      <Saludo nombre="Usuario" />
+      <Header />
     </div>
   );
 }
 
 export default App;`, 
 
-"/Saludo.js":
+"/Header.js":
 `import React from 'react';
+import "./Styles.css";
 
-function Saludo(props) {
-  return <p>Hola, {props.nombre}!</p>;
+function Header() {
+  return <div className="header">Header</div>;
 }
 
-export default Saludo;`,
+export default Header;`,
+
+"/Styles.css":
+`.header {
+  background-color: #ff6347;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}`
   }}
   
-  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+  dynamicVisibleFiles={["/App.js", "/Header.js", "/Styles.css"]}
 />
 
 ### Con variable:
@@ -82,8 +218,8 @@ export default Saludo;`,
 
 <CodeBlock
   codeString={`
-  const Saludo = function(props) {
-    return <p>Hola, {props.nombre}!</p>;
+  const Form = ( )=> {
+    return <div className="form">Form</div>;
   };
   `} 
   language='javascript'
@@ -93,29 +229,40 @@ export default Saludo;`,
 dynamicFiles={{    
 "/App.js": 
 `import React from 'react';
-import Saludo from './Saludo';
+import Form from './Form';
 
 const App=()=> {
   return (
     <div>
-      <Saludo nombre="Usuario" />
+      <Form />
     </div>
   );
 }
 
 export default App;`, 
 
-"/Saludo.js":
+"/Form.js":
 `import React from 'react';
+import "./Styles.css";
 
-const Saludo = (props)=> {
-    return <p>Hola, {props.nombre}!</p>;
+const Form = ( )=> {
+    return <div className="form">Form</div>;
 };
 
-export default Saludo;`,
+export default Form;`,
+
+"/Styles.css":
+`.form {
+  background-color: #87CEEB;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 143px;
+  text-align: center;
+}`
   }}
   
-  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+  dynamicVisibleFiles={["/App.js", "/Form.js", "/Styles.css"]}
 />
 
 <a id="seccion3"></a>
@@ -129,9 +276,9 @@ export default Saludo;`,
 
 <CodeBlock
   codeString={`
-  class Saludo extends React.Component {
-    render() {
-        return <p>Hola, {this.props.nombre}!</p>;
+  class Footer extends Component {
+    render( ) {
+      return <div className="footer">Footer</div>;
     }
   }
   `} 
@@ -141,14 +288,14 @@ export default Saludo;`,
 <DynamicSandpack
 dynamicFiles={{    
 "/App.js": 
-`import React from 'react';
-import Saludo from './Saludo';
+`import React, { Component } from "react";
+import Footer from './Footer';
 
-class App extends React.Component {
-  render() {
+class App extends Component {
+  render( ) {
     return (
       <div>
-        <Saludo nombre="Usuario" />
+        <Footer />
       </div>
     );
   }
@@ -156,19 +303,28 @@ class App extends React.Component {
 
 export default App;`, 
 
-"/Saludo.js":
-`import React from 'react';
+"/Footer.js":
+`import React, { Component } from "react";
+import "./Styles.css";
 
-class Saludo extends React.Component {
-  render() {
-    return <p>Hola, {this.props.nombre}!</p>;
+class Footer extends Component {
+  render( ) {
+    return <div className="footer">Footer</div>;
   }
 }
 
-export default Saludo;`,
+export default Footer;`,
+
+"/Styles.css":
+`.footer {
+  background-color: #b0c4de;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}`
   }}
   
-  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+  dynamicVisibleFiles={["/App.js", "/Footer.js", "/Styles.css"]}
 />
 
 ### Con variable:
@@ -179,9 +335,9 @@ export default Saludo;`,
 
 <CodeBlock
   codeString={`
-  const Saludo = class extends React.Component {
+  const Card = class extends Component {
     render() {
-        return <p>Hola, {this.props.nombre}!</p>;
+      return <div className="card">Card</div>;
     }
   };
   `} 
@@ -191,14 +347,14 @@ export default Saludo;`,
 <DynamicSandpack
 dynamicFiles={{    
 "/App.js": 
-`import React from 'react';
-import Saludo from './Saludo';
+`import React, { Component } from "react";
+import Card from './Card';
 
-const App = class extends React.Component {
+const App = class extends Component {
   render() {
     return (
       <div>
-        <Saludo nombre="Usuario" />
+        <Card />
       </div>
     );
   }
@@ -206,17 +362,31 @@ const App = class extends React.Component {
 
 export default App;`, 
 
-"/Saludo.js":
-`import React from 'react';
+"/Card.js":
+`import React, { Component } from "react";
+import "./Styles.css";
 
-  const Saludo = class extends React.Component {
-    render() {
-        return <p>Hola, {this.props.nombre}!</p>;
-    }
-  };
+const Card = class extends Component {
+  render() {
+    return <div className="card">Card</div>;
+  }
+};
 
-export default Saludo;`,
+export default Card;`,
+
+"/Styles.css":
+`.card {
+  background-color: #3cb371;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}`
+
+
   }}
   
-  dynamicVisibleFiles={["/App.js", "/Saludo.js"]}
+  dynamicVisibleFiles={["/App.js", "/Card.js", "/Styles.css"]}
 />

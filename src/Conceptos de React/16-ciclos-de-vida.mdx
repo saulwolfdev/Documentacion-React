@@ -1,4 +1,5 @@
 import { StickyNav,InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import Ciclos from "../assets/ciclos de vida.png";
 import "../styles.css"
 
 # Ciclos de vida
@@ -8,9 +9,15 @@ y otros hooks relacionados.
 Los componentes de función no tienen los mismos métodos de ciclo de vida que los componentes de clase, pero **useEffect** proporciona una forma de realizar efectos 
 secundarios en diferentes momentos del ciclo de vida.
 
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Ciclos} alt="Texto Alternativo" style={{ width: '550px', height: '390px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
 ### Fases del Ciclo de Vida:
 
-**Montaje (Mounting):**
+**Inicialización y Montaje (Mounting):**
 
 **- useEffect en el montaje:** Al utilizar useEffect con una función como argumento, podemos realizar operaciones cuando el componente se monta por primera vez. Esto es ideal 
 para inicializaciones, solicitudes de red y otros efectos relacionados con el montaje.
@@ -24,11 +31,6 @@ cambian. Esto es útil para responder a cambios específicos y realizar acciones
 
 **- useEffect con función de retorno:** La función de retorno de useEffect se ejecuta justo antes de que el componente se desmonte. Aquí podemos realizar tareas de limpieza 
 o liberación de recursos.
-
-**Manejo de Errores (Error Handling):**
-
-**- useEffect con try-catch para errores:** Podemos usar bloques try-catch dentro de useEffect para manejar errores durante operaciones asincrónicas, como solicitudes a una 
-API.
 
 **Ejemplo:**
 

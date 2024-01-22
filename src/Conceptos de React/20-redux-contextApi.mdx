@@ -1,4 +1,6 @@
 import { CodeBlock, StickyNav, SandPack } from '../components-mdx/index.js';
+import Redux from "../assets/Redux.png";
+import Context from "../assets/Context-Api.png";
 import "../styles.css"
 
 <StickyNav
@@ -27,6 +29,12 @@ acción.
 La arquitectura de **Redux** sigue el patrón de diseño de Flux pero simplifica y organiza aún más el manejo del estado. Aunque Redux puede ser inicialmente más verboso que 
 algunos enfoques alternativos su estructura clara y su capacidad para gestionar estados complejos y flujos de datos hacen que sea una elección popular en aplicaciones de 
 gran escala o donde la gestión del estado es crítica.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Redux} alt="Texto Alternativo" style={{ width: '650px', height: '350px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
 
 <a id="seccion1"></a>
 **Instalar las dependencias:**
@@ -217,6 +225,12 @@ Cuando se hace clic en los botones **Incrementar** o **Decrementar** se despacha
 
 La API de Context en React es útil para pasar datos a través del árbol de componentes sin tener que pasar props manualmente en cada nivel. 
 
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Context} alt="Texto Alternativo" style={{ width: '740px', height: '340px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
 **Crear el contexto:**
 
 Primero crea un archivo que contenga el contexto y sus proveedores. En este ejemplo, llamaremos al archivo **MyContext.js**:
@@ -308,11 +322,37 @@ Ahora podemos usar este contexto en los componentes que lo requieran:
 
 <SandPack 
 files={{
-"/MyContext.js": 
+"/App.js": 
+`import React from 'react';
+    import { MyProvider, useMyContext } from './MyContext';
+
+    const Counter = ( ) => {
+    const { state, dispatch } = useMyContext( );
+
+    return (
+        <div>
+        <h1>Contador: {state.count}</h1>
+        <button onClick={( ) => dispatch({ type: 'DECREMENT' })}>Decrementar</button>
+        <button onClick={( ) => dispatch({ type: 'INCREMENT' })}>Incrementar</button>        
+        </div>
+    );
+    };
+
+    const App = ( ) => {
+    return (
+        <MyProvider>
+        <Counter />
+        </MyProvider>
+    );
+    };
+
+    export default App;`,
+
+    "/MyContext.js": 
 `import React, { createContext, useContext, useReducer } from "react";
 
 // Creamos el contexto
-const MyContext = createContext();
+const MyContext = createContext( );
 
 // Creamos el proveedor del contexto
 const MyProvider = ({ children }) => {
@@ -341,7 +381,7 @@ const MyProvider = ({ children }) => {
 };
 
 // Función para utilizar el contexto en componentes hijos
-const useMyContext = () => {
+const useMyContext = ( ) => {
   const context = useContext(MyContext);
   if (!context) {
     throw new Error("useMyContext debe ser utilizado dentro de un MyProvider");
@@ -350,33 +390,6 @@ const useMyContext = () => {
 };
 
 export { MyProvider, useMyContext };`,
-
-
-"/App.js": 
-`import React from 'react';
-    import { MyProvider, useMyContext } from './MyContext';
-
-    const Counter = () => {
-    const { state, dispatch } = useMyContext();
-
-    return (
-        <div>
-        <h1>Contador: {state.count}</h1>
-        <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrementar</button>
-        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Incrementar</button>        
-        </div>
-    );
-    };
-
-    const App = () => {
-    return (
-        <MyProvider>
-        <Counter />
-        </MyProvider>
-    );
-    };
-
-    export default App;`,
 }}
 />
 

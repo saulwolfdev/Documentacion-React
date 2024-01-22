@@ -12,7 +12,7 @@ Esto puede ser útil en situaciones donde necesitas renderizar un componente en 
 Supongamos que tenemos un componente Modal en React que deseamos renderizar fuera del árbol de componentes principal.
 
 <SandPack 
-files={{    
+files={{  
 "/App.js": 
 `import React from "react";
 import Modal from "./Modal.js";
@@ -45,9 +45,9 @@ const Modal = () => {
 
   return (
     <div>
-      <button onClick={openModal}>Abrir Modal</button>
+      <button className="modal-button" onClick={openModal}>Abrir Modal</button>
       <Portal isOpen={modalOpen} onClose={closeModal}>
-        <ModalContent />
+        <ModalContent  onClose={closeModal}/>
       </Portal>
     </div>
   );
@@ -58,29 +58,70 @@ export default Modal;
 
 "ModalContent.js":
 `import React from 'react';
+import './styles.css';
 
-const ModalContent = () => (
-  <div
-    style={{
-      position: 'fixed',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      padding: '20px',
-      borderRadius: '8px',
-      boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-      zIndex: '1000',
-    }}
-  >
-    <h2>Contenido del Modal</h2>
-    <p>
-      Este es un ejemplo de modal renderizado fuera del árbol de componentes principal.
-    </p>
+const ModalContent = ({ onClose }) => (
+  <div>
+    <div className="modal-overlay"></div>
+    <div className="modal-content">
+      <button className="close-button" onClick={onClose}>
+        X
+      </button>
+      <h2>Contenido del Modal</h2>
+      <p>
+        Este es un ejemplo de modal renderizado fuera del árbol de componentes
+        principal.
+      </p>
+    </div>
   </div>
 );
 
-export default ModalContent;`,
+export default ModalContent`,
+
+"styles.css": 
+`.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro semitransparente */
+  z-index: 999; /* Asegura que el fondo esté detrás del modal */
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.close-button {
+  left: 192px;
+  position: relative;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.modal-button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FFA500;
+  color: white
+}`,
 
 "Portal.js":
 `import React from "react";
@@ -91,13 +132,14 @@ const Portal = ({ isOpen, onClose, children }) => {
 
   return ReactDOM.createPortal(
     <>
-      <button onClick={onClose}>Cerrar</button>
       {children}
     </>,
     document.body
   );
 };
 
-export default Portal;`
+export default Portal;`  
+
+
 }}
 />

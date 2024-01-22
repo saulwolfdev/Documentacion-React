@@ -1,4 +1,5 @@
 import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import Router from "../assets/React-Router.png";
 import "../styles.css"
 
 <StickyNav
@@ -18,6 +19,12 @@ import "../styles.css"
 Proporciona una forma declarativa y eficiente de definir las rutas de la aplicación lo que significa que puedes especificar qué componentes deben renderizarse cuando la URL de 
 la aplicación cambia.
 
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Router} alt="Texto Alternativo" style={{ width: '650px', height: '390px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
 ## Componentes Básicos de React Router
 
 <a id="seccion1"></a>
@@ -27,7 +34,7 @@ la aplicación cambia.
   codeString={`
   import { BrowserRouter as Router } from 'react-router-dom';
 
-    const App = () => (
+    const App = ( ) => (
     <Router>
         {/* Rutas y componentes aquí */}
     </Router>
@@ -43,9 +50,9 @@ la aplicación cambia.
   codeString={`
     import { Route } from 'react-router-dom';
 
-    const Home = () => <div>Home Component</div>;
+    const Home = ( ) => <div>Home Component</div>;
 
-    const App = () => (
+    const App = ( ) => (
         <div>
             <Route path="/" component={Home} />
         </div>
@@ -61,7 +68,7 @@ la aplicación cambia.
   codeString={`
     import { Link } from 'react-router-dom';
 
-    const Navigation = () => (
+    const Navigation = ( ) => (
         <div>
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
@@ -78,7 +85,7 @@ la aplicación cambia.
   codeString={`
     import { Routes, Route } from 'react-router-dom';
 
-    const App = () => (
+    const App = ( ) => (
         <Routes>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
@@ -96,7 +103,7 @@ la aplicación cambia.
   codeString={`
     import { Redirect } from 'react-router-dom';
 
-    const App = () => (
+    const App = ( ) => (
         <Routes>
             <Redirect from="/old-url" to="/new-url" />
             {/* Otras rutas */}
@@ -114,11 +121,11 @@ la aplicación cambia.
     import React from 'react';
     import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-    const Home = () => <div>Home Component</div>;
-    const About = () => <div>About Component</div>;
-    const Contact = () => <div>Contact Component</div>;
+    const Home = ( ) => <div>Home Component</div>;
+    const About = ( ) => <div>About Component</div>;
+    const Contact = ( ) => <div>Contact Component</div>;
 
-    const Navigation = () => (
+    const Navigation = ( ) => (
         <div>
             <Link to="/">Home</Link>
             <Link to="/about">About</Link>
@@ -126,7 +133,7 @@ la aplicación cambia.
         </div>
     );
 
-    const App = () => (
+    const App = ( ) => (
         <Router>
             <Navigation />
             <Routes>
@@ -150,11 +157,11 @@ dynamicFiles={{
 `import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-const Home = () => <div>Home Component</div>;
-const About = () => <div>About Component</div>;
-const Contact = () => <div>Contact Component</div>;
+const Home = ( ) => <div>Home Component</div>;
+const About = ( ) => <div>About Component</div>;
+const Contact = ( ) => <div>Contact Component</div>;
 
-const Navigation = () => (
+const Navigation = ( ) => (
   <div>
     <Link to="/">Home/ </Link>
     <Link to="/about">About/ </Link>
@@ -162,7 +169,7 @@ const Navigation = () => (
   </div>
 );
 
-const App = () => {
+const App = ( ) => {
   return (
     <>
       <Router>

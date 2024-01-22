@@ -1,4 +1,5 @@
 import { StickyNav,CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import Virtual from "../assets/virtual DOM.png";
 import "../styles.css"
 
 <StickyNav
@@ -23,6 +24,12 @@ La idea detrás del **Virtual DOM** es optimizar la manipulación y actualizaci�
 en los datos o estado de la aplicación **React** realiza los cambios primero en el **Virtual DOM** y luego compara este último con el **DOM real**. 
 Después de la comparación **React** determina cuáles son los cambios reales y los aplica de manera eficiente en el **DOM real** minimizando la cantidad de manipulación directa 
 del **DOM** y mejorando el rendimiento.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Virtual} alt="Texto Alternativo" style={{ width: '750px', height: '400px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
 
 <a id="seccion2"></a>
 - ###  Creación del Virtual DOM:

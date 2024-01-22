@@ -1,10 +1,17 @@
 import { StickyNav,CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import Unidireccionalidad from "../assets/Unidireccionalidad.png";
 import "../styles.css"
 
 # Unidireccionalidad de Datos
 
 En React los datos fluyen en una dirección específica de arriba hacia abajo a través de los componentes. Esto se conoce como unidireccionalidad de datos o "flujo unidireccional". 
 La idea es que el componente principal pasa datos a los componentes secundarios a través de las props.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Unidireccionalidad} alt="Texto Alternativo" style={{ width: '750px', height: '390px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
 
 <CodeBlock
   codeString={`
