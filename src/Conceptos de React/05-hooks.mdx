@@ -375,7 +375,7 @@ dynamicFiles={{
   function App() {
     return (
       <UserProvider>
-        <div>
+        <div  className="app-container">
           <h1>My App</h1>
           <UserProfile />
         </div>
@@ -387,15 +387,15 @@ dynamicFiles={{
 
 "/UserProfile.js":
 `import React, { useContext } from 'react';
-  import UserContext from './UserContext';
+import UserContext from './UserContext';
+import './styles.css';
 
   const UserProfile = () => {
-    const user = useContext(UserContext);
-
+  const user = useContext(UserContext);
     return (
       <div>
-        <h2>User Profile</h2>
-        <p>Username: {user.username}</p>
+        <h2 className="profile-heading">User Profile</h2>
+        <p className="profile-username">Username: {user.username}</p>
       </div>
     );
   };
@@ -415,9 +415,28 @@ dynamicFiles={{
   };
 
   export default UserContext`,
+
+  "/styles.css": 
+`.app-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.profile-heading {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+}
+
+.profile-username {
+  color: #555;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/UserProfile.js", "/UserContext.js"]}
+  dynamicVisibleFiles={["/App.js", "/UserProfile.js", "/UserContext.js", "/styles.css"]}
 />
 
 De esta manera **UserProfile** puede acceder al contexto de usuario y mostrar la información del usuario actual. 
@@ -521,10 +540,10 @@ import SumComponent from "./SumComponent";
     const incrementB = () => setNumberB(numberB + 2);
 
     return (
-      <div>
+      <div className="sum-container">
         <SumComponent a={numberA} b={numberB} />
-        <button onClick={incrementA}>Suma +1</button>
-        <button onClick={incrementB}>Suma +2</button>
+        <button className="button-sum" onClick={incrementA}>Suma +1</button>
+        <button className="button-sum" onClick={incrementB}>Suma +2</button>
       </div>
     );
   };
@@ -533,6 +552,7 @@ import SumComponent from "./SumComponent";
 
 "/SumComponent.js":
 `import React, { useMemo } from "react";
+import './styles.css';
 
 const SumComponent = ({ a, b }) => {
   // Función para realizar la suma
@@ -545,15 +565,41 @@ const SumComponent = ({ a, b }) => {
 
   return (
     <div>
-      <p>Suma: {sum}</p>
+      <p className="sum-paragraph">Suma: {sum}</p>
     </div>
   );
 };
 
 export default SumComponent;`,  
+
+"/styles.css": 
+`.sum-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.sum-paragraph {
+  font-size: 18px;
+  color: #333;
+}
+
+.button-sum {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white;
+  margin: 8px
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/SumComponent.js"]}
+  dynamicVisibleFiles={["/App.js", "/SumComponent.js", "/styles.css"]}
 />
 
 <a id="seccion5"></a>
@@ -620,6 +666,7 @@ import DOMElementAccess from "./DOMElementAccess";
 
 "/DOMElementAccess.js":
 `import React, { useRef, useEffect } from 'react';
+import './styles.css';
 
 const DOMElementAccess = ( ) => {
   // Crear una ref para el input
@@ -637,19 +684,50 @@ const DOMElementAccess = ( ) => {
   }, []);
 
   return (
-    <div>
+    <div className="input-container">
       {/* Asignar la ref al input */}
-      <input type="text" ref={inputRef} />
+      <input type="text" className="custom-input" ref={inputRef} />
       {/* Botón que enfoca el input */}
-      <button onClick={focusInput}>Enfocar Input</button>
+      <button className="custom-button" onClick={focusInput}>
+        Enfocar Input
+      </button>
     </div>
   );
 };
 
-export default DOMElementAccess;`,  
+export default DOMElementAccess;`, 
+
+"/styles.css": 
+`.input-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.custom-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.custom-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/DOMElementAccess.js"]}
+  dynamicVisibleFiles={["/App.js", "/DOMElementAccess.js", "/styles.css"]}
 />
 
 **- Persistencia entre renderizaciones:** Las **refs** son útiles para almacenar valores que no causan re-renderizaciones cuando cambian. Esto puede ser útil para ciertos 
@@ -709,6 +787,7 @@ import PersistenciaEntreRenderizaciones from "./PersistenciaEntreRenderizaciones
 
 "/PersistenciaEntreRenderizaciones.js":
 `import React, { useState, useRef } from 'react';
+import './styles.css';
 
 const PersistenciaEntreRenderizaciones = ( ) => {
   // Estado para un contador que provoca re-renderizaciones
@@ -725,22 +804,67 @@ const PersistenciaEntreRenderizaciones = ( ) => {
   const incrementarContadorPersistente = ( ) => {
     // Incrementar el contador persistente (no provoca re-renderización)
     contadorPersistente.current += 1;
+    console.log('incrementa pero no renderiza')
   };
 
   return (
-    <div>
-      <p>Contador Normal: {contadorNormal}</p>
-      <p>Contador Persistente: {contadorPersistente.current}</p>
-      <button onClick={incrementarContadorNormal}>Incrementar Contador Normal</button>
-      <button onClick={incrementarContadorPersistente}>Incrementar Contador Persistente</button>
+    <div className="counter-container">
+      <div className="counter-box">
+        <p className="counter-label">Contador Normal:</p>
+        <p className="counter-value">{contadorNormal}</p>
+        <button onClick={incrementarContadorNormal}>Incrementar Contador Normal</button>
+      </div>
+      <div className="counter-box">
+        <p className="counter-label">Contador Persistente:</p>
+        <p className="counter-value">{contadorPersistente.current}</p>
+        <button onClick={incrementarContadorPersistente}>Incrementar Contador Persistente</button>
+      </div>
     </div>
   );
 };
 
 export default PersistenciaEntreRenderizaciones;`,  
+
+"/styles.css": 
+`.counter-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.counter-box {
+  text-align: center;
+}
+
+.counter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/PersistenciaEntreRenderizaciones.js"]}
+  dynamicVisibleFiles={["/App.js", "/PersistenciaEntreRenderizaciones.js", "/styles.css"]}
 />
 
 En este ejemplo al hacer clic en **Incrementar Contador Normal** el estado cambia y provoca una re-renderización del componente. 
@@ -801,7 +925,7 @@ import Counter from './Counter';
 const App = ( ) => {
   return (
     <div>
-      <h1>Counter App</h1>
+      <h1>Counter App:</h1>
       <Counter />
     </div>
   );
@@ -811,6 +935,7 @@ export default App;`,
 
 "/Counter.js":
 `import React, { useReducer } from 'react';
+import './styles.css';
 
 // Reducer function
 const counterReducer = (state, action) => {
@@ -833,18 +958,61 @@ const Counter = ( ) => {
   const [state, dispatch] = useReducer(counterReducer, initialState);
 
   return (
-    <div>
-      <p>Count: {state.count}</p>
-      <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
-      <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+    <div className="counter-container">
+      <p className="counter-label">Count:</p>
+      <p className="counter-value">{state.count}</p>
+      <div className="button-container">
+        <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      </div>
     </div>
   );
 };
 
-export default Counter;`,  
+export default Counter;`, 
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.counter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  margin: 8px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/Counter.js"]}
+  dynamicVisibleFiles={["/App.js", "/Counter.js", "/styles.css"]}
 />
 
 Este ejemplo utiliza **useReducer** para gestionar el estado de un contador. Cuando se hace clic en los botones, se envían acciones al reductor, que actualiza el estado en 
@@ -897,10 +1065,11 @@ export default App;`,
 
 "/ButtonComponent.js":
 `import React from 'react';
+import './styles.css';
 
 const ButtonComponent = ({ onClick, label }) => {
   console.log(\`Renderizando \${label}\`);
-  return <button onClick={onClick}>{label}</button>;
+  return <button className="custom-button" onClick={onClick}>{label}</button>;
 };
 
 export default ButtonComponent;`,
@@ -908,6 +1077,7 @@ export default ButtonComponent;`,
 "/CounterComponent.js":
 `import React, { useState, useCallback } from 'react';
 import ButtonComponent from './ButtonComponent';
+import './styles.css';
 
 const CounterComponent = ({ label }) => {
   const [count, setCount] = useState(0);
@@ -917,16 +1087,50 @@ const CounterComponent = ({ label }) => {
   }, [count]);
 
   return (
-    <div>
-      <p>{label}: {count}</p>
-      <ButtonComponent onClick={handleClick} label={\`Incrementar \${label}\`} />
+    <div className="counter-container">
+      <p className="counter-label">{label}:</p>
+      <p className="counter-value">{count}</p>
+      <ButtonComponent onClick={handleClick} label={\`Incrementar \${label}\`\} />
     </div>
   );
 };
 
 export default CounterComponent;`,  
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.counter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+.custom-button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ButtonComponent.js", "/CounterComponent.js"]}
+  dynamicVisibleFiles={["/App.js", "/ButtonComponent.js", "/CounterComponent.js", "/styles.css"]}
 />
 
