@@ -100,6 +100,7 @@ export default App;`,
 
 "/ListaElementos.js":
 `import React, { useState } from 'react';
+import './styles.css';
 
 const ListaElementos = () => {
   const [elementos, setElementos] = useState(['Elemento 1', 'Elemento 2', 'Elemento 3']);
@@ -111,8 +112,8 @@ const ListaElementos = () => {
 
   return (
     <div>
-      <button onClick={agregarElemento}>Agregar Elemento</button>
-      <ul>
+      <button className="button-list" onClick={agregarElemento}>Agregar Elemento</button>
+      <ul className="custom-list">
         {elementos.map((elemento, index) => (
           <li key={index}>{elemento}</li>
         ))}
@@ -122,9 +123,39 @@ const ListaElementos = () => {
 };
 
 export default ListaElementos;`,
+
+"styles.css": 
+`.button-list {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}
+
+.custom-list {
+  list-style: none;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.custom-list li {
+  margin: 5px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #fff;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ListaElementos.js"]}
+  dynamicVisibleFiles={["/App.js", "/ListaElementos.js", "/styles.css"]}
 />
 
 **En este ejmplo:**

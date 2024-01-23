@@ -71,7 +71,7 @@ dynamicFiles={{
 `import React from "react";
 import Toggle from "./Toggle.js";
 
-const App = () => {
+const App = ( ) => {
   return (
     <div>
       <Toggle />
@@ -83,6 +83,7 @@ export default App;`,
 
 "/Toggle.js":
 `import React, { useState } from 'react';
+import './styles.css';
 
 const Toggle = ( ) =>{
 // Declarando una variable de estado llamada 'isOn' con un valor inicial de false
@@ -90,8 +91,8 @@ const [isOn, setIsOn] = useState(false);
 
 return (
 <div>
-  <p>El interruptor está {isOn ? 'encendido' : 'apagado'}</p>
-  <button onClick={( )=> setIsOn(!isOn)}>
+  <p className="toogle-text">El interruptor está {isOn ? 'encendido 💡' : 'apagado 🚫'}</p>
+  <button className= {isOn ? "toogle-on" : "toogle-off"} onClick={( )=> setIsOn(!isOn)}>
     {isOn ? 'Apagar' : 'Encender'}
   </button>
 </div>
@@ -99,9 +100,45 @@ return (
 }
 
 export default Toggle;`,
+
+"/styles.css": 
+`.toogle-off {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FFA500;
+  color: white
+}
+
+.toogle-on {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  color: #333;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+}
+
+.toogle-text {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/Toggle.js"]}
+  dynamicVisibleFiles={["/App.js", "/Toggle.js", "/styles.css"]}
 />
 
 En este ejemplo la variable de estado **isOn** se inicializa con false. 
@@ -179,6 +216,7 @@ export default App;`,
 
 "/CounterWithEffect.js":
 `import React, { useState, useEffect } from 'react';
+import './styles.css';
 
 const CounterWithEffect = () => {
   const [count, setCount] = useState(0);
@@ -189,9 +227,9 @@ const CounterWithEffect = () => {
   }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
 
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
+    <div className="counter-container">
+      <p className="counter-text">Count: {count}</p>
+      <button className="button-count" onClick={() => setCount(count + 1)}>
         Incrementar
       </button>
     </div>
@@ -199,9 +237,38 @@ const CounterWithEffect = () => {
 }
 
 export default CounterWithEffect;`,
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.counter-text {
+  font-size: 24px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.button-count {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FFA500;
+  color: white
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/CounterWithEffect.js"]}
+  dynamicVisibleFiles={["/App.js", "/CounterWithEffect.js", "/styles.css"]}
 />
 
 En este ejemplo cada vez que hacemos click en el botón para incrementar el contador se actualiza el estado del **count**. 
@@ -213,7 +280,7 @@ En este caso simplemente muestra el **valor actual de count**, pero se podria re
 
 **useContext** permite a los componentes de función suscribirse a un contexto específico y acceder al valor proporcionado por ese contexto. 
 Los contextos en React son una forma de pasar datos a través del árbol de componentes sin tener que pasar explícitamente las props en cada nivel. useContext simplifica la 
-suscripción a contextos y el acceso a sus valores.
+suscripción a contextos y el acceso a sus valores. Útil para pequeñas aplicaciones o componentes donde la complejidad de [Redux](/docs/conceptos-de-react-20-redux-contextapi--docs) no es necesaria.
 
 {
 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
