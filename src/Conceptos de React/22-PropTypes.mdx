@@ -88,34 +88,56 @@ export default App;`,
 
 "/MiComponente.js":
 `import React from 'react';
-    import PropTypes from 'prop-types'; //importamos PropTypes
+import PropTypes from 'prop-types'; //importamos PropTypes
+import './styles.css';
 
-    // Función de componente
-    function MiComponente(props) {
+  // Función de componente
+  function MiComponente(props) {
     return (
-        <div>
-        <h1>{props.titulo}</h1>
-        <p>{props.descripcion}</p>
+        <div className="mi-componente-container">
+          <h1 className="mi-componente-title">{props.titulo}</h1>
+          <p className="mi-componente-description">{props.descripcion}</p>
         </div>
     );
-    }
+  }
 
-    // Definición de PropTypes
-    MiComponente.propTypes = {
-    titulo: PropTypes.string.isRequired, // Cadena de texto requerida
-    descripcion: PropTypes.string,        // Cadena de texto opcional
-    };
+  // Definición de PropTypes
+  MiComponente.propTypes = {
+   titulo: PropTypes.string.isRequired, // Cadena de texto requerida
+   descripcion: PropTypes.string,        // Cadena de texto opcional
+  };
 
-    //PropTypes por default
-    MiComponente.defaultProps = {
+  //PropTypes por default
+  MiComponente.defaultProps = {
       titulo: 'Titulo Default',
       descripcion: 'Descripcion Default'  
-    };
+  };
 
-    export default MiComponente;`,
+  export default MiComponente;`,
+
+"/styles.css": 
+`.mi-componente-container {
+  max-width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+.mi-componente-title {
+  color: #3498db;
+}
+
+.mi-componente-description {
+  color: #555;
+  font-style: italic;
+  font-size: 18px;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/MiComponente.js"]}
+  dynamicVisibleFiles={["/App.js", "/MiComponente.js", "/styles.css"]}
 />
 
 **PropTypes** se utiliza para definir el tipo de datos esperado para cada propiedad que **MiComponente** espera recibir. Esto se hace mediante la asignación de un objeto a 

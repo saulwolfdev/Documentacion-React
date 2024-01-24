@@ -251,9 +251,9 @@ export default App;`,
 `import React from 'react';
 
 const CounterComponent = ({ count, incrementCounter }) => (
-  <div>
-    <p>Contador: {count}</p>
-    <button onClick={incrementCounter}>Incrementar</button>
+  <div className="counter-container">
+    <p className="counter-text">Contador: {count}</p>
+    <button className="button-count" onClick={incrementCounter}>Incrementar</button>
   </div>
 );
 
@@ -281,6 +281,35 @@ const withCounter = (WrappedComponent) => {
 };
 
 export default withCounter;`,
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.counter-text {
+  font-size: 24px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.button-count {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}`,
   }}
   
   dynamicVisibleFiles={["/App.js", "/CounterComponent.js", "/withCounter.js"]}

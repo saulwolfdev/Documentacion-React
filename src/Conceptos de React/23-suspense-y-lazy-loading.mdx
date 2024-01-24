@@ -80,6 +80,7 @@ siendo recuperados.
 dynamicFiles={{    
 "/App.js": 
 `import React, { Suspense, useState, useEffect } from 'react';
+import './styles.css';
 
 // Función simulada que espera 2 segundos antes de devolver datos
 const cargarDatosAsincronos = ( ) =>
@@ -104,10 +105,12 @@ const App= ( )=> {
   }, [ ]);
 
   return (
-    <div>
-      <h1>Mi Aplicación</h1>
-      <Suspense fallback={<div>Cargando...</div>}>
-        <DatosAsincronos datos={datos} />
+    <div className="app-container">
+      <h1 className="app-title">Mi Aplicación</h1>
+      <Suspense fallback={<div className="loading-message">Cargando...</div>}>
+        <div className="data-container">
+          <DatosAsincronos datos={datos} />
+        </div>
       </Suspense>
     </div>
   );
@@ -122,9 +125,41 @@ function DatosAsincronos({ datos }) {
   return <div>{datos}</div>;
 }
 
-export default App;
-`, 
+export default App;`,
+
+"/styles.css": 
+`.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-title {
+  color: #3498db;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.loading-message {
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+  font-size: 24px
+}
+
+.data-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.data-content {
+  color: #333;
+}`,
+ 
   }}
   
-  dynamicVisibleFiles={["/App.js"]}
+  dynamicVisibleFiles={["/App.js", "/styles.css"]}
 />
