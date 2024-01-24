@@ -164,13 +164,14 @@ document.getElementById('root')
 `import React from "react";
 import { connect } from "react-redux";
 import store from "./store";
+import './styles.css';
 
 const App = ({ count, increment, decrement }) => {
   return (
-    <div>
-      <h1>Contador: {count}</h1>
-      <button onClick={decrement}>Decrementar</button>
-      <button onClick={increment}>Incrementar</button>      
+    <div className="container">
+      <h1 className="text-count">Contador: {count}</h1>
+      <button className="count-button" onClick={decrement}>Decrementar</button>
+      <button className="count-button" onClick={increment}>Incrementar</button>      
     </div>
   );
 };
@@ -207,9 +208,33 @@ const counterReducer = (state = { count: 0 }, action) => {
 // Crear el store con el reducer
 const store = createStore(counterReducer);
 
-export default store;
-`,
+export default store;`,
 
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.text-count {
+  font-size: 18px;
+  color: #333;
+}
+
+.count-button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white;
+  margin: 8px
+}`,
 }}
 />
 
@@ -330,10 +355,10 @@ files={{
     const { state, dispatch } = useMyContext( );
 
     return (
-        <div>
-        <h1>Contador: {state.count}</h1>
-        <button onClick={( ) => dispatch({ type: 'DECREMENT' })}>Decrementar</button>
-        <button onClick={( ) => dispatch({ type: 'INCREMENT' })}>Incrementar</button>        
+        <div className="container">
+        <h1 className="text-count">Contador: {state.count}</h1>
+        <button className="count-button" onClick={( ) => dispatch({ type: 'DECREMENT' })}>Decrementar</button>
+        <button className="count-button" onClick={( ) => dispatch({ type: 'INCREMENT' })}>Incrementar</button>        
         </div>
     );
     };
@@ -390,6 +415,32 @@ const useMyContext = ( ) => {
 };
 
 export { MyProvider, useMyContext };`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.text-count {
+  font-size: 24px;
+  color: #333;
+}
+
+.count-button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white;
+  margin: 8px
+}`,
 }}
 />
 

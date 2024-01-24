@@ -40,10 +40,11 @@ export default App;`,
 
 "/ListaDeElementos.js":
 `import React from 'react';
+import './styles.css';
 
     const ListaDeElementos = ({ elementos }) => {
     return (
-        <ul>
+        <ul className="custom-list">
         {elementos.map((elemento, index) => (
             <li key={index}>{elemento}</li>
         ))}
@@ -52,9 +53,27 @@ export default App;`,
     };
 
     export default ListaDeElementos;`,
+
+"/styles.css": 
+`.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.custom-list li:hover {
+  background-color: #dcdcdc;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ListaDeElementos.js"]}
+  dynamicVisibleFiles={["/App.js", "/ListaDeElementos.js", "/styles.css"]}
 />
 
 En este ejemplo **ListaDeElementos** es un componente funcional que recibe la prop **elementos** y renderiza una lista utilizando el método **map()**. 

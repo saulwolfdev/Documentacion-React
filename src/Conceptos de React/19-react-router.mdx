@@ -156,16 +156,46 @@ dynamicFiles={{
 "/App.js": 
 `import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import './styles.css';
 
-const Home = ( ) => <div>Home Component</div>;
-const About = ( ) => <div>About Component</div>;
-const Contact = ( ) => <div>Contact Component</div>;
+const Home = () => (
+  <div className="page-container">
+    <h2 className="home-heading">Bienvenido a la Página de Inicio</h2>
+    <p>Este es un ejemplo de un componente de inicio.</p>
+  </div>
+);
+
+const About = () => (
+  <div className="page-container">
+    <h2 className="about-heading">Acerca de Nosotros</h2>
+    <p>Conozca más sobre nuestra historia y valores.</p>
+    <img src="https://c0.klipartz.com/pngpicture/257/702/gratis-png-acerca-de-nosotros-logotipo-logotipo-de-la-empresa-servicio-de-marca-de-la-empresa-icono-acerca-de-nosotros-hd-thumbnail.png" alt="Acerca de nosotros" className="about-image" />
+  </div>
+);
+
+const Contact = () => (
+  <div className="page-container">
+    <h2 className="contact-heading">Contacto</h2>
+    <p>¡Póngase en contacto con nosotros para obtener más información!</p>
+    <address className="address">
+      Dirección: 123 Calle Principal, Ciudad
+      <br />
+      Teléfono: 555-1234
+    </address>
+  </div>
+);
 
 const Navigation = ( ) => (
-  <div>
-    <Link to="/">Home/ </Link>
-    <Link to="/about">About/ </Link>
-    <Link to="/contact">Contact</Link>
+  <div className="nav-container">
+    <Link to="/" className="nav-link">
+      Home
+    </Link>
+    <Link to="/about" className="nav-link">
+      About
+    </Link>
+    <Link to="/contact" className="nav-link">
+      Contact
+    </Link>
   </div>
 );
 
@@ -186,9 +216,69 @@ const App = ( ) => {
 
 export default App;`,
 
-  }}
+"/styles.css": 
+`.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+.home-heading {
+  color: #3498db;
+}
+
+.about-heading {
+  color: #27ae60;
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+.about-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.contact-heading {
+  color: #e74c3c;
+}
+
+.address {
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+}
+
+.nav-container {
+  background-color: #333;
+  padding: 10px;
+  text-align: center;
+}
+
+.nav-link {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}`,
+}}
   
-  dynamicVisibleFiles={["/App.js"]}
+  dynamicVisibleFiles={["/App.js", "/styles.css"]}
   showNavigator
 />
 

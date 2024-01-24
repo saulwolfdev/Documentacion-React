@@ -69,8 +69,10 @@ const App = () => {
 export default App;`, 
 
 "/ListName.js":
-`const ListName = ({ names }) => (
-        <ul>
+`import './styles.css';
+
+const ListName = ({ names }) => (
+        <ul className="custom-list">
             {names.map((name, index) => (
                 <li key={index}>{name}</li>
             ))}
@@ -78,9 +80,27 @@ export default App;`,
     );
   
   export default ListName`,
+
+"/styles.css": 
+`.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.custom-list li:hover {
+  background-color: #dcdcdc;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ListName.js"]}
+  dynamicVisibleFiles={["/App.js", "/ListName.js", "/styles.css"]}
 />
 
 <a id="seccion2"></a>
@@ -150,8 +170,10 @@ export default App;
 `, 
 
 "/ListNames.js":
-`const ListNames = ({ names }) => (
-    <ul>
+`import './styles.css';
+
+const ListNames = ({ names }) => (
+    <ul className="custom-list">
         {names.map((name) => (
         <li key={name.id}>{name.nombre}</li>
         ))}
@@ -159,9 +181,27 @@ export default App;
   );
   
   export default ListNames`,
+
+  "/styles.css": 
+`.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.custom-list li:hover {
+  background-color: #dcdcdc;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ListNames.js"]}
+  dynamicVisibleFiles={["/App.js", "/ListNames.js", "/styles.css"]}
 />
 
 En este ejemplo la propiedad **id** se utiliza como **key** ya que es única para cada elemento en la lista.

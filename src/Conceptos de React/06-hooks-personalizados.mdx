@@ -131,15 +131,16 @@ export default App;
 
 "/CounterComponent.js":
 `import useCounter from "./useCounter";
+import './styles.css';
 
 const CounterComponent = () => {
   const { count, increment, decrement } = useCounter();
 
   return (
-    <div>
-      <p>Contador: {count}</p>
-      <button onClick={decrement}>Decrementar</button>
-      <button onClick={increment}>Incrementar</button>
+    <div className="operation-container">
+      <p className="operation-paragraph">Contador: {count}</p>
+      <button className="operation-button" onClick={decrement}>Decrementar</button>
+      <button className="operation-button" onClick={increment}>Incrementar</button>
     </div>
   );
 };
@@ -149,6 +150,7 @@ export default CounterComponent;
 
 "/useCounter.js":
 `import { useState } from "react";
+import './styles.css';
 
 const useCounter = (initialValue = 0) => {
   const [count, setCount] = useState(initialValue);
@@ -159,11 +161,37 @@ const useCounter = (initialValue = 0) => {
   return { count, increment, decrement };
 };
 
-export default useCounter;`
-,
+export default useCounter;`,
+
+"/styles.css": 
+`.operation-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.operation-paragraph {
+  font-size: 18px;
+  color: #333;
+}
+
+.operation-button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white;
+  margin: 8px
+}`,
+
   }}
   
-  dynamicVisibleFiles={["/App.js", "/CounterComponent.js", "/useCounter.js"]}
+  dynamicVisibleFiles={["/App.js", "/CounterComponent.js", "/useCounter.js", "/styles.css"]}
 />
 
 En este ejemplo **useCounter** es un hook personalizado que encapsula la lógica del contador. Puedes reutilizar este hook en cualquier componente que necesite gestionar un 
@@ -290,6 +318,7 @@ export default App;`,
 "/SessionComponent.js":
 `import React from "react";
 import useSessionEffect from "./useSessionEffect";
+import './styles.css';
 
 const SessionComponent = ( ) => {
   const { isLoggedIn, setIsLoggedIn } = useSessionEffect();
@@ -305,16 +334,20 @@ const SessionComponent = ( ) => {
   };
 
   return (
-    <div>
+    <div className="container">
       {isLoggedIn ? (
-        <div>
+        <div className="authenticated">
           <p>Usuario autenticado</p>
-          <button onClick={handleLogout}>Cerrar Sesión</button>
+          <button className="button-logout" onClick={handleLogout}>
+            Cerrar Sesión
+          </button>
         </div>
       ) : (
-        <div>
+        <div className="not-authenticated">
           <p>Usuario no autenticado</p>
-          <button onClick={handleLogin}>Iniciar Sesión</button>
+          <button className="button-login" onClick={handleLogin}>
+            Iniciar Sesión
+          </button>
         </div>
       )}
     </div>
@@ -347,8 +380,50 @@ const useSessionEffect = ( ) => {
 };
 
 export default useSessionEffect;`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.authenticated {
+  color: green;
+}
+
+.not-authenticated {
+  color: red;
+}
+
+.button-login {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #00FF00;
+  color: white
+}
+
+.button-logout {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FF6E67;
+  color: white
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/SessionComponent.js", "/useSessionEffect.js"]}
+  dynamicVisibleFiles={["/App.js", "/SessionComponent.js", "/useSessionEffect.js", "/styles.css"]}
   showConsole
 />

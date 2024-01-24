@@ -66,6 +66,7 @@ export default App;`,
 
 "/ButtonClick.js":
 `import React from 'react';
+import './styles.css';
 
 const ButtonClick = () => {
   const handleClick = () => {
@@ -73,14 +74,29 @@ const ButtonClick = () => {
   };
 
   return (
-    <button onClick={handleClick}>Clic aquí</button>
+    <button className="button" onClick={handleClick}>Clic aquí</button>
   );
 };
 
 export default ButtonClick;`,
+
+"/styles.css": 
+`.button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ButtonClick.js"]}
+  dynamicVisibleFiles={["/App.js", "/ButtonClick.js", "/styles.css"]}
   showConsole
 />
 
@@ -138,6 +154,7 @@ export default App;`,
 
 "/ControlledForm.js":
 `import React, { useState } from 'react';
+import './styles.css';
 
     const ControlledForm = () => {
     const [inputValue, setInputValue] = useState('');
@@ -147,22 +164,56 @@ export default App;`,
     };
 
     return (
-        <div>
+        <div className="input-container">
         <input
             type="text"
             value={inputValue}
             onChange={handleChange}
             placeholder="Escribe algo"
+            className="custom-input"
         />
-        <p>{inputValue}</p>
+        <div className="card">
+          <p>{inputValue}</p>
+        </div>
         </div>
     );
     };
 
     export default ControlledForm;`,
+
+"/styles.css": 
+`.input-container {
+  text-align: center;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.card {
+  display: flex;  
+  height: 200px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 16px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.card p {
+  margin: initial;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ControlledForm.js"]}
+  dynamicVisibleFiles={["/App.js", "/ControlledForm.js", "/styles.css"]}
 />
 
 En este ejemplo el componente **"ControlledForm"** contiene un campo de entrada **(input)**. La función **"handleChange"** se ejecuta cada vez que el usuario escribe algo en el 
@@ -214,6 +265,7 @@ export default App;`,
 
 "/MyComponent.js":
 `import React from 'react';
+import './styles.css';
 
   const MyComponent = ( ) => {
     const handleButtonClick = (param) => {
@@ -221,13 +273,28 @@ export default App;`,
     };
 
     return (
-      <button onClick={( ) => handleButtonClick("miArgumento")}>
+      <button className="button" onClick={( ) => handleButtonClick("miArgumento")}>
         Clic aquí
       </button>
     );
   };
 
   export default MyComponent;`,
+
+  "/styles.css": 
+`.button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FFA500;
+  color: white
+}`,
   }}
   
   dynamicVisibleFiles={["/App.js", "/MyComponent.js"]}
@@ -282,6 +349,7 @@ export default App;`,
 
 "/ToggleComponent.js":
 `import React, { useState } from 'react';
+import './styles.css';
 
 function ToggleComponent() {
   const [isVisible, setIsVisible] = useState(true);
@@ -291,9 +359,9 @@ function ToggleComponent() {
   };
 
   return (
-    <div>
-      {!isVisible && <p>Este párrafo es visible</p>}
-      <button onClick={toggleVisibility}>           
+    <div className="container">
+      {!isVisible && <p className="custom-text" > Este párrafo es visible </p>}
+      <button className={isVisible ? 'button-show' : 'button-hidden'} onClick={toggleVisibility}>           
         {isVisible ? 'Ver' : 'Ocultar'}
       </button>
     </div>
@@ -301,9 +369,47 @@ function ToggleComponent() {
 }
 
 export default ToggleComponent;`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.custom-text {
+  color: green;
+}
+
+.button-show {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #00FF00;
+  color: white
+}
+
+.button-hidden {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FF6E67;
+  color: white
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ToggleComponent.js"]}
+  dynamicVisibleFiles={["/App.js", "/ToggleComponent.js", "/styles.css"]}
 />
 
 Aquí el evento onClick cambia la visibilidad del párrafo dependiendo del estado si es true o false.

@@ -30,19 +30,20 @@ export default App;`,
 
 "/ConditionalRendering.js":
 `import React, { useState } from 'react';
+import './styles.css';
 
 const ConditionalRendering = ( ) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   return (
-    <div>
+    <div  className="container">
       {isLoggedIn ? (
-        <p>Bienvenido, usuario logueado</p>
+        <p className="loggin">Bienvenido, usuario logueado</p>
         ) : (
-        <p>Inicia sesión para acceder</p>
+        <p  className="not-loggin">Inicia sesión para acceder</p>
       )}
 
-      <button onClick={( )=> setLoggedIn(!isLoggedIn)}>
+      <button className={isLoggedIn ? 'button-logout' : 'button-login'} onClick={( )=> setLoggedIn(!isLoggedIn)}>
         {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
       </button>
     </div>
@@ -50,9 +51,54 @@ const ConditionalRendering = ( ) => {
 };
 
 export default ConditionalRendering;`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.loggin {
+  color: green;
+  font-size:24px;
+}
+
+.not-loggin {
+  color: red;
+  font-size:24px;
+}
+
+.button-login {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #00FF00;
+  color: white
+}
+
+.button-logout {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FF6E67;
+  color: white
+}`,
+
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ConditionalRendering.js"]}
+  dynamicVisibleFiles={["/App.js", "/ConditionalRendering.js", "/styles.css"]}
 />
 
 En este ejemplo, el componente **ConditionalRendering** tiene un estado **isLoggedIn** que controlamos con el **Hook** [useState](/docs/conceptos-de-react-04-hooks--docs) 
@@ -80,13 +126,14 @@ export default App;`,
 
 "/ConditionalRenderingProps.js":
 `import React, { useState } from 'react';
+import './styles.css';
 
 const UserGreeting = ({ isLoggedIn }) => {
-  return <p>Bienvenido de nuevo{isLoggedIn ? ', usuario' : ' '}</p>;
+  return <p className="loggin">Bienvenido de nuevo{isLoggedIn ? ', usuario' : ' '}</p>;
 };
 
 const GuestGreeting = ( ) => {
-  return <p>Por favor, inicia sesión</p>;
+  return <p className="not-loggin">Por favor, inicia sesión</p>;
 };
 
 const Greeting = ({ isLoggedIn }) => {
@@ -99,9 +146,9 @@ const ConditionalRenderingProps = ( ) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   return (
-    <div>
+    <div className="container">
       <Greeting isLoggedIn={isLoggedIn} />
-      <button onClick={( )=> setLoggedIn(!isLoggedIn)}>
+      <button className={isLoggedIn ? 'button-logout' : 'button-login'} onClick={( )=> setLoggedIn(!isLoggedIn)}>
         {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
       </button>
     </div>
@@ -109,9 +156,53 @@ const ConditionalRenderingProps = ( ) => {
 };
 
 export default ConditionalRenderingProps;`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.loggin {
+  color: green;
+  font-size:24px;
+}
+
+.not-loggin {
+  color: red;
+  font-size:24px;
+}
+
+.button-login {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}
+
+.button-logout {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FF0000;
+  color: white
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ConditionalRenderingProps.js"]}
+  dynamicVisibleFiles={["/App.js", "/ConditionalRenderingProps.js", "/styles.css"]}
 />
 
 En este ejemplo se utiliza el componente **"Greeting"** para realizar un renderizado condicional basado en el estado([useState](/docs/conceptos-de-react-04-hooks--docs)) **"isLoggedIn"** . 

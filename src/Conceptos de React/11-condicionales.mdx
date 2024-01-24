@@ -50,7 +50,7 @@ import ConditionalExample from "./ConditionalExample.js";
 
 const App = ( ) => {
   return (
-    <div>
+    <div className="container">
       <ConditionalExample condition={false}/>
     </div>
   )
@@ -60,23 +60,40 @@ export default App;`,
 
 "/ConditionalExample.js":
 `import React from 'react';
+import './styles.css';
 
     const ConditionalExample = (props) => {
     return (
         <div>
         {props.condition ? (
-            <p>La condición es verdadera.</p>
+            <p className="true-condition">La condición es verdadera.</p>
         ) : (
-            <p>La condición es falsa.</p>
+            <p className="false-condition">La condición es falsa.</p>
         )}
         </div>
     );
     };
 
     export default ConditionalExample`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.true-condition {
+  color: #00FF00;
+  font-size: 24px;
+}
+
+.false-condition {
+  color: #FF0000;
+  font-size: 24px;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/ConditionalExample.js"]}
+  dynamicVisibleFiles={["/App.js", "/ConditionalExample.js", "/styles.css"]}
 />
 
 <a id="seccion2"></a>
@@ -100,6 +117,7 @@ dynamicFiles={{
 "/App.js": 
 `import React from "react";
 import UserInfo from "./UserInfo.js";
+import './styles.css';
 
 const App = () => {
   const user = { name: 'John' };
@@ -122,9 +140,38 @@ export default App;`,
   );
 
     export default UserInfo`,
+
+"/styles.css": 
+`body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  color: #555;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/UserInfo.js"]}
+  dynamicVisibleFiles={["/App.js", "/UserInfo.js", "/styles.css"]}
 />
 
 <a id="seccion3"></a>
@@ -160,13 +207,40 @@ export default App;`,
 
 "/DefaultMessage.js":
 `const DefaultMessage = ({ message }) => (
-    <p>{message || 'No hay mensaje'}</p>
+    <div className="card">
+      <p className="message">{message || 'No hay mensaje'}</p>
+    </div>
   );
 
     export default DefaultMessage`,
+
+"/styles.css": 
+`body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  font-size: 18px;
+  color: #333;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/DefaultMessage.js"]}
+  dynamicVisibleFiles={["/App.js", "/DefaultMessage.js", "/styles.css"]}
 />
 
 <a id="seccion4"></a>
@@ -177,14 +251,15 @@ export default App;`,
  <CodeBlock
   codeString={`
   const NumberDisplay = ({ number }) => {
-    if (number > 0) {
-      return <p>Positive Number: {number}</p>;
-    } else if (number < 0) {
-      return <p>Negative Number: {number}</p>;
-    } else {
-      return <p>Zero</p>;
-    }
-  };
+  let message;
+
+  if (number > 0) {
+    message = \`Positive Number: \${number}\`\;
+  } else if (number < 0) {
+    message = \`Negative Number: \${number}\`\;
+  } else {
+    message = 'Zero';
+  }
   `} 
   language='javascript'
 />
@@ -208,20 +283,45 @@ const App = () => {
 export default App;`, 
 
 "/NumberDisplay.js":
-` const NumberDisplay = ({ number }) => {
-    if (number > 0) {
-      return <p>Positive Number: {number}</p>;
-    } else if (number < 0) {
-      return <p>Negative Number: {number}</p>;
-    } else {
-      return <p>Zero</p>;
-    }
-  };
-  
-  export default NumberDisplay`,
+`import React from 'react';
+import './styles.css';
+
+const NumberDisplay = ({ number }) => {
+  let message;
+
+  if (number > 0) {
+    message = \`Positive Number: \${number}\`\;
+  } else if (number < 0) {
+    message = \`Negative Number: \${number}\`\;
+  } else {
+    message = 'Zero';
+  }
+
+  return (
+    <div className="card">
+      <p>{message}</p>
+    </div>
+  );
+};
+
+export default NumberDisplay;`,
+
+"/styles.css": 
+`.card {
+  margin: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/NumberDisplay.js"]}
+  dynamicVisibleFiles={["/App.js", "/NumberDisplay.js", "/styles.css"]}
 />
 
 <a id="seccion5"></a>
@@ -265,20 +365,39 @@ const App = () => {
 export default App;`, 
 
 "/DayOfWeek.js":
-`const DayOfWeek = ({ day }) => {
-    switch (day) {
-      case 1:
-        return <p>Monday</p>;
-      case 2:
-        return <p>Tuesday</p>;
-      // ... otros casos
-      default:
-        return <p>Invalid day</p>;
-    }
-  };
-  
-  export default DayOfWeek`,
+`import './styles.css';
+
+const DayOfWeek = ({ day }) => {
+  let dayName;
+
+  switch (day) {
+    case 1:
+      dayName = 'Monday';
+      break;
+    case 2:
+      dayName = 'Tuesday';      
+      break;
+    // ... otros casos
+    default:
+      dayName = 'Invalid day';
+  }
+
+  return <p className="day-of-week">{dayName}</p>;
+};
+
+export default DayOfWeek;`,
+
+"/styles.css": 
+`.day-of-week {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}`,
   }}
   
-  dynamicVisibleFiles={["/App.js", "/DayOfWeek.js"]}
+  dynamicVisibleFiles={["/App.js", "/DayOfWeek.js", "/styles.css"]}
 />
