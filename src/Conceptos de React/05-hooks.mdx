@@ -1,0 +1,1136 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import Context from "../assets/context.png";
+import "../styles.css"
+
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'useState' },
+    { id: 'seccion2', text: 'useEffect' },
+    { id: 'seccion3', text: 'useContext' },
+    { id: 'seccion4', text: 'useMemo' },
+    { id: 'seccion5', text: 'useRef' },
+    { id: 'seccion6', text: 'useReducer' },
+    { id: 'seccion7', text: 'useCallback' },
+  ]}
+/>
+
+# Hooks
+
+ Los **hooks** son funciones especiales proporcionadas por React que permiten a los componentes funcionales tener **estado y ciclo de vida**. 
+ Algunos hooks comunes incluyen **useState**, **useEffect**, **useContext**, **useMemo**, **useReducer**, **useCallback**.
+
+<a id="seccion1"></a>
+ ### useState
+
+ useState es un hook que permite a los componentes funcionales tener estado. 
+ Proporciona una forma de declarar variables de estado en el cuerpo de un componente funcional.
+
+ #### Sintaxis:
+
+ <CodeBlock
+  codeString={`
+  const [state, setState] = useState(initialValue);
+  `} 
+  language='javascript'
+/>
+
+- **state** es la variable que almacena el valor actual del estado.
+- **setState** es la función utilizada para actualizar ese estado. 
+- **initialValue** es el valor inicial del estado, que puede ser un valor primitivo o una función que devuelve el valor inicial.
+
+ **Ejemplo:**
+
+ <CodeBlock
+  codeString={`
+    import React, { useState } from 'react';
+
+    const Toggle = ( ) =>{
+    // Declarando una variable de estado llamada 'isOn' con un valor inicial de false
+    const [isOn, setIsOn] = useState(false);
+
+    return (
+        <div>
+        <p>El interruptor está {isOn ? 'encendido' : 'apagado'}</p>
+        // Cambia el estado del interruptor al hacer clic en el botón 
+        <button onClick={( ) => setIsOn(!isOn)}>
+            {isOn ? 'Apagar' : 'Encender'}
+        </button>
+        </div>
+    );
+    }
+
+    export default Toggle;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import Toggle from "./Toggle.js";
+
+const App = ( ) => {
+  return (
+    <div>
+      <Toggle />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Toggle.js":
+`import React, { useState } from 'react';
+import './styles.css';
+
+const Toggle = ( ) =>{
+// Declarando una variable de estado llamada 'isOn' con un valor inicial de false
+const [isOn, setIsOn] = useState(false);
+
+return (
+<div>
+  <p className="toogle-text">El interruptor está {isOn ? 'encendido 💡' : 'apagado 🚫'}</p>
+  <button className= {isOn ? "toogle-on" : "toogle-off"} onClick={( )=> setIsOn(!isOn)}>
+    {isOn ? 'Apagar' : 'Encender'}
+  </button>
+</div>
+);
+}
+
+export default Toggle;`,
+
+"/styles.css": 
+`.toogle-off {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FFA500;
+  color: white
+}
+
+.toogle-on {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  color: #333;
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
+}
+
+.toogle-text {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Toggle.js", "/styles.css"]}
+/>
+
+En este ejemplo la variable de estado **isOn** se inicializa con false. 
+El botón cambia el estado de **isOn** entre true y false cuando se hace click lo que afecta el texto que indica si el interruptor está encendido o apagado.
+
+<a id="seccion2"></a>
+### useEffect
+
+**useEffect** es un hook que permite realizar efectos secundarios en componentes funcionales. 
+Puedes usarlo para gestionar el ciclo de vida del componente funcional, como realizar solicitudes de red, suscripciones a eventos, o limpiar recursos cuando 
+el componente se desmonta.
+
+ #### Sintaxis:
+
+ <CodeBlock
+  codeString={`
+  useEffect(() => {
+    // Código del efecto
+  }, [dependencias]);
+  `} 
+  language='javascript'
+/>
+
+**useEffect** toma dos argumentos una función que contiene el código del efecto, y un array de dependencias.
+
+- La función del efecto se ejecutará después de cada renderizado del componente.
+- Las dependencias son un array opcional que especifica los valores que si cambian provocarán que la función del efecto se vuelva a ejecutar. 
+Si no se proporciona un array de dependencias el efecto se ejecutará después de cada renderizado.
+
+**ejemplo:**
+
+<CodeBlock
+  codeString={`
+    import React, { useState, useEffect } from 'react';
+
+    const CounterWithEffect = () => {
+      const [count, setCount] = useState(0);
+
+      // useEffect se ejecuta cada vez que 'count' cambia
+      useEffect(() => {
+        // Puedes realizar acciones adicionales aquí basadas en el cambio de 'count'
+      }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
+
+      return (
+        <div>
+          <p>Count: {count}</p>
+          <button onClick={() => setCount(count + 1)}>
+            Incrementar
+          </button>
+        </div>
+      );
+    }
+
+export default CounterWithEffect;;
+  
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import CounterWithEffect from "./CounterWithEffect.js";
+
+const App = () => {
+  return (
+    <div>
+      <CounterWithEffect />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/CounterWithEffect.js":
+`import React, { useState, useEffect } from 'react';
+import './styles.css';
+
+const CounterWithEffect = () => {
+  const [count, setCount] = useState(0);
+
+  // useEffect se ejecuta cada vez que 'count' cambia
+  useEffect(() => {
+    // Puedes realizar acciones adicionales aquí basadas en el cambio de 'count'
+  }, [count]); // El segundo argumento es un array de dependencias, en este caso, contiene 'count'
+
+  return (
+    <div className="counter-container">
+      <p className="counter-text">Count: {count}</p>
+      <button className="button-count" onClick={() => setCount(count + 1)}>
+        Incrementar
+      </button>
+    </div>
+  );
+}
+
+export default CounterWithEffect;`,
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.counter-text {
+  font-size: 24px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.button-count {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FFA500;
+  color: white
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/CounterWithEffect.js", "/styles.css"]}
+/>
+
+En este ejemplo cada vez que hacemos click en el botón para incrementar el contador se actualiza el estado del **count**. 
+El efecto asociado a **useEffect** se ejecutará debido a la dependencia de **count** en el array de dependencias. 
+En este caso simplemente muestra el **valor actual de count**, pero se podria realizar acciones más complejas basadas en el cambio del estado.
+
+<a id="seccion3"></a>
+### useContext
+
+**useContext** permite a los componentes de función suscribirse a un contexto específico y acceder al valor proporcionado por ese contexto. 
+Los contextos en React son una forma de pasar datos a través del árbol de componentes sin tener que pasar explícitamente las props en cada nivel. useContext simplifica la 
+suscripción a contextos y el acceso a sus valores. Útil para pequeñas aplicaciones o componentes donde la complejidad de [Redux](/docs/conceptos-de-react-20-redux-contextapi--docs) no es necesaria.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Context} alt="Texto Alternativo" style={{ width: '600px', height: '300px', position: 'relative', margin: '32px' }} />
+</div>
+}
+
+#### Ejemplo de useContext:
+Supongamos que tienes un contexto llamado UserContext que proporciona información sobre el usuario actual. Primero creamos el contexto:
+
+<CodeBlock
+  codeString={`
+  // UserContext.js
+  import React, { createContext } from 'react';
+
+  const UserContext = createContext();
+
+  export const UserProvider = ({ children }) => {
+    // Puedes proporcionar un valor por defecto si lo deseas
+    const user = { username: 'guest' };
+
+    return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  };
+
+  export default UserContext;
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo **UserContext** se crea con **createContext** y se proporciona un valor predeterminado para el usuario (en este caso, un usuario invitado). 
+Luego el componente **UserProvider** envuelve a sus hijos con el contexto proporcionando el valor del usuario.
+
+Ahora en otro componente podemos utilizar **useContext** para acceder al valor del contexto:
+
+<CodeBlock
+  codeString={`
+  // UserProfile.js
+  import React, { useContext } from 'react';
+  import UserContext from './UserContext';
+
+  const UserProfile = () => {
+    const user = useContext(UserContext);
+
+    return (
+      <div>
+        <h2>User Profile</h2>
+        <p>Username: {user.username}</p>
+      </div>
+    );
+  };
+
+  export default UserProfile;
+  `} 
+  language='javascript'
+/>
+
+En este componente **useContext(UserContext)** se utiliza para acceder al valor proporcionado por el contexto **UserContext**. 
+Ahora **UserProfile** puede mostrar la información del usuario sin necesidad de pasar las props desde componentes superiores.
+
+Finalmente para que todo funcione asegurarnos de envolver la aplicación o el componente que necesita el contexto con el UserProvider:
+
+<CodeBlock
+  codeString={`
+  // App.js
+  import React from 'react';
+  import UserProfile from './UserProfile';
+  import { UserProvider } from './UserContext';
+
+  function App() {
+    return (
+      <UserProvider>
+        <div>
+          <h1>My App</h1>
+          <UserProfile />
+        </div>
+      </UserProvider>
+    );
+  }
+
+  export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+  import UserProfile from './UserProfile';
+  import { UserProvider } from './UserContext';
+
+  function App() {
+    return (
+      <UserProvider>
+        <div  className="app-container">
+          <h1>My App</h1>
+          <UserProfile />
+        </div>
+      </UserProvider>
+    );
+  }
+
+  export default App;`,
+
+"/UserProfile.js":
+`import React, { useContext } from 'react';
+import UserContext from './UserContext';
+import './styles.css';
+
+  const UserProfile = () => {
+  const user = useContext(UserContext);
+    return (
+      <div>
+        <h2 className="profile-heading">User Profile</h2>
+        <p className="profile-username">Username: {user.username}</p>
+      </div>
+    );
+  };
+
+  export default UserProfile;`,
+
+  "/UserContext.js":
+`import React, { createContext } from 'react';
+
+  const UserContext = createContext();
+
+  export const UserProvider = ({ children }) => {
+    // Puedes proporcionar un valor por defecto si lo deseas
+    const user = { username: 'guest' };
+
+    return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  };
+
+  export default UserContext`,
+
+  "/styles.css": 
+`.app-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.profile-heading {
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+}
+
+.profile-username {
+  color: #555;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/UserProfile.js", "/UserContext.js", "/styles.css"]}
+/>
+
+De esta manera **UserProfile** puede acceder al contexto de usuario y mostrar la información del usuario actual. 
+Este es un ejemplo básico pero demuestra cómo **useContext** facilita la suscripción y acceso a contextos en React.
+
+<a id="seccion4"></a>
+### useMemo
+
+**useMemo** memoriza un valor calculado lo que significa que memoriza (almacena en memoria) el resultado de una función y lo devuelve si las dependencias no han cambiado desde 
+la última renderización. Esto puede ayudar a mejorar el rendimiento al evitar recálculos innecesarios.
+
+- **useMemo** toma una función que realiza un cálculo costoso y un array de dependencias.
+- La función se ejecutará solo cuando las dependencias hayan cambiado desde la última renderización.
+- Devuelve el valor memorizado que resulta de la ejecución de la función.
+
+### Sintaxis
+
+<CodeBlock
+  codeString={`
+  const memorizeValue = useMemo(( ) => computeExpensiveValue(a, b), [a, b]);
+  `} 
+  language='javascript'
+/>
+
+- **useMemo:** Este es el hook que estás utilizando para memoizar un valor calculado.
+
+- **( ) => computeExpensiveValue(a, b):** Este es el primer argumento de **useMemo**. Es una función que realiza algún cálculo costoso. En este ejemplo, **computeExpensiveValue** 
+es la función que realiza el cálculo y `a y b` son las dependencias de esta función.
+
+- **[a, b]:** Este es el segundo argumento de **useMemo** y es un array de dependencias. La memoización se actualizará solo cuando los valores en este array cambien entre renderizaciones.
+
+- **memorizeValue:** Esto es lo que devuelve useMemo. Es el valor resultante del cálculo memorizado.
+
+### Ejemplo de useMemo:
+Supongamos que tenemos un componente que realiza un cálculo y queremos memorizar el resultado para evitar recálculos innecesarios.
+
+<CodeBlock
+  codeString={`
+  //SumComponent.js
+  import React, { useMemo } from "react";
+
+const SumComponent = ({ a, b }) => {
+  // Función para realizar la suma
+  const addNumbers = (x, y) => {
+    return x + y;
+  };
+
+  // Memoriza el resultado de la suma
+  const sum = useMemo(() => addNumbers(a, b), [a, b]);
+
+  return (
+    <div>
+      <p>Suma: {sum}</p>
+    </div>
+  );
+};
+
+export default SumComponent;
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+  //App.js
+  import React, { useState } from "react";
+import SumComponent from "./SumComponent";
+
+  const App = () => {
+    const [numberA, setNumberA] = useState(0);
+    const [numberB, setNumberB] = useState(0);
+
+    const incrementA = () => setNumberA(numberA + 1);
+    const incrementB = () => setNumberB(numberB + 2);
+
+    return (
+      <div>
+        <SumComponent a={numberA} b={numberB} />
+        <button onClick={incrementA}>Suma +1</button>
+        <button onClick={incrementB}>Suma +2</button>
+      </div>
+    );
+  };
+
+  export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+` import React, { useState } from "react";
+import SumComponent from "./SumComponent";
+
+  const App = () => {
+    const [numberA, setNumberA] = useState(0);
+    const [numberB, setNumberB] = useState(0);
+
+    const incrementA = () => setNumberA(numberA + 1);
+    const incrementB = () => setNumberB(numberB + 2);
+
+    return (
+      <div className="sum-container">
+        <SumComponent a={numberA} b={numberB} />
+        <button className="button-sum" onClick={incrementA}>Suma +1</button>
+        <button className="button-sum" onClick={incrementB}>Suma +2</button>
+      </div>
+    );
+  };
+
+  export default App;`,
+
+"/SumComponent.js":
+`import React, { useMemo } from "react";
+import './styles.css';
+
+const SumComponent = ({ a, b }) => {
+  // Función para realizar la suma
+  const addNumbers = (x, y) => {
+    return x + y;
+  };
+
+  // Memoriza el resultado de la suma
+  const sum = useMemo(() => addNumbers(a, b), [a, b]);
+
+  return (
+    <div>
+      <p className="sum-paragraph">Suma: {sum}</p>
+    </div>
+  );
+};
+
+export default SumComponent;`,  
+
+"/styles.css": 
+`.sum-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.sum-paragraph {
+  font-size: 18px;
+  color: #333;
+}
+
+.button-sum {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white;
+  margin: 8px
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/SumComponent.js", "/styles.css"]}
+/>
+
+<a id="seccion5"></a>
+### useRef
+
+**useRef** es un Hook de React que devuelve un objeto mutable llamado **ref**. El objeto **ref** tiene una propiedad current la cual puede ser utilizada para hacer 
+referencia a un elemento del DOM o a un valor mutable que persiste a través de las renderizaciones de un componente. A diferencia del estado **(useState)** la actualización 
+de una **ref** no provoca una **re-renderización** del componente.
+
+**Cuándo usar useRef**
+
+**- Acceso a elementos del DOM:** Podemos usar **useRef** para acceder directamente a elementos del DOM y realizar operaciones imperativas como enfocar un input, medir un 
+elemento o realizar animaciones directamente.
+
+<CodeBlock
+  codeString={`
+import React, { useRef, useEffect } from 'react';
+
+const DOMElementAccess = () => {
+  // Crear una ref para el input
+  const inputRef = useRef();
+
+  // Función para enfocar el input
+  const focusInput = () => {
+    inputRef.current.focus();
+  };
+
+  // useEffect para enfocar el input cuando el componente se monta
+  useEffect(() => {
+    focusInput();
+  }, []);
+
+  return (
+    <div>
+      {/* Asignar la ref al input */}
+      <input type="text" ref={inputRef} />
+      {/* Botón que enfoca el input */}
+      <button onClick={focusInput}>Enfocar Input</button>
+    </div>
+  );
+};
+
+export default DOMElementAccess;
+
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+` import React, { useState } from "react";
+import DOMElementAccess from "./DOMElementAccess";
+
+  const App = () => {
+    return (
+      <div>
+        <DOMElementAccess />        
+      </div>
+    );
+  };
+
+  export default App;`,
+
+"/DOMElementAccess.js":
+`import React, { useRef, useEffect } from 'react';
+import './styles.css';
+
+const DOMElementAccess = ( ) => {
+  // Crear una ref para el input
+  const inputRef = useRef( );
+
+  // Función para enfocar el input
+  const focusInput = ( ) => {
+    inputRef.current.focus( );
+  };
+
+  // useEffect para enfocar el input cuando el componente se monta
+  useEffect(() => {    
+  console.log("El componente se ha montado");
+    focusInput();
+  }, []);
+
+  return (
+    <div className="input-container">
+      {/* Asignar la ref al input */}
+      <input type="text" className="custom-input" ref={inputRef} />
+      {/* Botón que enfoca el input */}
+      <button className="custom-button" onClick={focusInput}>
+        Enfocar Input
+      </button>
+    </div>
+  );
+};
+
+export default DOMElementAccess;`, 
+
+"/styles.css": 
+`.input-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.custom-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.custom-button {
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/DOMElementAccess.js", "/styles.css"]}
+/>
+
+**- Persistencia entre renderizaciones:** Las **refs** son útiles para almacenar valores que no causan re-renderizaciones cuando cambian. Esto puede ser útil para ciertos 
+casos de optimización o para almacenar valores que necesitan persistir entre renderizaciones sin afectar el flujo de renderización.
+
+<CodeBlock
+  codeString={`
+import React, { useState, useRef } from 'react';
+
+const PersistenciaEntreRenderizaciones = ( ) => {
+  // Estado para un contador que provoca re-renderizaciones
+  const [contadorNormal, setContadorNormal] = useState(0);
+
+  // Ref para un contador que no provoca re-renderizaciones
+  const contadorPersistente = useRef(0);
+
+  const incrementarContadorNormal = ( ) => {
+    // Incrementar el contador normal (provoca re-renderización)
+    setContadorNormal(contadorNormal + 1);
+  };
+
+  const incrementarContadorPersistente = ( ) => {
+    // Incrementar el contador persistente (no provoca re-renderización)
+    contadorPersistente.current += 1;
+  };
+
+  return (
+    <div>
+      <p>Contador Normal: {contadorNormal}</p>
+      <p>Contador Persistente: {contadorPersistente.current}</p>
+      <button onClick={incrementarContadorNormal}>Incrementar Contador Normal</button>
+      <button onClick={incrementarContadorPersistente}>Incrementar Contador Persistente</button>
+    </div>
+  );
+};
+
+export default PersistenciaEntreRenderizaciones;
+`} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+` import React, { useState } from "react";
+import PersistenciaEntreRenderizaciones from "./PersistenciaEntreRenderizaciones";
+
+  const App = ( ) => {
+    return (
+      <div>
+        <PersistenciaEntreRenderizaciones />        
+      </div>
+    );
+  };
+
+  export default App;`,
+
+"/PersistenciaEntreRenderizaciones.js":
+`import React, { useState, useRef } from 'react';
+import './styles.css';
+
+const PersistenciaEntreRenderizaciones = ( ) => {
+  // Estado para un contador que provoca re-renderizaciones
+  const [contadorNormal, setContadorNormal] = useState(0);
+
+  // Ref para un contador que no provoca re-renderizaciones
+  const contadorPersistente = useRef(0);
+
+  const incrementarContadorNormal = ( ) => {
+    // Incrementar el contador normal (provoca re-renderización)
+    setContadorNormal(contadorNormal + 1);
+  };
+
+  const incrementarContadorPersistente = ( ) => {
+    // Incrementar el contador persistente (no provoca re-renderización)
+    contadorPersistente.current += 1;
+    console.log('incrementa pero no renderiza')
+  };
+
+  return (
+    <div className="counter-container">
+      <div className="counter-box">
+        <p className="counter-label">Contador Normal:</p>
+        <p className="counter-value">{contadorNormal}</p>
+        <button onClick={incrementarContadorNormal}>Incrementar Contador Normal</button>
+      </div>
+      <div className="counter-box">
+        <p className="counter-label">Contador Persistente:</p>
+        <p className="counter-value">{contadorPersistente.current}</p>
+        <button onClick={incrementarContadorPersistente}>Incrementar Contador Persistente</button>
+      </div>
+    </div>
+  );
+};
+
+export default PersistenciaEntreRenderizaciones;`,  
+
+"/styles.css": 
+`.counter-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.counter-box {
+  text-align: center;
+}
+
+.counter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/PersistenciaEntreRenderizaciones.js", "/styles.css"]}
+/>
+
+En este ejemplo al hacer clic en **Incrementar Contador Normal** el estado cambia y provoca una re-renderización del componente. 
+En cambio al hacer clic en **Incrementar Contador Persistente** el valor de la ref **contadorPersistente** se incrementa pero no provoca re-renderizaciones del componente. 
+Se veran los cambios en el **DOM** solo cuando el componente se vuelva a renderizar por otros motivos como cambios en el estado o las props, pero no por el cambio en 
+**contadorPersistente.current**.
+Esto resalta la diferencia en el comportamiento entre el **estado** y las **refs** en términos de re-renderización.
+
+**Cuándo no usar useRef en React:**
+
+**- Manejo de estado reactivamente:** Si necesitas que cambios en tus datos provoquen re-renderizaciones es mejor utilizar el estado **useState** en lugar de **useRef**. 
+El estado garantiza una actualización reactiva del componente.
+
+**- Alternativa a useState:** No uses **useRef** como un reemplazo directo de **useState** para manejar el estado de tu componente. 
+Las refs no activan re-renderizaciones y no son adecuadas para manejar cambios reactivos en la UI.
+
+En resumen utiliza **useRef** cuando necesites acceder a elementos del DOM directamente, almacenar datos mutables que no deben causar re-renderizaciones, o mantener datos 
+que persistan entre renderizaciones sin afectar la representación del componente. Evita usar **useRef** cuando estás manejando datos reactivos que deben afectar la UI y 
+provocar re-renderizaciones.
+
+<a id="seccion6"></a>
+### useReducer
+
+useReducer es un hook que se utiliza para gestionar el estado de un componente de manera más avanzada, especialmente cuando el estado depende del **estado anterior** y la 
+lógica para actualizarlo es más compleja. A diferencia de **useState** que maneja un solo valor de estado, useReducer maneja el estado a través de una **función reductora**. 
+La función reductora recibe el **estado actual** y una **acción** y devuelve un **nuevo estado**.
+
+### Sintaxis
+
+La sintaxis básica de useReducer en React es la siguiente:
+
+<CodeBlock
+  codeString={`
+    const [state, dispatch] = useReducer(reducer, initialState);
+  `} 
+  language='javascript'
+/>
+
+**state (cualquier tipo):** Es el estado actual gestionado por useReducer. Puede ser de cualquier tipo y será el resultado de aplicar las acciones al estado inicial 
+utilizando el reductor.
+
+**dispatch (función):** Es una función que se utiliza para enviar acciones al reductor. Cada vez que se llama a dispatch con una acción la función reductora se ejecuta y 
+actualiza el estado en consecuencia.
+
+**reducer (función):** Esta función se encarga de especificar cómo se debe actualizar el estado en respuesta a diferentes acciones. Toma dos argumentos: el estado actual y 
+una acción, y devuelve el nuevo estado.
+
+**initialState (cualquier tipo):** Es el estado inicial que se utilizará antes de que se realice cualquier acción. Puede ser de cualquier tipo (objeto, número, cadena, etc.) 
+dependiendo de las necesidades de nuestra aplicación.
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Counter from './Counter';
+
+// App component
+const App = ( ) => {
+  return (
+    <div>
+      <h1>Counter App:</h1>
+      <Counter />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Counter.js":
+`import React, { useReducer } from 'react';
+import './styles.css';
+
+// Reducer function
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { count: state.count + 1 };
+    case 'DECREMENT':
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+// Counter component
+const Counter = ( ) => {
+  // Initial state
+  const initialState = { count: 0 };
+
+  // useReducer
+  const [state, dispatch] = useReducer(counterReducer, initialState);
+
+  return (
+    <div className="counter-container">
+      <p className="counter-label">Count:</p>
+      <p className="counter-value">{state.count}</p>
+      <div className="button-container">
+        <button onClick={() => dispatch({ type: 'DECREMENT' })}>Decrement</button>
+        <button onClick={() => dispatch({ type: 'INCREMENT' })}>Increment</button>
+      </div>
+    </div>
+  );
+};
+
+export default Counter;`, 
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.counter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  margin: 8px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Counter.js", "/styles.css"]}
+/>
+
+Este ejemplo utiliza **useReducer** para gestionar el estado de un contador. Cuando se hace clic en los botones, se envían acciones al reductor, que actualiza el estado en 
+consecuencia.
+
+<a id="seccion7"></a>
+### useCallback
+
+useCallback es un hook que se utiliza para memorizar funciones lo que significa que ayuda a evitar la recreación de funciones en cada renderizado, optimizando así el 
+rendimiento de la aplicación. Se utiliza comúnmente para mejorar el rendimiento de componentes que dependen de funciones callback especialmente en situaciones donde estas 
+funciones se pasan como propiedades a componentes hijos.
+
+**Sintaxis**
+
+<CodeBlock
+  codeString={`
+    const memoizedCallback = useCallback(
+      ( ) => {
+        // función a memoizar
+      },
+      [dependencias]
+    );
+  `} 
+  language='javascript'
+/>
+
+- El primer argumento de useCallback es la función que quieres memorizar.
+
+- El segundo argumento es un array de dependencias. Si alguna de estas dependencias cambia entre renderizaciones la función se volverá a crear de lo contrario se devolverá 
+la versión memorizada.
+
+**Ejemplo:**
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import CounterComponent from './CounterComponent';
+
+const App = () => {
+  return (
+    <div>
+      <CounterComponent label="Count1" />
+      <CounterComponent label="Count2 con useCallback" />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ButtonComponent.js":
+`import React from 'react';
+import './styles.css';
+
+const ButtonComponent = ({ onClick, label }) => {
+  console.log(\`Renderizando \${label}\`);
+  return <button className="custom-button" onClick={onClick}>{label}</button>;
+};
+
+export default ButtonComponent;`,
+
+"/CounterComponent.js":
+`import React, { useState, useCallback } from 'react';
+import ButtonComponent from './ButtonComponent';
+import './styles.css';
+
+const CounterComponent = ({ label }) => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
+
+  return (
+    <div className="counter-container">
+      <p className="counter-label">{label}:</p>
+      <p className="counter-value">{count}</p>
+      <ButtonComponent onClick={handleClick} label={\`Incrementar \${label}\`\} />
+    </div>
+  );
+};
+
+export default CounterComponent;`,  
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.counter-label {
+  font-size: 16px;
+  color: #333;
+}
+
+.counter-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+.custom-button {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+.custom-button:hover {
+  background-color: #0056b3;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ButtonComponent.js", "/CounterComponent.js", "/styles.css"]}
+/>
+

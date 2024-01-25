@@ -1,0 +1,150 @@
+import { CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+
+# Estilos
+
+En **React** los estilos se aplican a los elementos de la interfaz de usuario para mejorar la apariencia y la experiencia del usuario. 
+
+- ### Estilos en línea
+
+React permite aplicar estilos en línea directamente a los elementos utilizando el atributo **style**.
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import InlineStyle from "./InlineStyle.js";
+
+ const App = () => {
+    return (
+      <div>
+        <InlineStyle />
+      </div>
+    ) 
+ }
+
+export default App;`,
+
+"/InlineStyle.js": 
+`const InlineStyle = () => {
+  const styles = {
+    color: 'blue',
+    fontSize: '24px',
+    backgroundColor: '#f0f0f0',
+    padding: '2px',
+  };
+
+  return (
+    <div style={styles}>
+      Este es un componente con estilos en línea.
+    </div>
+  );
+};
+
+export default InlineStyle;`,       
+}}
+/>
+
+- ### Usando CSS en archivos separados
+
+Podemos crear archivos CSS separados y luego importarlos en nuestros componentes de React.
+
+<SandPack 
+files={{           
+"/App.js": 
+`import React from "react";
+import './styles.css';
+
+const App = () => {
+  return (
+    <div className="container">
+      Este es un componente con estilos externos.
+    </div>
+  );
+}
+
+export default App;`,
+
+"styles.css": 
+`.container {
+  color: green;
+  font-size: 24px;
+}`,
+}}
+/>
+
+- ### Librerías de Estilos
+
+Librerías como Styled-components o Emotion permiten escribir estilos directamente en el código JavaScript.
+
+**Ejemplo con Styled-components**
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from "react";
+import styled from 'styled-components';
+
+const StyledComponent = styled.div\`
+  color: purple;
+  font-size: 22px;
+\`;
+
+const App = () => {
+  return (
+    <StyledComponent>
+        Este es un componente con Styled-components.
+    </StyledComponent>
+  );
+}
+
+export default App;`,   
+}}
+/>
+- ### Estilos condicionales
+
+Podemos aplicar estilos condicionales basados en el estado de un componente.
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from "react";
+import ConditionalStyle from "./ConditionalStyle.js";
+
+ const App = () => {
+   return (
+    <div>
+      <ConditionalStyle />
+    </div>
+  ) 
+ }
+
+export default App;`, 
+
+"/ConditionalStyle.js":
+`import React, { useState } from 'react';
+
+const ConditionalStyle = () => {
+ const [isActive, setIsActive] = useState(false);
+
+ const handleClick = () => {
+  setIsActive(!isActive);
+ };
+
+ return (
+    <div
+      style={{
+        color: isActive ? 'blue' : 'black',
+        backgroundColor: isActive ? 'yellow' : 'transparent',
+        fontSize: '20px',
+        padding: '10px',
+      }}
+    onClick={handleClick}
+    >
+      Este es un componente con estilos condicionales.
+    </div>
+  );
+};
+
+export default ConditionalStyle;`,
+}}
+/>

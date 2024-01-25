@@ -1,0 +1,70 @@
+import { StickyNav,CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import Unidireccionalidad from "../assets/Unidireccionalidad.png";
+import "../styles.css"
+
+# Unidireccionalidad de Datos
+
+En React los datos fluyen en una dirección específica de arriba hacia abajo a través de los componentes. Esto se conoce como unidireccionalidad de datos o "flujo unidireccional". 
+La idea es que el componente principal pasa datos a los componentes secundarios a través de las props.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Unidireccionalidad} alt="Texto Alternativo" style={{ width: '750px', height: '390px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
+<CodeBlock
+  codeString={`
+import React, { useState } from 'react';
+
+// Componente Hijo
+const MiComponente = (props) => {
+  return <p>Hola, {props.nombre}!</p>;
+};
+
+// Componente Padre
+const App = () => {
+  const [usuario, setUsuario] = useState('Usuario');
+
+  return <MiComponente nombre={usuario} />;
+};
+
+export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React, { useState } from 'react';
+import './styles.css';
+
+// Componente Hijo
+const MiComponente = (props) => {
+  return <p className="saludo">Hola, {props.nombre}!</p>;
+};
+
+// Componente Padre
+const App = () => {
+  const [usuario, setUsuario] = useState('Usuario');
+
+  return <MiComponente nombre={usuario} />;
+};
+
+export default App;`, 
+
+"/styles.css": 
+`.saludo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin: 20px 0;
+}`,
+}}
+  
+  dynamicVisibleFiles={["/App.js", "/styles.css"]}
+/>
+
+Esto ayuda a mantener la aplicación predecible y facilita la depuración ya que siempre sabes de dónde provienen los datos.

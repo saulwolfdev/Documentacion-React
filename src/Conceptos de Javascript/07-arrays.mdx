@@ -1,0 +1,470 @@
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Crear Arrays' },
+    { id: 'seccion2', text: 'Acceder a los valores' },
+    { id: 'seccion3', text: 'Recorrer un Array' },
+    { id: 'seccion4', text: 'Añadir nuevos elementos al final o Inicio' },
+    { id: 'seccion5', text: 'nuevo arreglo con el spread operator' },
+    { id: 'seccion6', text: 'Eliminar elementos con Splice' },
+    { id: 'seccion7', text: 'Destructuring de Arrays' },
+    { id: 'seccion8', text: '.map para iterar un array' },
+    { id: 'seccion9', text: 'Tips' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+# Arrays
+
+En JavaScript la notación `[]` se utiliza para representar arrays. 
+
+### Crear Arrays
+
+Un array en JavaScript es una estructura de datos que se utiliza para almacenar múltiples valores en una sola variable. 
+Podes pensar en un array como una lista ordenada de elementos. 
+Cada elemento en el array tiene un índice numérico que comienza desde 0. 
+Los arrays en JavaScript pueden contener elementos de diferentes tipos de datos, como números, cadenas, booleanos, objetos, entre otros.
+
+**Ejemplo:**
+
+<CodeBlock
+  codeString={`
+  // Crear un array de números
+  let numeros = [1, 2, 3, 4, 5];
+
+  // Crear un array de cadenas
+  let frutas = ["Manzana", "Banana", "Cereza"];
+
+  // Crear un array mixto
+  let mixto = [10, "Hola", true, 3.14];
+  `} 
+  language='javascript'
+/>
+
+en este ejemplo:
+- **numeros** es un array que contiene números del 1 al 5.
+- **frutas** es un array que contiene nombres de frutas.
+- **mixto** es un array que contiene elementos de diferentes tipos.
+
+<a id="seccion2"></a>
+###  Acceder a los valores de un Array
+
+Puedes acceder a los valores de un array en JavaScript utilizando los índices. Los índices en un array comienzan desde 0 y van hasta la longitud del array menos 1
+
+<CodeBlock
+  codeString={`
+  let miArray = [10, 20, 30, 40, 50];
+
+  // Acceder a los valores utilizando índices
+  console.log(miArray[0]); // Imprime el primer elemento: 10
+  console.log(miArray[2]); // Imprime el tercer elemento: 30
+  console.log(miArray[4]); // Imprime el quinto elemento: 50
+  `} 
+  language='javascript'
+/>
+
+Recuerda que los índices comienzan desde 0, por lo que miArray[0] te dará el primer elemento del array.
+
+Si intentas acceder a un índice que está fuera del rango del array, obtendrás undefined.
+
+<CodeBlock
+  codeString={`
+  console.log(miArray[10]); // Imprimirá undefined, ya que el array no tiene un elemento en el índice 10
+  `} 
+  language='javascript'
+/>
+
+Ten en cuenta que es una buena práctica verificar la longitud del array antes de intentar acceder a un índice específico para evitar errores. 
+Podes usar la propiedad length del array para obtener su longitud:
+
+<CodeBlock
+  codeString={`
+  console.log(miArray.length); // Imprime la longitud del array: 5
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion3"></a>
+### Recorrer un Array
+
+
+Recorrer un array en JavaScript significa pasar por cada elemento del array y realizar alguna operación en cada uno de ellos. 
+Hay varias formas de recorrer un array algunas de las más comunes son: for, forEach y for...of.
+
+**Usando un bucle for:** Se puede recorrer un array utilizando un bucle for clásico.
+
+<CodeBlock
+  codeString={`
+  let miArray = [10, 20, 30, 40, 50];
+
+  // Recorrer el array con un bucle for
+    for (let i = 0; i < miArray.length; i++) {
+    console.log(miArray[i]);
+  }
+  `} 
+  language='javascript'
+/>
+
+**Usando el método forEach:** El método forEach es una forma más moderna y legible de recorrer un array.
+
+<CodeBlock
+  codeString={`
+  let miArray = [10, 20, 30, 40, 50];
+
+  // Recorrer el array con forEach
+  miArray.forEach(function(elemento) {
+    console.log(elemento);
+  });
+  `} 
+  language='javascript'
+/>
+
+**Usando el bucle for...of:** El bucle for...of proporciona una sintaxis más concisa para recorrer un array. 
+
+<CodeBlock
+  codeString={`
+  let miArray = [10, 20, 30, 40, 50];
+
+  // Recorrer el array con un bucle for...of
+  for (let elemento of miArray) {
+    console.log(elemento);
+  }
+  `} 
+  language='javascript'
+/>
+
+Cada uno de estos enfoques imprimirá los valores del array en la consola:
+
+<CodeBlock
+  codeString={`
+  10
+  20
+  30
+  40
+  50
+  `} 
+  language='javascript'
+/>
+
+Podes eligir el método que te parezca más conveniente para tu situación. **forEach** suele ser preferido cuando no necesitas realizar un seguimiento del índice, mientras que el 
+bucle **for clásico** o el **for...of** son útiles cuando necesitas trabajar con los índices de los elementos.
+
+<a id="seccion4"></a>
+### Añadir nuevos elementos al final o Inicio de un array
+
+
+Para agregar nuevos valores a un array en JavaScript, puedes utilizar varios métodos. Dos de los métodos más comunes son **push()** y **unshift()**.
+
+**Método push():** El método push() agrega uno o más elementos al final de un array.
+
+<CodeBlock
+  codeString={`
+  let miArray = [1, 2, 3, 4, 5];
+
+  // Agregar un nuevo valor al final del array
+  miArray.push(6);
+
+  console.log(miArray); // Imprime: [1, 2, 3, 4, 5, 6]
+
+  // agregar múltiples elementos
+  miArray.push(7, 8, 9);
+
+  console.log(miArray); // Imprime: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  `} 
+  language='javascript'
+/>
+
+**Método unshift():** El método unshift() agrega uno o más elementos al principio de un array. 
+
+<CodeBlock
+  codeString={`
+  let miArray = [2, 3, 4, 5];
+
+  // Agregar un nuevo valor al principio del array
+  miArray.unshift(1);
+
+  console.log(miArray); // Imprime: [1, 2, 3, 4, 5]
+
+  //agregar múltiples elementos
+  miArray.unshift(-2, -1, 0);
+
+  console.log(miArray); // Imprime: [-2, -1, 0, 1, 2, 3, 4, 5]
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion5"></a>
+### Crear un nuevo arreglo con el spread operator
+
+El operador de propagación **spread operator** en JavaScript se denota por tres puntos `...`. Se utiliza para copiar elementos de un iterable (como un array o un objeto iterable) 
+en otro lugar como un nuevo array.
+
+<CodeBlock
+  codeString={`
+  let arrayOriginal = [1, 2, 3, 4, 5];
+
+  // Crear un nuevo array usando el spread operator
+  let nuevoArray = [...arrayOriginal];
+
+  console.log(nuevoArray); // Imprimirá [1, 2, 3, 4, 5]
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo **...arrayOriginal** se expande para incluir todos los elementos del array original en el **nuevoArray**. Esencialmente esto crea una copia superficial del 
+array original.
+
+
+Tambien se puede utilizar esta técnica para combinar arrays.
+
+<CodeBlock
+  codeString={`
+  let array1 = [1, 2, 3];
+  let array2 = [4, 5, 6];
+
+  // Combina ambos arrays usando el spread operator
+  let arrayCombinado = [...array1, ...array2];
+
+  console.log(arrayCombinado); // Imprimirá [1, 2, 3, 4, 5, 6]
+  `} 
+  language='javascript'
+/>
+
+El **spread operator** es muy útil para evitar la modificación directa de los arrays originales y para crear copias rápidas y simples de estos. 
+Además de trabajar con arrays, también puedes usar el **spread operator** con objetos literales para realizar operaciones similares.
+
+<a id="seccion6"></a>
+### Eliminar elementos con Splice
+
+El método **splice()** en JavaScript se utiliza para modificar el contenido de un array eliminando o reemplazando elementos existentes y/o agregando nuevos elementos en su lugar. 
+La sintaxis básica es la siguiente:
+
+<CodeBlock
+  codeString={`
+  array.splice(start, deleteCount, item1, item2, ...);
+  `} 
+  language='javascript'
+/>
+
+- **start:** Índice en el cual comenzará la modificación del array.
+- **deleteCount:** Número de elementos que se eliminarán desde el índice **start**.
+- **item1, item2, ...:** Elementos que se agregarán al array en el índice **start**.
+
+**Ejemplo:**
+
+<CodeBlock
+  codeString={`
+  let miArray = [1, 2, 3, 4, 5];
+
+  // Eliminar elementos utilizando splice
+  miArray.splice(2, 2); // Eliminar 2 elementos a partir del índice 2
+
+  console.log(miArray); // Imprimirá [1, 2, 5]
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo, **splice(2, 2)** elimina dos elementos a partir del índice 2 en **miArray** por lo que el resultado es **[1, 2, 5]**.
+
+También se puede utilizar **splice()** para agregar elementos en lugar de eliminarlos.
+
+<CodeBlock
+  codeString={`
+  let miArray = [1, 2, 3, 4, 5];
+
+  // Agregar elementos utilizando splice
+  miArray.splice(2, 0, 6, 7); // No eliminar elementos (deleteCount = 0), agregar 6 y 7 en el índice 2
+
+  console.log(miArray); // Imprimirá [1, 2, 6, 7, 3, 4, 5]
+  `} 
+  language='javascript'
+/>
+
+En este caso **splice(2, 0, 6, 7)** agrega los elementos 6 y 7 en el índice 2 sin eliminar ningún elemento, y el resultado es **[1, 2, 6, 7, 3, 4, 5]**.
+
+<a id="seccion7"></a>
+### Destructuring de Arrays
+
+La asignación por destructuración (o "destructuring") en JavaScript es una forma de extraer valores de arrays o propiedades de objetos y asignarlos a variables de manera más 
+concisa. En el contexto de arrays, se utiliza la sintaxis de corchetes para realizar la asignación por destructuración.
+
+**Asignación Básica:**
+
+<CodeBlock
+  codeString={`
+  let miArray = [1, 2, 3];
+
+  // Usar destructuring para asignar valores a variables
+  let [a, b, c] = miArray;
+
+  console.log(a); // Imprime 1
+  console.log(b); // Imprime 2
+  console.log(c); // Imprime 3
+  `} 
+  language='javascript'
+/>
+
+**Ignorar Elementos:** Se puede ignorar elementos utilizando comas si no necesitas asignar todos los valores.
+
+<CodeBlock
+  codeString={`
+  let [x, , z] = miArray;
+
+  console.log(x); // Imprime 1
+  console.log(z); // Imprime 3
+  `} 
+  language='javascript'
+/>
+
+**Asignar a Variables con Nombres Personalizados:** Se puede asignar elementos del array a variables con nombres personalizados.
+
+<CodeBlock
+  codeString={`
+  let [primero: a, segundo: b, tercero: c] = miArray;
+
+  console.log(primero); // Imprime 1
+  console.log(segundo); // Imprime 2
+  console.log(tercero); // Imprime 3
+  `} 
+  language='javascript'
+/>
+
+**Valores por Defecto:** Se puede proporcionar valores por defecto en caso de que el elemento no exista en el array.
+
+<CodeBlock
+  codeString={`
+  let [uno, dos, tres, cuatro = 4] = miArray;
+
+  console.log(uno);    // Imprime 1
+  console.log(dos);    // Imprime 2
+  console.log(tres);   // Imprime 3
+  console.log(cuatro); // Imprime 4 (valor por defecto)
+  `} 
+  language='javascript'
+/>
+
+**Utilidad:** La asignación por destructuración es especialmente útil cuando se trabaja con funciones que devuelven arrays ya que te permite extraer los valores de manera más 
+clara y legible.
+
+<CodeBlock
+  codeString={`
+  function obtenerCoordenadas( ) {
+    return [10, 20];
+  }
+
+  let [coordX, coordY] = obtenerCoordenadas();
+
+  console.log(coordX); // Imprime 10
+  console.log(coordY); // Imprime 20
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion8"></a>
+### .map para iterar un array y sus diferencias con forEach
+
+Ambos **forEach** y **.map** son métodos de los arrays en JavaScript que permiten realizar operaciones en cada elemento del array. 
+Sin embargo tienen algunas diferencias clave en términos de su uso y lo que devuelven.
+
+#### forEach
+
+- **Uso:** Itera sobre los elementos de un array pero no retorna un nuevo array.
+- **Objetivo:** Se utiliza cuando quieres ejecutar una operación o función en cada elemento del array, pero no necesitas o no estás interesado en obtener un nuevo array resultante.
+
+<CodeBlock
+  codeString={`
+  let miArray = [1, 2, 3, 4, 5];
+
+  // Usar forEach para imprimir cada elemento del array
+  miArray.forEach(function(elemento) {
+    console.log(elemento);
+  });
+  `} 
+  language='javascript'
+/>
+
+#### .map:
+
+- **Uso:** Itera sobre los elementos de un array y retorna un nuevo array con los resultados de aplicar una función a cada elemento.
+- **Objetivo:** Se utiliza cuando deseas obtener un nuevo array resultante de aplicar una transformación a cada elemento del array original.
+
+<CodeBlock
+  codeString={`
+  let miArray = [1, 2, 3, 4, 5];
+
+  // Usar map para duplicar cada elemento del array
+  let nuevoArray = miArray.map(function(elemento) {
+    return elemento * 2;
+  });
+
+  console.log(nuevoArray); // Imprimirá [2, 4, 6, 8, 10]
+  `} 
+  language='javascript'
+/>
+
+#### Diferencias clave
+
+**Retorno de Valor:**
+- **forEach:** No retorna un nuevo array devuelve **undefined**.
+- **.map:** Retorna un nuevo array con los resultados de la función aplicada a cada elemento.
+
+#### Modificación del Array Original
+- **forEach:** Puede modificar el array original pero generalmente se usa para realizar acciones sobre los elementos sin preocuparse por el valor de retorno.
+- **.map:** No modifica el array original. Retorna un nuevo array sin modificar el original.
+
+#### Uso común
+- **forEach:** Se utiliza cuando se necesita ejecutar una operación para cada elemento del array, pero no es necesario un nuevo array resultante.
+- **.map:** Se utiliza cuando se desea obtener un nuevo array resultante de aplicar una transformación a cada elemento del array original.
+
+En resumen **forEach** es útil cuando solo necesitas realizar una acción en cada elemento del array mientras que **.map** es más adecuado cuando deseas obtener un nuevo array 
+basado en la transformación de cada elemento del array original.
+
+<a id="seccion9"></a>
+# Tips
+
+#### Evitar el uso de for...in para arrays
+
+El bucle **for...in** puede iterar sobre propiedades no numéricas por lo que no es la mejor opción para recorrer arrays. Utiliza **for...of** o métodos de array en su lugar.
+
+<CodeBlock
+  codeString={`
+  const array = [1, 2, 3];
+
+  // No recomendado
+  for (const index in array) {
+    console.log(array[index]);
+  }
+
+  // Recomendado
+  for (const element of array) {
+    console.log(element);
+  }
+  `} 
+  language='javascript'
+/>
+
+Es importante destacar que el bucle **for...in** no se recomienda para iterar sobre arrays ya que puede incluir propiedades adicionales si el array ha sido extendido o 
+modificado.
+
+El enfoque con **for...of** es más seguro y está diseñado específicamente para iterar sobre elementos de un array sin incluir propiedades adicionales
+
+#### Verificar si un elemento existe en un array
+
+Antes de realizar operaciones en un array verifica si un elemento específico existe para evitar errores.
+
+<CodeBlock
+  codeString={`
+  const array = [1, 2, 3, 4, 5];
+  const element = 3;
+
+  //El método includes retorna true
+  if (array.includes(element)) {
+    console.log(\`El elemento \${element} está en el array.\`);
+  }
+
+  //resp: El elemento 3 está en el array.
+  `} 
+  language='javascript'
+/>

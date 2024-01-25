@@ -1,0 +1,165 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import Lazy from "../assets/Lazy Loading.png";
+import "../styles.css"
+
+# Suspense y Lazy Loading
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Lazy} alt="Texto Alternativo" style={{ width: '750px', height: '300px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
+### Suspense
+
+Suspense es una característica de React que permite a los componentes mostrar un indicador de carga **(como un spinner)** mientras esperan a que los datos sean cargados. 
+Se utiliza principalmente para manejar la carga de datos asíncronos y mejorar la experiencia del usuario al proporcionar una interfaz de usuario más receptiva.
+
+La sintaxis de **Suspense** se basa en dos conceptos principales: el componente `<Suspense>` y la función `React.lazy()`.
+
+- `<Suspense>` Este es un componente de React que permite a otros componentes suspender su renderización mientras esperan a que se completen operaciones asincrónicas. 
+Podes envolver los componentes que realizan operaciones asincrónicas con `<Suspense>` y proporcionar un **fallback (un componente que se renderizará mientras espera)**.
+
+<CodeBlock
+  codeString={`
+<Suspense fallback={<div>Cargando...</div>}>
+  <MyComponent />
+</Suspense>
+  `} 
+  language='javascript'
+/>
+
+### Lazy Loading
+
+Lazy Loading es una técnica que consiste en **retrasar** la carga de ciertos recursos o componentes hasta que realmente son necesarios. En el contexto de React esto se 
+utiliza para mejorar el rendimiento de la aplicación ya que solo se cargan los recursos necesarios cuando el usuario los solicita.
+
+- `React.lazy()` Esta función permite la carga dinámica de componentes. Se utiliza para importar componentes de forma asincrónica. Se utiliza en combinación con `<Suspense>` 
+para especificar qué componente se cargará de forma perezosa.
+
+<CodeBlock
+  codeString={`
+const MyComponent = React.lazy(() => import('./MyComponent'));
+  `} 
+  language='javascript'
+/>
+
+Suspense y Lazy Loading:
+
+<CodeBlock
+  codeString={`
+import React, { Suspense } from 'react';
+
+const MyComponent = React.lazy(() => import('./MyComponent'));
+
+function App() {
+  return (
+    <div>
+      <Suspense fallback={<div>Cargando...</div>}>
+        <MyComponent />
+      </Suspense>
+    </div>
+  );
+}
+  `} 
+  language='javascript'
+/>
+
+En el ejemplo anterior, cuando `<MyComponent />` se renderiza React automáticamente suspenderá la renderización y mostrará el **fallback** hasta que el código del componente 
+importado de forma perezosa esté disponible y cargado.
+
+Estas características son especialmente útiles en aplicaciones grandes donde la carga de componentes puede llevar tiempo permitiendo una mejor experiencia de usuario al 
+mostrar un indicador de carga o contenido de respaldo mientras se espera la carga de datos asincrónicos.
+
+**Ejemplo de como se comporta Suspense y Lazy Loading:**
+
+Supongamos que tenemos un componente que necesita cargar datos de manera asíncrona. Podemos usar Suspense para mostrar un indicador de carga mientras esos datos están 
+siendo recuperados.
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React, { Suspense, useState, useEffect } from 'react';
+import './styles.css';
+
+// Función simulada que espera 2 segundos antes de devolver datos
+const cargarDatosAsincronos = ( ) =>
+  new Promise(resolve => {
+    setTimeout(( ) => {
+      resolve('Datos cargados');
+    }, 2000);
+  });
+
+const ComponenteAsincrono = React.lazy(( ) => cargarDatosAsincronos( ));
+
+const App= ( )=> {
+  const [datos, setDatos] = useState(null);
+
+  useEffect(( ) => {
+    const fetchData = async ( ) => {
+      const data = await cargarDatosAsincronos();
+      setDatos(data);
+    };
+
+    fetchData( );
+  }, [ ]);
+
+  return (
+    <div className="app-container">
+      <h1 className="app-title">Mi Aplicación</h1>
+      <Suspense fallback={<div className="loading-message">Cargando...</div>}>
+        <div className="data-container">
+          <DatosAsincronos datos={datos} />
+        </div>
+      </Suspense>
+    </div>
+  );
+}
+
+// Componente que usa los datos cargados para fines preacticos y simular la carga de datos
+function DatosAsincronos({ datos }) {
+  if (!datos) {
+    throw cargarDatosAsincronos( ); // Forzamos una suspensión aquí
+  }
+
+  return <div>{datos}</div>;
+}
+
+export default App;`,
+
+"/styles.css": 
+`.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-title {
+  color: #3498db;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.loading-message {
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+  font-size: 24px
+}
+
+.data-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.data-content {
+  color: #333;
+}`,
+ 
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/styles.css"]}
+/>

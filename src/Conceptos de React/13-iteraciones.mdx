@@ -1,0 +1,102 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Iteración con map' },
+    { id: 'seccion2', text: 'Iteración con forEach' },
+  ]}
+/>
+
+# Iteraciones
+
+En **React** las iteraciones se refieren al proceso de **repetir** o **recorrer** elementos de una lista para **renderizar** componentes de manera **dinámica**. 
+Esto se logra mediante el uso de estructuras de control con metodos que permiten **recorrer arrays** y **generar** contenido JSX en función de los elementos de la lista.
+
+<a id="seccion1"></a>
+### Iteración con map
+
+[.map](/docs/conceptos-de-javascript-10-array-methods--docs) es una función de **JavaScript** que se utiliza comúnmente en **React** para iterar sobre **elementos de un array** 
+y devolver un **nuevo array** con cada elemento transformado según una función proporcionada.
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListaDeElementos from "./ListaDeElementos.js";
+
+const App = () => {
+  // Supongamos que tenemos un array de elementos
+  const elementos = ["Elemento 1", "Elemento 2", "Elemento 3"];
+
+  return (
+    <div>
+      <ListaDeElementos elementos={elementos} />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/ListaDeElementos.js":
+`import React from 'react';
+import './styles.css';
+
+    const ListaDeElementos = ({ elementos }) => {
+    return (
+        <ul className="custom-list">
+        {elementos.map((elemento, index) => (
+            <li key={index}>{elemento}</li>
+        ))}
+        </ul>
+    );
+    };
+
+    export default ListaDeElementos;`,
+
+"/styles.css": 
+`.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.custom-list li:hover {
+  background-color: #dcdcdc;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListaDeElementos.js", "/styles.css"]}
+/>
+
+En este ejemplo **ListaDeElementos** es un componente funcional que recibe la prop **elementos** y renderiza una lista utilizando el método **map()**. 
+Luego en el archivo **App.js** importas **ListaDeElemento** y lo usas en tu aplicación.
+
+<a id="seccion2"></a>
+### Iteración con forEach
+
+[.forEach](/docs/conceptos-de-javascript-09-iteradores--docs) es otra función de iteración en JavaScript que ejecuta una función proporcionada una vez por cada elemento 
+en un array.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  numbers.forEach((number) => {
+    console.log(number);
+  });
+
+  // Resultado: 1, 2, 3, 4, 5
+  `} 
+  language='javascript'
+/>
+
+En **React** aunque **forEach** se puede utilizar para realizar acciones sobre elementos **no se usa directamente para renderizar listas como map**. 
+**.map es preferido en React** porque devuelve un **nuevo array** mientras que **forEach** simplemente **itera** sobre los elementos.

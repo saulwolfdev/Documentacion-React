@@ -1,0 +1,108 @@
+.css-qa4clq :where(h1, h2, h3, h4):not(.sb-anchor, .sb-unstyled, .sb-unstyled h1, .sb-unstyled h2, .sb-unstyled h3, .sb-unstyled h4) {
+    font-family: 'Segoe UI', sans-serif !important;
+}
+
+.css-qa4clq :where(p:not(.sb-anchor, .sb-unstyled, .sb-unstyled p)) {
+    font-family: 'Segoe UI', sans-serif !important;
+    font-size: 16px !important;
+}
+
+.css-qa4clq :where(li:not(.sb-anchor, .sb-unstyled, .sb-unstyled li)) {
+    font-family: 'Segoe UI', sans-serif !important;
+    font-size: 16px !important;
+}
+
+.css-qa4clq :where(span:not(.sb-anchor, .sb-unstyled, .sb-unstyled span)) {
+    font-family: 'Segoe UI', sans-serif !important;
+    font-size: 16px !important;
+}
+
+.css-qa4clq :where(a:not(.sb-anchor, .sb-unstyled, .sb-unstyled a)) {
+    font-family: 'Segoe UI', sans-serif !important;
+    font-size: 16px !important;
+    &:hover {
+        color: red !important;
+    }
+}
+
+
+.sbdocs.sbdocs-content.css-qa4clq {
+    max-width: 1000px !important;
+    width: 100%;
+}
+
+code.css-1kwwth4 {
+    font-family: 'Cascadia Code', Menlo, 'Courier New', Courier, monospace !important;
+    font-size: 16px !important;
+    background: #f0f0f0 !important;
+    color: black !important;
+}
+
+
+.sticky-nav {
+    display: grid;
+    position: fixed;
+    top: 8%;
+    right: 30px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-nav .sticky-nav-link {
+    display: block;
+    padding: 10px;
+    position: relative;
+    text-decoration: none;
+    color: #029CFD;
+}
+
+.sticky-nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+  }
+
+.sticky-nav .indicator {
+    margin-right: 4px;
+}
+
+.sticky-nav .sticky-nav-link.clicked,
+.sticky-nav .sticky-nav-link.clicked .indicator {
+    color: red;
+}
+
+.sticky-nav {
+    display: none;
+  }
+  
+  @media (min-width: 1388px) {
+    .sticky-nav {
+      display: block;
+    }
+  }
+
+pre.prism-code.language-tsx{
+    background-color: rgb(1, 22, 39)!important;
+}
+
+.sp-c-bxeRRt.sp-c-gMfcns.sp-c-bxeRRt:has(svg + span) {
+    display: none;
+}
+
+.sp-c-euXojQ.sp-editor.sp-stack {
+    flex: -1 30 0px!important;
+}
+
+.sp-c-euXojQ.sp-editor.sp-stack{
+    height: 30rem!important;
+}
+
+.sp-c-ikJbEZ > .sp-c-euXojQ{
+    height: 30rem!important;
+}
+
+.sp-c-ikJbEZ > .sp-file-explorer {
+    min-width: 164px!important;
+}

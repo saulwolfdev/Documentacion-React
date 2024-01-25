@@ -1,0 +1,344 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import HOC from "../assets/HOC.png";
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Higher-Order Components' },
+    { id: 'seccion2', text: 'Añadir propiedades adicionales' },
+    { id: 'seccion3', text: 'Compartir estado' },
+    { id: 'seccion4', text: 'Ventajas y Consideraciones' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+#  Higher-Order Components
+
+Higher-Order Component **(HOC)** es una función que toma un componente y devuelve un nuevo componente con funcionalidades adicionales o propiedades. 
+Es una técnica que se utiliza para reutilizar la lógica de componentes y compartir funcionalidades entre diferentes partes de una aplicación. 
+Los **HOC** no son componentes de React en sí mismos, sino funciones que envuelven componentes para extender su comportamiento.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={HOC} alt="Texto Alternativo" style={{ width: '750px', height: '300px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
+<a id="seccion2"></a>
+### Añadir propiedades adicionales
+
+Cuando se habla de **añadir propiedades adicionales** se refiere a la capacidad de extender las propiedades y métodos de un componente React existente mediante el uso de un 
+**HOC**.
+
+Aquí hay un ejemplo simple para ilustrar cómo un **HOC** puede añadir propiedades adicionales a un componente:
+
+<CodeBlock
+  codeString={`
+    // HOC.js
+    import React from 'react';
+
+    const withColor = (WrappedComponent, color) => {
+        return (props) => (
+            <WrappedComponent {...props} color={color} />
+        );
+    };
+
+    export default withColor;
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    // ComponentA.js
+    import React from 'react';
+    import withColor from './HOC';
+
+    const ComponentA = ({ color }) => (
+    <div style={{ color }}>¡Hola, soy el Componente A con color!</div>
+    );
+
+    export default withColor(ComponentA, 'blue');
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    // ComponentB.js
+    import React from 'react';
+    import withColor from './HOC';
+
+    const ComponentB = ({ color }) => (
+    <div style={{ color }}>¡Hola, soy el Componente B con color!</div>
+    );
+
+    export default withColor(ComponentB, 'green');
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    // App.js
+    import React from 'react';
+    import ComponentA from './ComponentA';
+    import ComponentB from './ComponentB';
+
+    const App = ( ) => (
+    <div>
+        <ComponentA />
+        <ComponentB />
+    </div>
+    );
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ComponentA from "./ComponentA";
+import ComponentB from "./ComponentB";
+
+const App = ( ) => (
+  <div>
+    <ComponentA />
+    <ComponentB />
+  </div>
+);
+
+export default App;`,
+
+"/ComponentA.js":
+`import React from "react";
+import withColor from "./HOC";
+
+const ComponentA = ({ color }) => (
+  <div style={{ color }}>¡Hola, soy el Component A con color!</div>
+);
+
+export default withColor(ComponentA, "blue");`,  
+
+"/ComponentB.js":
+`import React from "react";
+import withColor from "./HOC";
+
+const ComponentB = ({ color }) => (
+  <div style={{ color }}>¡Hola, soy el Component B con color!</div>
+);
+
+export default withColor(ComponentB, "green");`,
+
+"/HOC.js":
+`import React from 'react';
+
+const withColor = (WrappedComponent, color) => {
+  return (props) => (
+    <WrappedComponent {...props} color={color} />
+  );
+};
+
+export default withColor;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ComponentA.js", "/ComponentB.js", "/HOC.js"]}
+/>
+
+**En este ejemplo:**
+
+**HOC.js** define el Higher Order Component (withColor) que toma un componente y devuelve un nuevo componente con la propiedad color.
+
+**ComponenteA.js** y **ComponenteB.js** son dos componentes separados que importan y utilizan el **HOC** withColor para obtener la propiedad color.
+
+**App.js** importa y utiliza **ComponenteA** y **ComponenteB** en la composición de la aplicación.
+
+<a id="seccion3"></a>
+### Compartir estado
+
+Cuando se habla de **compartir estado** a través de **HOC** se está refiriendo a la capacidad de pasar cierto estado a varios componentes envolviéndolos con el mismo **HOC**.
+
+**Ejemplo:**
+
+<CodeBlock
+  codeString={`
+    //withCounter.js
+    import React, { useState } from 'react';
+
+    const withCounter = (WrappedComponent) => {
+    return (props) => {
+        const [count, setCount] = useState(0);
+
+        const incrementCounter = () => {
+        setCount((prevCount) => prevCount + 1);
+        };
+
+        return (
+        <WrappedComponent
+            {...props}
+            count={count}
+            incrementCounter={incrementCounter}
+        />
+        );
+    };
+    };
+
+    export default withCounter;
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    //CounterComponent.js
+    import React from 'react';
+
+    const CounterComponent = ({ count, incrementCounter }) => (
+    <div>
+        <p>Contador: {count}</p>
+        <button onClick={incrementCounter}>Incrementar</button>
+    </div>
+    );
+
+    export default CounterComponent;
+  `} 
+  language='javascript'
+/>
+
+<CodeBlock
+  codeString={`
+    //App.js
+    import React from 'react';
+    import CounterComponent from './components/CounterComponent';
+    import withCounter from './HOC/withCounter';
+
+    // Uso del HOC para envolver el componente original
+    const CounterWithHOC = withCounter(CounterComponent);
+
+    const App = ( ) => (
+    <div>
+        <CounterWithHOC />
+    </div>
+    );
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import CounterComponent from './CounterComponent';
+import withCounter from './withCounter';
+
+// Uso del HOC para envolver el componente original
+const CounterWithHOC = withCounter(CounterComponent);
+
+const App = ( ) => (
+  <div>
+    <CounterWithHOC />
+  </div>
+);
+
+export default App;`,
+
+"/CounterComponent.js":
+`import React from 'react';
+
+const CounterComponent = ({ count, incrementCounter }) => (
+  <div className="counter-container">
+    <p className="counter-text">Contador: {count}</p>
+    <button className="button-count" onClick={incrementCounter}>Incrementar</button>
+  </div>
+);
+
+export default CounterComponent;`,  
+
+"/withCounter.js":
+`import React, { useState } from 'react';
+
+const withCounter = (WrappedComponent) => {
+  return (props) => {
+    const [count, setCount] = useState(0);
+
+    const incrementCounter = ( ) => {
+      setCount((prevCount) => prevCount + 1);
+    };
+
+    return (
+      <WrappedComponent
+        {...props}
+        count={count}
+        incrementCounter={incrementCounter}
+      />
+    );
+  };
+};
+
+export default withCounter;`,
+
+"/styles.css": 
+`.counter-container {
+  text-align: center;
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.counter-text {
+  font-size: 24px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.button-count {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/CounterComponent.js", "/withCounter.js"]}
+/>
+
+**En este Ejemplo:**
+
+**withCounter** es una función que toma un componente **(WrappedComponent)** y devuelve un nuevo componente funcional. Este nuevo componente funcional cuando se renderiza 
+agrega la funcionalidad de contar a través del uso de Hooks.
+
+**CounterComponent.js** este es el componente original al que queremos agregar la funcionalidad del contador. Recibe **count** y **incrementCounter** como propiedades y 
+muestra el contador y un botón para incrementarlo.
+
+
+**App.js** en este archivo utilizamos el **HOC** **withCounter** para envolver el componente **CounterComponent** creando así un nuevo componente llamado **CounterWithHOC** 
+luego renderizamos este componente dentro de la aplicación principal.
+
+<a id="seccion4"></a>
+### Ventajas:
+
+**- Reutilización de Código:** Permite la reutilización de lógica y funcionalidades en diferentes partes de una aplicación.
+
+**- Separación de Responsabilidades:** Facilita la separación de responsabilidades al encapsular ciertas funcionalidades en un HOC.
+
+### Consideraciones:
+
+Con la introducción de [hooks](/docs/conceptos-de-react-05-hooks--docs) en React algunas funcionalidades que anteriormente requerían **HOCs** pueden abordarse de manera más 
+directa con **Hooks** lo que hace que los **HOCs** sean menos necesarios en ciertos casos.
+
+En resumen los **HOCs** son una herramienta poderosa en React que permite mejorar la modularidad y reutilización de código al agregar funcionalidades a componentes de manera 
+flexible. Sin embargo es importante considerar también otras alternativas como el uso de **Hooks** dependiendo de la naturaleza específica de la funcionalidad que se está 
+buscando agregar a nuestros componentes.

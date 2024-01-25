@@ -1,0 +1,392 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import Reacts from "../assets/react-components.png";
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Componentes' },
+    { id: 'seccion2', text: 'Componentes Funcionales' },
+    { id: 'seccion3', text: 'Componentes de Clase' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+# Componentes
+
+Los componentes en React son bloques de construcción reutilizables que permiten estructurar la interfaz de usuario de una aplicación de manera modular. 
+Cada componente puede contener su propio estado y lógica, y puede ser compuesto por otros componentes para construir interfaces más complejas.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <h2>React Components</h2>
+</div>
+}
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import "./Styles.css";
+
+const Header = () => <div className="header">Header</div>;
+const SidebarMenu = () => <div className="sidebar-menu">Menu</div>;
+const Form = () => <div className="form">Form</div>;
+const Text = () => <div className="text">Text</div>;
+const Image = () => <div className="image">Image</div>;
+const Card = () => <div className="card">Card</div>;
+const Footer = () => <div className="footer">Footer</div>;
+
+const App = () => {
+  return (
+    <div className="app">
+      <Header />
+      <div className="main-content">
+        <SidebarMenu />
+        <div className="content">
+          <Form />
+          <Text />
+        </div>
+        <div className="sidebar">
+          <Card />
+          <Image />
+          <Card />
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Styles.css":`
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.app {
+  font-family: sans-serif;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #ff6347;
+  padding: 20px;
+  color: white;
+  height: 27px;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar-menu {
+  background-color: #ffa07a;  
+  padding: 20px;
+  color: white;
+  width: 55px
+}
+
+.content {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  background-color: #87CEEB;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 143px
+}
+
+.text {
+  background-color: #778899;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 100px
+}
+
+.sidebar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  background-color: #9370db;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 60px
+}
+
+.card {
+  background-color: #3cb371;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 60px
+}
+
+.footer {
+  background-color: #b0c4de;
+  padding: 20px;
+  color: white;
+  height: 10px;
+}
+
+`
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Styles.css"]}
+/>
+
+### Definición de Componente:
+
+En React un componente puede ser una función o una clase de JavaScript que devuelve elementos de React (usualmente, representados mediante [JSX](/docs/conceptos-de-react-09-jsx--docs)) que 
+describen cómo se debe renderizar la interfaz de usuario.
+
+<a id="seccion2"></a>
+## Componentes Funcionales:
+
+### Sin variable:
+
+**Ventajas:** Más conciso y a menudo se prefiere para componentes simples.
+
+**Uso común:** Para componentes pequeños y funcionales que no necesitan ser referenciados en múltiples lugares.
+
+<CodeBlock
+  codeString={`
+  function Header() {
+    return <div className="header">Header</div>;
+  }
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Header from './Header';
+
+function App() {
+  return (
+    <div>
+      <Header />
+    </div>
+  );
+}
+
+export default App;`, 
+
+"/Header.js":
+`import React from 'react';
+import "./Styles.css";
+
+function Header() {
+  return <div className="header">Header</div>;
+}
+
+export default Header;`,
+
+"/Styles.css":
+`.header {
+  background-color: #ff6347;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}`
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Header.js", "/Styles.css"]}
+/>
+
+### Con variable:
+
+**Ventajas:** Puede ser útil para componentes más grandes o cuando se necesita reutilizar el componente en varios lugares.
+
+**Uso común:** Para componentes más complejos o cuando se desea una referencia fácilmente reutilizable.
+
+<CodeBlock
+  codeString={`
+  const Form = ( )=> {
+    return <div className="form">Form</div>;
+  };
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import Form from './Form';
+
+const App=()=> {
+  return (
+    <div>
+      <Form />
+    </div>
+  );
+}
+
+export default App;`, 
+
+"/Form.js":
+`import React from 'react';
+import "./Styles.css";
+
+const Form = ( )=> {
+    return <div className="form">Form</div>;
+};
+
+export default Form;`,
+
+"/Styles.css":
+`.form {
+  background-color: #87CEEB;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  height: 143px;
+  text-align: center;
+}`
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Form.js", "/Styles.css"]}
+/>
+
+<a id="seccion3"></a>
+## Componentes de Clase:
+
+### Sin variable:
+
+**Ventajas:** Más compacto y directo, especialmente cuando se trabaja con clases pequeñas y específicas.
+
+**Uso común:** Para componentes de clase más simples.
+
+<CodeBlock
+  codeString={`
+  class Footer extends Component {
+    render( ) {
+      return <div className="footer">Footer</div>;
+    }
+  }
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React, { Component } from "react";
+import Footer from './Footer';
+
+class App extends Component {
+  render( ) {
+    return (
+      <div>
+        <Footer />
+      </div>
+    );
+  }
+}
+
+export default App;`, 
+
+"/Footer.js":
+`import React, { Component } from "react";
+import "./Styles.css";
+
+class Footer extends Component {
+  render( ) {
+    return <div className="footer">Footer</div>;
+  }
+}
+
+export default Footer;`,
+
+"/Styles.css":
+`.footer {
+  background-color: #b0c4de;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}`
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Footer.js", "/Styles.css"]}
+/>
+
+### Con variable:
+
+**Ventajas:** Puede facilitar la reutilización y la referencia cuando se trabaja con componentes de clase más grandes o complejos.
+
+**Uso común:** Para componentes de clase más complejos o cuando se desea una referencia fácilmente reutilizable.
+
+<CodeBlock
+  codeString={`
+  const Card = class extends Component {
+    render() {
+      return <div className="card">Card</div>;
+    }
+  };
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React, { Component } from "react";
+import Card from './Card';
+
+const App = class extends Component {
+  render() {
+    return (
+      <div>
+        <Card />
+      </div>
+    );
+  }
+}
+
+export default App;`, 
+
+"/Card.js":
+`import React, { Component } from "react";
+import "./Styles.css";
+
+const Card = class extends Component {
+  render() {
+    return <div className="card">Card</div>;
+  }
+};
+
+export default Card;`,
+
+"/Styles.css":
+`.card {
+  background-color: #3cb371;
+  margin: 10px;
+  padding: 20px;
+  color: white;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+}`
+
+
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/Card.js", "/Styles.css"]}
+/>

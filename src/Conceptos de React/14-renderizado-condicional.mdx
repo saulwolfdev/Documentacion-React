@@ -1,0 +1,214 @@
+import { CodeBlock, DynamicSandpack } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Renderizado condicional
+
+En el contexto de React el término **"renderizado"** se refiere al proceso de representar la interfaz de usuario en función del estado actual de los componentes. 
+React utiliza un enfoque de **"renderización declarativa"**, lo que significa que defines cómo debería lucir tu interfaz de usuario en función del estado y React 
+se encarga de actualizar el DOM para que coincida con esa representación.
+
+El renderizado condicional en React es una técnica fundamental para crear interfaces de usuario dinámicas y adaptables. 
+Puedes realizar renderizado condicional en función del estado interno de un componente o de las propiedades que recibe
+
+# Renderizado condicional basado en el estado:
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalRendering from "./ConditionalRendering.js";
+
+const App = ( ) => {
+  return (
+    <div>
+      <ConditionalRendering />
+    </div>
+  )
+}
+
+export default App;`, 
+
+"/ConditionalRendering.js":
+`import React, { useState } from 'react';
+import './styles.css';
+
+const ConditionalRendering = ( ) => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  return (
+    <div  className="container">
+      {isLoggedIn ? (
+        <p className="loggin">Bienvenido, usuario logueado</p>
+        ) : (
+        <p  className="not-loggin">Inicia sesión para acceder</p>
+      )}
+
+      <button className={isLoggedIn ? 'button-logout' : 'button-login'} onClick={( )=> setLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
+      </button>
+    </div>
+  );
+};
+
+export default ConditionalRendering;`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.loggin {
+  color: green;
+  font-size:24px;
+}
+
+.not-loggin {
+  color: red;
+  font-size:24px;
+}
+
+.button-login {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #00FF00;
+  color: white
+}
+
+.button-logout {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FF6E67;
+  color: white
+}`,
+
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalRendering.js", "/styles.css"]}
+/>
+
+En este ejemplo, el componente **ConditionalRendering** tiene un estado **isLoggedIn** que controlamos con el **Hook** [useState](/docs/conceptos-de-react-04-hooks--docs) 
+que indica si el usuario está o no logueado. 
+Dependiendo de este estado, se renderiza un mensaje de bienvenida o un mensaje para iniciar sesión. 
+Al hacer clic en el botón el estado cambia y el componente se vuelve a renderizar con la nueva información.
+
+# Renderizado condicional basado en props:
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalRenderingProps from "./ConditionalRenderingProps.js";
+
+const App = ( ) => {
+  return (
+    <div>
+      <ConditionalRenderingProps />
+    </div>
+  )
+}
+
+export default App;`, 
+
+"/ConditionalRenderingProps.js":
+`import React, { useState } from 'react';
+import './styles.css';
+
+const UserGreeting = ({ isLoggedIn }) => {
+  return <p className="loggin">Bienvenido de nuevo{isLoggedIn ? ', usuario' : ' '}</p>;
+};
+
+const GuestGreeting = ( ) => {
+  return <p className="not-loggin">Por favor, inicia sesión</p>;
+};
+
+const Greeting = ({ isLoggedIn }) => {
+  return isLoggedIn ?
+    <UserGreeting isLoggedIn={isLoggedIn} /> :
+    <GuestGreeting />;
+};
+
+const ConditionalRenderingProps = ( ) => {
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  return (
+    <div className="container">
+      <Greeting isLoggedIn={isLoggedIn} />
+      <button className={isLoggedIn ? 'button-logout' : 'button-login'} onClick={( )=> setLoggedIn(!isLoggedIn)}>
+        {isLoggedIn ? 'Cerrar sesión' : 'Iniciar sesión'}
+      </button>
+    </div>
+  );
+};
+
+export default ConditionalRenderingProps;`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.loggin {
+  color: green;
+  font-size:24px;
+}
+
+.not-loggin {
+  color: red;
+  font-size:24px;
+}
+
+.button-login {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}
+
+.button-logout {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #FF0000;
+  color: white
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalRenderingProps.js", "/styles.css"]}
+/>
+
+En este ejemplo se utiliza el componente **"Greeting"** para realizar un renderizado condicional basado en el estado([useState](/docs/conceptos-de-react-04-hooks--docs)) **"isLoggedIn"** . 
+Si el usuario está logueado **(isLoggedIn es true)**, se muestra el componente **"UserGreeting"**, que da la bienvenida al usuario. En caso contrario, se muestra el componente 
+**"GuestGreeting"**, que indica al usuario que inicie sesión.
+
+Estos son solo ejemplos básicos pero el **renderizado condicional** en **React** puede volverse más complejo a medida que se introducen más condiciones y lógica. 
+Puedes combinar múltiples condiciones, utilizar operadores lógicos, y emplear funciones para calcular dinámicamente qué renderizar. 
+En última instancia el renderizado condicional en React te proporciona la flexibilidad necesaria para construir interfaces de usuario dinámicas y adaptativas.

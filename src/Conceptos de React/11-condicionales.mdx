@@ -1,0 +1,403 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Operador ternario' },
+    { id: 'seccion2', text: 'Operador lógico &&' },
+    { id: 'seccion3', text: 'Operador lógico ||' },
+    { id: 'seccion4', text: 'Declaraciones if' },
+    { id: 'seccion5', text: 'Uso de Switch' },
+  ]}
+/>
+
+# Condicionales
+
+ Las condicionales se utilizan para **renderizar** diferentes partes de un componente o aplicar lógica basada en condiciones. 
+ se puede usar declaraciones if, operadores ternarios y funciones para manejar condicionales en tus componentes de React.
+
+<a id="seccion1"></a>
+### Operador ternario
+
+Podes usar el operador ternario para escribir condicionales de manera más concisa.
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+
+    const ConditionalExample = (props) => {
+    return (
+        <div>
+        {props.condition ? (
+            <p>La condición es verdadera.</p>
+        ) : (
+            <p>La condición es falsa.</p>
+        )}
+        </div>
+    );
+    };
+
+    export default ConditionalExample
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ConditionalExample from "./ConditionalExample.js";
+
+const App = ( ) => {
+  return (
+    <div className="container">
+      <ConditionalExample condition={false}/>
+    </div>
+  )
+}
+
+export default App;`, 
+
+"/ConditionalExample.js":
+`import React from 'react';
+import './styles.css';
+
+    const ConditionalExample = (props) => {
+    return (
+        <div>
+        {props.condition ? (
+            <p className="true-condition">La condición es verdadera.</p>
+        ) : (
+            <p className="false-condition">La condición es falsa.</p>
+        )}
+        </div>
+    );
+    };
+
+    export default ConditionalExample`,
+
+"/styles.css": 
+`.container {
+  text-align: center;
+  margin: 20px;
+}
+
+.true-condition {
+  color: #00FF00;
+  font-size: 24px;
+}
+
+.false-condition {
+  color: #FF0000;
+  font-size: 24px;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ConditionalExample.js", "/styles.css"]}
+/>
+
+<a id="seccion2"></a>
+### Operador lógico &&
+
+Este operador evalúa la expresión a la izquierda y si es verdadera devuelve la expresión a la derecha, de lo contrario devuelve null.
+
+<CodeBlock
+  codeString={`
+  const UserInfo = ({ user }) => (
+    <div>
+      {user && <p>Hello, {user.name}!</p>}
+    </div>
+  );
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import UserInfo from "./UserInfo.js";
+import './styles.css';
+
+const App = () => {
+  const user = { name: 'John' };
+
+  return (
+    <div>
+      <h1>Welcome to My App</h1>
+      <UserInfo user={user} />
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/UserInfo.js":
+`const UserInfo = ({ user }) => (
+    <div>
+      {user && <p>Hello, {user.name}!</p>}
+    </div>
+  );
+
+    export default UserInfo`,
+
+"/styles.css": 
+`body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  font-size: 18px;
+  color: #555;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/UserInfo.js", "/styles.css"]}
+/>
+
+<a id="seccion3"></a>
+### Operador lógico ||
+
+Este operador se utiliza para proporcionar un valor por defecto si la expresión a la izquierda es falsa.
+
+<CodeBlock
+  codeString={`
+  const DefaultMessage = ({ message }) => (
+    <p>{message || 'No message available'}</p>
+  );
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import DefaultMessage from "./DefaultMessage.js";
+
+const App = () => {
+  return (
+    <div>
+      <DefaultMessage message="Este es un mensaje desde App" />
+      <DefaultMessage message="" />
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/DefaultMessage.js":
+`const DefaultMessage = ({ message }) => (
+    <div className="card">
+      <p className="message">{message || 'No hay mensaje'}</p>
+    </div>
+  );
+
+    export default DefaultMessage`,
+
+"/styles.css": 
+`body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  font-size: 18px;
+  color: #333;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/DefaultMessage.js", "/styles.css"]}
+/>
+
+<a id="seccion4"></a>
+### Declaraciones if
+
+ Se puede usar declaraciones if dentro del método render de un componente de React para decidir qué renderizar en función de ciertas condiciones.
+
+ <CodeBlock
+  codeString={`
+  const NumberDisplay = ({ number }) => {
+  let message;
+
+  if (number > 0) {
+    message = \`Positive Number: \${number}\`\;
+  } else if (number < 0) {
+    message = \`Negative Number: \${number}\`\;
+  } else {
+    message = 'Zero';
+  }
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import NumberDisplay from "./NumberDisplay.js";
+
+const App = () => {
+  return (
+    <div>
+      <NumberDisplay  />
+      <NumberDisplay  number={1} />
+      <NumberDisplay  number={-1} />
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/NumberDisplay.js":
+`import React from 'react';
+import './styles.css';
+
+const NumberDisplay = ({ number }) => {
+  let message;
+
+  if (number > 0) {
+    message = \`Positive Number: \${number}\`\;
+  } else if (number < 0) {
+    message = \`Negative Number: \${number}\`\;
+  } else {
+    message = 'Zero';
+  }
+
+  return (
+    <div className="card">
+      <p>{message}</p>
+    </div>
+  );
+};
+
+export default NumberDisplay;`,
+
+"/styles.css": 
+`.card {
+  margin: 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/NumberDisplay.js", "/styles.css"]}
+/>
+
+<a id="seccion5"></a>
+### Uso de Switch
+
+Cuando se tiene múltiples condiciones podemos utilizar un bloque switch.
+
+<CodeBlock
+  codeString={`
+  const DayOfWeek = ({ day }) => {
+    switch (day) {
+      case 1:
+        return <p>Monday</p>;
+      case 2:
+        return <p>Tuesday</p>;
+      // ... otros casos
+      default:
+        return <p>Invalid day</p>;
+    }
+  };
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import DayOfWeek from "./DayOfWeek.js";
+
+const App = () => {
+  return (
+    <div>
+      <DayOfWeek  />
+      <DayOfWeek  day={1}/>
+      <DayOfWeek  day={2}/>      
+    </div>
+  );
+};
+
+export default App;`, 
+
+"/DayOfWeek.js":
+`import './styles.css';
+
+const DayOfWeek = ({ day }) => {
+  let dayName;
+
+  switch (day) {
+    case 1:
+      dayName = 'Monday';
+      break;
+    case 2:
+      dayName = 'Tuesday';      
+      break;
+    // ... otros casos
+    default:
+      dayName = 'Invalid day';
+  }
+
+  return <p className="day-of-week">{dayName}</p>;
+};
+
+export default DayOfWeek;`,
+
+"/styles.css": 
+`.day-of-week {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/DayOfWeek.js", "/styles.css"]}
+/>

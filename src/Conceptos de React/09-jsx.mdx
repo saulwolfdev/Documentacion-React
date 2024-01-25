@@ -1,0 +1,123 @@
+import { StickyNav,CodeBlock, InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import "../styles.css"
+
+# JSX (JavaScript XML)
+
+JSX es una extensión de la sintaxis de JavaScript que se parece al XML o HTML pero se utiliza con React para describir cómo debería verse la interfaz de usuario. 
+JSX facilita la creación de elementos de React de manera más concisa y legible.
+
+<CodeBlock
+  codeString={`
+  const element = 
+  <>
+    <header>
+      <h1>Bienvenido a mi aplicación</h1>
+      <p>Esto es un encabezado con un párrafo.</p>
+    </header>
+    <section>
+      <h2>Contenido Principal</h2>
+      <p>Este es el contenido principal de la aplicación.</p>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+    </section>
+    <footer>
+      <p>&copy; 2024 Mi Aplicación</p>
+    </footer>
+  </>;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from 'react';
+import JsxComponent from './JsxComponent';
+
+const App = ()=> {
+    return (
+      <JsxComponent />
+    );
+
+}
+
+export default App;`, 
+
+"/JsxComponent.js":
+`import React from 'react';
+import './styles.css';
+
+const element = 
+  <>
+    <header>
+      <h1>Bienvenido a mi aplicación</h1>
+      <p>Esto es un encabezado con un párrafo.</p>
+    </header>
+    <section>
+      <h2>Contenido Principal</h2>
+      <p>Este es el contenido principal de la aplicación.</p>
+      <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        <li>Elemento 3</li>
+      </ul>
+    </section>
+    <footer>
+      <p>&copy; 2024 Mi Aplicación</p>
+    </footer>
+  </>;
+
+const JsxComponent = () => {
+  return (
+    <div>
+      { element }
+    </div>
+  );
+};
+
+export default JsxComponent;`,
+
+"/styles.css": 
+`body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+}
+
+section {
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/JsxComponent.js", "/styles.css"]}
+/>

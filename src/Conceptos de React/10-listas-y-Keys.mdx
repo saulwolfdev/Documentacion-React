@@ -1,0 +1,210 @@
+import { CodeBlock, StickyNav, DynamicSandpack } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Listas' },
+    { id: 'seccion2', text: 'Keys' },
+  ]}
+/>
+
+# Listas y Keys
+
+<a id="seccion1"></a>
+### Listas
+
+En **React** una lista es un conjunto de elementos que se representan mediante el mismo componente. 
+Puedes crear listas utilizando el método [.map](/docs/conceptos-de-javascript-10-array-methods--docs) en arrays para iterar sobre cada elemento y devolver un componente 
+para cada uno. Esto es especialmente útil cuando trabajas con datos dinámicos como una lista de elementos de una API o una matriz de datos.
+
+**Ejemplo de Lista**
+
+Supongamos que tenemos un array de nombres y deseamos renderizarlos en una lista:
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+
+    const ListName = ({ names }) => (
+        <ul>
+            {names.map((name, index) => (
+                <li key={index}>{name}</li>
+            ))}
+        </ul>
+    );
+
+    const App = ( ) => {
+    const names = ["Juan", "María", "Pedro"];
+    
+        return (
+            <div>
+                <h1>Lista de Nombres:</h1>
+                <ListName names={names} />
+            </div>
+        );
+    };
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListName from "./ListName.js";
+
+const App = () => {
+   const names = ["Juan", "María", "Pedro"];
+    
+        return (
+            <div>
+                <h1>Lista de Nombres:</h1>
+                <ListName names={names} />
+            </div>
+        );
+    };
+
+export default App;`, 
+
+"/ListName.js":
+`import './styles.css';
+
+const ListName = ({ names }) => (
+        <ul className="custom-list">
+            {names.map((name, index) => (
+                <li key={index}>{name}</li>
+            ))}
+        </ul>
+    );
+  
+  export default ListName`,
+
+"/styles.css": 
+`.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.custom-list li:hover {
+  background-color: #dcdcdc;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListName.js", "/styles.css"]}
+/>
+
+<a id="seccion2"></a>
+### Keys
+
+Cuando renderizamos elementos de una **lista** en React es importante asignar una **"key" única** a cada elemento. 
+La **key** es un atributo especial que ayuda a **React** a identificar qué elementos han cambiado se han agregado o se han eliminado. 
+La **key** debe ser **única** dentro del conjunto de elementos y generalmente se asocia con la propiedad única de cada elemento.
+
+**Ejemplo**
+
+En el ejemplo anterior notarás  que `key={index}`asigna el índice del array como la **key** de cada elemento en la lista. 
+Sin embargo en situaciones ideales deberiamos usar una **propiedad única** de los datos **como key**.
+
+<CodeBlock
+  codeString={`
+  const ListaNombres = ({ nombres }) => (
+    <ul>
+        {nombres.map((nombre) => (
+        <li key={nombre.id}>{nombre.nombre}</li>
+        ))}
+    </ul>
+  );
+
+ const App = () => {
+    const nombres = [
+        { id: 1, nombre: "Juan" },
+        { id: 2, nombre: "María" },
+        { id: 3, nombre: "Pedro" },
+    ];
+    
+    return (
+        <div>
+            <h1>Lista de Nombres:</h1>
+            <ListaNombres nombres={nombres} />
+        </div>
+    );
+  };
+
+  export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import ListNames from "./ListNames.js";
+
+const App = () => {
+    const names = [
+        { id: 1, nombre: "Juan" },
+        { id: 2, nombre: "María" },
+        { id: 3, nombre: "Pedro" },
+    ];
+    
+    return (
+        <div>
+            <h1>Lista de Nombres:</h1>
+            <ListNames names={names} />
+        </div>
+    );
+};
+
+export default App;
+`, 
+
+"/ListNames.js":
+`import './styles.css';
+
+const ListNames = ({ names }) => (
+    <ul className="custom-list">
+        {names.map((name) => (
+        <li key={name.id}>{name.nombre}</li>
+        ))}
+    </ul>
+  );
+  
+  export default ListNames`,
+
+  "/styles.css": 
+`.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.custom-list li:hover {
+  background-color: #dcdcdc;
+}`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/ListNames.js", "/styles.css"]}
+/>
+
+En este ejemplo la propiedad **id** se utiliza como **key** ya que es única para cada elemento en la lista.
+
+En resumen al trabajar con **listas** en **React** es esencial utilizar **keys** para garantizar un rendimiento óptimo y un manejo adecuado de los elementos. 
+La elección de la **key** depende de la estructura de tus datos pero generalmente se prefiere una **propiedad única** en lugar de índices de array.

@@ -1,0 +1,244 @@
+import { CodeBlock, StickyNav, SandPack, DynamicSandpack } from '../components-mdx/index.js';
+import Props from "../assets/props.png";
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Props' },
+    { id: 'seccion2', text: 'DefaultProps' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+# Props
+
+Las "props" **(propiedades)** son una parte fundamental de la arquitectura de React.
+Se utilizan para pasar datos desde un componente principal **(padre)** a sus componentes secundarios **(hijos)** lo que facilita la comunicación entre ellos y la personalización 
+del comportamiento de los componentes secundarios.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Props} alt="Texto Alternativo" style={{ width: '750px', height: '390px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
+### Conceptos Básicos:
+
+**Props (Propiedades):** Son objetos que contienen datos que un componente puede recibir. Se utilizan para pasar información de un componente padre a un componente hijo.
+
+**Componente Padre:** Es el componente que contiene y renderiza otro componente.
+
+**Componente Hijo:** Es el componente que recibe y utiliza los props que le son pasados por su componente padre.
+
+### Ejemplo básico de uso de props:
+
+Supongamos que tenemos un componente principal llamado **"ParentComponent"** y un componente secundario llamado **"ChildComponent"**. Quieres pasar un mensaje del componente Padre 
+al componente Hijo utilizando props.
+
+### ParentComponent.js
+
+<CodeBlock
+  codeString={`
+    //Componente Padre
+    import React from 'react';
+    import { ChildComponent } from './ChildComponent';
+
+    export const ParentComponent = ( ) => {
+    const message = "Hola desde el componente padre 👋";
+
+    // Pasamos la prop "mensaje" al componente Hijo
+    return <ChildComponent message={message} />;
+    };
+  `} 
+  language='javascript'
+/>
+
+### ChildComponent.js
+
+<CodeBlock
+  codeString={`
+    //Componente Hijo
+    import React from 'react';
+
+    export const ChildComponent = (props) => {
+    // Acceda al "mensaje" recibido del componente principal
+    return <p>{props.message}</p>;
+    };
+  `} 
+  language='javascript'
+/>
+
+### App.js
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+    import { ParentComponent } from './ParentComponent';
+
+    const App = () => {
+    return (
+        <div>
+        <h1>My App</h1>
+        <ParentComponent /> //recibiremos el mensaje que se paso por las props: "Hola desde el componente padre"
+        </div>
+    );
+    };
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from 'react';
+import { ParentComponent } from './ParentComponent';
+
+const App = () => {
+  return (
+  <div>
+    <h1>My App</h1>
+    <ParentComponent />
+  </div>
+  );
+};
+
+export default App;`, 
+
+"/ParentComponent.js":
+`import React from 'react';
+import { ChildComponent } from './ChildComponent';
+
+export const ParentComponent = ( ) => {
+  const message = "Hola desde el componente padre 👋";
+
+  // Pasamos la prop "mensaje" al componente Hijo
+  return <ChildComponent message={message} />;
+};`,
+
+"/ChildComponent.js":
+`import React from 'react';
+import './styles.css';
+
+export const ChildComponent = (props) => {
+  // Acceda al "mensaje" recibido del componente principal
+  return <p className="child-component">{props.message}</p>;
+};`,
+
+"/styles.css": 
+`.child-component {
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+}`,
+}}
+/>
+
+En este ejemplo, hemos creado dos archivos separados, **"ParentComponent"** y **"ChildComponent"**. Luego, en el archivo principal **"App.js"**, importamos **"ParentComponent"** y 
+lo utilizamos. Al hacer esto estamos pasando la prop message al **"ChildComponent"** que es parte de la lógica interna del **"ParentComponent"**.
+
+<a id="seccion2"></a>
+# DefaultProps
+
+En React **defaultProps** es una propiedad que se puede definir en un componente de clase para proporcionar valores predeterminados para las props que no se han especificado 
+explícitamente al renderizar el componente. Esto es útil cuando deseas asegurarte de que un componente tenga ciertos valores predeterminados si no se proporcionan propiedades 
+específicas.
+
+#### Ejemplo:
+
+Supongamos que tenemos un componente de clase llamado **MiComponente** que acepta una prop llamada **mensaje**. Se puede establecer un valor predeterminado para mensaje utilizando 
+**defaultProps** de la siguiente manera:
+
+<CodeBlock
+  codeString={`
+    import React from 'react';
+
+    const MiComponente = (props) => {
+    const { mensaje } = props;
+
+    return <div>{mensaje}</div>;
+    };
+
+    // Definición de defaultProps fuera del componente
+    MiComponente.defaultProps = {
+    mensaje: 'Hola, mundo!', // Valor predeterminado para la prop "mensaje"
+    };
+
+    export default MiComponente;
+  `} 
+  language='javascript'
+/>
+
+En este ejemplo si creamos una instancia de **MiComponente** sin proporcionar una prop **mensaje** se utilizará el valor predeterminado **"Hola, mundo!"**.
+
+<CodeBlock
+  codeString={`
+    // Ejemplo de uso de MiComponente
+    import React from 'react';
+    import MiComponente from './MiComponente';
+
+    function App() {
+    return (
+        <div>
+        <MiComponente /> {/* Utiliza el valor predeterminado para "mensaje" */}
+        <MiComponente mensaje="¡Hola, desde App!" /> {/* Proporciona un valor específico para "mensaje" */}
+        </div>
+    );
+    }
+
+    export default App;
+  `} 
+  language='javascript'
+/>
+
+<DynamicSandpack
+dynamicFiles={{    
+"/App.js": 
+`import React from "react";
+import MiComponente from "./MiComponente.js";
+
+const App = ( ) => {
+  return (
+    <div>
+      <h1>
+        <MiComponente /> {/* Utiliza el valor predeterminado para "mensaje" */}
+      </h1>
+      <h2>
+        <MiComponente mensaje="¡Hola, desde App!" /> {/* Proporciona un valor específico para "mensaje" */}
+      </h2>
+    </div>
+  )
+}
+
+export default App;`, 
+
+"/MiComponente.js":
+`import React from 'react';
+
+    const MiComponente = (props) => {
+    const { mensaje } = props;
+
+    return <div>{mensaje}</div>;
+    };
+
+    // Definición de defaultProps fuera del componente
+    MiComponente.defaultProps = {
+    mensaje: 'Hola, mundo!', // Valor predeterminado para la prop "mensaje"
+    };
+
+    export default MiComponente;`,
+  }}
+  
+  dynamicVisibleFiles={["/App.js", "/MiComponente.js"]}
+/>
+
+ En el primer uso de **MiComponente** se utiliza el valor predeterminado porque no se proporciona la prop **mensaje**.
+ En el segundo uso de **MiComponente** se proporciona un valor específico para la prop **mensaje** lo que anula el valor predeterminado.
+
+ En resumen **defaultProps** es una forma de garantizar que tus componentes tengan valores predeterminados coherentes cuando las props específicas no se proporcionan explícitamente
+
+# Notas Adicionales:
+
+- Las **props** son de solo lectura. No deben ser modificados en el componente hijo. Si necesitas modificar datos, considera el uso de **"state"**.
+- Puedes pasar cualquier tipo de dato como **prop** incluyendo **funciones**, **objetos**, **arreglos**, etc.

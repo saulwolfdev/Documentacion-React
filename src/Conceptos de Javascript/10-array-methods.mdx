@@ -1,0 +1,154 @@
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: '.map' },
+    { id: 'seccion2', text: '.some' },
+    { id: 'seccion3', text: '.findIndex' },
+    { id: 'seccion4', text: '.reduce' },
+    { id: 'seccion5', text: '.filter' },
+    { id: 'seccion6', text: '.find' },
+    { id: 'seccion7', text: '.every' },
+    { id: 'seccion8', text: '.concat' },
+    { id: 'seccion9', text: 'Spread Operator' },
+  ]}
+/>
+
+# Array Methods
+
+Los **Array Methods** en JavaScript son métodos incorporados en el objeto Array que permiten realizar diversas operaciones en arreglos. 
+Estos métodos facilitan la manipulación, filtrado, búsqueda y transformación de datos almacenados en arreglos.
+
+<a id="seccion1"></a>
+- **.map:**  se utiliza para transformar los elementos de un array y crear un nuevo array con los resultados de aplicar una función a cada elemento del array original. 
+
+La idea principal detrás de **.map()** es aplicar una función a cada elemento del array y devolver un nuevo array que contiene los resultados de aplicar esa función.
+
+<CodeBlock
+  codeString={`
+  const numeros = [1, 2, 3, 4, 5];
+
+  // Utilizando map para multiplicar cada número por 2
+  const numerosDuplicados = numeros.map(function(numero) {
+    return numero * 2;
+  });
+
+  console.log(numerosDuplicados); // Output: [2, 4, 6, 8, 10]
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion2"></a>
+- **.some:** Verifica si al menos un elemento del array cumple con la condición proporcionada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const hasEven = numbers.some(num => num % 2 === 0);
+
+  console.log(hasEven); // true, ya que al menos un número es par
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion3"></a>
+- **.findIndex:** Encuentra el índice de la primera ocurrencia que cumple con la condición dada.
+
+<CodeBlock
+  codeString={`
+  const fruits = ['apple', 'banana', 'orange'];
+
+  const indexOfBanana = fruits.findIndex(fruit => fruit === 'banana');
+
+  console.log(indexOfBanana); // 1, ya que 'banana' está en la posición 1 del array
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion4"></a>
+- **.reduce:** Aplica una función acumuladora a cada elemento del array reduciéndolos a un solo valor.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  console.log(sum); // 15, que es la suma de todos los elementos del array
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion5"></a>
+- **.filter:** Crea un nuevo array con todos los elementos que cumplen con la condición dada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+  console.log(evenNumbers); // [2, 4], que son los números pares del array
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion6"></a>
+- **.find:** Devuelve el primer elemento que cumple con la condición dada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [1, 2, 3, 4, 5];
+
+  const firstEvenNumber = numbers.find(num => num % 2 === 0);
+
+  console.log(firstEvenNumber); // 2, que es el primer número par del array
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion7"></a>
+- **.every:** Verifica si todos los elementos del array cumplen con la condición proporcionada.
+
+<CodeBlock
+  codeString={`
+  const numbers = [2, 4, 6, 8, 10];
+
+  const allEven = numbers.every(num => num % 2 === 0);
+
+  console.log(allEven); // true, ya que todos los números son pares
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion8"></a>
+- **.concat:** Combina dos o más arrays creando un nuevo array.
+
+<CodeBlock
+  codeString={`
+  const arr1 = [1, 2, 3];
+  const arr2 = [4, 5, 6];
+
+  const combinedArray = arr1.concat(arr2);
+
+  console.log(combinedArray); // [1, 2, 3, 4, 5, 6]
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion9"></a>
+- **Spread Operator:**  Expande los elementos de un array o objeto.
+
+<CodeBlock
+  codeString={`
+  const arr1 = [1, 2, 3];
+  const arr2 = [4, 5, 6];
+
+  const combinedArray = [...arr1, ...arr2];
+
+  console.log(combinedArray); // [1, 2, 3, 4, 5, 6]
+  `} 
+  language='javascript'
+/>

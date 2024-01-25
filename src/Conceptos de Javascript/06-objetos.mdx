@@ -1,0 +1,259 @@
+import { CodeBlock, StickyNav } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Crear Objetos' },
+    { id: 'seccion2', text: 'Acceder a los Valores' },
+    { id: 'seccion3', text: 'Agregar o Eliminar Propiedades' },
+    { id: 'seccion4', text: 'Destructuring de Objetos' },
+    { id: 'seccion5', text: 'Objetos Dentro de Objetos' },
+    { id: 'seccion6', text: 'Destructuring de Objetos Anidados' },
+    { id: 'seccion7', text: 'Copiar 2 Objetos' },
+    { id: 'seccion8', text: 'Funciones en Objetos' },
+    { id: 'seccion9', text: 'Object Constructor' },
+    { id: 'seccion10', text: 'Object .keys, .values y .entries' },
+    { id: 'seccion11', text: 'Tips' },
+  ]}
+/>
+
+# Objetos
+
+En JavaScript cuando ves `{}` estás utilizando la notación de objeto literal esto representa un **objeto**. 
+La notación de objeto literal te permite crear y definir un objeto en el lugar donde lo necesitas.
+
+<a id="seccion1"></a>
+### Crear Objetos
+Los objetos en JavaScript son conjuntos de pares clave-valor, donde las claves son cadenas y los valores pueden ser de cualquier tipo de dato.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    ciudad: 'EjemploCity'
+  };
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion2"></a>
+### Acceder a los Valores de un Objeto
+Puedes acceder a los valores de un objeto mediante la notación de puntos o corchetes.
+
+<CodeBlock
+  codeString={`
+  console.log(persona.nombre); // Juan
+  console.log(persona['edad']); // 25
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion3"></a>
+### Agregar o Eliminar Propiedades de un Objeto
+Puedes añadir o quitar propiedades de un objeto en cualquier momento.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    ciudad: 'EjemploCity'
+  };
+
+  // Mostrar el objeto antes de las modificaciones
+  console.log('Antes de las modificaciones:', persona); // { nombre: 'Juan', edad: 25, ciudad: 'EjemploCity' }
+
+  // Agregar la propiedad 'trabajo'
+  persona.trabajo = 'Programador';
+
+  // Mostrar el objeto después de agregar la propiedad 'trabajo'
+  console.log('Después de agregar "trabajo":', persona); //{ nombre: 'Juan', edad: 25, ciudad: 'EjemploCity', trabajo: 'Programador' }
+
+  // Eliminar la propiedad 'ciudad'
+  delete persona.ciudad;
+
+  // Mostrar el objeto después de eliminar la propiedad 'ciudad'
+  console.log('Después de eliminar "ciudad":', persona); //{ nombre: 'Juan', edad: 25, trabajo: 'Programador' }
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion4"></a>
+### Destructuring de Objetos
+Permite desempacar valores de un objeto en variables individuales.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+  };
+
+  const { nombre, edad } = persona;
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion5"></a>
+### Objetos Dentro de Objetos
+Los objetos pueden contener otros objetos como sus propiedades.
+
+<CodeBlock
+  codeString={`
+  let empresa = {
+    nombre: 'TechCorp',
+    ubicacion: {
+        ciudad: 'EjemploCity',
+        pais: 'EjemploCountry'
+    }
+  };
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion6"></a>
+### Destructuring de Objetos Anidados
+Desestructurar objetos que están dentro de otros objetos.
+
+<CodeBlock
+  codeString={`
+  let empresa = {
+    nombre: 'TechCorp',
+    ubicacion: {
+        ciudad: 'EjemploCity',
+        pais: 'EjemploCountry'
+    }
+  };
+
+  const { ubicacion: { ciudad, pais } } = empresa;
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion7"></a>
+### Copiar 2 Objetos
+Para crear una copia de un objeto, puedes usar el operador de propagación `...`
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    ciudad: 'EjemploCity'
+  };
+
+  let copiaPersona = { ...persona };
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion8"></a>
+### Funciones en Objetos y Acceder a Sus Valores
+Puedes tener funciones como propiedades de un objeto y acceder a ellas mediante la notación de puntos.
+
+<CodeBlock
+  codeString={`
+  let coche = {
+    marca: 'Toyota',
+    arrancar: function( ) {
+        console.log('El coche está en marcha');
+    }
+  };
+
+  coche.arrancar( ); //imprime 'El coche está en marcha'
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion9"></a>
+### Object Constructor
+Puedes usar el constructor Object para crear un nuevo objeto.
+
+<CodeBlock
+  codeString={`
+  let nuevoObjeto = new Object( );
+  nuevoObjeto.propiedad = 'Nuevo';
+
+  console.log(nuevoObjeto); // Resultado: { propiedad: 'Nuevo' }
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion10"></a>
+### Object .keys, .values y .entries
+Métodos que proporcionan información sobre las propiedades de un objeto.
+
+<CodeBlock
+  codeString={`
+  let persona = {
+    nombre: 'Juan',
+    edad: 25,
+    trabajo: 'Programador'
+  };
+
+  console.log(Object.keys(persona));   // ['nombre', 'edad', 'trabajo']
+  console.log(Object.values(persona)); // ['Juan', 25, 'Programador']
+  console.log(Object.entries(persona)); // [['nombre', 'Juan'], ['edad', 25], ['trabajo', 'Programador']]
+  `} 
+  language='javascript'
+/>
+
+<a id="seccion11"></a>
+# Tips
+
+#### Manejo adecuado de this
+
+Al utilizar funciones dentro de objetos o eventos, asegúrate de manejar correctamente el valor de this utilizando funciones de flecha `=>` o `bind`.
+
+<CodeBlock
+  codeString={`
+  // Usar esto
+  const objeto = {
+      valor: 42,
+      obtenerValor: function() {
+          console.log(this.valor);
+      }
+  };
+
+  
+  objeto.obtenerValor.bind(objeto)(); // Imprimirá: 42
+
+  // O esto
+  const objeto = {
+      valor: 42,
+      obtenerValor: function() {
+          const obtenerValorArrow = () => {
+              console.log(this.valor);
+          };
+          obtenerValorArrow();
+      }
+  };
+
+  objeto.obtenerValor(); // Imprimirá: 42
+  `} 
+  language='javascript'
+/>
+
+El uso de **bind(objeto)** en este caso garantiza que cuando se llama a **obtenerValor**, el valor de this dentro de la función será el objeto **objeto**. 
+La última línea **()** invoca la función resultante.
+
+#### Uso de Object.entries para iterar sobre propiedades
+
+Para iterar sobre las propiedades de un objeto, puedes utilizar **Object.entries**.
+
+<CodeBlock
+  codeString={`
+  const miObjeto = { a: 1, b: 2, c: 3 };
+
+  for (const [clave, valor] of Object.entries(miObjeto)) {
+      console.log(\`\${clave}: \${valor}\`);
+  }
+
+  //salida esperada:
+  //a: 1
+  //b: 2
+  //c: 3
+  `} 
+  language='javascript'
+/>

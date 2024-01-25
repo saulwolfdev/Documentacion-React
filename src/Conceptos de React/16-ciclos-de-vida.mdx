@@ -1,0 +1,137 @@
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import Ciclos from "../assets/ciclos de vida.png";
+import "../styles.css"
+
+# Ciclos de vida
+
+En **React** la gestión de ciclos de vida en componentes de función se realiza principalmente a través del hook [useEffect](/docs/conceptos-de-react-04-hooks--docs) 
+y otros hooks relacionados. 
+Los componentes de función no tienen los mismos métodos de ciclo de vida que los componentes de clase, pero **useEffect** proporciona una forma de realizar efectos 
+secundarios en diferentes momentos del ciclo de vida.
+
+{
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img src={Ciclos} alt="Texto Alternativo" style={{ width: '550px', height: '390px', position: 'relative', marginBottom: '8px' }} />
+</div>
+}
+
+### Fases del Ciclo de Vida:
+
+**Inicialización y Montaje (Mounting):**
+
+**- useEffect en el montaje:** Al utilizar useEffect con una función como argumento, podemos realizar operaciones cuando el componente se monta por primera vez. Esto es ideal 
+para inicializaciones, solicitudes de red y otros efectos relacionados con el montaje.
+
+**Actualización (Updating):**
+
+**- useEffect en la actualización:** Al proporcionar una dependencia en useEffect (por ejemplo, [counter]), podemos realizar operaciones cada vez que ciertos estados o props 
+cambian. Esto es útil para responder a cambios específicos y realizar acciones relacionadas con la actualización del componente.
+
+**Desmontaje (Unmounting):**
+
+**- useEffect con función de retorno:** La función de retorno de useEffect se ejecuta justo antes de que el componente se desmonte. Aquí podemos realizar tareas de limpieza 
+o liberación de recursos.
+
+**Ejemplo:**
+
+Aqui un ejemplo básico que utiliza [useEffect](/docs/conceptos-de-react-04-hooks--docs) para simular algunas operaciones de ciclo de vida. 
+Supongamos que queremos mostrar un mensaje cuando el componente se monta y se actualiza.
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from "react";
+import MyComponent from "./MyComponent.js";
+
+const App = ( ) => {
+  return (
+    <div>
+      <MyComponent />
+    </div>
+  )
+}
+
+export default App;`, 
+
+"/MyComponent.js":
+`import React, { useState, useEffect } from 'react';
+
+const MyComponent = ( ) => {
+  const [counter, setCounter] = useState(0);
+  const [message, setMessage] = useState('');
+
+  useEffect(( ) => {
+    setMessage('El componente se ha montado o actualizado');
+
+    const fetchData = async ( ) => {
+      // Supongamos que estamos haciendo una solicitud a una API y esperamos la respuesta
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setMessage('Datos obtenidos de la API');
+      } catch (error) {
+        setMessage('Error al obtener datos');
+        console.error('Error al obtener datos:', error);
+      }
+    };
+    // Llamamos a la función para simular la operación asincrónica
+    fetchData( );
+
+    return ( ) => {
+      setMessage('El componente se va a desmontar o actualizar');
+    };
+  }, [counter]);
+
+  const incrementCounter = ( ) => {
+    setCounter(prevCounter => prevCounter + 1);
+  };
+
+  return (
+     <div className="my-component-container">
+      <p className="counter-text">Contador: {counter}</p>
+      <button className="increment-button" onClick={incrementCounter}>
+        Incrementar Contador
+      </button>
+      <p className="message-text">{message}</p>
+    </div>
+  );
+}
+
+export default MyComponent;`,
+
+"/styles.css": 
+`.my-component-container {
+  background-color: #f4f4f4;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px;
+  text-align: center;
+}
+
+.counter-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.increment-button {
+  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  border: 0;
+  border-radius: 3em;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 28px;
+  padding: 11px 20px;
+  background-color: #1ea7fd;
+  color: white
+}
+
+.message-text {
+  margin-top: 20px;
+  color: #555;
+  font-style: italic;
+}`,
+
+}}
+/>

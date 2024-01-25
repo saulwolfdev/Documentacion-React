@@ -1,0 +1,150 @@
+import { CodeBlock, StickyNav, CodeEditor, InteractiveCodeBlock } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Variables en React' },
+    { id: 'seccion2', text: 'let' },
+    { id: 'seccion3', text: 'const' },
+    { id: 'seccion4', text: 'tips' },
+  ]}
+/>
+
+<a id="seccion1"></a>
+# Variables en React y JavaScript Moderno (Let y Const)
+
+Antes que nada cabe mencionar que las variables se declaraban anteriormente con **var** la razón por la que ya no se recomienda usar la palabra clave **var** en  
+JavaScript en general se debe a la introducción de **let y const** en ECMAScript 6 (ES6)
+
+**let y const** tienen un alcance de bloque más estricto en comparación con **var**, lo que significa que solo están disponibles dentro del bloque donde se declaran 
+(por ejemplo, dentro de una función o un bucle). Por otro lado, var tiene un alcance de función o global, lo que puede llevar a errores difíciles de depurar y a problemas 
+de legibilidad en el código.
+
+En JavaScript Moderno se recomienda el uso de **const** para declarar variables que no van a ser reasignadas, y **let** para aquellas que sí pueden cambiar de valor. 
+Esto ayuda a evitar errores sutiles y a escribir código más claro y predecible.
+
+<a id="seccion2"></a>
+### **let:**
+let es una palabra clave introducida en ECMAScript 6 (también conocido como ES6 o ECMAScript 2015) que permite declarar variables con alcance de bloque. 
+Como se menciono anteriormente se pueden declarar variables con let para aquellas variables que pueden cambiar su valor.
+
+**Sintaxis:**
+
+<CodeBlock
+  codeString={`let variable = valor;`} 
+  language='javascript'
+/>
+
+**Ejemplo:**
+
+<CodeBlock
+  codeString={`
+  let x = 10;
+
+  if (true) {
+    let x = 20;
+    console.log(x); // 20
+  }
+
+  console.log(x); // 10
+  `}
+  language='javascript'
+/>
+
+En este ejemplo, la variable x declarada dentro del bloque if tiene un alcance limitado a ese bloque, mientras que la variable x declarada fuera del bloque if tiene un alcance 
+global al script.
+
+<a id="seccion3"></a>
+### **const:**
+const es otra palabra clave introducida en ECMAScript 6. Al igual que let, permite declarar variables con alcance de bloque, pero a diferencia de let, las variables declaradas 
+con const no pueden ser reasignadas después de su inicialización. Sin embargo, esto no significa que el valor es inmutable, solo que la variable no puede apuntar a otro valor.
+
+**Sintaxis:**
+
+<CodeBlock
+  codeString={`const variable = valor;`}
+  language='javascript'
+/>
+
+**Ejemplo:**
+
+<CodeBlock
+  codeString={`
+  const PI = 3.14;
+  PI = 42; // Error: No puedes reasignar una constante
+
+  const array = [1, 2, 3];
+  array.push(4); // Esto es válido, porque no estamos reasignando 'array' pero no lo ideal ya que estariamos mutando el array original
+
+  const newArrayConcat = array.concat(4); // Si prefieres evitar la mutación podrías usar el método concat 
+  const newArraySpread = [...array, 4]; // Tambien se puede utilizar el spread operator para evitar mutar el arreglo original.
+
+  console.log(newArrayConcat); // Output: [1, 2, 3, 4]
+  console.log(newArraySpread); // Output: [1, 2, 3, 4]  
+  `}
+  language='javascript'
+/>
+
+En este ejemplo, PI no puede ser reasignada después de su inicialización. Sin embargo, el arreglo array puede ser modificado, aunque no puede apuntar a otro arreglo.
+
+Es importante notar que cuando usas const con objetos o arreglos, el valor al que apunta (la referencia) no puede ser cambiado, pero los valores internos del objeto o arreglo 
+sí pueden ser modificados.
+
+### **Resumen:**
+
+**let** se utiliza para declarar variables con alcance de bloque que pueden ser reasignadas.
+**const** se utiliza para declarar constantes con alcance de bloque cuyos valores no pueden ser reasignados después de la inicialización aunque sus propiedades o elementos 
+internos pueden ser modificados.
+
+
+<a id="seccion4"></a>
+# Tips 
+
+#### Nombres descriptivos
+
+Usa nombres de variables descriptivos y significativos para mejorar la legibilidad del código.
+
+<CodeBlock
+  codeString={`
+  // No recomendado
+  let x = 5;
+
+  // Recomendado
+  let numeroIntentos = 5;
+  `} 
+  language='javascript'
+/>
+
+#### Entender el Ámbito (Scope)
+Entender el ámbito de las variables y evitar la creación de variables globales innecesarias.
+
+<CodeBlock
+  codeString={`
+  // Evitar el uso de var
+  var variableGlobal = "Global";
+
+  // Usar let o const en lugar de var
+  let variableGlobal = "Global";
+  `} 
+  language='javascript'
+/>
+
+#### Evitar Magic Numbers
+
+Evita el uso de "números mágicos" (valores literales sin explicación) y utiliza constantes descriptivas.
+
+<CodeBlock
+  codeString={`
+  // No recomendado
+  if (estatus === 3) {
+    // lógica
+  }
+
+  // Recomendado
+  const ESTATUS_FINALIZADO = 3;
+  if (estatus === ESTATUS_FINALIZADO) {
+    // lógica
+  }
+  `} 
+  language='javascript'
+/>

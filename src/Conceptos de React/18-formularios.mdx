@@ -1,0 +1,287 @@
+import { StickyNav,InteractiveCodeBlock, DynamicSandpack, SandPack } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Formularios
+
+En **React** los formularios son una parte fundamental para interactuar con los usuarios y recopilar información. 
+Los formularios en React siguen un flujo de datos **unidireccional** lo que significa que el estado de React es la única fuente principal. 
+
+### Conceptos Clave
+
+- **Estado del Componente:** Utiliza el estado [useState](/docs/conceptos-de-react-04-hooks--docs) para almacenar los datos del formulario.
+- **Manejo de Eventos:** Utiliza funciones para manejar eventos como **onChange** o **onSubmit**.
+- **Controlled Components:** En React los elementos de formulario como **input**, **textarea**, y **select** mantienen su propio estado. 
+Sin embargo en un formulario controlado el estado de React es la fuente única de verdad.
+
+### Ejemplos:
+-  Formulario Simple con un Campo de Entrada:
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from "react";
+import SimpleForm from "./SimpleForm.js";
+
+ const App = ( ) => {
+   return (
+    <div>
+      <SimpleForm />
+    </div>
+  ) 
+ }
+
+export default App;`, 
+
+"/SimpleForm.js":
+`import React, { useState } from 'react';
+import './SimpleForm.css';
+
+const SimpleForm = () => {
+  const [inputValue, setInputValue] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedValue, setSubmittedValue] = useState('');
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setSubmittedValue(inputValue);
+  };
+
+  return (
+    <form className="simple-form" onSubmit={handleSubmit}>
+      <label htmlFor="nameInput">
+        Nombre:
+        <input
+          id="nameInput"
+          type="text"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+      </label>
+      <button type="submit">Enviar</button>
+      {submitted && <p>Valor enviado: {submittedValue}</p>}
+    </form>
+  );
+};
+
+export default SimpleForm;`,
+
+"SimpleForm.css":
+`.simple-form {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+p {
+  margin-top: 15px;
+  color: #333;
+}`
+}}
+/>
+
+- Formulario con Varios Campos y Manejo Dinámico:
+
+<SandPack 
+files={{    
+"/App.js": 
+`import React from "react";
+import ComplexForm from "./ComplexForm.js";
+
+ const App = ( ) => {
+   return (
+    <div>
+      <ComplexForm />
+    </div>
+  ) 
+ }
+
+export default App;`, 
+
+"/ComplexForm.js":
+`import React, { useState } from 'react';
+import './ComplexForm.css';
+
+const ComplexForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const [formSubmissions, setFormSubmissions] = useState([]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmissions([...formSubmissions, formData]);
+    setFormData({ name: '', email: '', password: '' });
+  };
+
+  return (
+    <div className="complex-form-container">
+      <form onSubmit={handleSubmit} className="complex-form">
+        <label htmlFor="nameInput">
+          Nombre:
+          <input
+            id="nameInput"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label htmlFor="emailInput">
+          Correo Electrónico:
+          <input
+            id="emailInput"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+        </label>
+        <label htmlFor="passwordInput">
+          Contraseña:
+          <input
+            id="passwordInput"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+          />
+        </label>
+        <button type="submit">Enviar</button>
+      </form>
+      <div className="submission-history">
+        <h2>Historial de Envíos</h2>
+        <ul>
+          {formSubmissions.map((submission, index) => (
+            <li key={index}>
+              <strong>Envío {index + 1}:</strong>
+              <ul>
+                {Object.entries(submission).map(([key, value]) => (
+                  <li key={key}>
+                    <strong>{key}:</strong> {value}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default ComplexForm;`,
+
+"ComplexForm.css":
+`.complex-form-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
+  flex-direction: column;
+}
+
+.complex-form {
+  max-width: 300px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.submission-history {
+  max-width: 400px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+strong {
+  font-weight: bold;
+}`
+}}
+/>
