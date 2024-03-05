@@ -336,9 +336,24 @@ const App = () => {
 
   return (
     <div>
-      {currentPage === 'login' && <Login onRegisterClick={handleRegisterClick} onLogin={handleLogin} registeredUsers={registeredUsers} />}
-      {currentPage === 'register' && <Register onLoginClick={handleLoginClick} setRegisteredUsers={setRegisteredUsers} />}
-      {isLoggedIn && <CustomAppBar onLogout={handleLogout} />}
+      {currentPage === 'login' && 
+        <Login 
+          onRegisterClick={handleRegisterClick} 
+          onLogin={handleLogin} 
+          registeredUsers={registeredUsers} 
+        />
+      }
+      {currentPage === 'register' && 
+        <Register 
+          onLoginClick={handleLoginClick} 
+          setRegisteredUsers={setRegisteredUsers} 
+        />
+      }
+      {isLoggedIn && 
+        <CustomAppBar 
+          onLogout={handleLogout} 
+        />
+      }
     </div>
   );
 };
@@ -417,7 +432,7 @@ export default Login;`,
 import { TextField, Button, Container, Box, Typography, Link } from '@mui/material';
 import CustomModal from './CustomModal';
 
-const Register = ({ registeredUsers = [], setRegisteredUsers, onLoginClick }) => 
+const Register = ({ registeredUsers = [], setRegisteredUsers, onLoginClick }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -484,7 +499,18 @@ const Register = ({ registeredUsers = [], setRegisteredUsers, onLoginClick }) =>
             Registrarse
           </Button>
         </Box>
-        {error && <Typography variant="body2" sx={{ textAlign: 'center', mt: 2, color: 'red' }}>{error}</Typography>}
+        {error && 
+          <Typography 
+            variant="body2" 
+            sx={{ 
+              textAlign: 'center', 
+              mt: 2, 
+              color: 'red' 
+            }}
+          >
+            {error}
+          </Typography>
+        }
         <Typography variant="body2" sx={{ textAlign: 'center', mt: 2 }}>
           ¿Ya tienes una cuenta? <Link sx={{ cursor: 'pointer' }} onClick={onLoginClick}>Iniciar sesión</Link>
         </Typography>
