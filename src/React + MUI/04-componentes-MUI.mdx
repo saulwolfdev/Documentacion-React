@@ -1,0 +1,653 @@
+import { CodeBlock, StickyNav, SandPack } from '../components-mdx/index.js';
+import "../styles.css"
+
+
+# Componentes MUI
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import MainComponent from './MainComponent';
+
+ const App = () => {
+    return (
+    <div>
+       <MainComponent />
+    </div>
+    );
+ }
+
+export default App;`,
+
+"/MainComponent.jsx":`
+import React from 'react';
+import CardComponent from './CardComponent';
+import jsonData from './data.json';
+
+const MainComponent = () => {
+  return (
+    <div>
+      {jsonData.map((item, index) => (
+        <CardComponent key={index} data={item} />
+      ))}
+    </div>
+  );
+};
+
+export default MainComponent;`,
+
+"/CardComponent.jsx": 
+`import React from 'react';
+import { Card, CardContent, Typography, CardMedia, Box, Grid } from '@mui/material';
+
+const CardComponent = ({ data }) => {
+  return (
+    <Card sx={{ margin: 2 }}>
+      <CardContent>
+        <Grid container spacing={2} alignItems="flex-start" justifyContent="flex-start">
+          <Grid item xs={12}>
+            <Typography variant="h5" component="div">
+              {data.title}
+            </Typography>
+          </Grid>
+          {data.image && (
+            <Grid item xs={6}>
+              <Box mr={2} mt={1}>
+                <CardMedia
+                  component="img"
+                  height="150"
+                  style={{ width: '100%' }}
+                  image={data.image}
+                  alt={data.title}
+                />
+              </Box>
+            </Grid>
+          )}
+          <Grid item xs={data.image ? 6 : 12}>
+            <Typography variant="body2" color="text.secondary">
+              {data.description}
+            </Typography>
+          </Grid>
+        </Grid>
+        {data.date && data.author && (
+          <Box display="flex" alignItems="center" mt={2}>
+            <Typography variant="body2" color="#ffa726">
+              Fecha: {data.date}
+            </Typography>
+            <Box mx={1}>
+              <Typography variant="body2" color="#ffa726">
+                |
+              </Typography>
+            </Box>
+            <Typography variant="body2" color="#ffa726">
+              Autor: {data.author}
+            </Typography>
+          </Box>
+        )}
+      </CardContent>
+    </Card>
+  );
+};
+
+export default CardComponent;`,    
+
+"/data.json":   
+`
+[
+  {
+    "title": "Tarjeta 1",
+    "description": "Descripción de la tarjeta 1"
+  },
+  {
+    "title": "Tarjeta 2",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum libero nec justo rutrum, id efficitur felis dignissim. Integer vel nisl auctor, vehicula dolor at, congue magna.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVlmWueUsfk-7eDhFEOyKZAUkQVLj2fpWqSw&usqp=CAU"
+  },
+  {
+    "title": "Tarjeta 3",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum libero nec justo rutrum, id efficitur felis dignissim. Integer vel nisl auctor, vehicula dolor at, congue magna.",
+    "date": "27/02/2024",
+    "author": "John Doe"
+  },
+  {
+    "title": "Tarjeta 4",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vestibulum libero nec justo rutrum, id efficitur felis dignissim. Integer vel nisl auctor, vehicula dolor at, congue magna.",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVlmWueUsfk-7eDhFEOyKZAUkQVLj2fpWqSw&usqp=CAU",
+    "date": "27/02/2024",
+    "author": "John Doe"
+  }
+]
+`,
+}}
+/>
+
+### Ejemplo 2
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import TodoList from './TodoList';
+
+ const App = () => {
+    return (
+        <div>
+          <h1>Todo List</h1>
+          <TodoList />
+        </div>
+    );
+ }
+
+export default App;`,
+
+"/TodoList.js": 
+`import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import CustomModal from './Modal';
+
+const TodoList = () => {
+  const [tasks, setTasks] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
+  const [editValue, setEditValue] = useState('');
+  const [deleteIndex, setDeleteIndex] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleAddTask = () => {
+    if (inputValue.trim() !== '') {
+      setTasks([...tasks, inputValue]);
+      setInputValue('');
+    }
+  };
+
+  const handleEditTask = (index) => {
+    setEditIndex(index);
+    setEditValue(tasks[index]);
+    setDeleteIndex(null);
+    setIsEditing(true);
+  };
+
+  const handleSaveEdit = () => {
+    if (editValue.trim() !== '') {
+      const newTasks = [...tasks];
+      newTasks[editIndex] = editValue;
+      setTasks(newTasks);
+      setEditIndex(null);
+      setEditValue('');
+      setIsEditing(false);
+    }
+  };
+
+  const handleDeleteTask = (index) => {
+    setTasks(tasks.filter((_, i) => i !== index));
+    setDeleteIndex(null);
+  };
+
+  const handleOpenModal = (index) => {
+    setDeleteIndex(index);
+    setEditIndex(null);
+  };
+
+  const handleCloseModal = () => {
+    setDeleteIndex(null);
+  };
+
+  return (
+    <div>
+      <TextField
+        label="Agregar Tarea"
+        variant="outlined"
+        value={inputValue}
+        onChange={handleInputChange}
+        size="small"
+        disabled={isEditing}
+      />
+      <Button variant="contained" onClick={handleAddTask} sx={{ ml: 1 }} disabled={isEditing || inputValue.trim() === ''}>
+        Agregar
+      </Button>
+      <List>
+        {tasks.map((task, index) => (
+          <ListItem key={index}>
+            {editIndex === index ? (
+              <TextField
+                value={editValue}
+                onChange={(e) => setEditValue(e.target.value)}
+                autoFocus
+                size="small"
+                color="warning"
+              />
+            ) : (
+              <ListItemText primary={task} />
+            )}
+            <ListItemSecondaryAction>
+              {editIndex === index ? (
+                <IconButton onClick={handleSaveEdit}>
+                  <Button variant="contained" color="primary"  size="small">Guardar</Button>
+                </IconButton>
+              ) : (
+                <IconButton onClick={() => handleEditTask(index)}>
+                  <EditIcon color="primary" />
+                </IconButton>
+              )}
+              <IconButton onClick={() => handleOpenModal(index)}>
+                <DeleteIcon color="secondary" />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
+      </List>
+      <CustomModal 
+        open={deleteIndex !== null}
+        onClose={handleCloseModal}
+        onConfirm={() => handleDeleteTask(deleteIndex)}
+      />
+    </div>
+  );
+};
+
+export default TodoList;`,    
+
+"/Modal.js":`
+import React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
+const Modal = ({ open, onClose, onConfirm }) => {
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Confirmacion</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          ¿Estas seguro de eliminar esta tarea?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={onConfirm} color="secondary">
+          Eliminar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+export default Modal;`
+}}
+/>
+
+### Ejemplo 3
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React, { useState, useEffect } from 'react';
+import Login from "./Login";
+import Register from "./Register";
+import CustomAppBar from "./CustomAppBar";
+
+const App = () => {
+  const [currentPage, setCurrentPage] = useState('login');
+  const [registeredUsers, setRegisteredUsers] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedUsers = localStorage.getItem('registeredUsers');
+    if (storedUsers) {
+      setRegisteredUsers(JSON.parse(storedUsers));
+    }
+  }, []);
+
+  const handleRegisterClick = () => {
+    setCurrentPage('register');
+  };
+
+  const handleLoginClick = () => {
+    setCurrentPage('login');
+  };
+
+  const handleLogin = (user) => {
+    setIsLoggedIn(true);
+    setCurrentPage('dashboard');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentPage('login');
+  };
+
+  return (
+    <div>
+      {currentPage === 'login' && <Login onRegisterClick={handleRegisterClick} onLogin={handleLogin} registeredUsers={registeredUsers} />}
+      {currentPage === 'register' && <Register onLoginClick={handleLoginClick} setRegisteredUsers={setRegisteredUsers} />}
+      {isLoggedIn && <CustomAppBar onLogout={handleLogout} />}
+    </div>
+  );
+};
+
+export default App;`,
+
+"/Login.js": 
+`import React, { useState } from 'react';
+import { TextField, Button, Container, Box, Typography, Link } from '@mui/material';
+
+const Login = ({ registeredUsers, onLogin, onRegisterClick }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = () => {
+    const user = registeredUsers.find(user => user.username === username && user.password === password);
+    if (user) {
+      onLogin(user);
+    } else {
+      setError('Usuario o contraseña no son correctos');
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#f0f0f0',
+      }}
+    >
+      <Typography variant="h4" sx={{ mb: 2 }}>Login</Typography>
+      <Container maxWidth="sm">
+        <Typography variant="subtitle1" gutterBottom>Usuario</Typography>
+        <TextField
+          fullWidth
+          label="Ingresa tu Usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          margin="normal"
+        />
+        <Typography variant="subtitle1" gutterBottom>Contraseña</Typography>
+        <TextField
+          fullWidth
+          label="Ingresa tu Contraseña"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          margin="normal"
+        />
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Button
+            variant="contained"
+            onClick={handleLogin}
+          >
+            Iniciar Sesión
+          </Button>
+        </Box>
+        {error && <Typography variant="body2" sx={{ textAlign: 'center', mt: 2, color: 'red' }}>{error}</Typography>}
+        <Typography variant="body2" sx={{ textAlign: 'center', mt: 2 }}>
+          ¿No tienes una cuenta? <Link sx={{ cursor: 'pointer' }} onClick={onRegisterClick}>Registrarse</Link>
+        </Typography>
+      </Container>
+    </Box>
+  );
+};
+
+export default Login;`,  
+
+"/Register.js":
+`import React, { useState } from 'react';
+import { TextField, Button, Container, Box, Typography, Link } from '@mui/material';
+import CustomModal from './CustomModal';
+
+const Register = ({ registeredUsers = [], setRegisteredUsers, onLoginClick }) => 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleRegister = () => {
+    if (!username || !password) {
+      setError('Por favor, complete todos los campos.');
+      return;
+    }
+
+    const isUserRegistered = registeredUsers.some(user => user.username === username && user.password === password);
+    if (isUserRegistered) {
+      setError('El usuario ya está registrado.');
+      return;
+    }
+
+    const newUser = { username, password };
+    setRegisteredUsers([...registeredUsers, newUser]);
+
+    localStorage.setItem('registeredUsers', JSON.stringify([...registeredUsers, newUser]));
+
+    setUsername('');
+    setPassword('');
+
+    setOpenModal(true);
+  };
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#f0f0f0',
+      }}
+    >
+      <Typography variant="h4" sx={{ mb: 2 }}>Registro</Typography>
+      <Container maxWidth="sm">
+        <Typography variant="subtitle1" gutterBottom>Usuario</Typography>
+        <TextField
+          fullWidth
+          label="Usuario"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          margin="normal"
+        />
+        <Typography variant="subtitle1" gutterBottom>Contraseña</Typography>
+        <TextField
+          fullWidth
+          label="Contraseña"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          margin="normal"
+        />
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+          <Button
+            variant="contained"
+            onClick={handleRegister}
+          >
+            Registrarse
+          </Button>
+        </Box>
+        {error && <Typography variant="body2" sx={{ textAlign: 'center', mt: 2, color: 'red' }}>{error}</Typography>}
+        <Typography variant="body2" sx={{ textAlign: 'center', mt: 2 }}>
+          ¿Ya tienes una cuenta? <Link sx={{ cursor: 'pointer' }} onClick={onLoginClick}>Iniciar sesión</Link>
+        </Typography>
+      </Container>
+      <CustomModal open={openModal} handleClose={onLoginClick} />
+    </Box>
+  );
+};
+
+export default Register;
+
+`,
+
+"/CustomModal.js":
+`import React from 'react';
+import { Modal, Typography, Button, Box } from '@mui/material';
+
+const CustomModal = ({ open, handleClose }) => {
+  return (
+    <Modal
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+        maxWidth: '80%',
+         textAlign: 'center',
+      }}>
+        <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ mb: 2 }}>
+          Usuario Registrado
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mb: 2 }}>
+          ¡El usuario se ha registrado correctamente!
+        </Typography>
+        <Button onClick={handleClose} variant="contained">Cerrar</Button>
+      </Box>
+    </Modal>
+  );
+};
+
+export default CustomModal;`,
+
+"/CustomAppBar.js":
+`import React, { useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import Home from './Home';
+import About from './About';
+import Contact from './Contact';
+
+const CustomAppBar = ({ onLogout }) => {
+  const [currentPage, setCurrentPage] = useState('Home');
+
+  const changePage = (page) => {
+    setCurrentPage(page);
+  };
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'Home':
+        return <Home />;
+      case 'About':
+        return <About />;
+      case 'Contact':
+        return <Contact />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Toolbar>
+            <Typography variant="h6" component="div" >
+              <Button color="inherit" onClick={() => changePage('Home')}>Home</Button>
+            </Typography>
+            <Typography variant="h6" component="div">
+              <Button color="inherit" onClick={() => changePage('About')}>About</Button>
+            </Typography>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Button color="inherit" onClick={() => changePage('Contact')}>Contact</Button>
+            </Typography>
+            <Button color="inherit" onClick={onLogout}>Logout</Button>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      {renderPage()}
+    </div>
+  );
+};
+
+export default CustomAppBar;`,
+
+"Home.js":
+`import React from 'react';
+import { Typography, Container, Box } from '@mui/material';
+
+const Home = () => (
+  <Container maxWidth="md">
+    <Box sx={{ textAlign: 'center', mt: 4 }}>
+      <Typography variant="h4" gutterBottom>Bienvenido a la Página de Inicio</Typography>
+      <Typography variant="body1">
+        Este es un ejemplo de un componente de inicio utilizando Material-UI.
+      </Typography>
+    </Box>
+  </Container>
+);
+
+export default Home;`,
+
+"About.js":
+`import React from 'react';
+import { Typography, Container, Box } from '@mui/material';
+
+const About = () => (
+  <Container maxWidth="md">
+    <Box sx={{ textAlign: 'center', mt: 4 }}>
+      <Typography variant="h4" gutterBottom>Acerca de Nosotros</Typography>
+      <Typography variant="body1">
+        Conozca más sobre nuestra historia y valores.
+      </Typography>
+    </Box>
+  </Container>
+);
+
+export default About;`,
+
+"Contact.js":
+`import React from 'react';
+import { Typography, Container, Box } from '@mui/material';
+
+const Contact = () => (
+  <Container maxWidth="md">
+    <Box sx={{ textAlign: 'center', mt: 4 }}>
+      <Typography variant="h4" gutterBottom>Contacto</Typography>
+      <Typography variant="body1">
+        ¡Póngase en contacto con nosotros para obtener más información!
+      </Typography>
+      <Typography variant="body1" sx={{ mt: 2 }}>
+        Dirección: 123 Calle Principal, Ciudad
+      </Typography>
+      <Typography variant="body1">
+        Teléfono: 555-1234
+      </Typography>
+    </Box>
+  </Container>
+);
+
+export default Contact;`
+
+}}
+/>

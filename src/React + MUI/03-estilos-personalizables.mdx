@@ -1,0 +1,201 @@
+import { CodeBlock, StickyNav, SandPack } from '../components-mdx/index.js';
+import "../styles.css"
+
+<StickyNav
+  links={[
+    { id: 'seccion1', text: 'Estilos Básicos' },
+    { id: 'seccion2', text: 'Uso de sx Props' },
+    { id: 'seccion3', text: 'Estilos con makeStyles' },
+    { id: 'seccion4', text: 'Temas Globales' },
+  ]}
+/>
+
+# Estilos Personalizables en MUI
+
+Los estilos son una parte importante en **MUI (Material-UI)**, ya que permiten personalizar la apariencia y el diseño de los componentes de la interfaz de usuario de manera 
+flexible y coherente. **MUI** ofrece diversas opciones para gestionar los estilos, que van desde la aplicación de estilos en línea con **sx props** hasta la definición de 
+estilos reutilizables con **makeStyles y la personalización del tema global**. Esta flexibilidad en el manejo de estilos permite adaptar la apariencia de los componentes a 
+las necesidades específicas de cada proyecto, manteniendo al mismo tiempo una coherencia visual en toda la aplicación. 
+Además, los estilos en **MUI** pueden ser aplicados a una amplia gama de componentes, desde elementos básicos como botones y cuadros de texto hasta componentes más 
+complejos como barras de navegación y paneles de control, lo que permite crear interfaces de usuario atractivas y funcionales.
+
+<a id="seccion1"></a>
+### 1-Estilos Básicos con Componentes Pequeños
+
+En **Material-UI** la personalización de la apariencia de los componentes comienza con los **estilos básicos** que se pueden aplicar directamente a través de la propiedad 
+**style** de los componentes. Esto permite definir estilos en línea de manera similar a cómo se hace en **React estándar** lo que resulta útil para ajustar rápidamente la 
+apariencia de un componente sin la necesidad de crear estilos separados en un archivo CSS.
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import { Button } from '@mui/material';
+
+ const App = () => {
+    return (
+        <Button style={{ backgroundColor: 'blue', color: 'white' }}>
+            Mi botón
+        </Button>
+    );
+ }
+
+export default App;`,      
+}}
+/>
+
+<a id="seccion2"></a>
+### 2-Uso de sx Props para Estilos en Línea
+
+Los **"sx props"** son una característica de **MUI** que permite aplicar estilos directamente a los componentes utilizando un **objeto de estilo en línea**  similar a cómo se 
+aplican los estilos en React mediante el uso de la propiedad **"style"**. Sin embargo los **sx props** tienen algunas ventajas sobre el uso de **style** directamente
+
+**-Tema predeterminado:** Los estilos definidos con **sx props** tienen acceso al tema predeterminado de **MUI** lo que significa que pueden acceder a las variables de tema 
+definidas como **colores, fuentes, espaciado, etc** sin necesidad de pasar explícitamente el tema como una prop.
+
+**-Propiedad CSS simplificada:** Los estilos se definen utilizando una sintaxis simplificada similar a **CSS-in-JS** lo que facilita la escritura y el mantenimiento del código.
+
+**-Soporte para props de CSS:** Los estilos definidos con **sx props** pueden ser sensibles a las props del componente lo que permite crear componentes más dinámicos y 
+personalizables.
+
+Aca un ejemplo de cómo se pueden usar los sx props en un componente:
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import { Box, Button } from '@mui/material';
+
+ const App = () => {
+    return (
+        <Box sx={{ backgroundColor: 'secondary.main', padding: 2 }}>
+        <Button sx={{ color: 'white', '&:hover': { backgroundColor: 'primary.dark' } }}>
+            Mi botón
+        </Button>
+        </Box>
+    );
+ }
+
+export default App;`,      
+}}
+/>
+
+en este ejemplo **secondary.main** es una referencia a una variable de tema predefinida en **MUI**. En la configuración predeterminada de **Material-UI** secondary es una de las paletas de 
+colores principales y main es la tonalidad principal dentro de esa paleta. Por lo tanto **secondary.main** representa el color principal definido en la paleta de colores 
+secundaria del tema. Por ejemplo si el color secundario principal es azul **secondary.main** representará ese color azul. Esta sintaxis permite que los estilos se ajusten 
+automáticamente si se cambian las variables de tema.
+
+**padding: 2** establece el relleno del Box en **2 unidades**. En MUI la unidad de medida predeterminada para el relleno es **theme.spacing**. 
+Por defecto **theme.spacing es igual a 8 píxeles**. Por lo tanto **padding: 2** equivale a un relleno de **16 píxeles (2 * 8)**. Sin embargo este valor puede ser 
+personalizado a través del **tema global de MUI** lo que permite una gestión coherente del espaciado en toda la aplicación.
+
+<a id="seccion3"></a>
+### 3-Estilos Reutilizables con makeStyles
+
+En **Material-UI** los estilos reutilizables pueden ser definidos y aplicados de manera eficiente utilizando el **hook makeStyles**. Este enfoque permite crear clases de 
+estilo específicas para componentes individuales, lo que facilita la gestión y la reutilización de estilos en toda la aplicación.
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import { Box, Paper, Typography, Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: 20,
+  },
+  paper: {
+    width: '50%',
+    padding: 10,
+    marginBottom: 10,
+  },
+  addButton: {
+        
+    backgroundColor: 'red !important',
+    marginTop: '20px !important',
+  },
+});
+
+function TaskList() {
+  const classes = useStyles();
+
+  return (
+    <Box className={classes.root}>
+      <Paper className={classes.paper}>
+        <Typography variant="h6">Task 1</Typography>
+      </Paper>
+      <Paper className={classes.paper}>
+        <Typography variant="h6">Task 2</Typography>
+      </Paper>
+      <Button className={classes.addButton} variant="contained" color="primary">
+        Add Task
+      </Button>
+    </Box>
+  );
+}
+
+export default TaskList;`,      
+}}
+/>
+
+**root:** Este estilo se aplica al contenedor principal del componente **TaskList**. Define un diseño de columna **(flexDirection: 'column')** centra los elementos en el 
+eje cruzado **(alignItems: 'center')** y agrega un relleno de 20 píxeles en todos los lados **(padding: 20)**.
+
+**paper:** Este estilo se aplica a los **componentes Paper** dentro del componente **TaskList**. Define un ancho del 50% **(width: '50%')** un relleno de 10 píxeles en 
+todos los lados **(padding: 10)** y un margen inferior de 10 píxeles **(marginBottom: 10)**.
+
+**addButton:** se aplica al botón dentro del componente para asegurar la consistencia en la apariencia del botón. Le aplicamos un color de fondo rojo 
+**(backgroundColor: 'red !important')** y un margen superior de 20 píxeles **(marginTop: '20px !important')**.
+
+<a id="seccion4"></a>
+### 4-Personalización de Temas Globales
+
+En **Material-UI** la personalización de temas globales es una parte esencial del proceso de diseño de una aplicación. Permite establecer estilos consistentes en toda la 
+aplicación como colores, tipografía, espaciado etc. Para lograr esto **Material-UI** proporciona la capacidad de crear y aplicar temas personalizados utilizando el 
+componente **ThemeProvider** y la función **createTheme**.
+
+Al crear un tema personalizado podemos definir una amplia gama de propiedades como colores primarios y secundarios, fuentes de texto, espaciado y más. Estas propiedades 
+pueden adaptarse a los requisitos de diseño específicos de nuestra aplicación y pueden ser fácilmente modificadas para reflejar cambios en el diseño.
+
+Una vez que hayamos creado nuestro **theme personalizado** podemos aplicarlo a nuestra aplicación utilizando el componente **ThemeProvider**. Esto asegura que todos los 
+**componentes dentro del árbol de componentes** estén estilizados de acuerdo con las especificaciones del **theme**.
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import { Button, ThemeProvider, createTheme } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2196f3',
+    },
+    secondary: {
+      main: '#ff9800',
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto',
+  },
+});
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button variant="contained" color="primary">
+        Mi botón
+      </Button>
+    </ThemeProvider>
+  );
+}
+
+export default App;
+`,      
+}}
+/>

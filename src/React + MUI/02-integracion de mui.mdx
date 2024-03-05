@@ -1,0 +1,119 @@
+import { CodeBlock, StickyNav, SandPack } from '../components-mdx/index.js';
+import "../styles.css"
+
+# Integracion de MUI en React
+
+**1 Instalación de Material-UI:** Primero, instala Material-UI y sus dependencias en tu proyecto de React 
+
+**Con npm:**
+
+<CodeBlock
+  codeString={`npm install @mui/material @emotion/react @emotion/styled`} 
+  language='javascript'
+/>
+
+**Con yarn:**
+
+<CodeBlock
+  codeString={`yarn add @mui/material @emotion/react @emotion/styled`} 
+  language='javascript'
+/>
+
+**2 Utilizacion de MUI**
+
+**Ejemplo:**
+
+Podemos empezar a utilizar **MUI** por ejemplo configurando un tema personalizado para nuestra aplicación. **Material-UI** proporciona un **ThemeProvider** para esto. 
+Por ejemplo podemos crear un archivo **theme.js** y definir nuestro tema personalizado.
+
+<CodeBlock
+  codeString={
+`// theme.js
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#3f51b5',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  },
+});
+
+export default theme;`
+  } 
+  language='javascript'
+/>
+
+
+**3 Integración en la aplicación React:**
+
+ Podemos comenzar a utilizar los componentes de **Material-UI** en nuestra aplicación. Por ejemplo en el archivo App.js:
+
+ <CodeBlock
+  codeString={
+`// App.js
+import React from "react";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import Button from '@mui/material/Button'; // Podemos importar un boton y pasarle el theme
+
+ const App = () => {
+    return (
+        <ThemeProvider theme={theme}>
+        <div>
+            <Button variant="contained" color="primary">
+                Hello World
+            </Button>
+        </div>
+        </ThemeProvider>
+    );
+ }
+
+export default App;`
+  } 
+  language='javascript'
+/>
+
+<SandPack 
+files={{   
+"/App.js": 
+`import React from "react";
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import Button from '@mui/material/Button';
+
+ const App = () => {
+    return (
+        <ThemeProvider theme={theme}>
+        <div>
+            <Button variant="contained" color="primary">
+                Hello World
+            </Button>
+        </div>
+        </ThemeProvider>
+    );
+ }
+
+export default App;`,
+
+"/theme.js": 
+`import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#3f51b5',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  },
+});
+
+export default theme;`,       
+}}
+/>
+
